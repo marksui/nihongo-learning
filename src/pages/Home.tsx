@@ -4,6 +4,7 @@ import {
   BookOpen,
   GraduationCap,
   Grid3X3,
+  Hash,
   MessagesSquare,
   PlayCircle,
   Table2,
@@ -11,6 +12,7 @@ import {
 import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
+import { numberExamples } from "../data/numbers";
 import { quickPhrases } from "../data/quickPhrases";
 import { vocabulary } from "../data/vocabulary";
 import type { PageKey } from "../components/Navbar";
@@ -46,6 +48,14 @@ const featureCards: FeatureCard[] = [
     icon: BookOpen,
   },
   {
+    title: "数字读法",
+    page: "numbers",
+    description: "从 0-10 到价格、日期、年龄、楼层和大数字。",
+    metric: `${numberExamples.length} 条数字规则`,
+    accent: "bg-sun",
+    icon: Hash,
+  },
+  {
     title: "基础语法",
     page: "grammar",
     description: "用中文讲清句型，并标出中文母语者容易踩的点。",
@@ -58,7 +68,7 @@ const featureCards: FeatureCard[] = [
     page: "conversation",
     description: "更多旅行、生活、学校和紧急情景，支持逐句跟读。",
     metric: `${dialogues.length} 段对话`,
-    accent: "bg-sun",
+    accent: "bg-matcha",
     icon: MessagesSquare,
   },
   {
@@ -131,7 +141,7 @@ const Home = ({ onNavigate }: HomeProps) => {
           <p className="text-sm text-ink/58">所有内容来自本地 TypeScript 数据，无需后端。</p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
           {featureCards.map((card) => {
             const Icon = card.icon;
 

@@ -3,6 +3,7 @@ import {
   BookOpen,
   GraduationCap,
   Grid3X3,
+  Hash,
   Home,
   MessagesSquare,
   Table2,
@@ -11,6 +12,7 @@ import {
 export type PageKey =
   | "home"
   | "kana"
+  | "numbers"
   | "vocabulary"
   | "grammar"
   | "conversation"
@@ -25,6 +27,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { page: "home", label: "首页", icon: Home },
   { page: "kana", label: "五十音图", icon: Grid3X3 },
+  { page: "numbers", label: "数字读法", icon: Hash },
   { page: "vocabulary", label: "常用单词", icon: BookOpen },
   { page: "grammar", label: "基础语法", icon: GraduationCap },
   { page: "conversation", label: "日常会话", icon: MessagesSquare },

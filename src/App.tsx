@@ -5,6 +5,7 @@ import ConversationPage from "./pages/ConversationPage";
 import GrammarPage from "./pages/GrammarPage";
 import Home from "./pages/Home";
 import KanaPage from "./pages/KanaPage";
+import NumbersPage from "./pages/NumbersPage";
 import QuickReadPage from "./pages/QuickReadPage";
 import VocabularyPage from "./pages/VocabularyPage";
 import {
@@ -17,6 +18,7 @@ import {
 const pages: PageKey[] = [
   "home",
   "kana",
+  "numbers",
   "vocabulary",
   "grammar",
   "conversation",
@@ -66,6 +68,8 @@ const App = () => {
     switch (currentPage) {
       case "kana":
         return <KanaPage onSpeak={handleSpeak} />;
+      case "numbers":
+        return <NumbersPage onSpeak={handleSpeak} />;
       case "vocabulary":
         return <VocabularyPage onSpeak={handleSpeak} />;
       case "grammar":
