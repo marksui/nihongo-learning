@@ -17,11 +17,20 @@ npm install
 npm run dev
 ```
 
+然后打开终端显示的本地地址，例如 `http://localhost:5173/`。不要直接双击根目录的 `index.html`，因为浏览器不会编译 Vite 的 React/TypeScript 源码。
+
 如果 Windows PowerShell 的执行策略拦截 `npm.ps1`，可以在同一目录使用：
 
 ```bash
 npm.cmd install
 npm.cmd run dev
+```
+
+## 预览生产版本
+
+```bash
+npm run build
+npm run preview
 ```
 
 ## 发音说明

@@ -10,7 +10,48 @@
     <title>中文学日语</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main
+        style="
+          min-height: 100vh;
+          box-sizing: border-box;
+          display: grid;
+          place-items: center;
+          padding: 24px;
+          background: #f8f5ef;
+          color: #202236;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Microsoft YaHei',
+            sans-serif;
+        "
+      >
+        <section
+          style="
+            width: min(560px, 100%);
+            border: 1px solid rgba(32, 34, 54, 0.12);
+            border-radius: 12px;
+            background: white;
+            padding: 28px;
+            box-shadow: 0 18px 45px rgba(32, 34, 54, 0.12);
+          "
+        >
+          <h1 style="margin: 0; font-size: 32px">中文学日语</h1>
+          <p style="line-height: 1.7; color: rgba(32, 34, 54, 0.72)">
+            正在加载应用。如果你是直接双击打开根目录的 index.html，React/Vite
+            源码不会被浏览器编译，请在项目目录运行：
+          </p>
+          <pre
+            style="
+              overflow-x: auto;
+              border-radius: 8px;
+              background: #202236;
+              padding: 14px;
+              color: white;
+            "
+          >npm install
+npm run dev</pre>
+        </section>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
