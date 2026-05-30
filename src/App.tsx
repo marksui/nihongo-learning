@@ -5,7 +5,7 @@ import ConversationPage from "./pages/ConversationPage";
 import GrammarPage from "./pages/GrammarPage";
 import Home from "./pages/Home";
 import KanaPage from "./pages/KanaPage";
-import PracticePage from "./pages/PracticePage";
+import QuickReadPage from "./pages/QuickReadPage";
 import VocabularyPage from "./pages/VocabularyPage";
 import {
   pauseJapanese,
@@ -20,7 +20,7 @@ const pages: PageKey[] = [
   "vocabulary",
   "grammar",
   "conversation",
-  "practice",
+  "quickread",
 ];
 
 const getPageFromHash = (): PageKey => {
@@ -72,8 +72,8 @@ const App = () => {
         return <GrammarPage />;
       case "conversation":
         return <ConversationPage onSpeak={handleSpeak} />;
-      case "practice":
-        return <PracticePage />;
+      case "quickread":
+        return <QuickReadPage onSpeak={handleSpeak} />;
       case "home":
       default:
         return <Home onNavigate={navigate} />;

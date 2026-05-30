@@ -2,15 +2,16 @@ import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   BookOpen,
-  ClipboardCheck,
   GraduationCap,
   Grid3X3,
   MessagesSquare,
   PlayCircle,
+  Table2,
 } from "lucide-react";
 import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
+import { quickPhrases } from "../data/quickPhrases";
 import { vocabulary } from "../data/vocabulary";
 import type { PageKey } from "../components/Navbar";
 
@@ -55,18 +56,18 @@ const featureCards: FeatureCard[] = [
   {
     title: "日常会话",
     page: "conversation",
-    description: "自我介绍、点餐、问路、购物和学校对话逐句练。",
+    description: "更多旅行、生活、学校和紧急情景，支持逐句跟读。",
     metric: `${dialogues.length} 段对话`,
     accent: "bg-sun",
     icon: MessagesSquare,
   },
   {
-    title: "练习测试",
-    page: "practice",
-    description: "假名识别、词义选择和语法填空即时评分。",
-    metric: "32 道本地生成题",
+    title: "快捷朗读",
+    page: "quickread",
+    description: "常用句整理成表，直接点击日语文字就能朗读。",
+    metric: `${quickPhrases.length} 句常用表达`,
     accent: "bg-ink",
-    icon: ClipboardCheck,
+    icon: Table2,
   },
 ];
 
@@ -95,11 +96,11 @@ const Home = ({ onNavigate }: HomeProps) => {
             </button>
             <button
               type="button"
-              onClick={() => onNavigate("practice")}
+              onClick={() => onNavigate("quickread")}
               className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-black/10 bg-white px-4 py-2 font-bold text-ink transition hover:bg-rice active:scale-95"
             >
-              进入练习
-              <ClipboardCheck aria-hidden="true" size={18} />
+              快捷朗读
+              <Table2 aria-hidden="true" size={18} />
             </button>
           </div>
         </div>

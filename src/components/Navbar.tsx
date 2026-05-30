@@ -1,11 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
-  ClipboardCheck,
   GraduationCap,
   Grid3X3,
   Home,
   MessagesSquare,
+  Table2,
 } from "lucide-react";
 
 export type PageKey =
@@ -14,7 +14,7 @@ export type PageKey =
   | "vocabulary"
   | "grammar"
   | "conversation"
-  | "practice";
+  | "quickread";
 
 interface NavItem {
   page: PageKey;
@@ -28,7 +28,7 @@ const navItems: NavItem[] = [
   { page: "vocabulary", label: "常用单词", icon: BookOpen },
   { page: "grammar", label: "基础语法", icon: GraduationCap },
   { page: "conversation", label: "日常会话", icon: MessagesSquare },
-  { page: "practice", label: "练习测试", icon: ClipboardCheck },
+  { page: "quickread", label: "快捷朗读", icon: Table2 },
 ];
 
 interface NavbarProps {
