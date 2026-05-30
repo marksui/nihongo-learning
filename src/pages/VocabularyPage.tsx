@@ -35,7 +35,7 @@ const VocabularyPage = ({ onSpeak }: VocabularyPageProps) => {
         <p className="text-sm font-bold text-coral">Vocabulary</p>
         <h1 className="mt-2 font-serif text-4xl font-bold text-ink">常用单词</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-ink/70">
-          词卡按入门场景分组，包含日语、假名读法、罗马音、中文意思、例句和中文翻译。
+          词卡按入门场景分组，包含日语、假名读法、罗马音、中文意思、例句和中文翻译。食物、水果、蔬菜词卡配有插图，适合看图记词。
         </p>
 
         <div className="mt-6 grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">

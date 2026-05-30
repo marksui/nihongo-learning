@@ -1,5 +1,6 @@
 import { MessageCircle, Volume2 } from "lucide-react";
 import type { VocabularyItem } from "../data/vocabulary";
+import FoodIllustration from "./FoodIllustration";
 
 interface WordCardProps {
   word: VocabularyItem;
@@ -10,6 +11,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
   return (
     <article className="flex min-h-80 flex-col justify-between rounded-lg border border-black/10 bg-white/90 p-5 shadow-card transition hover:-translate-y-0.5 hover:border-coral/35 hover:shadow-soft">
       <div>
+        <FoodIllustration word={word} />
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="mb-2 w-fit rounded-md bg-sun/24 px-2 py-1 text-xs font-bold text-ink/68">
