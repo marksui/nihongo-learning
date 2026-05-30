@@ -5,6 +5,7 @@ import {
   quickPhrases,
   type QuickPhraseCategory,
 } from "../data/quickPhrases";
+import { formatRomajiReading } from "../utils/romaji";
 
 interface QuickReadPageProps {
   onSpeak: (text: string) => Promise<boolean>;
@@ -23,7 +24,14 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
       const matchesCategory = category === "全部" || phrase.category === category;
       const matchesQuery =
         !normalizedQuery ||
-        [phrase.japanese, phrase.kana, phrase.romaji, phrase.meaning, phrase.category]
+        [
+          phrase.japanese,
+          phrase.kana,
+          phrase.romaji,
+          formatRomajiReading(phrase.romaji),
+          phrase.meaning,
+          phrase.category,
+        ]
           .join(" ")
           .toLowerCase()
           .includes(normalizedQuery);
@@ -113,7 +121,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
               <p className="text-sm leading-6 text-ink/62">
                 {phrase.kana}
                 <br />
-                <span className="font-semibold text-coral">{phrase.romaji}</span>
+                <span className="font-semibold text-coral">{formatRomajiReading(phrase.romaji)}</span>
               </p>
               <p className="text-sm font-semibold leading-6 text-ink/74">{phrase.meaning}</p>
             </article>

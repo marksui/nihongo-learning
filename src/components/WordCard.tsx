@@ -1,5 +1,6 @@
 import { MessageCircle, Volume2 } from "lucide-react";
 import type { VocabularyItem } from "../data/vocabulary";
+import { formatRomajiReading } from "../utils/romaji";
 import FoodIllustration from "./FoodIllustration";
 
 interface WordCardProps {
@@ -19,7 +20,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
             </p>
             <h3 className="break-words font-serif text-3xl font-bold text-ink">{word.japanese}</h3>
             <p className="mt-2 text-sm text-ink/62">
-              {word.kana} · {word.romaji}
+              {word.kana} · {formatRomajiReading(word.romaji)}
             </p>
           </div>
           <button

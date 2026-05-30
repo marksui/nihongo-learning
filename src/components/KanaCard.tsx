@@ -1,5 +1,6 @@
 import { Volume2 } from "lucide-react";
 import type { KanaItem } from "../data/kana";
+import { formatRomajiReading } from "../utils/romaji";
 
 interface KanaCardProps {
   item: KanaItem;
@@ -16,7 +17,9 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
               <span className="font-serif text-5xl font-bold text-ink">{item.hiragana}</span>
               <span className="font-serif text-4xl font-bold text-indigo">{item.katakana}</span>
             </div>
-            <p className="mt-1 text-sm font-bold uppercase text-coral">{item.romaji}</p>
+            <p className="mt-1 text-sm font-bold uppercase text-coral">
+              {formatRomajiReading(item.romaji)}
+            </p>
           </div>
           <button
             type="button"
@@ -33,7 +36,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
           <p className="text-xs font-bold text-ink/52">例词</p>
           <p className="mt-1 text-2xl font-bold text-ink">{item.example.word}</p>
           <p className="mt-1 text-sm text-ink/62">
-            {item.example.kana} · {item.example.romaji}
+            {item.example.kana} · {formatRomajiReading(item.example.romaji)}
           </p>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Search, Volume2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { numberExamples, numberGroups, type NumberGroup } from "../data/numbers";
+import { formatRomajiReading } from "../utils/romaji";
 
 interface NumbersPageProps {
   onSpeak: (text: string) => Promise<boolean>;
@@ -19,7 +20,16 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
       const matchesGroup = group === "全部" || item.group === group;
       const matchesQuery =
         !normalizedQuery ||
-        [item.display, item.japanese, item.kana, item.romaji, item.meaning, item.note, item.group]
+        [
+          item.display,
+          item.japanese,
+          item.kana,
+          item.romaji,
+          formatRomajiReading(item.romaji),
+          item.meaning,
+          item.note,
+          item.group,
+        ]
           .join(" ")
           .toLowerCase()
           .includes(normalizedQuery);
@@ -113,7 +123,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
               <span className="block text-2xl font-bold">{item.japanese}</span>
               <span className="mt-2 block text-sm opacity-80">{item.kana}</span>
               <span className="mt-1 block text-sm font-semibold text-coral group-hover:text-white">
-                {item.romaji}
+                {formatRomajiReading(item.romaji)}
               </span>
             </button>
 

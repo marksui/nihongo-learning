@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import WordCard from "../components/WordCard";
 import { vocabulary, vocabularyCategories, type VocabularyCategory } from "../data/vocabulary";
+import { formatRomajiReading } from "../utils/romaji";
 
 interface VocabularyPageProps {
   onSpeak: (text: string) => Promise<boolean>;
@@ -20,7 +21,15 @@ const VocabularyPage = ({ onSpeak }: VocabularyPageProps) => {
       const matchesCategory = category === "全部" || word.category === category;
       const matchesQuery =
         !normalizedQuery ||
-        [word.japanese, word.kana, word.romaji, word.meaning, word.sentence, word.translation]
+        [
+          word.japanese,
+          word.kana,
+          word.romaji,
+          formatRomajiReading(word.romaji),
+          word.meaning,
+          word.sentence,
+          word.translation,
+        ]
           .join(" ")
           .toLowerCase()
           .includes(normalizedQuery);
