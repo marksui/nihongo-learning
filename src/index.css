@@ -48,6 +48,36 @@ select:focus-visible {
   background: rgba(245, 184, 75, 0.36);
 }
 
+.reading-token {
+  display: inline-block;
+  border-radius: 0.25rem;
+  padding: 0 0.08rem;
+  animation: reading-token-pulse 1.15s ease both;
+}
+
+@keyframes reading-token-pulse {
+  0% {
+    background: transparent;
+    transform: translateY(0);
+  }
+
+  28% {
+    background: rgba(245, 184, 75, 0.42);
+    color: #202236;
+    transform: translateY(-0.12rem);
+  }
+
+  72% {
+    background: rgba(245, 184, 75, 0.22);
+    transform: translateY(0);
+  }
+
+  100% {
+    background: transparent;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

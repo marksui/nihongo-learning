@@ -1,6 +1,7 @@
 import { AlertTriangle, BookOpenCheck, CheckCircle2, Volume2 } from "lucide-react";
+import { useRef, useState } from "react";
+import AnimatedReading from "./AnimatedReading";
 import type { GrammarLesson } from "../data/grammar";
-import { formatRomajiReading } from "../utils/romaji";
 
 interface LessonCardProps {
   lesson: GrammarLesson;
@@ -9,6 +10,24 @@ interface LessonCardProps {
 
 const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
   const sampleSentence = lesson.examples[0]?.japanese ?? lesson.pattern;
+  const [activeReadingKey, setActiveReadingKey] = useState<string | null>(null);
+  const readingRunRef = useRef(0);
+
+  const speakWithReading = async (key: string, text: string) => {
+    const runId = readingRunRef.current + 1;
+    readingRunRef.current = runId;
+    setActiveReadingKey(key);
+
+    const ok = await onSpeak(text);
+    window.setTimeout(
+      () => {
+        if (readingRunRef.current === runId) {
+          setActiveReadingKey(null);
+        }
+      },
+      ok ? 300 : 900,
+    );
+  };
 
   return (
     <article className="overflow-hidden rounded-lg border border-black/10 bg-white/92 p-5 shadow-card">
@@ -29,7 +48,7 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
             </div>
             <button
               type="button"
-              onClick={() => void onSpeak(sampleSentence)}
+              onClick={() => void speakWithReading("pattern", sampleSentence)}
               className="grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-md bg-white/12 text-white transition hover:bg-white/22 active:scale-95"
               aria-label={`播放${lesson.title}例句`}
               title="播放例句"
@@ -38,36 +57,61 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
             </button>
           </div>
           <div className="mt-3 space-y-1 border-t border-white/12 pt-3">
-            <p className="break-words text-sm font-semibold text-white/80">{lesson.patternKana}</p>
-            <p className="break-words font-mono text-xs text-white/62">{formatRomajiReading(lesson.patternRomaji)}</p>
+            <AnimatedReading
+              kana={lesson.patternKana}
+              romaji={lesson.patternRomaji}
+              active={activeReadingKey === "pattern"}
+              variant="dark"
+            />
           </div>
         </div>
       </div>
 
       <div className="mt-6 grid gap-3 md:grid-cols-3">
-        {lesson.examples.map((example) => (
-          <div key={example.japanese} className="rounded-md border border-black/8 bg-rice/68 p-4">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div className="min-w-0">
-                <p className="break-words text-lg font-bold text-ink">{example.japanese}</p>
-                <p className="mt-1 break-words text-xs font-semibold text-ink/58">{example.kana}</p>
-                <p className="mt-1 break-words font-mono text-xs text-indigo/78">
-                  {formatRomajiReading(example.romaji)}
-                </p>
+        {lesson.examples.map((example, index) => {
+          const readingKey = `example-${index}`;
+          const active = activeReadingKey === readingKey;
+
+          return (
+            <div
+              key={example.japanese}
+              className={`rounded-md border p-4 transition duration-300 ${
+                active
+                  ? "border-matcha/35 bg-white shadow-card ring-2 ring-matcha/16"
+                  : "border-black/8 bg-rice/68"
+              }`}
+            >
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div className="min-w-0">
+                  <p
+                    className={`break-words text-lg font-bold transition-colors ${
+                      active ? "text-matcha" : "text-ink"
+                    }`}
+                  >
+                    {example.japanese}
+                  </p>
+                  <div className="mt-1">
+                    <AnimatedReading kana={example.kana} romaji={example.romaji} active={active} />
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => void speakWithReading(readingKey, example.japanese)}
+                  className={`grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-md transition active:scale-95 ${
+                    active
+                      ? "bg-matcha text-white shadow-card"
+                      : "bg-indigo/10 text-indigo hover:bg-indigo hover:text-white"
+                  }`}
+                  aria-label={`播放 ${example.japanese}`}
+                  title="播放"
+                >
+                  <Volume2 aria-hidden="true" size={18} />
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={() => void onSpeak(example.japanese)}
-                className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-md bg-indigo/10 text-indigo transition hover:bg-indigo hover:text-white active:scale-95"
-                aria-label={`播放 ${example.japanese}`}
-                title="播放"
-              >
-                <Volume2 aria-hidden="true" size={18} />
-              </button>
+              <p className="mt-3 text-sm text-ink/72">{example.translation}</p>
             </div>
-            <p className="mt-3 text-sm text-ink/72">{example.translation}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="mt-6 rounded-md border border-coral/22 bg-coral/8 p-4">
