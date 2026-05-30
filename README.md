@@ -2,6 +2,8 @@
 
 面向中文母语者的零基础日语学习网站，使用 React + TypeScript + Vite + Tailwind CSS 构建。内容目前全部来自本地 TypeScript 数据文件，无需后端或付费 API。
 
+GitHub Pages: https://marksui.github.io/nihongo-learning/
+
 ## 功能
 
 - 五十音图：平假名、片假名、romaji、例词和中文意思。
