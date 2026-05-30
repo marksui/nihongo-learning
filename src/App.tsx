@@ -73,7 +73,7 @@ const App = () => {
       case "vocabulary":
         return <VocabularyPage onSpeak={handleSpeak} />;
       case "grammar":
-        return <GrammarPage />;
+        return <GrammarPage onSpeak={handleSpeak} />;
       case "conversation":
         return <ConversationPage onSpeak={handleSpeak} />;
       case "quickread":
