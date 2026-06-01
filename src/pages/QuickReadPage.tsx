@@ -170,7 +170,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
         <p className="mt-1 text-base font-semibold text-ink/72 sm:text-lg">{subtitle}</p>
       </div>
 
-      <div className="grid min-w-0 grid-cols-[repeat(11,minmax(0,1fr))] gap-x-0.5 gap-y-1 sm:gap-x-2 sm:gap-y-2">
+      <div className="grid min-w-0 grid-cols-6 gap-1.5 sm:grid-cols-[repeat(11,minmax(0,1fr))] sm:gap-2">
         {kanaRows.flatMap((row, rowIndex) =>
           row.map((id, columnIndex) => {
             if (!id) {
@@ -178,7 +178,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 <div
                   key={`${script}-${rowIndex}-${columnIndex}-blank`}
                   aria-hidden="true"
-                  className="min-h-12 min-w-0"
+                  className="hidden min-h-14 min-w-0 sm:block sm:min-h-16"
                 />
               );
             }
@@ -197,20 +197,21 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 key={key}
                 type="button"
                 onClick={() => onPlay(key, kana)}
-                className={`group grid min-h-12 min-w-0 cursor-pointer place-items-center rounded-md px-0.5 py-1 text-center transition duration-200 active:scale-95 ${
+                aria-pressed={active}
+                className={`group grid min-h-16 min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.62)] transition duration-200 active:scale-95 sm:min-h-16 sm:px-0.5 sm:py-1 ${
                   active
-                    ? "bg-yuzu/28 text-ink ring-2 ring-sakura/28"
-                    : "text-ink hover:bg-sora/12"
+                    ? "border-yuzu/70 bg-yuzu/25 text-ink ring-2 ring-yuzu/30"
+                    : "border-ink/10 bg-rice/40 text-ink hover:border-yuzu/40 hover:bg-yuzu/10"
                 }`}
                 aria-label={`朗读 ${kana} ${getRomajiLabel(item)}`}
                 title={`朗读 ${kana}`}
               >
-                <span className="block min-w-0 font-serif text-lg font-bold leading-none sm:text-2xl md:text-3xl">
+                <span className="block min-w-0 font-serif text-2xl font-bold leading-none sm:text-3xl md:text-4xl">
                   {kana}
                 </span>
                 <span
-                  className={`mt-1 block min-w-0 font-mono text-[0.56rem] font-bold leading-none sm:text-xs ${
-                    active ? "text-sakura" : "text-sakura/82 group-hover:text-sakura"
+                  className={`mt-1 block min-w-0 font-mono text-[0.62rem] font-extrabold leading-none sm:text-sm ${
+                    active ? "text-matcha" : "text-ink/58 group-hover:text-matcha"
                   }`}
                 >
                   {getRomajiLabel(item)}
@@ -240,7 +241,7 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
         <p className="mt-1 text-sm font-semibold text-ink/68 sm:text-base">{section.subtitle}</p>
       </div>
 
-      <div className="grid min-w-0 grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
+      <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {section.items.map((item) => {
           const key = `${section.id}-${item.id}`;
           const active = activeKey === key;
@@ -250,23 +251,24 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
               key={key}
               type="button"
               onClick={() => onPlay(key, item.kana.split(" / ")[0])}
-              className={`group min-w-0 cursor-pointer rounded-md border px-2 py-3 text-center transition active:scale-95 ${
+              aria-pressed={active}
+              className={`group grid min-h-36 min-w-0 cursor-pointer grid-rows-[auto_1fr_auto_auto_auto] rounded-md border px-3 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.68)] transition active:scale-95 sm:min-h-40 ${
                 active
-                  ? "border-yuzu/60 bg-yuzu/24 ring-2 ring-yuzu/25"
-                  : "border-ink/8 bg-rice/45 hover:border-yuzu/35 hover:bg-yuzu/12"
+                  ? "border-yuzu/70 bg-yuzu/24 ring-2 ring-yuzu/30"
+                  : "border-ink/10 bg-rice/45 hover:border-yuzu/40 hover:bg-yuzu/10"
               }`}
               aria-label={`朗读 ${item.label} ${item.kana}`}
               title={`朗读 ${item.japanese}`}
             >
-              <span className="block truncate text-xs font-extrabold text-ink/52">{item.label}</span>
-              <span className={`mt-1 block break-words font-serif text-2xl font-bold ${active ? "text-matcha" : "text-ink"}`}>
+              <span className="block truncate text-sm font-extrabold text-ink/58">{item.label}</span>
+              <span className={`mt-2 flex items-center justify-center break-words font-serif text-3xl font-bold leading-tight sm:text-4xl ${active ? "text-matcha" : "text-ink"}`}>
                 {item.japanese}
               </span>
-              <span className="mt-1 block break-words text-xs font-semibold leading-4 text-ink/62">{item.kana}</span>
-              <span className={`mt-1 block break-words font-mono text-[0.68rem] font-bold leading-4 ${active ? "text-sakura" : "text-sakura/78"}`}>
+              <span className="mt-2 block break-words text-sm font-bold leading-5 text-ink/70">{item.kana}</span>
+              <span className={`mt-1 block break-words font-mono text-xs font-extrabold leading-5 ${active ? "text-matcha" : "text-sakura/85"}`}>
                 {formatRomajiReading(item.romaji)}
               </span>
-              <span className="mt-2 block truncate text-xs font-bold text-ink/58">{item.meaning}</span>
+              <span className="mt-2 block truncate text-sm font-extrabold text-ink/62">{item.meaning}</span>
             </button>
           );
         })}
@@ -297,7 +299,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
 
   return (
     <div className="grid min-h-[calc(100vh-9rem)] place-items-center">
-      <article className="w-full max-w-[20.25rem] overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1] px-3 py-7 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
+      <article className="w-full max-w-[22rem] overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1] px-2.5 py-7 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
         <div className="space-y-9 sm:space-y-10">
           <KanaPosterSection
             title="HIRAGANA"

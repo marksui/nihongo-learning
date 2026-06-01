@@ -43,7 +43,7 @@ const PageHero = ({
             <span>{eyebrow}</span>
           </div>
           <h1 className="break-words font-serif text-4xl font-bold leading-tight text-ink sm:text-5xl">{title}</h1>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-ink/70 sm:text-base">{description}</p>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-ink/76">{description}</p>
           {actions ? <div className="mt-5 flex flex-wrap gap-3">{actions}</div> : null}
         </div>
 
