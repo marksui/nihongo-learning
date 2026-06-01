@@ -28,7 +28,7 @@ const KanaPage = ({ onSpeak }: KanaPageProps) => {
 
         return (
           <section key={group} className="space-y-4">
-            <div className="flex items-center gap-3 rounded-lg border border-ink/10 bg-[#fffdf1]/75 px-4 py-3 shadow-card">
+            <div className="flex items-center gap-3 rounded-lg border border-ink/10 bg-paper px-4 py-3 shadow-card">
               <h2 className="font-serif text-2xl font-bold text-ink">{group}</h2>
               <div className="h-px flex-1 bg-yuzu/28" />
             </div>

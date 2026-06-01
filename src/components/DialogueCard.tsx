@@ -101,8 +101,8 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
   };
 
   return (
-    <article className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1]/92 shadow-card">
-      <div className="border-b border-ink/10 bg-[#fffdf1] p-5">
+    <article className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper shadow-card">
+      <div className="border-b border-ink/10 bg-paper p-5">
         <div className="flex min-w-0 flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
@@ -191,10 +191,10 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
                 <div
                   className={`w-full rounded-lg border p-4 shadow-sm transition duration-300 md:max-w-[76%] ${
                     active
-                      ? "scale-[1.01] border-yuzu bg-[#fffdf1] shadow-soft ring-2 ring-yuzu/30"
+                      ? "scale-[1.01] border-yuzu bg-paper shadow-soft ring-2 ring-yuzu/30"
                       : practiceLine
                         ? "border-matcha/18 bg-matcha/8"
-                        : "border-ink/8 bg-[#fffdf1]"
+                        : "border-ink/8 bg-paper"
                   }`}
                 >
                   <div className="mb-3 flex flex-wrap items-center gap-2">

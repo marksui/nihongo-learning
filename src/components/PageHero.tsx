@@ -34,7 +34,7 @@ const PageHero = ({
   title,
 }: PageHeroProps) => {
   return (
-    <section className="relative overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1]/92 p-5 shadow-card sm:p-6">
+    <section className="relative overflow-hidden rounded-lg border border-ink/10 bg-paper p-5 shadow-card sm:p-6">
       <div className="absolute inset-x-0 top-0 h-1.5 bg-yuzu/45" />
       <div className="grid gap-5 pt-2 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
         <div className="min-w-0">

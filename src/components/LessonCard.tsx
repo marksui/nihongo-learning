@@ -77,7 +77,7 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
               className={`rounded-md border p-4 transition duration-300 ${
                 active
                   ? "border-yuzu/50 bg-yuzu/10 shadow-card ring-2 ring-yuzu/25"
-                  : "border-black/8 bg-rice/68"
+                  : "border-ink/8 bg-rice/68"
               }`}
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">

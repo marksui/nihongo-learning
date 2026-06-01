@@ -4,20 +4,78 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color: #2b2418;
-  background: #fff4cf;
+:root,
+html[data-theme="hidamari"] {
+  --color-ink: 43 36 24;
+  --color-rice: 255 244 207;
+  --color-paper: 255 253 241;
+  --color-sakura: 217 111 126;
+  --color-matcha: 78 141 97;
+  --color-sora: 93 155 203;
+  --color-yuzu: 233 185 73;
+  --color-sumire: 116 105 154;
+  --color-sky: 244 235 200;
+  --page-start: 255 248 220;
+  --page-end: 255 243 199;
+  --grid-line: 107 80 34;
+  color: rgb(var(--color-ink));
+  background: rgb(var(--color-rice));
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+html[data-theme="matcha"] {
+  --color-ink: 33 54 38;
+  --color-rice: 237 247 222;
+  --color-paper: 251 255 241;
+  --color-sakura: 202 112 121;
+  --color-matcha: 72 135 82;
+  --color-sora: 86 145 177;
+  --color-yuzu: 220 179 72;
+  --color-sumire: 105 111 145;
+  --color-sky: 225 239 216;
+  --page-start: 248 255 231;
+  --page-end: 232 244 209;
+  --grid-line: 75 103 59;
+}
+
+html[data-theme="momo"] {
+  --color-ink: 67 39 34;
+  --color-rice: 255 238 221;
+  --color-paper: 255 250 242;
+  --color-sakura: 210 103 114;
+  --color-matcha: 84 132 94;
+  --color-sora: 92 142 181;
+  --color-yuzu: 228 174 85;
+  --color-sumire: 128 100 143;
+  --color-sky: 249 230 211;
+  --page-start: 255 244 229;
+  --page-end: 255 231 214;
+  --grid-line: 132 83 64;
+}
+
+html[data-theme="washi"] {
+  --color-ink: 36 40 38;
+  --color-rice: 242 238 220;
+  --color-paper: 252 250 239;
+  --color-sakura: 178 111 116;
+  --color-matcha: 82 121 88;
+  --color-sora: 86 124 153;
+  --color-yuzu: 190 157 79;
+  --color-sumire: 100 98 128;
+  --color-sky: 232 229 213;
+  --page-start: 249 247 235;
+  --page-end: 238 232 211;
+  --grid-line: 95 90 77;
+}
+
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: linear-gradient(180deg, #fff8dc 0%, #fff3c7 100%);
+  background: linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--page-end)) 100%);
   font-family: "Noto Sans JP", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -31,8 +89,8 @@ body::before {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(90deg, rgba(107, 80, 34, 0.035) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(107, 80, 34, 0.025) 1px, transparent 1px);
+    linear-gradient(90deg, rgb(var(--grid-line) / 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--grid-line) / 0.025) 1px, transparent 1px);
   background-size: 32px 32px;
   opacity: 0.45;
 }
@@ -53,12 +111,12 @@ button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid rgba(242, 106, 141, 0.42);
+  outline: 3px solid rgb(var(--color-sakura) / 0.42);
   outline-offset: 2px;
 }
 
 ::selection {
-  background: rgba(247, 201, 72, 0.42);
+  background: rgb(var(--color-yuzu) / 0.38);
 }
 
 .reading-token {
@@ -75,13 +133,13 @@ select:focus-visible {
   }
 
   28% {
-    background: rgba(247, 201, 72, 0.42);
-    color: #2b2418;
+    background: rgb(var(--color-yuzu) / 0.38);
+    color: rgb(var(--color-ink));
     transform: translateY(-0.12rem);
   }
 
   72% {
-    background: rgba(247, 201, 72, 0.22);
+    background: rgb(var(--color-yuzu) / 0.2);
     transform: translateY(0);
   }
 

@@ -32,7 +32,7 @@ const FilterChips = <T extends string>({
               className={`flex min-h-10 shrink-0 cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-95 ${
                 selected
                   ? "border-matcha bg-matcha text-white shadow-card"
-                  : "border-ink/10 bg-[#fffdf1]/90 text-ink/70 hover:border-yuzu/35 hover:bg-yuzu/12 hover:text-ink"
+                  : "border-ink/10 bg-paper text-ink/70 hover:border-yuzu/35 hover:bg-yuzu/12 hover:text-ink"
               }`}
             >
               {Icon ? <Icon aria-hidden="true" size={15} /> : null}

@@ -119,7 +119,7 @@ const Home = ({ onNavigate }: HomeProps) => {
           }
         />
 
-        <div className="relative min-h-80 overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1] p-6 shadow-card">
+        <div className="relative min-h-80 overflow-hidden rounded-lg border border-ink/10 bg-paper p-6 shadow-card">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-yuzu/45" />
           <div className="relative grid h-full grid-cols-2 gap-3">
             {["あ", "ア", "日语", "中文", "です", "を", "かな", "会話"].map((label, index) => (

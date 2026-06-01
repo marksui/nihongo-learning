@@ -299,7 +299,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
 
   return (
     <div className="grid min-h-[calc(100vh-9rem)] place-items-center">
-      <article className="w-full max-w-[22rem] overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1] px-2.5 py-7 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
+      <article className="w-full max-w-[22rem] overflow-hidden rounded-lg border border-ink/10 bg-paper px-2.5 py-7 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
         <div className="space-y-9 sm:space-y-10">
           <KanaPosterSection
             title="HIRAGANA"

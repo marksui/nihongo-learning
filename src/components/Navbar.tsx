@@ -75,7 +75,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
             className="flex min-w-0 cursor-pointer items-center gap-3 rounded-md px-1 py-1 text-left transition hover:text-sakura"
             aria-label="返回首页"
           >
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-ink/10 bg-[#fffdf1] text-lg font-extrabold text-sakura shadow-card">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-ink/10 bg-paper text-lg font-extrabold text-sakura shadow-card">
               日
             </span>
             <span className="min-w-0">
@@ -84,7 +84,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
             </span>
           </button>
 
-          <nav className="hidden gap-1 rounded-lg border border-ink/10 bg-[#fffdf1]/88 p-1 shadow-card md:flex">
+          <nav className="hidden gap-1 rounded-lg border border-ink/10 bg-paper p-1 shadow-card md:flex">
             {desktopItems.map((item) => {
               const Icon = item.icon;
               const active = currentPage === item.page;
@@ -114,7 +114,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
         <div className="fixed inset-0 z-40 bg-ink/12 backdrop-blur-[2px] md:hidden" onClick={() => setMoreOpen(false)} />
       ) : null}
 
-      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-ink/10 bg-[#fffdf1]/96 px-3 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2 shadow-soft backdrop-blur-xl md:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-ink/10 bg-paper px-3 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2 shadow-soft backdrop-blur-xl md:hidden">
         {moreOpen ? (
           <div className="mb-2 rounded-lg border border-ink/10 bg-rice p-2 shadow-card">
             <div className="mb-1 flex items-center justify-between px-2 py-1">
@@ -122,7 +122,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
               <button
                 type="button"
                 onClick={() => setMoreOpen(false)}
-                className="grid h-8 w-8 cursor-pointer place-items-center rounded-md text-ink/55 hover:bg-[#fffdf1]"
+                className="grid h-8 w-8 cursor-pointer place-items-center rounded-md text-ink/55 hover:bg-paper"
                 aria-label="关闭更多菜单"
               >
                 <X aria-hidden="true" size={17} />
@@ -139,7 +139,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                     type="button"
                     onClick={() => navigate(item.page)}
                     className={`grid min-h-16 cursor-pointer place-items-center rounded-md px-2 py-2 text-xs font-extrabold transition active:scale-95 ${
-                      active ? "bg-matcha text-white" : "bg-[#fffdf1] text-ink/68 hover:bg-yuzu/14 hover:text-ink"
+                      active ? "bg-matcha text-white" : "bg-paper text-ink/68 hover:bg-yuzu/14 hover:text-ink"
                     }`}
                   >
                     <Icon aria-hidden="true" size={20} />

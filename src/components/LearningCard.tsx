@@ -9,7 +9,7 @@ interface LearningCardProps {
 const LearningCard = ({ children, className = "", interactive = false }: LearningCardProps) => {
   return (
     <article
-      className={`rounded-lg border border-ink/10 bg-[#fffdf1]/92 shadow-card ${
+      className={`rounded-lg border border-ink/10 bg-paper shadow-card ${
         interactive ? "transition hover:-translate-y-0.5 hover:border-yuzu/45 hover:shadow-card" : ""
       } ${className}`}
     >

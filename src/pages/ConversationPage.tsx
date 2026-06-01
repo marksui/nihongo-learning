@@ -55,7 +55,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
         ]}
       />
 
-      <section className="rounded-lg border border-ink/10 bg-[#fffdf1]/94 p-4 shadow-card">
+      <section className="rounded-lg border border-ink/10 bg-paper p-4 shadow-card">
         <FilterChips
           active={selectedMode}
           counts={modeCounts}
@@ -67,7 +67,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
       </section>
 
       <section className="grid min-w-0 gap-5 lg:grid-cols-[21rem_minmax(0,1fr)]">
-        <aside className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1]/92 p-3 shadow-card lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)]">
+        <aside className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper p-3 shadow-card lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)]">
           <div className="flex items-center justify-between px-2 py-2">
             <div className="flex items-center gap-2 text-sm font-bold text-ink">
               <MessageCircle aria-hidden="true" className="text-matcha" size={18} />

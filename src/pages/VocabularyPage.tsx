@@ -65,7 +65,7 @@ const VocabularyPage = ({ onSpeak }: VocabularyPageProps) => {
         ]}
       />
 
-      <section className="sticky top-20 z-20 rounded-lg border border-ink/10 bg-[#fffdf1]/94 p-4 shadow-card backdrop-blur md:top-24">
+      <section className="sticky top-20 z-20 rounded-lg border border-ink/10 bg-paper p-4 shadow-card backdrop-blur md:top-24">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <label className="relative block">
             <Search
@@ -78,7 +78,7 @@ const VocabularyPage = ({ onSpeak }: VocabularyPageProps) => {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="搜索日语、假名、romaji 或中文意思"
-              className="min-h-12 w-full rounded-md border border-black/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
+              className="min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
             />
           </label>
           <p className="text-sm font-bold text-ink/60">{filteredWords.length} / {vocabulary.length} 个词</p>

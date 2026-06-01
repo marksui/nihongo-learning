@@ -7,7 +7,7 @@ interface EmptyStateProps {
 
 const EmptyState = ({ description, title }: EmptyStateProps) => {
   return (
-    <div className="rounded-lg border border-dashed border-yuzu/45 bg-[#fffdf1]/85 p-8 text-center shadow-card">
+    <div className="rounded-lg border border-dashed border-yuzu/45 bg-paper p-8 text-center shadow-card">
       <div className="mx-auto grid h-12 w-12 place-items-center rounded-md bg-yuzu/18 text-ink">
         <SearchX aria-hidden="true" size={24} />
       </div>
