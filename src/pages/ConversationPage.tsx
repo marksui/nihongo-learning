@@ -1,6 +1,8 @@
 import { MessageCircle, Sparkles, Users } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import DialogueCard from "../components/DialogueCard";
+import FilterChips from "../components/FilterChips";
+import PageHero from "../components/PageHero";
 import { dialogueModes, dialogues, type DialogueMode } from "../data/dialogues";
 
 interface ConversationPageProps {
@@ -40,56 +42,28 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
 
   return (
     <div className="min-w-0 space-y-6">
-      <section className="min-w-0 overflow-hidden rounded-lg border border-black/10 bg-white/88 p-6 shadow-card">
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
-          <div className="min-w-0">
-            <p className="text-sm font-bold text-matcha">Conversation</p>
-            <h1 className="mt-2 font-serif text-4xl font-bold text-ink">日常会话</h1>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-ink/70">
-              用情景模式听真实对话。左边选场景，右边按“你说 / 对方说”对照跟读，可以只听对方或只听我方，像现场轮流说话一样。
-            </p>
-          </div>
+      <PageHero
+        accent="matcha"
+        eyebrow="Conversation"
+        icon={MessageCircle}
+        title="日常会话"
+        description="用情景模式听真实对话。先选场景，再按“你说 / 对方说”对照跟读，也可以只听对方或只听我方，像现场轮流说话一样。"
+        stats={[
+          { label: "情景", value: dialogues.length },
+          { label: "模式", value: dialogueModes.length },
+          { label: "句子", value: totalLines },
+        ]}
+      />
 
-          <div className="grid min-w-0 grid-cols-3 gap-2 text-center">
-            <div className="min-w-0 rounded-md bg-rice px-2 py-3 sm:px-3">
-              <p className="text-2xl font-extrabold text-ink">{dialogues.length}</p>
-              <p className="mt-1 text-xs font-bold text-ink/58">情景</p>
-            </div>
-            <div className="min-w-0 rounded-md bg-sky px-2 py-3 sm:px-3">
-              <p className="text-2xl font-extrabold text-ink">{dialogueModes.length}</p>
-              <p className="mt-1 text-xs font-bold text-ink/58">模式</p>
-            </div>
-            <div className="min-w-0 rounded-md bg-matcha/10 px-2 py-3 sm:px-3">
-              <p className="text-2xl font-extrabold text-matcha">{totalLines}</p>
-              <p className="mt-1 text-xs font-bold text-ink/58">句子</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-5 flex gap-2 overflow-x-auto pb-1">
-          {modeOptions.map((mode) => {
-            const active = selectedMode === mode;
-
-            return (
-              <button
-                key={mode}
-                type="button"
-                onClick={() => setSelectedMode(mode)}
-                className={`flex min-h-10 shrink-0 cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm font-bold transition ${
-                  active
-                    ? "bg-ink text-white"
-                    : "border border-black/10 bg-white text-ink/68 hover:bg-rice hover:text-ink"
-                }`}
-              >
-                <Sparkles aria-hidden="true" size={15} />
-                <span>{mode === "全部" ? "全部模式" : mode}</span>
-                <span className={`rounded px-1.5 py-0.5 text-xs ${active ? "bg-white/16" : "bg-rice"}`}>
-                  {modeCounts[mode]}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+      <section className="rounded-lg border border-black/10 bg-white/94 p-4 shadow-card">
+        <FilterChips
+          active={selectedMode}
+          counts={modeCounts}
+          icon={Sparkles}
+          label="情景模式"
+          onChange={setSelectedMode}
+          options={modeOptions}
+        />
       </section>
 
       <section className="grid min-w-0 gap-5 lg:grid-cols-[21rem_minmax(0,1fr)]">
@@ -112,19 +86,19 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
               ).join(" / ");
 
               return (
-            <button
-              key={dialogue.id}
-              type="button"
-              onClick={() => setSelectedDialogueId(dialogue.id)}
+                <button
+                  key={dialogue.id}
+                  type="button"
+                  onClick={() => setSelectedDialogueId(dialogue.id)}
                   className={`min-w-0 cursor-pointer rounded-md border p-3 text-left transition ${
                     active
-                      ? "border-matcha bg-matcha/10 shadow-card"
-                      : "border-black/8 bg-white hover:border-matcha/35 hover:bg-rice/70"
-              }`}
-            >
+                      ? "border-matcha bg-matcha/10 shadow-card ring-2 ring-matcha/15"
+                      : "border-black/8 bg-white hover:border-sakura/35 hover:bg-rice/70"
+                  }`}
+                >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="text-xs font-bold text-coral">{dialogue.mode}</p>
+                      <p className="text-xs font-bold text-sakura">{dialogue.mode}</p>
                       <h2 className="mt-1 break-words text-base font-extrabold text-ink">{dialogue.title}</h2>
                     </div>
                     <span className="rounded-md bg-ink px-2 py-1 text-xs font-bold text-white">
@@ -138,7 +112,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
                     <span className="text-ink/30">/</span>
                     <span className="min-w-0 break-words">对方：{partnerSpeakers}</span>
                   </div>
-            </button>
+                </button>
               );
             })}
           </div>

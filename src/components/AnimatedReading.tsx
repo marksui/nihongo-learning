@@ -12,12 +12,12 @@ const AnimatedReading = ({ kana, romaji, active = false, variant = "light" }: An
   const tokens = formattedRomaji.split(/(\s+)/);
   const kanaClass =
     variant === "dark"
-      ? "text-white/80 data-[active=true]:text-sun"
+      ? "text-white/80 data-[active=true]:text-yuzu"
       : "text-ink/58 data-[active=true]:text-matcha";
   const romajiClass =
     variant === "dark"
       ? "text-white/62 data-[active=true]:text-white"
-      : "text-indigo/78 data-[active=true]:text-indigo";
+      : "text-sumire/78 data-[active=true]:text-sumire";
 
   return (
     <div className="space-y-1" data-active={active}>

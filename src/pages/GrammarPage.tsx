@@ -1,4 +1,6 @@
+import { BookOpenCheck } from "lucide-react";
 import LessonCard from "../components/LessonCard";
+import PageHero from "../components/PageHero";
 import { grammarLessons } from "../data/grammar";
 
 interface GrammarPageProps {
@@ -8,13 +10,18 @@ interface GrammarPageProps {
 const GrammarPage = ({ onSpeak }: GrammarPageProps) => {
   return (
     <div className="space-y-6">
-      <section className="rounded-lg border border-black/10 bg-white/88 p-6 shadow-card">
-        <p className="text-sm font-bold text-indigo">Grammar</p>
-        <h1 className="mt-2 font-serif text-4xl font-bold text-ink">基础语法</h1>
-        <p className="mt-4 max-w-3xl text-sm leading-7 text-ink/70">
-          用中文解释日语句型，例句同时给出日语、假名读法、分隔 romaji 和中文翻译。点击喇叭可以逐句听发音，并特别标出中文母语者容易混淆的地方。
-        </p>
-      </section>
+      <PageHero
+        accent="sumire"
+        eyebrow="Grammar"
+        icon={BookOpenCheck}
+        title="基础语法"
+        description="用中文解释日语句型，例句同时给出日语、假名读法、分隔 romaji 和中文翻译。点击句子可以逐句听发音，并标出中文母语者容易混淆的地方。"
+        stats={[
+          { label: "课程", value: grammarLessons.length },
+          { label: "例句", value: grammarLessons.reduce((sum, lesson) => sum + lesson.examples.length, 0) },
+          { label: "读音", value: "动画" },
+        ]}
+      />
 
       <section className="space-y-5">
         {grammarLessons.map((lesson) => (

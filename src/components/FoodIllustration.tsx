@@ -60,7 +60,7 @@ const FoodIllustration = ({ word }: FoodIllustrationProps) => {
 
   return (
     <div
-      className="mb-4 grid h-32 place-items-center overflow-hidden rounded-lg border border-black/8 bg-gradient-to-br from-rice via-white to-sky/70"
+      className="mb-4 grid h-32 place-items-center overflow-hidden rounded-lg border border-black/8 bg-gradient-to-br from-rice via-white to-sora/12"
       aria-label={`${word.meaning} 插图`}
       role="img"
     >

@@ -9,6 +9,8 @@ import {
   PlayCircle,
   Table2,
 } from "lucide-react";
+import LearningCard from "../components/LearningCard";
+import PageHero from "../components/PageHero";
 import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
@@ -43,7 +45,7 @@ const featureCards: FeatureCard[] = [
     page: "vocabulary",
     description: "按生活场景分类，配日语例句和中文翻译。",
     metric: `${vocabulary.length} 个入门词`,
-    accent: "bg-coral",
+    accent: "bg-sakura",
     icon: BookOpen,
   },
   {
@@ -51,7 +53,7 @@ const featureCards: FeatureCard[] = [
     page: "numbers",
     description: "从 0-10 到价格、日期、年龄、楼层和大数字。",
     metric: `${numberExamples.length} 条数字规则`,
-    accent: "bg-sun",
+    accent: "bg-yuzu",
     icon: Hash,
   },
   {
@@ -59,7 +61,7 @@ const featureCards: FeatureCard[] = [
     page: "grammar",
     description: "用中文讲清句型，并标出中文母语者容易踩的点。",
     metric: `${grammarLessons.length} 个核心句型`,
-    accent: "bg-indigo",
+    accent: "bg-sumire",
     icon: GraduationCap,
   },
   {
@@ -83,39 +85,42 @@ const featureCards: FeatureCard[] = [
 const Home = ({ onNavigate }: HomeProps) => {
   return (
     <div className="space-y-10">
-      <section className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
-        <div className="rounded-lg border border-black/10 bg-white/88 p-6 shadow-soft md:p-8">
-          <div className="mb-5 flex w-fit items-center gap-2 rounded-md bg-matcha/10 px-3 py-2 text-sm font-bold text-matcha">
-            <PlayCircle aria-hidden="true" size={18} />
-            零基础中文路线
-          </div>
-          <h1 className="font-serif text-5xl font-bold text-ink sm:text-6xl">中文学日语</h1>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-ink/72">
-            从五十音开始，把假名、单词、语法、例句、会话和发音点读放在同一条学习路径里。
-            页面全部使用简体中文说明，日语内容配罗马音、假名读法和中文意思。
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+      <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+        <PageHero
+          accent="sakura"
+          eyebrow="零基础中文路线"
+          icon={PlayCircle}
+          title="中文学日语"
+          description="从五十音开始，把假名、单词、语法、例句、会话和发音点读放在同一条学习路径里。页面全部使用简体中文说明，日语内容配罗马音、假名读法和中文意思。"
+          stats={[
+            { label: "假名", value: kanaItems.length },
+            { label: "单词", value: vocabulary.length },
+            { label: "会话", value: dialogues.length },
+          ]}
+          actions={
+            <>
             <button
               type="button"
               onClick={() => onNavigate("kana")}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-ink px-4 py-2 font-bold text-white transition hover:bg-ink/90 active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-ink px-4 py-2 font-extrabold text-white shadow-card transition hover:bg-ink/90 active:scale-95"
             >
               开始学五十音
               <ArrowRight aria-hidden="true" size={18} />
             </button>
             <button
               type="button"
-              onClick={() => onNavigate("quickread")}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-black/10 bg-white px-4 py-2 font-bold text-ink transition hover:bg-rice active:scale-95"
+              onClick={() => onNavigate("conversation")}
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-sakura/25 bg-sakura/10 px-4 py-2 font-extrabold text-sakura transition hover:bg-sakura hover:text-white active:scale-95"
             >
-              假名速读
-              <Table2 aria-hidden="true" size={18} />
+              进入会话
+              <MessagesSquare aria-hidden="true" size={18} />
             </button>
-          </div>
-        </div>
+            </>
+          }
+        />
 
-        <div className="relative min-h-80 overflow-hidden rounded-lg border border-black/10 bg-ink p-6 shadow-soft">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(245,184,75,0.35),transparent_16rem),radial-gradient(circle_at_80%_30%,rgba(47,125,105,0.34),transparent_15rem)]" />
+        <div className="relative min-h-80 overflow-hidden rounded-lg border border-black/10 bg-ink p-6 shadow-pop">
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(242,106,141,0.28),transparent_35%),linear-gradient(45deg,rgba(77,163,255,0.22),transparent_45%)]" />
           <div className="relative grid h-full grid-cols-2 gap-3">
             {["あ", "ア", "日语", "中文", "です", "を", "かな", "会話"].map((label, index) => (
               <div
@@ -134,38 +139,43 @@ const Home = ({ onNavigate }: HomeProps) => {
       <section>
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-bold text-matcha">学习模块</p>
+            <p className="text-sm font-extrabold text-sakura">学习地图</p>
             <h2 className="font-serif text-3xl font-bold text-ink">按真实入门顺序推进</h2>
           </div>
           <p className="text-sm text-ink/58">所有内容来自本地 TypeScript 数据，无需后端。</p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
-          {featureCards.map((card) => {
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {featureCards.map((card, index) => {
             const Icon = card.icon;
 
             return (
-              <button
+              <LearningCard
                 key={card.title}
-                type="button"
-                onClick={() => onNavigate(card.page)}
-                className="group flex min-h-64 cursor-pointer flex-col rounded-lg border border-black/10 bg-white/90 p-5 text-left shadow-card transition hover:-translate-y-0.5 hover:shadow-soft"
+                interactive
+                className="group min-h-52 overflow-hidden p-0"
               >
-                <span className={`grid h-12 w-12 place-items-center rounded-md ${card.accent} text-white`}>
-                  <Icon aria-hidden="true" size={23} />
-                </span>
-                <h3 className="mt-5 text-xl font-extrabold text-ink">{card.title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-6 text-ink/68">{card.description}</p>
-                <div className="mt-5 w-full">
-                  <div className="mb-2 flex items-center justify-between text-xs font-bold text-ink/58">
+                <button
+                  type="button"
+                  onClick={() => onNavigate(card.page)}
+                  className="flex h-full w-full cursor-pointer flex-col p-5 text-left"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <span className={`grid h-12 w-12 place-items-center rounded-md ${card.accent} text-white`}>
+                      <Icon aria-hidden="true" size={23} />
+                    </span>
+                    <span className="rounded-md bg-rice px-2 py-1 text-xs font-extrabold text-ink/54">
+                      STEP {index + 1}
+                    </span>
+                  </div>
+                  <h3 className="mt-5 text-xl font-extrabold text-ink">{card.title}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-6 text-ink/68">{card.description}</p>
+                  <div className="mt-5 flex items-center justify-between text-xs font-extrabold text-ink/58">
                     <span>{card.metric}</span>
                     <ArrowRight className="transition group-hover:translate-x-1" size={16} />
                   </div>
-                  <div className="h-2 rounded-md bg-rice">
-                    <div className={`h-2 rounded-md ${card.accent}`} style={{ width: "72%" }} />
-                  </div>
-                </div>
-              </button>
+                </button>
+              </LearningCard>
             );
           })}
         </div>

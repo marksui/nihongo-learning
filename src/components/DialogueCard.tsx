@@ -6,11 +6,11 @@ import {
   Square,
   UserRound,
   UsersRound,
-  Volume2,
 } from "lucide-react";
 import { useRef, useState } from "react";
 import type { Dialogue } from "../data/dialogues";
 import { stopJapanese } from "../utils/speech";
+import SpeakButton from "./SpeakButton";
 
 interface DialogueCardProps {
   dialogue: Dialogue;
@@ -106,7 +106,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
         <div className="flex min-w-0 flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-md bg-coral/10 px-2 py-1 text-xs font-bold text-coral">{dialogue.mode}</span>
+              <span className="rounded-md bg-sakura/10 px-2 py-1 text-xs font-bold text-sakura">{dialogue.mode}</span>
               <span className="text-sm font-bold text-matcha">{dialogue.situation}</span>
             </div>
             <h2 className="mt-2 break-words font-serif text-3xl font-bold text-ink">{dialogue.title}</h2>
@@ -119,11 +119,11 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
                   <p className="font-extrabold text-matcha">{dialogue.practiceSpeaker}</p>
                 </div>
               </div>
-              <div className="flex min-w-0 items-center gap-3 rounded-md bg-sky px-3 py-2">
-                <UsersRound aria-hidden="true" className="shrink-0 text-indigo" size={18} />
+              <div className="flex min-w-0 items-center gap-3 rounded-md bg-sora/12 px-3 py-2">
+                <UsersRound aria-hidden="true" className="shrink-0 text-sora" size={18} />
                 <div>
                   <p className="text-xs font-bold text-ink/52">对方说</p>
-                  <p className="break-words font-extrabold text-indigo">{partnerSpeakers.join(" / ")}</p>
+                  <p className="break-words font-extrabold text-sora">{partnerSpeakers.join(" / ")}</p>
                 </div>
               </div>
             </div>
@@ -133,7 +133,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <button
               type="button"
               onClick={playNextLine}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-indigo px-3 py-2 text-sm font-bold text-white transition hover:bg-indigo/90 active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-sumire px-3 py-2 text-sm font-bold text-white transition hover:bg-sumire/90 active:scale-95"
             >
               <ListMusic aria-hidden="true" size={18} />
               逐句
@@ -149,7 +149,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <button
               type="button"
               onClick={playPartnerLines}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-black/10 bg-white px-3 py-2 text-sm font-bold text-ink transition hover:bg-sky active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-black/10 bg-white px-3 py-2 text-sm font-bold text-ink transition hover:bg-sora/12 active:scale-95"
             >
               <Ear aria-hidden="true" size={18} />
               只听对方
@@ -165,11 +165,12 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <button
               type="button"
               onClick={stopPlayback}
-              className="grid min-h-11 w-11 cursor-pointer place-items-center rounded-md border border-black/10 bg-white text-ink transition hover:bg-rice active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-black/10 bg-white px-3 py-2 text-sm font-bold text-ink transition hover:bg-rice active:scale-95"
               aria-label="停止播放对话"
               title="停止"
             >
               <Square aria-hidden="true" size={18} />
+              停止
             </button>
           </div>
         </div>
@@ -190,7 +191,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
                 <div
                   className={`w-full rounded-lg border p-4 shadow-sm transition duration-300 md:max-w-[76%] ${
                     active
-                      ? "scale-[1.01] border-sun bg-white shadow-soft ring-2 ring-sun/30"
+                      ? "scale-[1.01] border-yuzu bg-white shadow-soft ring-2 ring-yuzu/30"
                       : practiceLine
                         ? "border-matcha/18 bg-matcha/8"
                         : "border-black/8 bg-white"
@@ -199,24 +200,23 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
                   <div className="mb-3 flex flex-wrap items-center gap-2">
                     <span
                       className={`rounded-md px-2 py-1 text-xs font-extrabold ${
-                        practiceLine ? "bg-matcha text-white" : "bg-indigo text-white"
+                        practiceLine ? "bg-matcha text-white" : "bg-sora text-white"
                       }`}
                     >
                       {practiceLine ? "你说" : "对方说"}
                     </span>
                     <span className="text-sm font-bold text-ink/62">{line.speaker}</span>
                     {active ? (
-                      <span className="rounded-md bg-sun/24 px-2 py-1 text-xs font-bold text-ink">正在播放</span>
+                      <span className="rounded-md bg-yuzu/24 px-2 py-1 text-xs font-bold text-ink">正在播放</span>
                     ) : null}
-                    <button
-                      type="button"
-                      onClick={() => void playLine(index)}
-                      className="ml-auto grid h-10 w-10 cursor-pointer place-items-center rounded-md bg-white text-matcha shadow-sm transition hover:bg-matcha hover:text-white active:scale-95"
-                      aria-label={`播放第 ${index + 1} 句`}
+                    <SpeakButton
+                      active={active}
+                      ariaLabel={`播放第 ${index + 1} 句`}
+                      className="ml-auto h-10 w-10"
+                      onClick={() => playLine(index)}
                       title="播放这一句"
-                    >
-                      <Volume2 aria-hidden="true" size={18} />
-                    </button>
+                      variant="light"
+                    />
                   </div>
 
                   <p className="break-words text-xl font-extrabold leading-8 text-ink">{line.japanese}</p>

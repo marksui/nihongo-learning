@@ -79,8 +79,8 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 onClick={() => onPlay(key, kana)}
                 className={`group grid min-h-12 min-w-0 cursor-pointer place-items-center rounded-md px-0.5 py-1 text-center transition duration-200 active:scale-95 ${
                   active
-                    ? "bg-sun/28 text-ink ring-2 ring-coral/28"
-                    : "text-ink hover:bg-sky"
+                    ? "bg-yuzu/28 text-ink ring-2 ring-sakura/28"
+                    : "text-ink hover:bg-sora/12"
                 }`}
                 aria-label={`朗读 ${kana} ${getRomajiLabel(item)}`}
                 title={`朗读 ${kana}`}
@@ -90,7 +90,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 </span>
                 <span
                   className={`mt-1 block min-w-0 font-mono text-[0.56rem] font-bold leading-none sm:text-xs ${
-                    active ? "text-coral" : "text-coral/82 group-hover:text-coral"
+                    active ? "text-sakura" : "text-sakura/82 group-hover:text-sakura"
                   }`}
                 >
                   {getRomajiLabel(item)}

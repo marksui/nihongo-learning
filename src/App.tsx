@@ -101,17 +101,17 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen text-ink">
+    <div className="min-h-screen overflow-x-hidden text-ink">
       <Navbar currentPage={currentPage} onNavigate={navigate} />
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">{page}</main>
+      <main className="mx-auto max-w-7xl px-4 pb-28 pt-5 sm:px-6 md:pb-8 lg:px-8 lg:py-8">{page}</main>
 
       {speechWarning ? (
         <div
           role="status"
-          className="fixed bottom-4 left-4 right-4 z-50 rounded-lg border border-coral/30 bg-white p-4 text-sm text-ink shadow-soft sm:left-auto sm:max-w-md"
+          className="fixed bottom-24 left-4 right-4 z-[60] rounded-lg border border-sakura/30 bg-white p-4 text-sm text-ink shadow-soft sm:left-auto sm:max-w-md md:bottom-4"
         >
           <div className="flex items-start gap-3">
-            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-coral/12 font-bold text-coral">
+            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-sakura/12 font-bold text-sakura">
               声
             </div>
             <p className="leading-6">{speechWarning}</p>
@@ -129,11 +129,11 @@ const App = () => {
       ) : null}
 
       {speechActive ? (
-        <div className="fixed bottom-4 left-4 z-50 flex gap-2 rounded-lg border border-black/10 bg-white p-2 shadow-soft">
+        <div className="fixed bottom-24 left-4 z-[60] flex gap-2 rounded-lg border border-black/10 bg-white p-2 shadow-soft md:bottom-4">
           <button
             type="button"
             onClick={speechPaused ? resumeSpeech : pauseSpeech}
-            className="grid h-11 w-11 cursor-pointer place-items-center rounded-md bg-indigo text-white transition hover:bg-indigo/90 active:scale-95"
+            className="grid h-11 w-11 cursor-pointer place-items-center rounded-md bg-sora text-white transition hover:bg-sora/90 active:scale-95"
             aria-label={speechPaused ? "继续播放" : "暂停播放"}
             title={speechPaused ? "继续" : "暂停"}
           >
