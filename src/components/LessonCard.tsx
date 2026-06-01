@@ -42,10 +42,10 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
           <h2 className="break-words font-serif text-3xl font-bold text-ink">{lesson.title}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-ink/72">{lesson.explanation}</p>
         </div>
-        <div className="rounded-md bg-ink px-4 py-3 text-white md:min-w-72">
+        <div className="rounded-md border border-yuzu/28 bg-rice/70 px-4 py-3 text-ink md:min-w-72">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div className="min-w-0">
-              <p className="text-xs font-bold text-white/58">句型</p>
+              <p className="text-xs font-bold text-ink/58">句型</p>
               <p className="mt-1 break-words font-serif text-xl font-bold">{lesson.pattern}</p>
             </div>
             <SpeakButton
@@ -53,15 +53,14 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
               ariaLabel={`播放${lesson.title}例句`}
               onClick={() => speakWithReading("pattern", sampleSentence)}
               title="播放例句"
-              variant="dark"
+              variant="soft"
             />
           </div>
-          <div className="mt-3 space-y-1 border-t border-white/12 pt-3">
+          <div className="mt-3 space-y-1 border-t border-ink/10 pt-3">
             <AnimatedReading
               kana={lesson.patternKana}
               romaji={lesson.patternRomaji}
               active={activeReadingKey === "pattern"}
-              variant="dark"
             />
           </div>
         </div>

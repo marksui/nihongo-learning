@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { kanaItems, type KanaItem } from "../data/kana";
+import { formatRomajiReading } from "../utils/romaji";
 
 interface QuickReadPageProps {
   onSpeak: (text: string) => Promise<boolean>;
@@ -7,6 +8,22 @@ interface QuickReadPageProps {
 
 type KanaScript = "hiragana" | "katakana";
 type KanaCell = string | null;
+
+interface QuickReadItem {
+  id: string;
+  label: string;
+  japanese: string;
+  kana: string;
+  romaji: string;
+  meaning: string;
+}
+
+interface QuickReadSection {
+  id: string;
+  title: string;
+  subtitle: string;
+  items: QuickReadItem[];
+}
 
 const kanaRows: KanaCell[][] = [
   ["n", "wa", "ra", "ya", "ma", "ha", "na", "ta", "sa", "ka", "a"],
@@ -28,6 +45,109 @@ const getRomajiLabel = (item: KanaItem) => {
 
 const getKanaText = (item: KanaItem, script: KanaScript) =>
   script === "hiragana" ? item.hiragana : item.katakana;
+
+const quickReadSections: QuickReadSection[] = [
+  {
+    id: "basic-numbers",
+    title: "NUMBERS",
+    subtitle: "基础数字",
+    items: [
+      { id: "n0", label: "0", japanese: "ゼロ", kana: "ゼロ / れい", romaji: "zero / rei", meaning: "零" },
+      { id: "n1", label: "1", japanese: "一", kana: "いち", romaji: "ichi", meaning: "一" },
+      { id: "n2", label: "2", japanese: "二", kana: "に", romaji: "ni", meaning: "二" },
+      { id: "n3", label: "3", japanese: "三", kana: "さん", romaji: "san", meaning: "三" },
+      { id: "n4", label: "4", japanese: "四", kana: "よん / し", romaji: "yon / shi", meaning: "四" },
+      { id: "n5", label: "5", japanese: "五", kana: "ご", romaji: "go", meaning: "五" },
+      { id: "n6", label: "6", japanese: "六", kana: "ろく", romaji: "roku", meaning: "六" },
+      { id: "n7", label: "7", japanese: "七", kana: "なな / しち", romaji: "nana / shichi", meaning: "七" },
+      { id: "n8", label: "8", japanese: "八", kana: "はち", romaji: "hachi", meaning: "八" },
+      { id: "n9", label: "9", japanese: "九", kana: "きゅう / く", romaji: "kyuu / ku", meaning: "九" },
+      { id: "n10", label: "10", japanese: "十", kana: "じゅう", romaji: "juu", meaning: "十" },
+      { id: "n11", label: "11", japanese: "十一", kana: "じゅういち", romaji: "juu ichi", meaning: "十一" },
+      { id: "n12", label: "12", japanese: "十二", kana: "じゅうに", romaji: "juu ni", meaning: "十二" },
+      { id: "n20", label: "20", japanese: "二十", kana: "にじゅう", romaji: "ni juu", meaning: "二十" },
+      { id: "n21", label: "21", japanese: "二十一", kana: "にじゅういち", romaji: "ni juu ichi", meaning: "二十一" },
+    ],
+  },
+  {
+    id: "large-numbers",
+    title: "LARGE NUMBERS",
+    subtitle: "复杂数字",
+    items: [
+      { id: "n30", label: "30", japanese: "三十", kana: "さんじゅう", romaji: "san juu", meaning: "三十" },
+      { id: "n100", label: "100", japanese: "百", kana: "ひゃく", romaji: "hyaku", meaning: "一百" },
+      { id: "n300", label: "300", japanese: "三百", kana: "さんびゃく", romaji: "san byaku", meaning: "三百" },
+      { id: "n600", label: "600", japanese: "六百", kana: "ろっぴゃく", romaji: "roppyaku", meaning: "六百" },
+      { id: "n800", label: "800", japanese: "八百", kana: "はっぴゃく", romaji: "happyaku", meaning: "八百" },
+      { id: "n1000", label: "1000", japanese: "千", kana: "せん", romaji: "sen", meaning: "一千" },
+      { id: "n3000", label: "3000", japanese: "三千", kana: "さんぜん", romaji: "san zen", meaning: "三千" },
+      { id: "n8000", label: "8000", japanese: "八千", kana: "はっせん", romaji: "hassen", meaning: "八千" },
+      { id: "n10000", label: "1万", japanese: "一万", kana: "いちまん", romaji: "ichi man", meaning: "一万" },
+      { id: "n100000", label: "10万", japanese: "十万", kana: "じゅうまん", romaji: "juu man", meaning: "十万" },
+      { id: "n1000000", label: "100万", japanese: "百万", kana: "ひゃくまん", romaji: "hyaku man", meaning: "一百万" },
+      { id: "n100000000", label: "1億", japanese: "一億", kana: "いちおく", romaji: "ichi oku", meaning: "一亿" },
+    ],
+  },
+  {
+    id: "months",
+    title: "MONTHS",
+    subtitle: "月份",
+    items: [
+      { id: "m1", label: "1月", japanese: "一月", kana: "いちがつ", romaji: "ichi gatsu", meaning: "一月" },
+      { id: "m2", label: "2月", japanese: "二月", kana: "にがつ", romaji: "ni gatsu", meaning: "二月" },
+      { id: "m3", label: "3月", japanese: "三月", kana: "さんがつ", romaji: "san gatsu", meaning: "三月" },
+      { id: "m4", label: "4月", japanese: "四月", kana: "しがつ", romaji: "shi gatsu", meaning: "四月" },
+      { id: "m5", label: "5月", japanese: "五月", kana: "ごがつ", romaji: "go gatsu", meaning: "五月" },
+      { id: "m6", label: "6月", japanese: "六月", kana: "ろくがつ", romaji: "roku gatsu", meaning: "六月" },
+      { id: "m7", label: "7月", japanese: "七月", kana: "しちがつ", romaji: "shichi gatsu", meaning: "七月" },
+      { id: "m8", label: "8月", japanese: "八月", kana: "はちがつ", romaji: "hachi gatsu", meaning: "八月" },
+      { id: "m9", label: "9月", japanese: "九月", kana: "くがつ", romaji: "ku gatsu", meaning: "九月" },
+      { id: "m10", label: "10月", japanese: "十月", kana: "じゅうがつ", romaji: "juu gatsu", meaning: "十月" },
+      { id: "m11", label: "11月", japanese: "十一月", kana: "じゅういちがつ", romaji: "juu ichi gatsu", meaning: "十一月" },
+      { id: "m12", label: "12月", japanese: "十二月", kana: "じゅうにがつ", romaji: "juu ni gatsu", meaning: "十二月" },
+    ],
+  },
+  {
+    id: "dates",
+    title: "DATES",
+    subtitle: "日期重点读法",
+    items: [
+      { id: "d1", label: "1日", japanese: "一日", kana: "ついたち", romaji: "tsuitachi", meaning: "一号" },
+      { id: "d2", label: "2日", japanese: "二日", kana: "ふつか", romaji: "futsuka", meaning: "二号" },
+      { id: "d3", label: "3日", japanese: "三日", kana: "みっか", romaji: "mikka", meaning: "三号" },
+      { id: "d4", label: "4日", japanese: "四日", kana: "よっか", romaji: "yokka", meaning: "四号" },
+      { id: "d5", label: "5日", japanese: "五日", kana: "いつか", romaji: "itsuka", meaning: "五号" },
+      { id: "d6", label: "6日", japanese: "六日", kana: "むいか", romaji: "muika", meaning: "六号" },
+      { id: "d7", label: "7日", japanese: "七日", kana: "なのか", romaji: "nanoka", meaning: "七号" },
+      { id: "d8", label: "8日", japanese: "八日", kana: "ようか", romaji: "youka", meaning: "八号" },
+      { id: "d9", label: "9日", japanese: "九日", kana: "ここのか", romaji: "kokonoka", meaning: "九号" },
+      { id: "d10", label: "10日", japanese: "十日", kana: "とおか", romaji: "tooka", meaning: "十号" },
+      { id: "d14", label: "14日", japanese: "十四日", kana: "じゅうよっか", romaji: "juu yokka", meaning: "十四号" },
+      { id: "d20", label: "20日", japanese: "二十日", kana: "はつか", romaji: "hatsuka", meaning: "二十号" },
+      { id: "d24", label: "24日", japanese: "二十四日", kana: "にじゅうよっか", romaji: "ni juu yokka", meaning: "二十四号" },
+      { id: "d31", label: "31日", japanese: "三十一日", kana: "さんじゅういちにち", romaji: "san juu ichi nichi", meaning: "三十一号" },
+    ],
+  },
+  {
+    id: "week-time",
+    title: "WEEK & TIME",
+    subtitle: "星期和基础时间",
+    items: [
+      { id: "mon", label: "月", japanese: "月曜日", kana: "げつようび", romaji: "getsu you bi", meaning: "星期一" },
+      { id: "tue", label: "火", japanese: "火曜日", kana: "かようび", romaji: "ka you bi", meaning: "星期二" },
+      { id: "wed", label: "水", japanese: "水曜日", kana: "すいようび", romaji: "sui you bi", meaning: "星期三" },
+      { id: "thu", label: "木", japanese: "木曜日", kana: "もくようび", romaji: "moku you bi", meaning: "星期四" },
+      { id: "fri", label: "金", japanese: "金曜日", kana: "きんようび", romaji: "kin you bi", meaning: "星期五" },
+      { id: "sat", label: "土", japanese: "土曜日", kana: "どようび", romaji: "do you bi", meaning: "星期六" },
+      { id: "sun", label: "日", japanese: "日曜日", kana: "にちようび", romaji: "nichi you bi", meaning: "星期日" },
+      { id: "today", label: "今天", japanese: "今日", kana: "きょう", romaji: "kyou", meaning: "今天" },
+      { id: "tomorrow", label: "明天", japanese: "明日", kana: "あした", romaji: "ashita", meaning: "明天" },
+      { id: "yesterday", label: "昨天", japanese: "昨日", kana: "きのう", romaji: "kinou", meaning: "昨天" },
+      { id: "morning", label: "早上", japanese: "朝", kana: "あさ", romaji: "asa", meaning: "早上" },
+      { id: "night", label: "晚上", japanese: "夜", kana: "よる", romaji: "yoru", meaning: "晚上" },
+    ],
+  },
+];
 
 interface KanaPosterSectionProps {
   activeKey: string | null;
@@ -104,11 +224,62 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
   );
 };
 
+interface QuickReadTableSectionProps {
+  activeKey: string | null;
+  section: QuickReadSection;
+  onPlay: (key: string, text: string) => void;
+}
+
+const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSectionProps) => {
+  return (
+    <section aria-labelledby={`${section.id}-title`} className="space-y-4">
+      <div className="text-center">
+        <h2 id={`${section.id}-title`} className="text-3xl font-extrabold leading-none text-ink sm:text-4xl">
+          {section.title}
+        </h2>
+        <p className="mt-1 text-sm font-semibold text-ink/68 sm:text-base">{section.subtitle}</p>
+      </div>
+
+      <div className="grid min-w-0 grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
+        {section.items.map((item) => {
+          const key = `${section.id}-${item.id}`;
+          const active = activeKey === key;
+
+          return (
+            <button
+              key={key}
+              type="button"
+              onClick={() => onPlay(key, item.kana.split(" / ")[0])}
+              className={`group min-w-0 cursor-pointer rounded-md border px-2 py-3 text-center transition active:scale-95 ${
+                active
+                  ? "border-yuzu/60 bg-yuzu/24 ring-2 ring-yuzu/25"
+                  : "border-ink/8 bg-rice/45 hover:border-yuzu/35 hover:bg-yuzu/12"
+              }`}
+              aria-label={`朗读 ${item.label} ${item.kana}`}
+              title={`朗读 ${item.japanese}`}
+            >
+              <span className="block truncate text-xs font-extrabold text-ink/52">{item.label}</span>
+              <span className={`mt-1 block break-words font-serif text-2xl font-bold ${active ? "text-matcha" : "text-ink"}`}>
+                {item.japanese}
+              </span>
+              <span className="mt-1 block break-words text-xs font-semibold leading-4 text-ink/62">{item.kana}</span>
+              <span className={`mt-1 block break-words font-mono text-[0.68rem] font-bold leading-4 ${active ? "text-sakura" : "text-sakura/78"}`}>
+                {formatRomajiReading(item.romaji)}
+              </span>
+              <span className="mt-2 block truncate text-xs font-bold text-ink/58">{item.meaning}</span>
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
 const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const playRunRef = useRef(0);
 
-  const playKana = async (key: string, text: string) => {
+  const playQuickRead = async (key: string, text: string) => {
     const runId = playRunRef.current + 1;
     playRunRef.current = runId;
     setActiveKey(key);
@@ -126,25 +297,36 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
 
   return (
     <div className="grid min-h-[calc(100vh-9rem)] place-items-center">
-      <article className="w-full max-w-[20.25rem] overflow-hidden rounded-lg border border-black/10 bg-white px-3 py-7 shadow-soft sm:max-w-4xl sm:px-8 sm:py-9">
+      <article className="w-full max-w-[20.25rem] overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1] px-3 py-7 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
         <div className="space-y-9 sm:space-y-10">
           <KanaPosterSection
             title="HIRAGANA"
             subtitle="ひらがな"
             script="hiragana"
             activeKey={activeKey}
-            onPlay={(key, text) => void playKana(key, text)}
+            onPlay={(key, text) => void playQuickRead(key, text)}
           />
 
-          <div className="h-px bg-black/10" />
+          <div className="h-px bg-ink/10" />
 
           <KanaPosterSection
             title="KATAKANA"
             subtitle="カタカナ"
             script="katakana"
             activeKey={activeKey}
-            onPlay={(key, text) => void playKana(key, text)}
+            onPlay={(key, text) => void playQuickRead(key, text)}
           />
+
+          {quickReadSections.map((section) => (
+            <div key={section.id} className="space-y-9 sm:space-y-10">
+              <div className="h-px bg-ink/10" />
+              <QuickReadTableSection
+                activeKey={activeKey}
+                section={section}
+                onPlay={(key, text) => void playQuickRead(key, text)}
+              />
+            </div>
+          ))}
         </div>
       </article>
     </div>

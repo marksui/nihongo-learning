@@ -17,11 +17,11 @@ interface PageHeroProps {
 }
 
 const accentClasses = {
-  sakura: "bg-sakura/12 text-sakura border-sakura/20",
-  matcha: "bg-matcha/12 text-matcha border-matcha/20",
-  sora: "bg-sora/12 text-sora border-sora/20",
-  yuzu: "bg-yuzu/24 text-ink border-yuzu/30",
-  sumire: "bg-sumire/12 text-sumire border-sumire/20",
+  sakura: "bg-sakura/8 text-sakura border-sakura/18",
+  matcha: "bg-matcha/10 text-matcha border-matcha/18",
+  sora: "bg-sora/10 text-sora border-sora/18",
+  yuzu: "bg-yuzu/18 text-ink border-yuzu/24",
+  sumire: "bg-sumire/8 text-sumire border-sumire/16",
 };
 
 const PageHero = ({
@@ -34,8 +34,8 @@ const PageHero = ({
   title,
 }: PageHeroProps) => {
   return (
-    <section className="relative overflow-hidden rounded-lg border border-black/10 bg-white/92 p-5 shadow-pop sm:p-6">
-      <div className="absolute inset-x-0 top-0 h-2 bg-[linear-gradient(90deg,#F26A8D,#F7C948,#4DA3FF,#2F9A78)]" />
+    <section className="relative overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1]/92 p-5 shadow-card sm:p-6">
+      <div className="absolute inset-x-0 top-0 h-1.5 bg-yuzu/45" />
       <div className="grid gap-5 pt-2 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
         <div className="min-w-0">
           <div className={`mb-4 flex w-fit items-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold ${accentClasses[accent]}`}>
@@ -52,12 +52,12 @@ const PageHero = ({
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className={`min-w-0 rounded-lg border px-3 py-3 text-center shadow-card ${
+                className={`min-w-0 rounded-lg border px-3 py-3 text-center ${
                   index % 3 === 0
-                    ? "border-sakura/18 bg-sakura/8"
+                    ? "border-yuzu/24 bg-rice/62"
                     : index % 3 === 1
-                      ? "border-sora/18 bg-sora/10"
-                      : "border-matcha/18 bg-matcha/10"
+                      ? "border-matcha/18 bg-matcha/8"
+                      : "border-sakura/14 bg-sakura/6"
                 }`}
               >
                 <p className="truncate text-2xl font-extrabold text-ink">{stat.value}</p>

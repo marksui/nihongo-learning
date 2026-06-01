@@ -65,7 +65,7 @@ const VocabularyPage = ({ onSpeak }: VocabularyPageProps) => {
         ]}
       />
 
-      <section className="sticky top-20 z-20 rounded-lg border border-black/10 bg-white/94 p-4 shadow-card backdrop-blur md:top-24">
+      <section className="sticky top-20 z-20 rounded-lg border border-ink/10 bg-[#fffdf1]/94 p-4 shadow-card backdrop-blur md:top-24">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <label className="relative block">
             <Search

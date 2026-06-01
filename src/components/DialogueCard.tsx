@@ -101,8 +101,8 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
   };
 
   return (
-    <article className="min-w-0 overflow-hidden rounded-lg border border-black/10 bg-white/92 shadow-card">
-      <div className="border-b border-black/10 bg-white p-5">
+    <article className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1]/92 shadow-card">
+      <div className="border-b border-ink/10 bg-[#fffdf1] p-5">
         <div className="flex min-w-0 flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
@@ -149,7 +149,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <button
               type="button"
               onClick={playPartnerLines}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-black/10 bg-white px-3 py-2 text-sm font-bold text-ink transition hover:bg-sora/12 active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-rice/45 px-3 py-2 text-sm font-bold text-ink transition hover:bg-yuzu/14 active:scale-95"
             >
               <Ear aria-hidden="true" size={18} />
               只听对方
@@ -165,7 +165,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <button
               type="button"
               onClick={stopPlayback}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-black/10 bg-white px-3 py-2 text-sm font-bold text-ink transition hover:bg-rice active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-rice/45 px-3 py-2 text-sm font-bold text-ink transition hover:bg-yuzu/14 active:scale-95"
               aria-label="停止播放对话"
               title="停止"
             >
@@ -176,7 +176,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
         </div>
       </div>
 
-      <div className="relative bg-rice/42 p-4 sm:p-5">
+      <div className="relative bg-rice/55 p-4 sm:p-5">
         <div className="absolute left-1/2 top-5 hidden h-[calc(100%-2.5rem)] w-px -translate-x-1/2 bg-black/8 md:block" />
         <div className="space-y-4">
           {dialogue.lines.map((line, index) => {
@@ -191,10 +191,10 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
                 <div
                   className={`w-full rounded-lg border p-4 shadow-sm transition duration-300 md:max-w-[76%] ${
                     active
-                      ? "scale-[1.01] border-yuzu bg-white shadow-soft ring-2 ring-yuzu/30"
+                      ? "scale-[1.01] border-yuzu bg-[#fffdf1] shadow-soft ring-2 ring-yuzu/30"
                       : practiceLine
                         ? "border-matcha/18 bg-matcha/8"
-                        : "border-black/8 bg-white"
+                        : "border-ink/8 bg-[#fffdf1]"
                   }`}
                 >
                   <div className="mb-3 flex flex-wrap items-center gap-2">

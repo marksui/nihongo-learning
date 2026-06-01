@@ -77,7 +77,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         ]}
       />
 
-      <section className="sticky top-20 z-20 rounded-lg border border-black/10 bg-white/94 p-4 shadow-card backdrop-blur md:top-24">
+      <section className="sticky top-20 z-20 rounded-lg border border-ink/10 bg-[#fffdf1]/94 p-4 shadow-card backdrop-blur md:top-24">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <label className="relative block">
             <Search
@@ -141,7 +141,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                   type="button"
                   onClick={() => void playNumber(item.id, item.japanese)}
                   className={`group mt-5 w-full cursor-pointer rounded-md px-4 py-3 text-left transition active:scale-[0.99] ${
-                    active ? "bg-matcha text-white" : "bg-sora/12 hover:bg-matcha hover:text-white"
+                    active ? "bg-matcha text-white" : "bg-rice/55 hover:bg-matcha hover:text-white"
                   }`}
                   title="点击日语读法朗读"
                 >

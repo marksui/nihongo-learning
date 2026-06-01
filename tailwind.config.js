@@ -4,17 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#201B3F",
-        rice: "#FFF8EF",
-        sakura: "#F26A8D",
-        matcha: "#2F9A78",
-        sora: "#4DA3FF",
-        yuzu: "#F7C948",
-        sumire: "#6C5CE7",
-        coral: "#E85D75",
-        indigo: "#4A4E9B",
-        sun: "#F7C948",
-        sky: "#EAF5FF",
+        ink: "#2B2418",
+        rice: "#FFF4CF",
+        sakura: "#D96F7E",
+        matcha: "#4E8D61",
+        sora: "#5D9BCB",
+        yuzu: "#E9B949",
+        sumire: "#74699A",
+        coral: "#D96F7E",
+        indigo: "#74699A",
+        sun: "#E9B949",
+        sky: "#F4EBC8",
       },
       fontFamily: {
         sans: [
@@ -27,9 +27,9 @@ export default {
         serif: ['"Noto Serif JP"', '"Songti SC"', "serif"],
       },
       boxShadow: {
-        soft: "0 20px 48px rgba(32, 27, 63, 0.13)",
-        card: "0 10px 24px rgba(32, 27, 63, 0.08)",
-        pop: "0 12px 0 rgba(32, 27, 63, 0.06), 0 18px 34px rgba(32, 27, 63, 0.10)",
+        soft: "0 18px 38px rgba(80, 58, 24, 0.10)",
+        card: "0 8px 20px rgba(80, 58, 24, 0.07)",
+        pop: "0 10px 0 rgba(80, 58, 24, 0.045), 0 16px 30px rgba(80, 58, 24, 0.08)",
       },
     },
   },

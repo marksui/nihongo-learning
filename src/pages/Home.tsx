@@ -75,9 +75,9 @@ const featureCards: FeatureCard[] = [
   {
     title: "假名速读",
     page: "quickread",
-    description: "整页假名速读表，点击任意平假名或片假名直接发音。",
-    metric: `${kanaItems.length * 2} 个可点读假名`,
-    accent: "bg-ink",
+    description: "假名、数字、月份日期和基础时间词都做成速查点读表。",
+    metric: "多张速读表",
+    accent: "bg-matcha",
     icon: Table2,
   },
 ];
@@ -102,7 +102,7 @@ const Home = ({ onNavigate }: HomeProps) => {
             <button
               type="button"
               onClick={() => onNavigate("kana")}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-ink px-4 py-2 font-extrabold text-white shadow-card transition hover:bg-ink/90 active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-matcha px-4 py-2 font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-95"
             >
               开始学五十音
               <ArrowRight aria-hidden="true" size={18} />
@@ -110,7 +110,7 @@ const Home = ({ onNavigate }: HomeProps) => {
             <button
               type="button"
               onClick={() => onNavigate("conversation")}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-sakura/25 bg-sakura/10 px-4 py-2 font-extrabold text-sakura transition hover:bg-sakura hover:text-white active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-rice/65 px-4 py-2 font-extrabold text-ink transition hover:bg-yuzu/20 active:scale-95"
             >
               进入会话
               <MessagesSquare aria-hidden="true" size={18} />
@@ -119,14 +119,14 @@ const Home = ({ onNavigate }: HomeProps) => {
           }
         />
 
-        <div className="relative min-h-80 overflow-hidden rounded-lg border border-black/10 bg-ink p-6 shadow-pop">
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(242,106,141,0.28),transparent_35%),linear-gradient(45deg,rgba(77,163,255,0.22),transparent_45%)]" />
+        <div className="relative min-h-80 overflow-hidden rounded-lg border border-ink/10 bg-[#fffdf1] p-6 shadow-card">
+          <div className="absolute inset-x-0 top-0 h-1.5 bg-yuzu/45" />
           <div className="relative grid h-full grid-cols-2 gap-3">
             {["あ", "ア", "日语", "中文", "です", "を", "かな", "会話"].map((label, index) => (
               <div
                 key={label}
-                className={`grid place-items-center rounded-lg border border-white/14 bg-white/10 p-4 text-center text-white shadow-card backdrop-blur ${
-                  index % 3 === 0 ? "font-serif text-5xl font-bold" : "text-2xl font-extrabold"
+                className={`grid place-items-center rounded-lg border border-ink/8 bg-rice/55 p-4 text-center text-ink shadow-card ${
+                  index % 3 === 0 ? "font-serif text-5xl font-bold text-matcha" : "text-2xl font-extrabold"
                 }`}
               >
                 {label}
@@ -161,7 +161,7 @@ const Home = ({ onNavigate }: HomeProps) => {
                   className="flex h-full w-full cursor-pointer flex-col p-5 text-left"
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <span className={`grid h-12 w-12 place-items-center rounded-md ${card.accent} text-white`}>
+                    <span className={`grid h-12 w-12 place-items-center rounded-md ${card.accent} text-white shadow-card`}>
                       <Icon aria-hidden="true" size={23} />
                     </span>
                     <span className="rounded-md bg-rice px-2 py-1 text-xs font-extrabold text-ink/54">
