@@ -31,7 +31,7 @@ const navItems: NavItem[] = [
   { page: "vocabulary", label: "常用单词", icon: BookOpen },
   { page: "grammar", label: "基础语法", icon: GraduationCap },
   { page: "conversation", label: "日常会话", icon: MessagesSquare },
-  { page: "quickread", label: "快捷朗读", icon: Table2 },
+  { page: "quickread", label: "假名速读", icon: Table2 },
 ];
 
 interface NavbarProps {

@@ -13,7 +13,6 @@ import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
 import { numberExamples } from "../data/numbers";
-import { quickPhrases } from "../data/quickPhrases";
 import { vocabulary } from "../data/vocabulary";
 import type { PageKey } from "../components/Navbar";
 
@@ -72,10 +71,10 @@ const featureCards: FeatureCard[] = [
     icon: MessagesSquare,
   },
   {
-    title: "快捷朗读",
+    title: "假名速读",
     page: "quickread",
-    description: "常用句整理成表，直接点击日语文字就能朗读。",
-    metric: `${quickPhrases.length} 句常用表达`,
+    description: "整页假名速读表，点击任意平假名或片假名直接发音。",
+    metric: `${kanaItems.length * 2} 个可点读假名`,
     accent: "bg-ink",
     icon: Table2,
   },
@@ -109,7 +108,7 @@ const Home = ({ onNavigate }: HomeProps) => {
               onClick={() => onNavigate("quickread")}
               className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-black/10 bg-white px-4 py-2 font-bold text-ink transition hover:bg-rice active:scale-95"
             >
-              快捷朗读
+              假名速读
               <Table2 aria-hidden="true" size={18} />
             </button>
           </div>

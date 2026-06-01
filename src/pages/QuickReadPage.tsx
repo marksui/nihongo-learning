@@ -1,133 +1,152 @@
-import { Search, Volume2 } from "lucide-react";
-import { useMemo, useState } from "react";
-import {
-  quickPhraseCategories,
-  quickPhrases,
-  type QuickPhraseCategory,
-} from "../data/quickPhrases";
-import { formatRomajiReading } from "../utils/romaji";
+import { useRef, useState } from "react";
+import { kanaItems, type KanaItem } from "../data/kana";
 
 interface QuickReadPageProps {
   onSpeak: (text: string) => Promise<boolean>;
 }
 
-type CategoryFilter = "全部" | QuickPhraseCategory;
+type KanaScript = "hiragana" | "katakana";
+type KanaCell = string | null;
 
-const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<CategoryFilter>("全部");
+const kanaRows: KanaCell[][] = [
+  ["n", "wa", "ra", "ya", "ma", "ha", "na", "ta", "sa", "ka", "a"],
+  [null, null, "ri", null, "mi", "hi", "ni", "chi", "shi", "ki", "i"],
+  [null, null, "ru", "yu", "mu", "fu", "nu", "tsu", "su", "ku", "u"],
+  [null, null, "re", null, "me", "he", "ne", "te", "se", "ke", "e"],
+  ["wo", null, "ro", "yo", "mo", "ho", "no", "to", "so", "ko", "o"],
+];
 
-  const filteredPhrases = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
+const kanaById = new Map(kanaItems.map((item) => [item.id, item]));
 
-    return quickPhrases.filter((phrase) => {
-      const matchesCategory = category === "全部" || phrase.category === category;
-      const matchesQuery =
-        !normalizedQuery ||
-        [
-          phrase.japanese,
-          phrase.kana,
-          phrase.romaji,
-          formatRomajiReading(phrase.romaji),
-          phrase.meaning,
-          phrase.category,
-        ]
-          .join(" ")
-          .toLowerCase()
-          .includes(normalizedQuery);
+const getRomajiLabel = (item: KanaItem) => {
+  if (item.id === "wo") {
+    return "O";
+  }
 
-      return matchesCategory && matchesQuery;
-    });
-  }, [category, query]);
+  return item.romaji.toUpperCase();
+};
 
+const getKanaText = (item: KanaItem, script: KanaScript) =>
+  script === "hiragana" ? item.hiragana : item.katakana;
+
+interface KanaPosterSectionProps {
+  activeKey: string | null;
+  script: KanaScript;
+  subtitle: string;
+  title: string;
+  onPlay: (key: string, text: string) => void;
+}
+
+const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaPosterSectionProps) => {
   return (
-    <div className="space-y-7">
-      <section className="rounded-lg border border-black/10 bg-white/88 p-6 shadow-card">
-        <p className="text-sm font-bold text-matcha">Quick Speak</p>
-        <h1 className="mt-2 font-serif text-4xl font-bold text-ink">快捷朗读表</h1>
-        <p className="mt-4 max-w-3xl text-sm leading-7 text-ink/70">
-          常用句按情景整理成表格。直接点击日语文字即可朗读，适合出门前快速跟读和现场查句子。
-        </p>
+    <section aria-labelledby={`${script}-title`} className="space-y-3">
+      <div className="text-center">
+        <h1
+          id={`${script}-title`}
+          className="text-4xl font-extrabold leading-none text-ink sm:text-5xl"
+        >
+          {title}
+        </h1>
+        <p className="mt-1 text-base font-semibold text-ink/72 sm:text-lg">{subtitle}</p>
+      </div>
 
-        <div className="mt-6 grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-          <label className="relative block">
-            <Search
-              aria-hidden="true"
-              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink/42"
-              size={20}
-            />
-            <input
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="搜索日语、假名、romaji、中文或情景"
-              className="min-h-12 w-full rounded-md border border-black/10 bg-rice/72 pl-11 pr-4 text-sm text-ink placeholder:text-ink/38"
-            />
-          </label>
-          <p className="text-sm font-bold text-ink/60">
-            {filteredPhrases.length} / {quickPhrases.length} 句
-          </p>
-        </div>
+      <div className="grid min-w-0 grid-cols-[repeat(11,minmax(0,1fr))] gap-x-0.5 gap-y-1 sm:gap-x-2 sm:gap-y-2">
+        {kanaRows.flatMap((row, rowIndex) =>
+          row.map((id, columnIndex) => {
+            if (!id) {
+              return (
+                <div
+                  key={`${script}-${rowIndex}-${columnIndex}-blank`}
+                  aria-hidden="true"
+                  className="min-h-12 min-w-0"
+                />
+              );
+            }
 
-        <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
-          {(["全部", ...quickPhraseCategories] as CategoryFilter[]).map((item) => {
-            const active = category === item;
+            const item = kanaById.get(id);
+            if (!item) {
+              return null;
+            }
+
+            const kana = getKanaText(item, script);
+            const key = `${script}-${item.id}`;
+            const active = activeKey === key;
 
             return (
               <button
-                key={item}
+                key={key}
                 type="button"
-                onClick={() => setCategory(item)}
-                className={`min-h-10 shrink-0 cursor-pointer rounded-md px-3 py-2 text-sm font-bold transition ${
+                onClick={() => onPlay(key, kana)}
+                className={`group grid min-h-12 min-w-0 cursor-pointer place-items-center rounded-md px-0.5 py-1 text-center transition duration-200 active:scale-95 ${
                   active
-                    ? "bg-ink text-white"
-                    : "border border-black/10 bg-white text-ink/68 hover:bg-rice hover:text-ink"
+                    ? "bg-sun/28 text-ink ring-2 ring-coral/28"
+                    : "text-ink hover:bg-sky"
                 }`}
+                aria-label={`朗读 ${kana} ${getRomajiLabel(item)}`}
+                title={`朗读 ${kana}`}
               >
-                {item}
+                <span className="block min-w-0 font-serif text-lg font-bold leading-none sm:text-2xl md:text-3xl">
+                  {kana}
+                </span>
+                <span
+                  className={`mt-1 block min-w-0 font-mono text-[0.56rem] font-bold leading-none sm:text-xs ${
+                    active ? "text-coral" : "text-coral/82 group-hover:text-coral"
+                  }`}
+                >
+                  {getRomajiLabel(item)}
+                </span>
               </button>
             );
-          })}
-        </div>
-      </section>
+          }),
+        )}
+      </div>
+    </section>
+  );
+};
 
-      <section className="overflow-hidden rounded-lg border border-black/10 bg-white/92 shadow-card">
-        <div className="hidden grid-cols-[9rem_1.3fr_1fr_1fr] gap-4 border-b border-black/10 bg-ink px-5 py-3 text-sm font-bold text-white md:grid">
-          <span>情景</span>
-          <span>点击日语朗读</span>
-          <span>假名 / romaji</span>
-          <span>中文意思</span>
-        </div>
+const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
+  const [activeKey, setActiveKey] = useState<string | null>(null);
+  const playRunRef = useRef(0);
 
-        <div className="divide-y divide-black/8">
-          {filteredPhrases.map((phrase) => (
-            <article
-              key={phrase.id}
-              className="grid gap-3 px-4 py-4 transition hover:bg-rice/62 md:grid-cols-[9rem_1.3fr_1fr_1fr] md:items-center md:px-5"
-            >
-              <p className="w-fit rounded-md bg-sky px-2 py-1 text-xs font-bold text-ink/66">
-                {phrase.category}
-              </p>
-              <button
-                type="button"
-                onClick={() => onSpeak(phrase.japanese)}
-                className="flex min-h-12 cursor-pointer items-center gap-3 rounded-md bg-white px-3 py-2 text-left text-xl font-bold text-ink shadow-sm transition hover:bg-matcha hover:text-white active:scale-[0.99]"
-                aria-label={`朗读 ${phrase.japanese}`}
-                title="点击文字朗读"
-              >
-                <Volume2 aria-hidden="true" className="shrink-0" size={19} />
-                <span>{phrase.japanese}</span>
-              </button>
-              <p className="text-sm leading-6 text-ink/62">
-                {phrase.kana}
-                <br />
-                <span className="font-semibold text-coral">{formatRomajiReading(phrase.romaji)}</span>
-              </p>
-              <p className="text-sm font-semibold leading-6 text-ink/74">{phrase.meaning}</p>
-            </article>
-          ))}
+  const playKana = async (key: string, text: string) => {
+    const runId = playRunRef.current + 1;
+    playRunRef.current = runId;
+    setActiveKey(key);
+
+    const ok = await onSpeak(text);
+    window.setTimeout(
+      () => {
+        if (playRunRef.current === runId) {
+          setActiveKey(null);
+        }
+      },
+      ok ? 180 : 900,
+    );
+  };
+
+  return (
+    <div className="grid min-h-[calc(100vh-9rem)] place-items-center">
+      <article className="w-full max-w-[20.25rem] overflow-hidden rounded-lg border border-black/10 bg-white px-3 py-7 shadow-soft sm:max-w-4xl sm:px-8 sm:py-9">
+        <div className="space-y-9 sm:space-y-10">
+          <KanaPosterSection
+            title="HIRAGANA"
+            subtitle="ひらがな"
+            script="hiragana"
+            activeKey={activeKey}
+            onPlay={(key, text) => void playKana(key, text)}
+          />
+
+          <div className="h-px bg-black/10" />
+
+          <KanaPosterSection
+            title="KATAKANA"
+            subtitle="カタカナ"
+            script="katakana"
+            activeKey={activeKey}
+            onPlay={(key, text) => void playKana(key, text)}
+          />
         </div>
-      </section>
+      </article>
     </div>
   );
 };
