@@ -91,7 +91,7 @@ const Home = ({ onNavigate }: HomeProps) => {
           </div>
           <h1 className="font-serif text-5xl font-bold text-ink sm:text-6xl">中文学日语</h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-ink/72">
-            从五十音开始，把假名、单词、语法、例句、会话和发音练习放在同一条学习路径里。
+            从五十音开始，把假名、单词、语法、例句、会话和发音点读放在同一条学习路径里。
             页面全部使用简体中文说明，日语内容配罗马音、假名读法和中文意思。
           </p>
           <div className="mt-7 flex flex-wrap gap-3">

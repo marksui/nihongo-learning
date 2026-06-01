@@ -5,9 +5,15 @@ export interface DialogueLine {
   translation: string;
 }
 
+export const dialogueModes = ["社交", "餐饮", "出行", "购物", "校园", "旅行", "生活", "紧急"] as const;
+
+export type DialogueMode = (typeof dialogueModes)[number];
+
 export interface Dialogue {
   id: string;
   title: string;
+  mode: DialogueMode;
+  practiceSpeaker: string;
   situation: string;
   lines: DialogueLine[];
 }
@@ -16,6 +22,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "self-introduction",
     title: "自我介绍",
+    mode: "社交",
+    practiceSpeaker: "李",
     situation: "第一次见面时的简短介绍",
     lines: [
       { speaker: "李", japanese: "はじめまして。李です。", kana: "はじめまして。りです。", translation: "初次见面，我姓李。" },
@@ -28,6 +36,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "restaurant-order",
     title: "点餐",
+    mode: "餐饮",
+    practiceSpeaker: "客人",
     situation: "在餐厅点拉面和茶",
     lines: [
       { speaker: "店员", japanese: "いらっしゃいませ。何名様ですか。", kana: "いらっしゃいませ。なんめいさまですか。", translation: "欢迎光临。几位？" },
@@ -40,6 +50,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "asking-directions",
     title: "问路",
+    mode: "出行",
+    practiceSpeaker: "李",
     situation: "在街上询问车站方向",
     lines: [
       { speaker: "李", japanese: "すみません、駅はどこですか。", kana: "すみません、えきはどこですか。", translation: "不好意思，车站在哪里？" },
@@ -52,6 +64,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "shopping",
     title: "购物",
+    mode: "购物",
+    practiceSpeaker: "客人",
     situation: "在商店询问价格和颜色",
     lines: [
       { speaker: "客人", japanese: "すみません、このかばんはいくらですか。", kana: "すみません、このかばんはいくらですか。", translation: "不好意思，这个包多少钱？" },
@@ -64,6 +78,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "school-dialogue",
     title: "学校对话",
+    mode: "校园",
+    practiceSpeaker: "王",
     situation: "同学之间聊日语课和作业",
     lines: [
       { speaker: "王", japanese: "今日の日本語の授業は何時ですか。", kana: "きょうのにほんごのじゅぎょうはなんじですか。", translation: "今天的日语课几点？" },
@@ -76,6 +92,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "convenience-store",
     title: "便利店付款",
+    mode: "购物",
+    practiceSpeaker: "客人",
     situation: "在便利店买水和饭团",
     lines: [
       { speaker: "店员", japanese: "いらっしゃいませ。", kana: "いらっしゃいませ。", translation: "欢迎光临。" },
@@ -88,6 +106,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "train-ride",
     title: "坐电车",
+    mode: "出行",
+    practiceSpeaker: "李",
     situation: "询问站台和下车站",
     lines: [
       { speaker: "李", japanese: "すみません、東京行きは何番線ですか。", kana: "すみません、とうきょういきはなんばんせんですか。", translation: "不好意思，去东京是几号站台？" },
@@ -100,6 +120,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "hotel-checkin",
     title: "酒店入住",
+    mode: "旅行",
+    practiceSpeaker: "客人",
     situation: "在酒店前台办理入住",
     lines: [
       { speaker: "客人", japanese: "チェックインをお願いします。", kana: "ちぇっくいんをおねがいします。", translation: "我要办理入住。" },
@@ -112,6 +134,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "clinic-visit",
     title: "看病",
+    mode: "紧急",
+    practiceSpeaker: "李",
     situation: "在诊所说明症状",
     lines: [
       { speaker: "受付", japanese: "今日はどうしましたか。", kana: "きょうはどうしましたか。", translation: "今天哪里不舒服？" },
@@ -124,6 +148,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "phone-call",
     title: "打电话",
+    mode: "生活",
+    practiceSpeaker: "李",
     situation: "电话里确认时间",
     lines: [
       { speaker: "李", japanese: "もしもし、李です。", kana: "もしもし、りです。", translation: "喂，我是李。" },
@@ -136,6 +162,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "weather-chat",
     title: "天气闲聊",
+    mode: "社交",
+    practiceSpeaker: "王",
     situation: "和同学简单聊天",
     lines: [
       { speaker: "佐藤", japanese: "今日は暑いですね。", kana: "きょうはあついですね。", translation: "今天很热呢。" },
@@ -148,6 +176,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "lost-item",
     title: "失物招领",
+    mode: "紧急",
+    practiceSpeaker: "李",
     situation: "找丢失的钱包",
     lines: [
       { speaker: "李", japanese: "すみません、財布をなくしました。", kana: "すみません、さいふをなくしました。", translation: "不好意思，我的钱包丢了。" },
@@ -160,6 +190,8 @@ export const dialogues: Dialogue[] = [
   {
     id: "making-appointment",
     title: "约时间",
+    mode: "社交",
+    practiceSpeaker: "李",
     situation: "和朋友约见面时间",
     lines: [
       { speaker: "李", japanese: "明日、時間がありますか。", kana: "あした、じかんがありますか。", translation: "明天有时间吗？" },
@@ -167,6 +199,126 @@ export const dialogues: Dialogue[] = [
       { speaker: "李", japanese: "三時に駅で会いませんか。", kana: "さんじにえきであいませんか。", translation: "三点在车站见怎么样？" },
       { speaker: "山田", japanese: "いいですね。", kana: "いいですね。", translation: "好啊。" },
       { speaker: "李", japanese: "では、また明日。", kana: "では、またあした。", translation: "那么明天见。" },
+    ],
+  },
+  {
+    id: "airport-arrival",
+    title: "机场入境",
+    mode: "旅行",
+    practiceSpeaker: "旅客",
+    situation: "入境时回答简单问题",
+    lines: [
+      { speaker: "工作人员", japanese: "日本へは何をしに来ましたか。", kana: "にほんへはなにをしにきましたか。", translation: "您来日本做什么？" },
+      { speaker: "旅客", japanese: "旅行に来ました。", kana: "りょこうにきました。", translation: "我是来旅行的。" },
+      { speaker: "工作人员", japanese: "何日ぐらい滞在しますか。", kana: "なんにちぐらいたいざいしますか。", translation: "大概停留几天？" },
+      { speaker: "旅客", japanese: "五日ぐらいです。", kana: "いつかぐらいです。", translation: "大概五天。" },
+      { speaker: "工作人员", japanese: "ホテルの住所は分かりますか。", kana: "ほてるのじゅうしょはわかりますか。", translation: "知道酒店地址吗？" },
+      { speaker: "旅客", japanese: "はい、ここにあります。", kana: "はい、ここにあります。", translation: "知道，在这里。" },
+    ],
+  },
+  {
+    id: "ticket-counter",
+    title: "车站买票",
+    mode: "出行",
+    practiceSpeaker: "客人",
+    situation: "在车站窗口买去京都的票",
+    lines: [
+      { speaker: "客人", japanese: "京都までの切符をください。", kana: "きょうとまでのきっぷをください。", translation: "请给我一张到京都的票。" },
+      { speaker: "駅员", japanese: "片道ですか、往復ですか。", kana: "かたみちですか、おうふくですか。", translation: "单程还是往返？" },
+      { speaker: "客人", japanese: "片道でお願いします。", kana: "かたみちでおねがいします。", translation: "请给我单程。" },
+      { speaker: "駅员", japanese: "自由席でよろしいですか。", kana: "じゆうせきでよろしいですか。", translation: "自由席可以吗？" },
+      { speaker: "客人", japanese: "はい、大丈夫です。", kana: "はい、だいじょうぶです。", translation: "可以，没问题。" },
+      { speaker: "駅员", japanese: "三千二百円です。", kana: "さんぜんにひゃくえんです。", translation: "三千二百日元。" },
+    ],
+  },
+  {
+    id: "cafe-order",
+    title: "咖啡店",
+    mode: "餐饮",
+    practiceSpeaker: "客人",
+    situation: "点咖啡并选择堂食或外带",
+    lines: [
+      { speaker: "店员", japanese: "ご注文をどうぞ。", kana: "ごちゅうもんをどうぞ。", translation: "请点单。" },
+      { speaker: "客人", japanese: "アイスコーヒーを一つください。", kana: "あいすこーひーをひとつください。", translation: "请给我一杯冰咖啡。" },
+      { speaker: "店员", japanese: "サイズはいかがなさいますか。", kana: "さいずはいかがなさいますか。", translation: "要什么尺寸？" },
+      { speaker: "客人", japanese: "Mサイズでお願いします。", kana: "えむさいずでおねがいします。", translation: "请给我中杯。" },
+      { speaker: "店员", japanese: "店内でお召し上がりですか。", kana: "てんないでおめしあがりですか。", translation: "在店内用吗？" },
+      { speaker: "客人", japanese: "持ち帰りでお願いします。", kana: "もちかえりでおねがいします。", translation: "请帮我打包。" },
+    ],
+  },
+  {
+    id: "taxi-ride",
+    title: "打车",
+    mode: "出行",
+    practiceSpeaker: "客人",
+    situation: "坐出租车去酒店",
+    lines: [
+      { speaker: "司机", japanese: "どちらまでですか。", kana: "どちらまでですか。", translation: "去哪里？" },
+      { speaker: "客人", japanese: "このホテルまでお願いします。", kana: "このほてるまでおねがいします。", translation: "请到这家酒店。" },
+      { speaker: "司机", japanese: "高速道路を使いますか。", kana: "こうそくどうろをつかいますか。", translation: "要走高速吗？" },
+      { speaker: "客人", japanese: "はい、お願いします。", kana: "はい、おねがいします。", translation: "好的，麻烦您。" },
+      { speaker: "客人", japanese: "ここで止めてください。", kana: "ここでとめてください。", translation: "请在这里停车。" },
+      { speaker: "司机", japanese: "はい、ありがとうございます。", kana: "はい、ありがとうございます。", translation: "好的，谢谢。" },
+    ],
+  },
+  {
+    id: "pharmacy",
+    title: "药妆店",
+    mode: "购物",
+    practiceSpeaker: "客人",
+    situation: "在药妆店询问感冒药",
+    lines: [
+      { speaker: "客人", japanese: "すみません、風邪薬はありますか。", kana: "すみません、かぜぐすりはありますか。", translation: "不好意思，有感冒药吗？" },
+      { speaker: "店员", japanese: "はい、こちらです。", kana: "はい、こちらです。", translation: "有，在这边。" },
+      { speaker: "客人", japanese: "眠くなりにくい薬はありますか。", kana: "ねむくなりにくいくすりはありますか。", translation: "有没有不太容易犯困的药？" },
+      { speaker: "店员", japanese: "こちらがおすすめです。", kana: "こちらがおすすめです。", translation: "推荐这款。" },
+      { speaker: "客人", japanese: "一日に何回飲みますか。", kana: "いちにちになんかいのみますか。", translation: "一天吃几次？" },
+      { speaker: "店员", japanese: "一日三回です。", kana: "いちにちさんかいです。", translation: "一天三次。" },
+    ],
+  },
+  {
+    id: "hotel-problem",
+    title: "酒店问题",
+    mode: "旅行",
+    practiceSpeaker: "客人",
+    situation: "向前台说明房间里的问题",
+    lines: [
+      { speaker: "客人", japanese: "すみません、部屋のエアコンがつきません。", kana: "すみません、へやのえあこんがつきません。", translation: "不好意思，房间空调打不开。" },
+      { speaker: "前台", japanese: "申し訳ございません。すぐ確認します。", kana: "もうしわけございません。すぐかくにんします。", translation: "非常抱歉，我们马上确认。" },
+      { speaker: "客人", japanese: "部屋を変えることはできますか。", kana: "へやをかえることはできますか。", translation: "可以换房间吗？" },
+      { speaker: "前台", japanese: "はい、空いている部屋があります。", kana: "はい、あいているへやがあります。", translation: "可以，有空房间。" },
+      { speaker: "客人", japanese: "ありがとうございます。", kana: "ありがとうございます。", translation: "谢谢。" },
+      { speaker: "前台", japanese: "新しい鍵をお渡しします。", kana: "あたらしいかぎをおわたしします。", translation: "我给您新的钥匙。" },
+    ],
+  },
+  {
+    id: "club-invitation",
+    title: "社团邀请",
+    mode: "校园",
+    practiceSpeaker: "留学生",
+    situation: "在学校被邀请参加社团活动",
+    lines: [
+      { speaker: "先輩", japanese: "日本語クラブに興味がありますか。", kana: "にほんごくらぶにきょうみがありますか。", translation: "你对日语社有兴趣吗？" },
+      { speaker: "留学生", japanese: "はい、少し興味があります。", kana: "はい、すこしきょうみがあります。", translation: "有，有一点兴趣。" },
+      { speaker: "先輩", japanese: "毎週金曜日に集まります。", kana: "まいしゅうきんようびにあつまります。", translation: "每周五集合。" },
+      { speaker: "留学生", japanese: "何時からですか。", kana: "なんじからですか。", translation: "从几点开始？" },
+      { speaker: "先輩", japanese: "午後六時からです。", kana: "ごごろくじからです。", translation: "下午六点开始。" },
+      { speaker: "留学生", japanese: "参加してみたいです。", kana: "さんかしてみたいです。", translation: "我想参加看看。" },
+    ],
+  },
+  {
+    id: "emergency-help",
+    title: "紧急求助",
+    mode: "紧急",
+    practiceSpeaker: "李",
+    situation: "手机没电时向路人求助",
+    lines: [
+      { speaker: "李", japanese: "すみません、助けてください。", kana: "すみません、たすけてください。", translation: "不好意思，请帮帮我。" },
+      { speaker: "路人", japanese: "どうしましたか。", kana: "どうしましたか。", translation: "怎么了？" },
+      { speaker: "李", japanese: "携帯の電池がなくなりました。", kana: "けいたいのでんちがなくなりました。", translation: "我的手机没电了。" },
+      { speaker: "李", japanese: "駅に行きたいです。", kana: "えきにいきたいです。", translation: "我想去车站。" },
+      { speaker: "路人", japanese: "交番はあそこです。", kana: "こうばんはあそこです。", translation: "派出所在那边。" },
+      { speaker: "李", japanese: "ありがとうございます。", kana: "ありがとうございます。", translation: "谢谢。" },
     ],
   },
 ];

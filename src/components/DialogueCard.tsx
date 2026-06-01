@@ -1,4 +1,13 @@
-import { ListMusic, Play, Square, Volume2 } from "lucide-react";
+import {
+  Ear,
+  ListMusic,
+  Mic2,
+  Play,
+  Square,
+  UserRound,
+  UsersRound,
+  Volume2,
+} from "lucide-react";
 import { useRef, useState } from "react";
 import type { Dialogue } from "../data/dialogues";
 import { stopJapanese } from "../utils/speech";
@@ -11,124 +20,213 @@ interface DialogueCardProps {
 const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
   const [activeLine, setActiveLine] = useState<number | null>(null);
   const [nextLine, setNextLine] = useState(0);
-  const [isPlayingAll, setIsPlayingAll] = useState(false);
+  const [isPlayingSequence, setIsPlayingSequence] = useState(false);
   const cancelledRef = useRef(false);
+
+  const partnerSpeakers = Array.from(
+    new Set(dialogue.lines.map((line) => line.speaker).filter((speaker) => speaker !== dialogue.practiceSpeaker)),
+  );
 
   const playLine = async (index: number) => {
     cancelledRef.current = false;
     setActiveLine(index);
+
     const ok = await onSpeak(dialogue.lines[index].japanese);
+
     if (!cancelledRef.current) {
       setActiveLine(null);
       setNextLine((index + 1) % dialogue.lines.length);
     }
+
     return ok;
   };
 
   const playNextLine = async () => {
-    if (!isPlayingAll) {
+    if (!isPlayingSequence) {
       await playLine(nextLine);
     }
   };
 
-  const playAll = async () => {
-    if (isPlayingAll) {
+  const playSequence = async (indexes: number[]) => {
+    if (isPlayingSequence) {
       return;
     }
 
     cancelledRef.current = false;
-    setIsPlayingAll(true);
+    setIsPlayingSequence(true);
 
-    for (let index = 0; index < dialogue.lines.length; index += 1) {
+    for (const index of indexes) {
       if (cancelledRef.current) {
         break;
       }
+
       setActiveLine(index);
       const ok = await onSpeak(dialogue.lines[index].japanese);
+
       if (!ok) {
         break;
       }
     }
 
     setActiveLine(null);
-    setIsPlayingAll(false);
+    setIsPlayingSequence(false);
     setNextLine(0);
+  };
+
+  const playAll = () => {
+    void playSequence(dialogue.lines.map((_, index) => index));
+  };
+
+  const playPartnerLines = () => {
+    void playSequence(
+      dialogue.lines
+        .map((line, index) => (line.speaker === dialogue.practiceSpeaker ? null : index))
+        .filter((index): index is number => index !== null),
+    );
+  };
+
+  const playOwnLines = () => {
+    void playSequence(
+      dialogue.lines
+        .map((line, index) => (line.speaker === dialogue.practiceSpeaker ? index : null))
+        .filter((index): index is number => index !== null),
+    );
   };
 
   const stopPlayback = () => {
     cancelledRef.current = true;
     stopJapanese();
     setActiveLine(null);
-    setIsPlayingAll(false);
+    setIsPlayingSequence(false);
   };
 
   return (
-    <article className="rounded-lg border border-black/10 bg-white/92 p-5 shadow-card">
-      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-        <div>
-          <p className="text-sm font-bold text-matcha">{dialogue.situation}</p>
-          <h2 className="mt-1 font-serif text-3xl font-bold text-ink">{dialogue.title}</h2>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={playNextLine}
-            className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-indigo px-3 py-2 text-sm font-bold text-white transition hover:bg-indigo/90 active:scale-95"
-          >
-            <ListMusic aria-hidden="true" size={18} />
-            逐句播放
-          </button>
-          <button
-            type="button"
-            onClick={playAll}
-            className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-matcha px-3 py-2 text-sm font-bold text-white transition hover:bg-matcha/90 active:scale-95"
-          >
-            <Play aria-hidden="true" size={18} />
-            播放整段对话
-          </button>
-          <button
-            type="button"
-            onClick={stopPlayback}
-            className="grid min-h-11 w-11 cursor-pointer place-items-center rounded-md border border-black/10 bg-white text-ink transition hover:bg-rice active:scale-95"
-            aria-label="停止播放对话"
-            title="停止"
-          >
-            <Square aria-hidden="true" size={18} />
-          </button>
+    <article className="min-w-0 overflow-hidden rounded-lg border border-black/10 bg-white/92 shadow-card">
+      <div className="border-b border-black/10 bg-white p-5">
+        <div className="flex min-w-0 flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-md bg-coral/10 px-2 py-1 text-xs font-bold text-coral">{dialogue.mode}</span>
+              <span className="text-sm font-bold text-matcha">{dialogue.situation}</span>
+            </div>
+            <h2 className="mt-2 break-words font-serif text-3xl font-bold text-ink">{dialogue.title}</h2>
+
+            <div className="mt-4 grid min-w-0 gap-2 sm:grid-cols-2">
+              <div className="flex min-w-0 items-center gap-3 rounded-md bg-matcha/10 px-3 py-2">
+                <UserRound aria-hidden="true" className="shrink-0 text-matcha" size={18} />
+                <div>
+                  <p className="text-xs font-bold text-ink/52">我方角色</p>
+                  <p className="font-extrabold text-matcha">{dialogue.practiceSpeaker}</p>
+                </div>
+              </div>
+              <div className="flex min-w-0 items-center gap-3 rounded-md bg-sky px-3 py-2">
+                <UsersRound aria-hidden="true" className="shrink-0 text-indigo" size={18} />
+                <div>
+                  <p className="text-xs font-bold text-ink/52">对方说</p>
+                  <p className="break-words font-extrabold text-indigo">{partnerSpeakers.join(" / ")}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex min-w-0 flex-wrap gap-2 xl:justify-end">
+            <button
+              type="button"
+              onClick={playNextLine}
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-indigo px-3 py-2 text-sm font-bold text-white transition hover:bg-indigo/90 active:scale-95"
+            >
+              <ListMusic aria-hidden="true" size={18} />
+              逐句
+            </button>
+            <button
+              type="button"
+              onClick={playAll}
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-matcha px-3 py-2 text-sm font-bold text-white transition hover:bg-matcha/90 active:scale-95"
+            >
+              <Play aria-hidden="true" size={18} />
+              整段
+            </button>
+            <button
+              type="button"
+              onClick={playPartnerLines}
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-black/10 bg-white px-3 py-2 text-sm font-bold text-ink transition hover:bg-sky active:scale-95"
+            >
+              <Ear aria-hidden="true" size={18} />
+              只听对方
+            </button>
+            <button
+              type="button"
+              onClick={playOwnLines}
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-matcha/25 bg-matcha/10 px-3 py-2 text-sm font-bold text-matcha transition hover:bg-matcha hover:text-white active:scale-95"
+            >
+              <Mic2 aria-hidden="true" size={18} />
+              只听我方
+            </button>
+            <button
+              type="button"
+              onClick={stopPlayback}
+              className="grid min-h-11 w-11 cursor-pointer place-items-center rounded-md border border-black/10 bg-white text-ink transition hover:bg-rice active:scale-95"
+              aria-label="停止播放对话"
+              title="停止"
+            >
+              <Square aria-hidden="true" size={18} />
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="mt-6 space-y-3">
-        {dialogue.lines.map((line, index) => {
-          const active = activeLine === index;
+      <div className="relative bg-rice/42 p-4 sm:p-5">
+        <div className="absolute left-1/2 top-5 hidden h-[calc(100%-2.5rem)] w-px -translate-x-1/2 bg-black/8 md:block" />
+        <div className="space-y-4">
+          {dialogue.lines.map((line, index) => {
+            const active = activeLine === index;
+            const practiceLine = line.speaker === dialogue.practiceSpeaker;
 
-          return (
-            <div
-              key={`${line.speaker}-${line.japanese}`}
-              className={`grid gap-3 rounded-lg border p-4 transition md:grid-cols-[7rem_1fr_auto] md:items-center ${
-                active
-                  ? "border-matcha bg-matcha/10"
-                  : "border-black/8 bg-rice/52"
-              }`}
-            >
-              <p className="text-sm font-bold text-ink/58">{line.speaker}</p>
-              <div>
-                <p className="text-lg font-bold text-ink">{line.japanese}</p>
-                <p className="mt-1 text-xs text-ink/55">{line.kana}</p>
-                <p className="mt-2 text-sm text-ink/70">{line.translation}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => playLine(index)}
-                className="grid h-11 w-11 cursor-pointer place-items-center rounded-md bg-white text-matcha shadow-sm transition hover:bg-matcha hover:text-white active:scale-95"
-                aria-label={`播放第 ${index + 1} 句`}
-                title="播放这一句"
+            return (
+              <div
+                key={`${line.speaker}-${line.japanese}`}
+                className={`relative flex ${practiceLine ? "justify-end" : "justify-start"}`}
               >
-                <Volume2 aria-hidden="true" size={19} />
-              </button>
-            </div>
-          );
-        })}
+                <div
+                  className={`w-full rounded-lg border p-4 shadow-sm transition duration-300 md:max-w-[76%] ${
+                    active
+                      ? "scale-[1.01] border-sun bg-white shadow-soft ring-2 ring-sun/30"
+                      : practiceLine
+                        ? "border-matcha/18 bg-matcha/8"
+                        : "border-black/8 bg-white"
+                  }`}
+                >
+                  <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <span
+                      className={`rounded-md px-2 py-1 text-xs font-extrabold ${
+                        practiceLine ? "bg-matcha text-white" : "bg-indigo text-white"
+                      }`}
+                    >
+                      {practiceLine ? "你说" : "对方说"}
+                    </span>
+                    <span className="text-sm font-bold text-ink/62">{line.speaker}</span>
+                    {active ? (
+                      <span className="rounded-md bg-sun/24 px-2 py-1 text-xs font-bold text-ink">正在播放</span>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() => void playLine(index)}
+                      className="ml-auto grid h-10 w-10 cursor-pointer place-items-center rounded-md bg-white text-matcha shadow-sm transition hover:bg-matcha hover:text-white active:scale-95"
+                      aria-label={`播放第 ${index + 1} 句`}
+                      title="播放这一句"
+                    >
+                      <Volume2 aria-hidden="true" size={18} />
+                    </button>
+                  </div>
+
+                  <p className="break-words text-xl font-extrabold leading-8 text-ink">{line.japanese}</p>
+                  <p className="mt-2 break-words text-xs font-semibold leading-5 text-ink/55">{line.kana}</p>
+                  <p className="mt-3 break-words text-sm font-semibold leading-6 text-ink/72">{line.translation}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </article>
   );

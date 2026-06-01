@@ -12,7 +12,7 @@ const KanaPage = ({ onSpeak }: KanaPageProps) => {
         <p className="text-sm font-bold text-matcha">Kana</p>
         <h1 className="mt-2 font-serif text-4xl font-bold text-ink">五十音图</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-ink/70">
-          每张卡同时显示平假名、片假名、罗马音和例词。点击播放按钮可以用浏览器内置日语语音练习发音。
+          每张卡同时显示平假名、片假名、罗马音和例词。点击播放按钮可以用浏览器内置日语语音点读发音。
         </p>
       </section>
 

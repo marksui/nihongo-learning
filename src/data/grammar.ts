@@ -5,13 +5,6 @@ export interface GrammarExample {
   translation: string;
 }
 
-export interface GrammarQuiz {
-  prompt: string;
-  answer: string;
-  choices: string[];
-  explanation: string;
-}
-
 export interface GrammarLesson {
   id: string;
   title: string;
@@ -21,7 +14,6 @@ export interface GrammarLesson {
   explanation: string;
   examples: GrammarExample[];
   commonMistakes: string[];
-  quiz: GrammarQuiz;
 }
 
 export const grammarLessons: GrammarLesson[] = [
@@ -43,12 +35,6 @@ export const grammarLessons: GrammarLesson[] = [
       "日语通常不需要像中文一样加“是”的独立动词，句尾「です」承担礼貌判断功能。",
       "「さん」不是“先生/女士”的直译称谓，而是礼貌后缀，通常不要加在自己名字后。",
     ],
-    quiz: {
-      prompt: "私は学生__。",
-      answer: "です",
-      choices: ["です", "を", "に", "の"],
-      explanation: "判断句“我是学生”用「A は B です」。",
-    },
   },
   {
     id: "a-wa-b-dewa-arimasen",
@@ -68,12 +54,6 @@ export const grammarLessons: GrammarLesson[] = [
       "「じゃありません」偏口语，正式学习初期先掌握「ではありません」。",
       "否定句的「は」仍然读 wa。",
     ],
-    quiz: {
-      prompt: "これはノート__ありません。",
-      answer: "では",
-      choices: ["では", "を", "に", "へ"],
-      explanation: "礼貌否定句型是「A は B ではありません」。",
-    },
   },
   {
     id: "kore-sore-are",
@@ -93,12 +73,6 @@ export const grammarLessons: GrammarLesson[] = [
       "中文一个“这/那”可以覆盖很多距离，日语要按双方距离区分。",
       "「これ本です」少了助词「は」，初学时建议完整说出。",
     ],
-    quiz: {
-      prompt: "离说话人近的东西，用__。",
-      answer: "これ",
-      choices: ["これ", "それ", "あれ", "どれ"],
-      explanation: "「これ」表示靠近说话人的“这个”。",
-    },
   },
   {
     id: "no-possession",
@@ -118,12 +92,6 @@ export const grammarLessons: GrammarLesson[] = [
       "「我的朋友」是「私の友だち」，不要漏掉「の」。",
       "「日本的料理」更自然常说「日本料理」，有些固定词不需要「の」。",
     ],
-    quiz: {
-      prompt: "私__本です。",
-      answer: "の",
-      choices: ["の", "は", "を", "へ"],
-      explanation: "表示“我的书”用「私の本」。",
-    },
   },
   {
     id: "wo-object-marker",
@@ -143,12 +111,6 @@ export const grammarLessons: GrammarLesson[] = [
       "不要说「水飲みます」；初学时把宾语助词说清楚更稳。",
       "喜欢、懂、会等表达不一定用「を」，例如「日本語が好きです」。",
     ],
-    quiz: {
-      prompt: "本__読みます。",
-      answer: "を",
-      choices: ["を", "は", "に", "です"],
-      explanation: "「本」是「読む」的宾语，所以用「を」。",
-    },
   },
   {
     id: "ni-e-direction",
@@ -168,12 +130,6 @@ export const grammarLessons: GrammarLesson[] = [
       "表示存在位置时用「に」，例如「駅にいます」，不要用「へ」。",
       "中文“去到”常不区分方向和到达点，日语要看动词和语境。",
     ],
-    quiz: {
-      prompt: "日本__行きます。",
-      answer: "へ",
-      choices: ["へ", "を", "です", "の"],
-      explanation: "表示移动方向“去日本”可用「日本へ行きます」。",
-    },
   },
   {
     id: "masu-form",
@@ -193,12 +149,6 @@ export const grammarLessons: GrammarLesson[] = [
       "不要把所有动词原形直接加「ます」；动词需要变成ます形。",
       "过去否定是「ませんでした」，不是「ましたない」。",
     ],
-    quiz: {
-      prompt: "昨日、映画を見__。",
-      answer: "ました",
-      choices: ["ました", "ます", "ません", "です"],
-      explanation: "「昨日」表示过去，看了电影用「見ました」。",
-    },
   },
   {
     id: "basic-adjectives",
@@ -218,11 +168,5 @@ export const grammarLessons: GrammarLesson[] = [
       "な形容词修饰名词要加「な」，例如「静かな部屋」。",
       "「きれい」虽然以い结尾，但它是な形容词。",
     ],
-    quiz: {
-      prompt: "__本を買いました。",
-      answer: "新しい",
-      choices: ["新しい", "新しいな", "新しいの", "新しいを"],
-      explanation: "い形容词直接修饰名词：新しい本。",
-    },
   },
 ];
