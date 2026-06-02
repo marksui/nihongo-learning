@@ -7,7 +7,7 @@ interface SiteFooterProps {
   onNavigate: (page: PageKey) => void;
 }
 
-const personalHomepageUrl = "https://marksui.github.io/";
+const authorHomepageUrl = "https://marksui.github.io/";
 
 const footerLinks: Array<{ label: string; page: PageKey }> = [
   { label: "首页", page: "home" },
@@ -27,26 +27,27 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
           <section className="rounded-lg border border-ink/10 bg-paper p-4 shadow-card" aria-labelledby="footer-about">
             <div className="flex items-center gap-3">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-matcha text-base font-extrabold text-white">
-                日
+                M
               </span>
               <div>
                 <h2 id="footer-about" className="text-lg font-extrabold text-ink">
-                  中文学日语
+                  作者主页
                 </h2>
-                <p className="text-sm font-semibold text-ink/58">护眼点读学习 App</p>
+                <p className="text-sm font-semibold text-ink/58">站点作者 Mark</p>
               </div>
             </div>
             <p className="mt-4 text-sm leading-7 text-ink/70">
-              从假名、数字、单词、语法到会话，保持本地数据和浏览器内置日语语音，不需要后端或付费 API。
+              这个入口指向站点作者主页，不是学习者账号中心。学习入口和主题设置都放在页脚里，方便不用回到顶部。
             </p>
             <a
-              href={personalHomepageUrl}
+              href={authorHomepageUrl}
               target="_blank"
               rel="noreferrer"
+              aria-label="打开 Mark 的作者主页"
               className="mt-4 flex min-h-11 w-fit items-center gap-2 rounded-md border border-ink/10 bg-rice/60 px-3 py-2 text-sm font-extrabold text-ink transition hover:border-yuzu/45 hover:bg-yuzu/14"
             >
               <Home aria-hidden="true" size={18} />
-              个人主页
+              Mark 的主页
               <ExternalLink aria-hidden="true" size={16} />
             </a>
           </section>
@@ -98,7 +99,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
               </span>
             </div>
             <p id="footer-note" className="mt-3 text-sm leading-7 text-ink/68">
-              页脚现在也可以作为设置区：切主题、跳转学习页面、进入个人主页，都不用回到顶部。
+              页脚现在也可以作为设置区：切主题、跳转学习页面、访问作者主页，都不用回到顶部。
             </p>
           </section>
         </div>
