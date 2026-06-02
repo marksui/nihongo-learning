@@ -35,7 +35,7 @@ const featureCards: FeatureCard[] = [
   {
     title: "五十音图",
     page: "kana",
-    description: "平假名、片假名、罗马音和例词同步记忆。",
+    description: "假名、罗马音、例词点读。",
     metric: `${kanaItems.length} 个基础假名`,
     accent: "bg-matcha",
     icon: Grid3X3,
@@ -43,7 +43,7 @@ const featureCards: FeatureCard[] = [
   {
     title: "常用单词",
     page: "vocabulary",
-    description: "按生活场景分类，配日语例句和中文翻译。",
+    description: "按场景找词，听单词和例句。",
     metric: `${vocabulary.length} 个入门词`,
     accent: "bg-sakura",
     icon: BookOpen,
@@ -51,7 +51,7 @@ const featureCards: FeatureCard[] = [
   {
     title: "数字读法",
     page: "numbers",
-    description: "从 0-10 到价格、日期、年龄、楼层和大数字。",
+    description: "数字、价格、日期和大数字。",
     metric: `${numberExamples.length} 条数字规则`,
     accent: "bg-yuzu",
     icon: Hash,
@@ -59,7 +59,7 @@ const featureCards: FeatureCard[] = [
   {
     title: "基础语法",
     page: "grammar",
-    description: "用中文讲清句型，并标出中文母语者容易踩的点。",
+    description: "中文讲句型，例句可听。",
     metric: `${grammarLessons.length} 个核心句型`,
     accent: "bg-sumire",
     icon: GraduationCap,
@@ -67,7 +67,7 @@ const featureCards: FeatureCard[] = [
   {
     title: "日常会话",
     page: "conversation",
-    description: "更多旅行、生活、学校和紧急情景，支持逐句跟读。",
+    description: "你说 / 对方说，对照跟读。",
     metric: `${dialogues.length} 段对话`,
     accent: "bg-matcha",
     icon: MessagesSquare,
@@ -75,7 +75,7 @@ const featureCards: FeatureCard[] = [
   {
     title: "假名速读",
     page: "quickread",
-    description: "假名、数字、月份日期和基础时间词都做成速查点读表。",
+    description: "快捷点读表，直接听。",
     metric: "多张速读表",
     accent: "bg-matcha",
     icon: Table2,
@@ -84,21 +84,20 @@ const featureCards: FeatureCard[] = [
 
 const Home = ({ onNavigate }: HomeProps) => {
   return (
-    <div className="space-y-10">
-      <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
-        <PageHero
-          accent="sakura"
-          eyebrow="零基础中文路线"
-          icon={PlayCircle}
-          title="中文学日语"
-          description="从五十音开始，把假名、单词、语法、例句、会话和发音点读放在同一条学习路径里。页面全部使用简体中文说明，日语内容配罗马音、假名读法和中文意思。"
-          stats={[
-            { label: "假名", value: kanaItems.length },
-            { label: "单词", value: vocabulary.length },
-            { label: "会话", value: dialogues.length },
-          ]}
-          actions={
-            <>
+    <div className="space-y-7">
+      <PageHero
+        accent="sakura"
+        eyebrow="零基础中文路线"
+        icon={PlayCircle}
+        title="中文学日语"
+        description="从五十音开始，用简体中文说明、日语点读和清晰例句学习。没有考试模式，打开就能学。"
+        stats={[
+          { label: "假名", value: kanaItems.length },
+          { label: "单词", value: vocabulary.length },
+          { label: "会话", value: dialogues.length },
+        ]}
+        actions={
+          <>
             <button
               type="button"
               onClick={() => onNavigate("kana")}
@@ -115,34 +114,17 @@ const Home = ({ onNavigate }: HomeProps) => {
               进入会话
               <MessagesSquare aria-hidden="true" size={18} />
             </button>
-            </>
-          }
-        />
-
-        <div className="relative min-h-80 overflow-hidden rounded-lg border border-ink/10 bg-paper p-6 shadow-card">
-          <div className="absolute inset-x-0 top-0 h-1.5 bg-yuzu/45" />
-          <div className="relative grid h-full grid-cols-2 gap-3">
-            {["あ", "ア", "日语", "中文", "です", "を", "かな", "会話"].map((label, index) => (
-              <div
-                key={label}
-                className={`grid place-items-center rounded-lg border border-ink/8 bg-rice/55 p-4 text-center text-ink shadow-card ${
-                  index % 3 === 0 ? "font-serif text-5xl font-bold text-matcha" : "text-2xl font-extrabold"
-                }`}
-              >
-                {label}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       <section>
-        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-extrabold text-sakura">学习地图</p>
-            <h2 className="font-serif text-3xl font-bold text-ink">按真实入门顺序推进</h2>
+            <p className="text-sm font-extrabold text-sakura">学习入口</p>
+            <h2 className="font-serif text-2xl font-bold text-ink sm:text-3xl">选一个开始</h2>
           </div>
-          <p className="text-sm text-ink/58">所有内容来自本地 TypeScript 数据，无需后端。</p>
+          <p className="text-sm text-ink/58">本地数据，浏览器日语发音。</p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -153,26 +135,26 @@ const Home = ({ onNavigate }: HomeProps) => {
               <LearningCard
                 key={card.title}
                 interactive
-                className="group min-h-52 overflow-hidden p-0"
+                className="group overflow-hidden p-0"
               >
                 <button
                   type="button"
                   onClick={() => onNavigate(card.page)}
-                  className="flex h-full w-full cursor-pointer flex-col p-5 text-left"
+                  className="flex min-h-36 w-full cursor-pointer items-start gap-4 p-4 text-left"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <span className={`grid h-12 w-12 place-items-center rounded-md ${card.accent} text-white shadow-card`}>
-                      <Icon aria-hidden="true" size={23} />
-                    </span>
-                    <span className="rounded-md bg-rice px-2 py-1 text-xs font-extrabold text-ink/54">
-                      STEP {index + 1}
-                    </span>
-                  </div>
-                  <h3 className="mt-5 text-xl font-extrabold text-ink">{card.title}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-6 text-ink/68">{card.description}</p>
-                  <div className="mt-5 flex items-center justify-between text-xs font-extrabold text-ink/58">
-                    <span>{card.metric}</span>
-                    <ArrowRight className="transition group-hover:translate-x-1" size={16} />
+                  <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-md ${card.accent} text-white shadow-card`}>
+                    <Icon aria-hidden="true" size={21} />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-lg font-extrabold text-ink">{card.title}</h3>
+                      <span className="rounded bg-rice px-1.5 py-0.5 text-xs font-bold text-ink/50">{index + 1}</span>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-ink/68">{card.description}</p>
+                    <div className="mt-3 flex items-center justify-between gap-3 text-xs font-extrabold text-ink/55">
+                      <span className="truncate">{card.metric}</span>
+                      <ArrowRight className="shrink-0 transition group-hover:translate-x-0.5" size={16} />
+                    </div>
                   </div>
                 </button>
               </LearningCard>

@@ -68,23 +68,22 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-ink/10 bg-rice/95 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
           <button
             type="button"
             onClick={() => navigate("home")}
-            className="flex min-w-0 cursor-pointer items-center gap-3 rounded-md px-1 py-1 text-left transition hover:text-sakura"
+            className="flex min-w-0 cursor-pointer items-center gap-2.5 rounded-md px-1 py-1 text-left transition hover:text-sakura"
             aria-label="返回首页"
           >
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-ink/10 bg-paper text-lg font-extrabold text-sakura shadow-card">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-ink/10 bg-paper text-base font-extrabold text-sakura shadow-card">
               日
             </span>
             <span className="min-w-0">
               <span className="block truncate text-lg font-extrabold text-ink">中文学日语</span>
-              <span className="hidden truncate text-xs font-bold text-ink/55 sm:block">从假名到会话的基础路径</span>
             </span>
           </button>
 
-          <nav className="hidden gap-1 rounded-lg border border-ink/10 bg-paper p-1 shadow-card md:flex">
+          <nav className="hidden gap-1 rounded-lg border border-ink/8 bg-paper/90 p-1 shadow-card md:flex">
             {desktopItems.map((item) => {
               const Icon = item.icon;
               const active = currentPage === item.page;
@@ -97,8 +96,8 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                   aria-current={active ? "page" : undefined}
                   className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm font-extrabold transition active:scale-95 ${
                     active
-                      ? "bg-matcha text-white shadow-card"
-                      : "text-ink/68 hover:bg-yuzu/14 hover:text-ink"
+                      ? "bg-matcha text-white"
+                      : "text-ink/64 hover:bg-rice hover:text-ink"
                   }`}
                 >
                   <Icon aria-hidden="true" size={18} strokeWidth={2.2} />

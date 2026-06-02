@@ -75,7 +75,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--page-end)) 100%);
+  background: rgb(var(--color-rice));
   font-family: "Noto Sans JP", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -89,10 +89,10 @@ body::before {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(90deg, rgb(var(--grid-line) / 0.035) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(var(--grid-line) / 0.025) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.45;
+    linear-gradient(90deg, rgb(var(--grid-line) / 0.018) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--grid-line) / 0.014) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.22;
 }
 
 button,
