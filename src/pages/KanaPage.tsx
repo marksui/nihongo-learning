@@ -15,11 +15,11 @@ const KanaPage = ({ onSpeak }: KanaPageProps) => {
         eyebrow="Kana"
         icon={Grid3X3}
         title="五十音图"
-        description="每张卡同时显示平假名、片假名、罗马音和例词。点击播放按钮可以用浏览器内置日语语音点读发音。"
+        description="每张卡同时显示平假名、片假名、罗马音和例词。点击播放按钮就能听发音。"
         stats={[
           { label: "行", value: kanaGroups.length },
           { label: "假名", value: kanaItems.length },
-          { label: "点读", value: "ja-JP" },
+          { label: "点读", value: "可听" },
         ]}
       />
 

@@ -90,7 +90,7 @@ const Home = ({ onNavigate }: HomeProps) => {
         eyebrow="零基础中文路线"
         icon={PlayCircle}
         title="中文学日语"
-        description="从五十音开始，用简体中文说明、日语点读和清晰例句学习。没有考试模式，打开就能学。"
+        description="从五十音开始，用简体中文说明、日语点读和清晰例句学习。打开就能跟着读。"
         stats={[
           { label: "假名", value: kanaItems.length },
           { label: "单词", value: vocabulary.length },
@@ -124,7 +124,6 @@ const Home = ({ onNavigate }: HomeProps) => {
             <p className="text-sm font-extrabold text-sakura">学习入口</p>
             <h2 className="font-serif text-2xl font-bold text-ink sm:text-3xl">选一个开始</h2>
           </div>
-          <p className="text-sm text-ink/58">本地数据，浏览器日语发音。</p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
