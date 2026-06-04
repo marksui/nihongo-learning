@@ -93,6 +93,25 @@ export const getSeenContentStats = (progress: LearningProgress) => ({
   totalSeen: new Set(progress.seenContentIds.filter(Boolean)).size,
 });
 
+const weekDayLabels = ["日", "一", "二", "三", "四", "五", "六"];
+
+export const getWeeklyCompletionDays = (progress: LearningProgress, date = new Date()) => {
+  const doneDates = new Set(progress.dailyDoneDates.filter(Boolean));
+
+  return Array.from({ length: 7 }, (_, index) => {
+    const day = addDays(date, index - 6);
+    const dateKey = getDateKey(day);
+    const isToday = index === 6;
+
+    return {
+      dateKey,
+      done: doneDates.has(dateKey),
+      isToday,
+      label: isToday ? "今" : weekDayLabels[day.getDay()],
+    };
+  });
+};
+
 export const markTodaySuggestionDone = (contentIds: string[] = [], date = new Date()) => {
   const progress = readLearningProgress();
   const dateKey = getDateKey(date);

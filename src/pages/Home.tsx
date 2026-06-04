@@ -28,6 +28,7 @@ import type { PageKey } from "../components/Navbar";
 import {
   getDailyCompletionStats,
   getSeenContentStats,
+  getWeeklyCompletionDays,
   isTodaySuggestionDone,
   markTodaySuggestionDone,
   readLearningProgress,
@@ -133,6 +134,8 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const todayDone = isTodaySuggestionDone(progress);
   const dailyStats = getDailyCompletionStats(progress);
   const seenStats = getSeenContentStats(progress);
+  const weekDays = getWeeklyCompletionDays(progress);
+  const weeklyDoneCount = weekDays.filter((day) => day.done).length;
   const todayContentSeen = todayContentIds.every((id) => progress.seenContentIds.includes(id));
   const todayFullyDone = todayDone && todayContentSeen;
   const viewedPages = new Set(progress.viewedPages);
@@ -379,6 +382,36 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
               </div>
             </div>
           ) : null}
+          <div className="mt-3 rounded-md border border-ink/8 bg-paper px-3 py-2">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-xs font-bold text-ink/55">本周节奏</p>
+              <p className="text-xs font-extrabold text-matcha">{weeklyDoneCount}/7</p>
+            </div>
+            <div className="mt-2 grid grid-cols-7 gap-1.5">
+              {weekDays.map((day) => (
+                <div
+                  key={day.dateKey}
+                  className={`grid min-h-12 place-items-center rounded-md border px-1 text-[0.68rem] font-extrabold transition ${
+                    day.done
+                      ? "border-matcha/24 bg-matcha/12 text-matcha"
+                      : day.isToday
+                        ? "border-yuzu/32 bg-yuzu/12 text-ink/62"
+                        : "border-ink/8 bg-rice/45 text-ink/44"
+                  }`}
+                  aria-label={`${day.isToday ? "今天" : `周${day.label}`}：${day.done ? "已完成" : "待完成"}`}
+                  title={`${day.dateKey} ${day.done ? "已完成" : "待完成"}`}
+                >
+                  <span>{day.label}</span>
+                  <span
+                    className={`mt-1 h-1.5 w-5 rounded-full ${
+                      day.done ? "bg-matcha" : day.isToday ? "bg-yuzu" : "bg-ink/12"
+                    }`}
+                    aria-hidden="true"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </LearningCard>
 
         <LearningCard className="p-4">
