@@ -4,6 +4,7 @@ export interface LearningProgress {
   viewedPages: PageKey[];
   recentReads: string[];
   dailyDoneDates: string[];
+  seenContentIds: string[];
   updatedAt: string;
 }
 
@@ -13,6 +14,7 @@ const emptyProgress = (): LearningProgress => ({
   viewedPages: [],
   recentReads: [],
   dailyDoneDates: [],
+  seenContentIds: [],
   updatedAt: new Date().toISOString(),
 });
 
@@ -34,6 +36,7 @@ export const readLearningProgress = (): LearningProgress => {
       viewedPages: Array.isArray(parsed.viewedPages) ? parsed.viewedPages.filter(Boolean) as PageKey[] : [],
       recentReads: Array.isArray(parsed.recentReads) ? parsed.recentReads.filter(Boolean).slice(0, 12) : [],
       dailyDoneDates: Array.isArray(parsed.dailyDoneDates) ? parsed.dailyDoneDates.filter(Boolean).slice(0, 60) : [],
+      seenContentIds: Array.isArray(parsed.seenContentIds) ? parsed.seenContentIds.filter(Boolean).slice(0, 500) : [],
       updatedAt: typeof parsed.updatedAt === "string" ? parsed.updatedAt : new Date().toISOString(),
     };
   } catch {
@@ -86,12 +89,17 @@ export const getDailyCompletionStats = (progress: LearningProgress, date = new D
   };
 };
 
-export const markTodaySuggestionDone = (date = new Date()) => {
+export const getSeenContentStats = (progress: LearningProgress) => ({
+  totalSeen: new Set(progress.seenContentIds.filter(Boolean)).size,
+});
+
+export const markTodaySuggestionDone = (contentIds: string[] = [], date = new Date()) => {
   const progress = readLearningProgress();
   const dateKey = getDateKey(date);
   const nextProgress = {
     ...progress,
     dailyDoneDates: Array.from(new Set([dateKey, ...progress.dailyDoneDates])).slice(0, 60),
+    seenContentIds: Array.from(new Set([...contentIds.filter(Boolean), ...progress.seenContentIds])).slice(0, 500),
     updatedAt: new Date().toISOString(),
   };
 

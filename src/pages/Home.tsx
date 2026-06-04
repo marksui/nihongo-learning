@@ -25,7 +25,13 @@ import { getTodaySuggestion, learningGoals, learningMilestones, learningPathStep
 import { numberExamples } from "../data/numbers";
 import { vocabulary } from "../data/vocabulary";
 import type { PageKey } from "../components/Navbar";
-import { getDailyCompletionStats, isTodaySuggestionDone, markTodaySuggestionDone, readLearningProgress } from "../utils/progress";
+import {
+  getDailyCompletionStats,
+  getSeenContentStats,
+  isTodaySuggestionDone,
+  markTodaySuggestionDone,
+  readLearningProgress,
+} from "../utils/progress";
 
 interface HomeProps {
   onNavigate: (page: PageKey) => void;
@@ -114,11 +120,21 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const today = useMemo(() => getTodaySuggestion(), []);
   const [progress, setProgress] = useState(() => readLearningProgress());
   const [activeTodayNumber, setActiveTodayNumber] = useState(false);
+  const todayContentIds = useMemo(() => [
+    `kana:${today.kanaGroup}`,
+    ...today.words.map((word) => `word:${word.id}`),
+    `grammar:${today.grammar.id}`,
+    `number:${today.numberScene.id}`,
+    `dialogue:${today.dialogue.id}`,
+  ], [today]);
   const goalsById = useMemo(() => new Map(learningGoals.map((goal) => [goal.id, goal])), []);
   const milestonesById = useMemo(() => new Map(learningMilestones.map((milestone) => [milestone.id, milestone])), []);
   const featureByPage = useMemo(() => new Map(featureCards.map((card) => [card.page, card])), []);
   const todayDone = isTodaySuggestionDone(progress);
   const dailyStats = getDailyCompletionStats(progress);
+  const seenStats = getSeenContentStats(progress);
+  const todayContentSeen = todayContentIds.every((id) => progress.seenContentIds.includes(id));
+  const todayFullyDone = todayDone && todayContentSeen;
   const viewedPages = new Set(progress.viewedPages);
   const completedPathSteps = learningPathSteps.filter((step) => viewedPages.has(step.page));
   const nextPathStep = learningPathSteps.find((step) => !viewedPages.has(step.page)) ?? learningPathSteps[learningPathSteps.length - 1];
@@ -151,8 +167,8 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     : 0;
 
   const completeToday = () => {
-    if (!todayDone) {
-      setProgress(markTodaySuggestionDone());
+    if (!todayFullyDone) {
+      setProgress(markTodaySuggestionDone(todayContentIds));
     }
   };
 
@@ -327,19 +343,19 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           <button
             type="button"
             onClick={completeToday}
-            disabled={todayDone}
-            aria-pressed={todayDone}
+            disabled={todayFullyDone}
+            aria-pressed={todayFullyDone}
             className={`mt-3 flex min-h-11 w-full items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
-              todayDone
+              todayFullyDone
                 ? "cursor-default border-matcha/25 bg-matcha/12 text-matcha"
                 : "cursor-pointer border-yuzu/30 bg-yuzu/18 text-ink hover:bg-yuzu/28"
             }`}
           >
             <CheckCircle2 aria-hidden="true" size={17} />
-            {todayDone ? "今日已完成" : "完成今日建议"}
+            {todayFullyDone ? "今日已完成" : todayDone ? "记入今日内容" : "完成今日建议"}
           </button>
-          {dailyStats.totalDays ? (
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          {dailyStats.totalDays || seenStats.totalSeen ? (
+            <div className="mt-3 grid gap-2 sm:grid-cols-3">
               <div className="rounded-md border border-ink/8 bg-rice/45 px-3 py-2">
                 <p className="text-xs font-bold text-ink/52">累计完成</p>
                 <p className="mt-1 text-lg font-extrabold leading-tight text-ink">
@@ -352,6 +368,13 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                 <p className="mt-1 text-lg font-extrabold leading-tight text-matcha">
                   {dailyStats.currentStreak ? dailyStats.currentStreak : "今天待完成"}
                   {dailyStats.currentStreak ? <span className="ml-1 text-sm font-bold text-matcha/70">天</span> : null}
+                </p>
+              </div>
+              <div className="rounded-md border border-sora/18 bg-sora/8 px-3 py-2">
+                <p className="text-xs font-bold text-ink/52">已看内容</p>
+                <p className="mt-1 text-lg font-extrabold leading-tight text-sora">
+                  {seenStats.totalSeen}
+                  <span className="ml-1 text-sm font-bold text-sora/70">项</span>
                 </p>
               </div>
             </div>
