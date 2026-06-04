@@ -20,7 +20,7 @@ import PageHero from "../components/PageHero";
 import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
-import { getTodaySuggestion, learningGoals, learningPathSteps } from "../data/learningPath";
+import { getTodaySuggestion, learningGoals, learningMilestones, learningPathSteps } from "../data/learningPath";
 import { numberExamples } from "../data/numbers";
 import { vocabulary } from "../data/vocabulary";
 import type { PageKey } from "../components/Navbar";
@@ -50,6 +50,12 @@ const goalAccentClasses = {
   sora: "bg-sora",
   sakura: "bg-sakura",
 } satisfies Record<(typeof learningGoals)[number]["tone"], string>;
+
+const milestoneToneClasses = {
+  matcha: "border-matcha/20 bg-matcha/8 hover:border-matcha/35 hover:bg-matcha/12",
+  sora: "border-sora/20 bg-sora/8 hover:border-sora/35 hover:bg-sora/12",
+  sakura: "border-sakura/20 bg-sakura/8 hover:border-sakura/35 hover:bg-sakura/12",
+} satisfies Record<(typeof learningMilestones)[number]["tone"], string>;
 
 const featureCards: FeatureCard[] = [
   {
@@ -106,6 +112,7 @@ const Home = ({ onNavigate }: HomeProps) => {
   const today = useMemo(() => getTodaySuggestion(), []);
   const progress = useMemo(() => readLearningProgress(), []);
   const goalsById = useMemo(() => new Map(learningGoals.map((goal) => [goal.id, goal])), []);
+  const milestonesById = useMemo(() => new Map(learningMilestones.map((milestone) => [milestone.id, milestone])), []);
   const viewedPages = new Set(progress.viewedPages);
 
   return (
@@ -237,10 +244,25 @@ const Home = ({ onNavigate }: HomeProps) => {
               {progress.viewedPages.length}/{learningPathSteps.length}
             </span>
           </div>
+          <div className="mb-3 grid gap-2 sm:grid-cols-3">
+            {learningMilestones.map((milestone) => (
+              <button
+                key={milestone.id}
+                type="button"
+                onClick={() => onNavigate(milestone.page)}
+                className={`min-h-24 rounded-md border p-3 text-left transition active:scale-[0.99] ${milestoneToneClasses[milestone.tone]}`}
+              >
+                <span className="text-[0.68rem] font-extrabold text-ink/52">{milestone.label}</span>
+                <span className="mt-1 block text-sm font-extrabold text-ink">{milestone.title}</span>
+                <span className="mt-1 block text-xs leading-5 text-ink/62">{milestone.description}</span>
+              </button>
+            ))}
+          </div>
           <div className="grid gap-2 sm:grid-cols-2">
             {learningPathSteps.map((step, index) => {
               const done = viewedPages.has(step.page);
               const goal = goalsById.get(step.goalId);
+              const milestone = milestonesById.get(step.milestoneId);
 
               return (
                 <button
@@ -263,7 +285,7 @@ const Home = ({ onNavigate }: HomeProps) => {
                     <span className="mt-1 block text-xs leading-5 text-ink/62">{step.description}</span>
                     {goal ? (
                       <span className="mt-2 inline-flex rounded bg-yuzu/18 px-2 py-0.5 text-[0.7rem] font-extrabold text-ink/58">
-                        {goal.title}
+                        {milestone ? `${milestone.label} · ` : ""}{goal.title}
                       </span>
                     ) : null}
                   </span>
