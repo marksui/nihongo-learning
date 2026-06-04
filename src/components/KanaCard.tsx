@@ -11,28 +11,33 @@ interface KanaCardProps {
 }
 
 const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
-  const [active, setActive] = useState(false);
+  const [activeTarget, setActiveTarget] = useState<"kana" | "example" | null>(null);
 
-  const playKana = async () => {
-    setActive(true);
+  const play = async (target: "kana" | "example", text: string) => {
+    setActiveTarget(target);
     recordSeenContent(`kana:${item.id}`);
-    const ok = await onSpeak(item.audioText ?? item.hiragana);
-    window.setTimeout(() => setActive(false), ok ? 240 : 900);
+    const ok = await onSpeak(text);
+    window.setTimeout(() => {
+      setActiveTarget((current) => (current === target ? null : current));
+    }, ok ? 260 : 900);
   };
+
+  const kanaActive = activeTarget === "kana";
+  const exampleActive = activeTarget === "example";
 
   return (
     <LearningCard
       interactive
-      className={`flex min-h-56 flex-col justify-between p-4 ${active ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/25" : ""}`}
+      className={`flex min-h-56 flex-col justify-between p-4 ${activeTarget ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/25" : ""}`}
     >
       <div>
         <div className="mb-3 flex items-start justify-between gap-3">
           <div>
             <div className="flex items-baseline gap-3">
-              <span className={`font-japanese text-5xl font-bold transition-colors ${active ? "text-matcha" : "text-ink"}`}>
+              <span className={`font-japanese text-5xl font-bold transition-colors ${kanaActive ? "text-matcha" : "text-ink"}`}>
                 {item.hiragana}
               </span>
-              <span className={`font-japanese text-4xl font-bold transition-colors ${active ? "text-sakura" : "text-sumire"}`}>
+              <span className={`font-japanese text-4xl font-bold transition-colors ${kanaActive ? "text-sakura" : "text-sumire"}`}>
                 {item.katakana}
               </span>
             </div>
@@ -41,19 +46,43 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
             </p>
           </div>
           <SpeakButton
-            active={active}
-            onClick={playKana}
+            active={kanaActive}
+            onClick={() => play("kana", item.audioText ?? item.hiragana)}
             ariaLabel={`播放 ${item.hiragana} 的日语发音`}
             title="播放发音"
           />
         </div>
 
-        <div className="rounded-md border border-sora/18 bg-sora/10 p-3">
-          <p className="text-xs font-bold text-ink/52">例词</p>
-          <p className="mt-1 font-japanese text-2xl font-bold text-ink">{item.example.word}</p>
-          <p className="mt-1 text-sm text-ink/62">
-            {item.example.kana} · {formatRomajiReading(item.example.romaji)}
-          </p>
+        <div
+          className={`rounded-md border p-3 transition ${
+            exampleActive ? "border-matcha/40 bg-matcha/10" : "border-sora/18 bg-sora/10"
+          }`}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <button
+              type="button"
+              onClick={() => play("example", item.example.word)}
+              className="min-w-0 flex-1 cursor-pointer text-left"
+              aria-label={`朗读例词 ${item.example.word}`}
+              title="朗读例词"
+            >
+              <p className="text-xs font-bold text-ink/52">例词</p>
+              <p className={`mt-1 font-japanese text-2xl font-bold transition-colors ${exampleActive ? "text-matcha" : "text-ink"}`}>
+                {item.example.word}
+              </p>
+              <p className="mt-1 text-sm text-ink/62">
+                {item.example.kana} · {formatRomajiReading(item.example.romaji)}
+              </p>
+            </button>
+            <SpeakButton
+              active={exampleActive}
+              ariaLabel={`朗读例词 ${item.example.word}`}
+              className="h-10 w-10"
+              onClick={() => play("example", item.example.word)}
+              title="朗读例词"
+              variant="light"
+            />
+          </div>
         </div>
       </div>
 

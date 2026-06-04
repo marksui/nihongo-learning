@@ -9,6 +9,7 @@ interface QuickReadPageProps {
 
 type KanaScript = "hiragana" | "katakana";
 type KanaCell = string | null;
+type QuickReadView = "basic" | "extra" | "numbers" | "time" | "phrases";
 
 interface QuickReadItem {
   id: string;
@@ -25,6 +26,13 @@ interface QuickReadSection {
   title: string;
   subtitle: string;
   items: QuickReadItem[];
+}
+
+interface QuickReadViewMeta {
+  id: QuickReadView;
+  label: string;
+  detail: string;
+  count: string;
 }
 
 const kanaRows: KanaCell[][] = [
@@ -175,6 +183,55 @@ const quickReadSections: QuickReadSection[] = [
   },
 ];
 
+const quickPhraseSections: QuickReadSection[] = [
+  {
+    id: "daily-greetings",
+    title: "GREETINGS",
+    subtitle: "问候与礼貌",
+    items: [
+      { id: "ohayou", label: "早上", japanese: "おはようございます", kana: "おはようございます", romaji: "ohayou gozaimasu", meaning: "早上好" },
+      { id: "konnichiwa", label: "白天", japanese: "こんにちは", kana: "こんにちは", romaji: "konnichiwa", meaning: "你好" },
+      { id: "konbanwa", label: "晚上", japanese: "こんばんは", kana: "こんばんは", romaji: "konbanwa", meaning: "晚上好" },
+      { id: "arigatou", label: "感谢", japanese: "ありがとうございます", kana: "ありがとうございます", romaji: "arigatou gozaimasu", meaning: "谢谢" },
+      { id: "sumimasen", label: "打扰", japanese: "すみません", kana: "すみません", romaji: "sumimasen", meaning: "不好意思" },
+      { id: "onegaishimasu", label: "请求", japanese: "お願いします", kana: "おねがいします", romaji: "onegai shimasu", meaning: "拜托了" },
+      { id: "hai", label: "肯定", japanese: "はい", kana: "はい", romaji: "hai", meaning: "是" },
+      { id: "iie", label: "否定", japanese: "いいえ", kana: "いいえ", romaji: "iie", meaning: "不是" },
+    ],
+  },
+  {
+    id: "classroom-phrases",
+    title: "CLASSROOM",
+    subtitle: "课堂跟读",
+    items: [
+      { id: "mou-ichido", label: "再一次", japanese: "もう一度お願いします", kana: "もういちどおねがいします", romaji: "mou ichido onegai shimasu", meaning: "请再说一次" },
+      { id: "yukkuri", label: "慢一点", japanese: "ゆっくりお願いします", kana: "ゆっくりおねがいします", romaji: "yukkuri onegai shimasu", meaning: "请慢一点" },
+      { id: "wakarimasu", label: "明白", japanese: "わかります", kana: "わかります", romaji: "wakarimasu", meaning: "我明白" },
+      { id: "wakarimasen", label: "不懂", japanese: "わかりません", kana: "わかりません", romaji: "wakarimasen", meaning: "我不明白" },
+      { id: "daijoubu", label: "可以", japanese: "大丈夫です", kana: "だいじょうぶです", romaji: "daijoubu desu", meaning: "没关系 / 可以" },
+      { id: "kore-kudasai", label: "购买", japanese: "これをください", kana: "これをください", romaji: "kore o kudasai", meaning: "请给我这个" },
+      { id: "ikura", label: "价格", japanese: "いくらですか", kana: "いくらですか", romaji: "ikura desu ka", meaning: "多少钱" },
+      { id: "doko", label: "位置", japanese: "どこですか", kana: "どこですか", romaji: "doko desu ka", meaning: "在哪里" },
+    ],
+  },
+];
+
+const numberQuickReadSections = quickReadSections.filter((section) =>
+  ["basic-numbers", "large-numbers"].includes(section.id),
+);
+
+const timeQuickReadSections = quickReadSections.filter((section) =>
+  ["months", "dates", "week-time"].includes(section.id),
+);
+
+const quickReadViews: QuickReadViewMeta[] = [
+  { id: "basic", label: "基础假名", detail: "平假名 / 片假名", count: "2 表" },
+  { id: "extra", label: "浊音拗音", detail: "浊音、半浊音、拗音", count: `${kanaExtensionSections.length} 组` },
+  { id: "numbers", label: "数字速读", detail: "数字和大数字", count: `${numberQuickReadSections.length} 组` },
+  { id: "time", label: "日期时间", detail: "月份、日期、星期", count: `${timeQuickReadSections.length} 组` },
+  { id: "phrases", label: "常用短句", detail: "问候和课堂句", count: `${quickPhraseSections.reduce((total, section) => total + section.items.length, 0)} 句` },
+];
+
 interface KanaPosterSectionProps {
   activeKey: string | null;
   script: KanaScript;
@@ -305,7 +362,19 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
 
 const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
   const [activeKey, setActiveKey] = useState<string | null>(null);
+  const [activeView, setActiveView] = useState<QuickReadView>("basic");
   const playRunRef = useRef(0);
+  const activeViewMeta = quickReadViews.find((view) => view.id === activeView) ?? quickReadViews[0];
+  const activeSections =
+    activeView === "extra"
+      ? kanaExtensionSections
+      : activeView === "numbers"
+        ? numberQuickReadSections
+        : activeView === "time"
+          ? timeQuickReadSections
+          : activeView === "phrases"
+            ? quickPhraseSections
+            : [];
 
   const playQuickRead = async (key: string, text: string) => {
     const runId = playRunRef.current + 1;
@@ -325,48 +394,90 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
   };
 
   return (
-    <div className="grid min-h-[calc(100vh-9rem)] place-items-center">
-      <article className="w-full max-w-[22rem] overflow-hidden rounded-lg border border-ink/10 bg-paper px-2.5 py-7 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
+    <div className="space-y-4">
+      <section className="sticky top-20 z-20 rounded-lg border border-ink/10 bg-paper/95 p-3 shadow-card backdrop-blur md:top-24">
+        <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-extrabold text-sakura">假名速读</p>
+            <h1 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">{activeViewMeta.label}</h1>
+          </div>
+          <p className="text-sm font-bold text-ink/58">{activeViewMeta.count}</p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+          {quickReadViews.map((view) => {
+            const active = activeView === view.id;
+
+            return (
+              <button
+                key={view.id}
+                type="button"
+                onClick={() => {
+                  setActiveView(view.id);
+                  setActiveKey(null);
+                }}
+                aria-pressed={active}
+                className={`min-h-14 cursor-pointer rounded-md border px-3 py-2 text-left transition active:scale-[0.99] ${
+                  active
+                    ? "border-matcha bg-matcha text-white shadow-card"
+                    : "border-ink/10 bg-rice/45 text-ink hover:border-matcha/25 hover:bg-rice/70"
+                }`}
+              >
+                <span className="block text-sm font-extrabold">{view.label}</span>
+                <span className={`mt-0.5 block truncate text-xs font-bold ${active ? "text-white/78" : "text-ink/52"}`}>
+                  {view.detail}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <article className="mx-auto w-full max-w-[22rem] overflow-hidden rounded-lg border border-ink/10 bg-paper px-2.5 py-7 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
         <div className="space-y-9 sm:space-y-10">
-          <KanaPosterSection
-            title="HIRAGANA"
-            subtitle="ひらがな"
-            script="hiragana"
-            activeKey={activeKey}
-            onPlay={(key, text) => void playQuickRead(key, text)}
-          />
+          {activeView === "basic" ? (
+            <>
+              <KanaPosterSection
+                title="HIRAGANA"
+                subtitle="ひらがな"
+                script="hiragana"
+                activeKey={activeKey}
+                onPlay={(key, text) => void playQuickRead(key, text)}
+              />
 
-          <div className="h-px bg-ink/10" />
-
-          <KanaPosterSection
-            title="KATAKANA"
-            subtitle="カタカナ"
-            script="katakana"
-            activeKey={activeKey}
-            onPlay={(key, text) => void playQuickRead(key, text)}
-          />
-
-          {kanaExtensionSections.map((section) => (
-            <div key={section.id} className="space-y-9 sm:space-y-10">
               <div className="h-px bg-ink/10" />
+
+              <KanaPosterSection
+                title="KATAKANA"
+                subtitle="カタカナ"
+                script="katakana"
+                activeKey={activeKey}
+                onPlay={(key, text) => void playQuickRead(key, text)}
+              />
+            </>
+          ) : null}
+
+          {activeView === "extra" ? kanaExtensionSections.map((section, index) => (
+            <div key={section.id} className="space-y-9 sm:space-y-10">
+              {index ? <div className="h-px bg-ink/10" /> : null}
               <QuickReadTableSection
                 activeKey={activeKey}
                 section={section}
                 onPlay={(key, text) => void playQuickRead(key, text)}
               />
             </div>
-          ))}
+          )) : null}
 
-          {quickReadSections.map((section) => (
+          {activeView !== "basic" && activeView !== "extra" ? activeSections.map((section, index) => (
             <div key={section.id} className="space-y-9 sm:space-y-10">
-              <div className="h-px bg-ink/10" />
+              {index ? <div className="h-px bg-ink/10" /> : null}
               <QuickReadTableSection
                 activeKey={activeKey}
                 section={section}
                 onPlay={(key, text) => void playQuickRead(key, text)}
               />
             </div>
-          ))}
+          )) : null}
         </div>
       </article>
     </div>
