@@ -17,6 +17,7 @@ interface QuickReadItem {
   kana: string;
   romaji: string;
   meaning: string;
+  audioText?: string;
 }
 
 interface QuickReadSection {
@@ -46,6 +47,30 @@ const getRomajiLabel = (item: KanaItem) => {
 
 const getKanaText = (item: KanaItem, script: KanaScript) =>
   script === "hiragana" ? item.hiragana : item.katakana;
+
+const extensionGroupMeta = [
+  { group: "浊音", title: "DAKUON", subtitle: "浊音：が・ざ・だ・ば 行" },
+  { group: "半浊音", title: "HANDAKUON", subtitle: "半浊音：ぱ 行" },
+  { group: "拗音", title: "YOUON", subtitle: "拗音：きゃ・しゃ・ちゃ 等" },
+  { group: "促音・长音", title: "SPECIAL SOUNDS", subtitle: "促音和长音：小 っ 与 ー" },
+] as const;
+
+const kanaExtensionSections: QuickReadSection[] = extensionGroupMeta.map(({ group, title, subtitle }) => ({
+  id: `kana-${group}`,
+  title,
+  subtitle,
+  items: kanaItems
+    .filter((item) => item.group === group)
+    .map((item) => ({
+      id: item.id,
+      label: item.example.word,
+      japanese: `${item.hiragana} / ${item.katakana}`,
+      kana: item.example.kana,
+      romaji: `${item.romaji} / ${item.example.romaji}`,
+      meaning: item.example.meaning,
+      audioText: item.audioText ?? item.hiragana,
+    })),
+}));
 
 const quickReadSections: QuickReadSection[] = [
   {
@@ -251,7 +276,7 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
             <button
               key={key}
               type="button"
-              onClick={() => onPlay(key, item.kana.split(" / ")[0])}
+              onClick={() => onPlay(key, item.audioText ?? item.kana.split(" / ")[0])}
               aria-pressed={active}
               className={`group grid min-h-36 min-w-0 cursor-pointer grid-rows-[auto_1fr_auto_auto_auto] rounded-md border px-3 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.68)] transition active:scale-95 sm:min-h-40 ${
                 active
@@ -320,6 +345,17 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
             activeKey={activeKey}
             onPlay={(key, text) => void playQuickRead(key, text)}
           />
+
+          {kanaExtensionSections.map((section) => (
+            <div key={section.id} className="space-y-9 sm:space-y-10">
+              <div className="h-px bg-ink/10" />
+              <QuickReadTableSection
+                activeKey={activeKey}
+                section={section}
+                onPlay={(key, text) => void playQuickRead(key, text)}
+              />
+            </div>
+          ))}
 
           {quickReadSections.map((section) => (
             <div key={section.id} className="space-y-9 sm:space-y-10">
