@@ -439,6 +439,21 @@ const expandedGrammarLessons: GrammarLesson[] = [
     ["「から」既可表示起点，也可表示原因，要看位置和语境。", "礼貌句中常用「ですから」「ますから」。", "不要只照中文顺序直译，日语要保留连接词。"],
     ["原因", "连接"],
   ),
+  makeLesson(
+    "dekimasu-potential",
+    "できます 可能表达",
+    "名词 が できます / 动词ことができます",
+    "めいし が できます / どうしこと が できます",
+    "meishi ga dekimasu / doushi koto ga dekimasu",
+    "「できます」表示会做、能做或某事可以实现。名词能力常用「ができます」，动作能力常用「动词辞书形 + ことができます」。",
+    [
+      { japanese: "私は日本語が少しできます。", kana: "わたしはにほんごがすこしできます。", romaji: "watashi wa nihongo ga sukoshi dekimasu", translation: "我会一点日语。" },
+      { japanese: "ここでカードを使うことができます。", kana: "ここでかーどをつかうことができます。", romaji: "koko de kaado o tsukau koto ga dekimasu", translation: "这里可以使用银行卡。" },
+      { japanese: "漢字を読むことができません。", kana: "かんじをよむことができません。", romaji: "kanji o yomu koto ga dekimasen", translation: "不会读汉字。" },
+    ],
+    ["表示会某种语言时常说「日本語ができます」，不是「日本語をできます」。", "动作能力要把动词变成辞书形再接「ことができます」。", "否定是「できません」，不要说「できますない」。"],
+    ["可能", "动词", "能力"],
+  ),
 ];
 
 export const grammarLessons: GrammarLesson[] = [...coreGrammarLessons, ...expandedGrammarLessons].map((lesson, index) => ({
