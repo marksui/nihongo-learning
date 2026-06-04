@@ -30,12 +30,12 @@ interface NavItem {
 
 const desktopItems: NavItem[] = [
   { page: "home", label: "首页", icon: Home },
-  { page: "kana", label: "五十音图", icon: Grid3X3 },
-  { page: "numbers", label: "数字读法", icon: Hash },
-  { page: "vocabulary", label: "常用单词", icon: BookOpen },
-  { page: "grammar", label: "基础语法", icon: GraduationCap },
-  { page: "conversation", label: "日常会话", icon: MessagesSquare },
-  { page: "quickread", label: "假名速读", icon: Table2 },
+  { page: "kana", label: "五十音", icon: Grid3X3 },
+  { page: "numbers", label: "数字", icon: Hash },
+  { page: "vocabulary", label: "单词", icon: BookOpen },
+  { page: "grammar", label: "语法", icon: GraduationCap },
+  { page: "conversation", label: "会话", icon: MessagesSquare },
+  { page: "quickread", label: "速读", icon: Table2 },
 ];
 
 const mobilePrimaryItems: NavItem[] = [
@@ -68,22 +68,22 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-ink/10 bg-rice/95 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:px-6 lg:px-8">
           <button
             type="button"
             onClick={() => navigate("home")}
-            className="flex min-w-0 cursor-pointer items-center gap-2.5 rounded-md px-1 py-1 text-left transition hover:text-sakura"
+            className="flex min-w-0 cursor-pointer items-center gap-2 rounded-md px-1 py-1 text-left transition hover:text-sakura"
             aria-label="返回首页"
           >
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-ink/10 bg-paper text-base font-extrabold text-sakura shadow-card">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-ink/10 bg-paper text-sm font-extrabold text-sakura shadow-card">
               日
             </span>
             <span className="min-w-0">
-              <span className="block truncate text-lg font-extrabold text-ink">中文学日语</span>
+              <span className="block truncate text-base font-extrabold text-ink">中文学日语</span>
             </span>
           </button>
 
-          <nav className="hidden gap-1 rounded-lg border border-ink/8 bg-paper/90 p-1 shadow-card md:flex">
+          <nav className="hidden gap-1 rounded-md border border-ink/8 bg-paper/90 p-1 shadow-card md:flex">
             {desktopItems.map((item) => {
               const Icon = item.icon;
               const active = currentPage === item.page;
@@ -94,13 +94,13 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                   type="button"
                   onClick={() => navigate(item.page)}
                   aria-current={active ? "page" : undefined}
-                  className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm font-extrabold transition active:scale-95 ${
+                  className={`flex min-h-10 cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-extrabold transition active:scale-95 ${
                     active
                       ? "bg-matcha text-white"
                       : "text-ink/64 hover:bg-rice hover:text-ink"
                   }`}
                 >
-                  <Icon aria-hidden="true" size={18} strokeWidth={2.2} />
+                  <Icon aria-hidden="true" size={17} strokeWidth={2.2} />
                   <span>{item.label}</span>
                 </button>
               );
