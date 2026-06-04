@@ -25,9 +25,14 @@ export const vocabularyCategories = [
   "科技",
   "副词",
   "表达",
+  "考试单词",
 ] as const;
 
 export type VocabularyCategory = (typeof vocabularyCategories)[number];
+export const jlptVocabularyLevels = ["N5", "N4", "N3", "N2", "N1"] as const;
+export type JlptVocabularyLevel = (typeof jlptVocabularyLevels)[number];
+export type VocabularyLevel = "入门" | "基础" | "进阶入门" | "N3" | "N2" | "N1";
+type ExamVocabularyLevel = Extract<JlptVocabularyLevel, "N3" | "N2" | "N1">;
 
 export interface VocabularyItem {
   id: string;
@@ -39,11 +44,23 @@ export interface VocabularyItem {
   sentence: string;
   sentenceKana: string;
   translation: string;
-  level?: "入门" | "基础" | "进阶入门" | "N3";
+  level?: VocabularyLevel;
   tags?: string[];
   sortOrder?: number;
   audioText?: string;
 }
+
+export const getVocabularyJlptLevel = (word: VocabularyItem): JlptVocabularyLevel => {
+  if (word.level === "N1" || word.level === "N2" || word.level === "N3") {
+    return word.level;
+  }
+
+  if (word.level === "基础" || word.level === "进阶入门") {
+    return "N4";
+  }
+
+  return "N5";
+};
 
 const coreVocabulary: VocabularyItem[] = [
   {
@@ -1011,6 +1028,31 @@ const makeN3Vocabulary = (
   tags,
 });
 
+const makeExamVocabulary = (
+  id: string,
+  level: ExamVocabularyLevel,
+  japanese: string,
+  kana: string,
+  romaji: string,
+  meaning: string,
+  sentence: string = `試験問題で「${japanese}」という言葉を確認します。`,
+  sentenceKana: string = `しけんもんだいで「${kana}」ということばをかくにんします。`,
+  translation: string = `在考试题里确认“${meaning}”这个词。`,
+  tags: string[] = ["考试单词", level, "JLPT"],
+): VocabularyItem => ({
+  id,
+  category: "考试单词",
+  japanese,
+  kana,
+  romaji,
+  meaning,
+  sentence,
+  sentenceKana,
+  translation,
+  level,
+  tags,
+});
+
 const expandedVocabulary: VocabularyItem[] = [
   makeVocabulary("travel-ryokan", "旅行", "旅館", "りょかん", "ryokan", "日式旅馆", "この旅館は静かです。", "このりょかんはしずかです。", "这家日式旅馆很安静。"),
   makeVocabulary("travel-yoyaku", "旅行", "予約", "よやく", "yoyaku", "预约 / 预订", "ホテルの予約があります。", "ほてるのよやくがあります。", "我有酒店预订。"),
@@ -1309,7 +1351,131 @@ const n3Vocabulary: VocabularyItem[] = [
   makeN3Vocabulary("expression-yousuruni", "表达", "要するに", "ようするに", "you suru ni", "总之 / 简而言之", "要するに、練習が必要です。", "ようするに、れんしゅうがひつようです。", "总之，需要练习。"),
 ];
 
-export const vocabulary: VocabularyItem[] = [...coreVocabulary, ...expandedVocabulary, ...n3Vocabulary].map((word, index) => ({
+const examVocabulary: VocabularyItem[] = [
+  makeExamVocabulary("exam-n2-chuushou", "N2", "抽象", "ちゅうしょう", "chuushou", "抽象 / 抽象概念"),
+  makeExamVocabulary("exam-n2-gutai", "N2", "具体", "ぐたい", "gutai", "具体"),
+  makeExamVocabulary("exam-n2-genshou", "N2", "現象", "げんしょう", "genshou", "现象"),
+  makeExamVocabulary("exam-n2-taishou", "N2", "対象", "たいしょう", "taishou", "对象 / 目标"),
+  makeExamVocabulary("exam-n2-hikaku", "N2", "比較", "ひかく", "hikaku", "比较"),
+  makeExamVocabulary("exam-n2-bunseki", "N2", "分析", "ぶんせき", "bunseki", "分析"),
+  makeExamVocabulary("exam-n2-chousa", "N2", "調査", "ちょうさ", "chousa", "调查"),
+  makeExamVocabulary("exam-n2-toukei", "N2", "統計", "とうけい", "toukei", "统计"),
+  makeExamVocabulary("exam-n2-ketsuron", "N2", "結論", "けつろん", "ketsuron", "结论"),
+  makeExamVocabulary("exam-n2-konkyo", "N2", "根拠", "こんきょ", "konkyo", "根据 / 依据"),
+  makeExamVocabulary("exam-n2-shuchou", "N2", "主張", "しゅちょう", "shuchou", "主张"),
+  makeExamVocabulary("exam-n2-hihan", "N2", "批判", "ひはん", "hihan", "批判"),
+  makeExamVocabulary("exam-n2-hyouka", "N2", "評価", "ひょうか", "hyouka", "评价"),
+  makeExamVocabulary("exam-n2-juyou", "N2", "需要", "じゅよう", "juyou", "需求"),
+  makeExamVocabulary("exam-n2-kyoukyuu", "N2", "供給", "きょうきゅう", "kyoukyuu", "供给"),
+  makeExamVocabulary("exam-n2-kakaku", "N2", "価格", "かかく", "kakaku", "价格"),
+  makeExamVocabulary("exam-n2-rieki", "N2", "利益", "りえき", "rieki", "利益"),
+  makeExamVocabulary("exam-n2-hiyou", "N2", "費用", "ひよう", "hiyou", "费用"),
+  makeExamVocabulary("exam-n2-keiyaku", "N2", "契約", "けいやく", "keiyaku", "合同 / 契约"),
+  makeExamVocabulary("exam-n2-jouken", "N2", "条件", "じょうけん", "jouken", "条件"),
+  makeExamVocabulary("exam-n2-shinsei", "N2", "申請", "しんせい", "shinsei", "申请"),
+  makeExamVocabulary("exam-n2-kyoka", "N2", "許可", "きょか", "kyoka", "许可"),
+  makeExamVocabulary("exam-n2-shikaku", "N2", "資格", "しかく", "shikaku", "资格"),
+  makeExamVocabulary("exam-n2-sekinin", "N2", "責任", "せきにん", "sekinin", "责任"),
+  makeExamVocabulary("exam-n2-gimu", "N2", "義務", "ぎむ", "gimu", "义务"),
+  makeExamVocabulary("exam-n2-kenri", "N2", "権利", "けんり", "kenri", "权利"),
+  makeExamVocabulary("exam-n2-soshiki", "N2", "組織", "そしき", "soshiki", "组织"),
+  makeExamVocabulary("exam-n2-busho", "N2", "部署", "ぶしょ", "busho", "部门"),
+  makeExamVocabulary("exam-n2-houshin", "N2", "方針", "ほうしん", "houshin", "方针"),
+  makeExamVocabulary("exam-n2-senryaku", "N2", "戦略", "せんりゃく", "senryaku", "战略"),
+  makeExamVocabulary("exam-n2-kaizen", "N2", "改善", "かいぜん", "kaizen", "改善"),
+  makeExamVocabulary("exam-n2-kaiketsu", "N2", "解決", "かいけつ", "kaiketsu", "解决"),
+  makeExamVocabulary("exam-n2-koushou", "N2", "交渉", "こうしょう", "koushou", "交涉 / 谈判"),
+  makeExamVocabulary("exam-n2-eikyou", "N2", "影響", "えいきょう", "eikyou", "影响"),
+  makeExamVocabulary("exam-n2-henka", "N2", "変化", "へんか", "henka", "变化"),
+  makeExamVocabulary("exam-n2-hatten", "N2", "発展", "はってん", "hatten", "发展"),
+  makeExamVocabulary("exam-n2-shinpo", "N2", "進歩", "しんぽ", "shinpo", "进步"),
+  makeExamVocabulary("exam-n2-ginou", "N2", "技能", "ぎのう", "ginou", "技能"),
+  makeExamVocabulary("exam-n2-senmon", "N2", "専門", "せんもん", "senmon", "专业"),
+  makeExamVocabulary("exam-n2-chishiki", "N2", "知識", "ちしき", "chishiki", "知识"),
+  makeExamVocabulary("exam-n2-nouryoku", "N2", "能力", "のうりょく", "nouryoku", "能力"),
+  makeExamVocabulary("exam-n2-handan", "N2", "判断", "はんだん", "handan", "判断"),
+  makeExamVocabulary("exam-n2-sentaku", "N2", "選択", "せんたく", "sentaku", "选择"),
+  makeExamVocabulary("exam-n2-ninshiki", "N2", "認識", "にんしき", "ninshiki", "认识 / 认知"),
+  makeExamVocabulary("exam-n2-ishiki", "N2", "意識", "いしき", "ishiki", "意识"),
+  makeExamVocabulary("exam-n2-kankaku", "N2", "感覚", "かんかく", "kankaku", "感觉"),
+  makeExamVocabulary("exam-n2-taido", "N2", "態度", "たいど", "taido", "态度"),
+  makeExamVocabulary("exam-n2-koudou", "N2", "行動", "こうどう", "koudou", "行动"),
+  makeExamVocabulary("exam-n2-sanka", "N2", "参加", "さんか", "sanka", "参加"),
+  makeExamVocabulary("exam-n2-kouken", "N2", "貢献", "こうけん", "kouken", "贡献"),
+  makeExamVocabulary("exam-n2-kyougi", "N2", "協議", "きょうぎ", "kyougi", "协商 / 协议"),
+  makeExamVocabulary("exam-n2-houkoku", "N2", "報告", "ほうこく", "houkoku", "报告"),
+  makeExamVocabulary("exam-n2-renkei", "N2", "連携", "れんけい", "renkei", "协作 / 联动"),
+  makeExamVocabulary("exam-n2-kanri", "N2", "管理", "かんり", "kanri", "管理"),
+  makeExamVocabulary("exam-n2-seigen", "N2", "制限", "せいげん", "seigen", "限制"),
+  makeExamVocabulary("exam-n2-kinshi", "N2", "禁止", "きんし", "kinshi", "禁止"),
+  makeExamVocabulary("exam-n2-suisen", "N2", "推薦", "すいせん", "suisen", "推荐"),
+  makeExamVocabulary("exam-n2-tekiyou", "N2", "適用", "てきよう", "tekiyou", "适用 / 应用"),
+  makeExamVocabulary("exam-n2-henkou", "N2", "変更", "へんこう", "henkou", "变更"),
+  makeExamVocabulary("exam-n2-iji", "N2", "維持", "いじ", "iji", "维持"),
+
+  makeExamVocabulary("exam-n1-gainen", "N1", "概念", "がいねん", "gainen", "概念"),
+  makeExamVocabulary("exam-n1-honshitsu", "N1", "本質", "ほんしつ", "honshitsu", "本质"),
+  makeExamVocabulary("exam-n1-youshi", "N1", "要旨", "ようし", "youshi", "要旨 / 大意"),
+  makeExamVocabulary("exam-n1-ronri", "N1", "論理", "ろんり", "ronri", "逻辑"),
+  makeExamVocabulary("exam-n1-kasetsu", "N1", "仮説", "かせつ", "kasetsu", "假说"),
+  makeExamVocabulary("exam-n1-kenshou", "N1", "検証", "けんしょう", "kenshou", "验证"),
+  makeExamVocabulary("exam-n1-kousatsu", "N1", "考察", "こうさつ", "kousatsu", "考察 / 分析"),
+  makeExamVocabulary("exam-n1-suiron", "N1", "推論", "すいろん", "suiron", "推论"),
+  makeExamVocabulary("exam-n1-mujun", "N1", "矛盾", "むじゅん", "mujun", "矛盾"),
+  makeExamVocabulary("exam-n1-datou", "N1", "妥当", "だとう", "datou", "妥当 / 合理"),
+  makeExamVocabulary("exam-n1-kyakkan", "N1", "客観", "きゃっかん", "kyakkan", "客观"),
+  makeExamVocabulary("exam-n1-shukan", "N1", "主観", "しゅかん", "shukan", "主观"),
+  makeExamVocabulary("exam-n1-fuhen", "N1", "普遍", "ふへん", "fuhen", "普遍"),
+  makeExamVocabulary("exam-n1-tokushu", "N1", "特殊", "とくしゅ", "tokushu", "特殊"),
+  makeExamVocabulary("exam-n1-chuushutsu", "N1", "抽出", "ちゅうしゅつ", "chuushutsu", "抽出 / 提取"),
+  makeExamVocabulary("exam-n1-taikei", "N1", "体系", "たいけい", "taikei", "体系"),
+  makeExamVocabulary("exam-n1-kouzou", "N1", "構造", "こうぞう", "kouzou", "结构"),
+  makeExamVocabulary("exam-n1-kinou", "N1", "機能", "きのう", "kinou", "功能"),
+  makeExamVocabulary("exam-n1-sougo", "N1", "相互", "そうご", "sougo", "相互"),
+  makeExamVocabulary("exam-n1-izon", "N1", "依存", "いぞん", "izon", "依赖"),
+  makeExamVocabulary("exam-n1-hensen", "N1", "変遷", "へんせん", "hensen", "变迁"),
+  makeExamVocabulary("exam-n1-katei", "N1", "過程", "かてい", "katei", "过程"),
+  makeExamVocabulary("exam-n1-haikei", "N1", "背景", "はいけい", "haikei", "背景"),
+  makeExamVocabulary("exam-n1-bunmyaku", "N1", "文脈", "ぶんみゃく", "bunmyaku", "语境 / 上下文"),
+  makeExamVocabulary("exam-n1-shouchou", "N1", "象徴", "しょうちょう", "shouchou", "象征"),
+  makeExamVocabulary("exam-n1-kainyuu", "N1", "介入", "かいにゅう", "kainyuu", "介入"),
+  makeExamVocabulary("exam-n1-choutei", "N1", "調停", "ちょうてい", "choutei", "调停"),
+  makeExamVocabulary("exam-n1-yokusei", "N1", "抑制", "よくせい", "yokusei", "抑制"),
+  makeExamVocabulary("exam-n1-sokushin", "N1", "促進", "そくしん", "sokushin", "促进"),
+  makeExamVocabulary("exam-n1-zesei", "N1", "是正", "ぜせい", "zesei", "纠正"),
+  makeExamVocabulary("exam-n1-tekkai", "N1", "撤回", "てっかい", "tekkai", "撤回"),
+  makeExamVocabulary("exam-n1-jouho", "N1", "譲歩", "じょうほ", "jouho", "让步"),
+  makeExamVocabulary("exam-n1-dakyou", "N1", "妥協", "だきょう", "dakyou", "妥协"),
+  makeExamVocabulary("exam-n1-goui", "N1", "合意", "ごうい", "goui", "达成一致 / 合意"),
+  makeExamVocabulary("exam-n1-tairitsu", "N1", "対立", "たいりつ", "tairitsu", "对立"),
+  makeExamVocabulary("exam-n1-funsou", "N1", "紛争", "ふんそう", "funsou", "纷争 / 争端"),
+  makeExamVocabulary("exam-n1-chitsujo", "N1", "秩序", "ちつじょ", "chitsujo", "秩序"),
+  makeExamVocabulary("exam-n1-kihan", "N1", "規範", "きはん", "kihan", "规范"),
+  makeExamVocabulary("exam-n1-rinri", "N1", "倫理", "りんり", "rinri", "伦理"),
+  makeExamVocabulary("exam-n1-zaisei", "N1", "財政", "ざいせい", "zaisei", "财政"),
+  makeExamVocabulary("exam-n1-kinyuu", "N1", "金融", "きんゆう", "kinyuu", "金融"),
+  makeExamVocabulary("exam-n1-shijou", "N1", "市場", "しじょう", "shijou", "市场"),
+  makeExamVocabulary("exam-n1-keiki", "N1", "景気", "けいき", "keiki", "经济景气 / 行情"),
+  makeExamVocabulary("exam-n1-kakusa", "N1", "格差", "かくさ", "kakusa", "差距"),
+  makeExamVocabulary("exam-n1-koyou", "N1", "雇用", "こよう", "koyou", "雇用"),
+  makeExamVocabulary("exam-n1-hoshou", "N1", "保障", "ほしょう", "hoshou", "保障"),
+  makeExamVocabulary("exam-n1-fukushi", "N1", "福祉", "ふくし", "fukushi", "福利 / 社会福祉"),
+  makeExamVocabulary("exam-n1-kankyouhakai", "N1", "環境破壊", "かんきょうはかい", "kankyou hakai", "环境破坏"),
+  makeExamVocabulary("exam-n1-jizokukanou", "N1", "持続可能", "じぞくかのう", "jizoku kanou", "可持续"),
+  makeExamVocabulary("exam-n1-shihon", "N1", "資本", "しほん", "shihon", "资本"),
+  makeExamVocabulary("exam-n1-toushi", "N1", "投資", "とうし", "toushi", "投资"),
+  makeExamVocabulary("exam-n1-shuueki", "N1", "収益", "しゅうえき", "shuueki", "收益"),
+  makeExamVocabulary("exam-n1-sonshitsu", "N1", "損失", "そんしつ", "sonshitsu", "损失"),
+  makeExamVocabulary("exam-n1-hatan", "N1", "破綻", "はたん", "hatan", "破产 / 崩溃"),
+  makeExamVocabulary("exam-n1-saiken", "N1", "再建", "さいけん", "saiken", "重建"),
+  makeExamVocabulary("exam-n1-kakushin", "N1", "革新", "かくしん", "kakushin", "革新"),
+  makeExamVocabulary("exam-n1-sentan", "N1", "先端", "せんたん", "sentan", "尖端 / 前沿"),
+  makeExamVocabulary("exam-n1-chinou", "N1", "知能", "ちのう", "chinou", "智能 / 智力"),
+  makeExamVocabulary("exam-n1-rinrikan", "N1", "倫理観", "りんりかん", "rinrikan", "伦理观"),
+  makeExamVocabulary("exam-n1-juunan", "N1", "柔軟", "じゅうなん", "juunan", "灵活 / 柔软"),
+];
+
+export const vocabulary: VocabularyItem[] = [...coreVocabulary, ...expandedVocabulary, ...n3Vocabulary, ...examVocabulary].map((word, index) => ({
   sortOrder: word.sortOrder ?? index + 1,
   ...word,
 }));

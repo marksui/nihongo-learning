@@ -3,7 +3,7 @@ import { dialogues } from "./dialogues";
 import { grammarLessons } from "./grammar";
 import { kanaGroups, kanaItems } from "./kana";
 import { numberSceneExamples } from "./numbers";
-import { vocabulary } from "./vocabulary";
+import { getVocabularyJlptLevel, vocabulary, type JlptVocabularyLevel } from "./vocabulary";
 
 export interface LearningPathStep {
   id: string;
@@ -140,9 +140,10 @@ const getDayIndex = (date = new Date()) => {
 const pickMany = <T,>(items: T[], start: number, count: number) =>
   Array.from({ length: count }, (_, index) => items[(start + index) % items.length]).filter(Boolean);
 
-export const getTodaySuggestion = (date = new Date()): TodaySuggestion => {
+export const getTodaySuggestion = (date = new Date(), targetLevel: JlptVocabularyLevel = "N5"): TodaySuggestion => {
   const dayIndex = getDayIndex(date);
   const kanaGroup = kanaGroups[dayIndex % kanaGroups.length];
+  const targetVocabulary = vocabulary.filter((word) => getVocabularyJlptLevel(word) === targetLevel);
   const kanaPreview = kanaItems
     .filter((item) => item.group === kanaGroup)
     .slice(0, 6)
@@ -152,7 +153,7 @@ export const getTodaySuggestion = (date = new Date()): TodaySuggestion => {
   return {
     kanaGroup,
     kanaPreview,
-    words: pickMany(vocabulary, dayIndex * 5, 5),
+    words: pickMany(targetVocabulary.length ? targetVocabulary : vocabulary, dayIndex * 5, 5),
     grammar: grammarLessons[dayIndex % grammarLessons.length],
     dialogue: dialogues[dayIndex % dialogues.length],
     numberScene: numberSceneExamples[dayIndex % numberSceneExamples.length],

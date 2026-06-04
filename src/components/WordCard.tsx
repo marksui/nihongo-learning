@@ -1,6 +1,6 @@
 import { CheckCircle2, Clock3, MessageCircle } from "lucide-react";
 import { useState } from "react";
-import type { VocabularyItem } from "../data/vocabulary";
+import { getVocabularyJlptLevel, type VocabularyItem } from "../data/vocabulary";
 import { isContentCompleted, markContentCompleted, readLearningProgress, recordSeenContent } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 import FoodIllustration from "./FoodIllustration";
@@ -41,6 +41,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
 
   const wordActive = activeTarget === "word";
   const sentenceActive = activeTarget === "sentence";
+  const jlptLevel = getVocabularyJlptLevel(word);
 
   return (
     <LearningCard
@@ -55,11 +56,9 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
               <p className="w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-bold text-ink/68">
                 {word.category}
               </p>
-              {word.level ? (
-                <p className="w-fit rounded-md bg-sora/12 px-2 py-1 text-xs font-extrabold text-sora">
-                  {word.level}
-                </p>
-              ) : null}
+              <p className="w-fit rounded-md bg-sora/12 px-2 py-1 text-xs font-extrabold text-sora">
+                {jlptLevel}
+              </p>
               <p
                 className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
                   studyState.completed

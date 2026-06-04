@@ -1,6 +1,6 @@
 # 中文学日语
 
-面向中文母语者的零基础到 JLPT N3 入门学习网站，使用 React + TypeScript + Vite + Tailwind CSS 构建。内容目前全部来自本地 TypeScript 数据文件，无需后端或付费 API。
+面向中文母语者的零基础到 JLPT N1 备考学习网站，使用 React + TypeScript + Vite + Tailwind CSS 构建。内容目前全部来自本地 TypeScript 数据文件，无需后端或付费 API。
 
 GitHub Pages: https://marksui.github.io/nihongo-learning/
 
@@ -8,7 +8,8 @@ GitHub Pages: https://marksui.github.io/nihongo-learning/
 
 - 五十音图：平假名、片假名、romaji、例词和中文意思。
 - 数字读法：复杂数字、价格、日期、人数、年龄、楼层和电话号码的读法速查。
-- 常用单词：26 个分类、361 个入门到 N3 核心词、例句、中文翻译和发音按钮；食物、水果、蔬菜配插图。
+- 常用单词：27 个分类、481 个入门到 N1 核心词和考试词，支持 N5 / N4 / N3 / N2 / N1 等级筛选、例句、中文翻译和发音按钮；食物、水果、蔬菜配插图。
+- 首页仪表盘：纸面风格学习插画、JLPT 目标等级选择、今日内容预览、5 个任务进度、任务预听、继续学习和最近复习。
 - 罗马音读音会按音节加空格显示，例如 `ichi` 显示为 `i chi`。
 - 基础语法：25 个初级句型，包含中文讲解、例句和中文母语者常见误区。
 - 日常会话：63 个场景对话，支持情景筛选、单句播放和整段播放。

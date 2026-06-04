@@ -20,15 +20,17 @@ import {
   Target,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import JlptLevelSelector from "../components/JlptLevelSelector";
 import LearningCard from "../components/LearningCard";
 import PageHero from "../components/PageHero";
 import SpeakButton from "../components/SpeakButton";
+import homeStudyScene from "../assets/home-study-scene.jpg";
 import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
 import { getTodaySuggestion, learningGoals, learningMilestones, learningPathSteps } from "../data/learningPath";
 import { numberExamples } from "../data/numbers";
-import { vocabulary } from "../data/vocabulary";
+import { getVocabularyJlptLevel, jlptVocabularyLevels, vocabulary, type JlptVocabularyLevel } from "../data/vocabulary";
 import type { PageKey } from "../components/Navbar";
 import {
   getDailyCompletionStats,
@@ -39,6 +41,7 @@ import {
   markTodaySuggestionDone,
   readLearningProgress,
   recordSeenContent,
+  setTargetJlptLevel,
   type TodayTaskKey,
   type TodayTaskProgress,
 } from "../utils/progress";
@@ -55,6 +58,17 @@ interface FeatureCard {
   metric: string;
   accent: string;
   icon: LucideIcon;
+}
+
+interface HomePreviewItem {
+  key: TodayTaskKey;
+  label: string;
+  title: string;
+  page: PageKey;
+  japanese: string;
+  reading: string;
+  meaning: string;
+  speakText: string;
 }
 
 const goalIcons: Record<string, LucideIcon> = {
@@ -111,8 +125,8 @@ const featureCards: FeatureCard[] = [
   {
     title: "常用单词",
     page: "vocabulary",
-    description: "入门到 N3，按场景找词。",
-    metric: `${vocabulary.length} 个核心词`,
+    description: "入门到 N1，按场景和等级找词。",
+    metric: `${vocabulary.length} 个核心/考试词`,
     accent: "bg-sakura",
     icon: BookOpen,
   },
@@ -151,13 +165,78 @@ const featureCards: FeatureCard[] = [
 ];
 
 const Home = ({ onNavigate, onSpeak }: HomeProps) => {
-  const today = useMemo(() => getTodaySuggestion(), []);
   const [progress, setProgress] = useState(() => readLearningProgress());
-  const [activeTodayNumber, setActiveTodayNumber] = useState(false);
+  const [activeTodayTaskKey, setActiveTodayTaskKey] = useState<TodayTaskKey | null>(null);
+  const [activeHeroPreviewKey, setActiveHeroPreviewKey] = useState<TodayTaskKey>("kana");
+  const targetLevel = progress.targetJlptLevel;
+  const today = useMemo(() => getTodaySuggestion(new Date(), targetLevel), [targetLevel]);
+  const targetLevelCounts = useMemo(() => {
+    return jlptVocabularyLevels.reduce<Record<JlptVocabularyLevel, number>>((counts, level) => {
+      counts[level] = vocabulary.filter((word) => getVocabularyJlptLevel(word) === level).length;
+      return counts;
+    }, {} as Record<JlptVocabularyLevel, number>);
+  }, []);
+  const targetLevelCount = targetLevelCounts[targetLevel] ?? 0;
   const todayTaskStats = getTodayTaskStats(progress, today);
   const todayTasks = todayTaskStats.tasks;
   const todayContentIds = todayTasks.flatMap((task) => task.contentIds);
   const todayFullyDone = todayTaskStats.completedTasks === todayTaskStats.totalTasks;
+  const previewWord = today.words[0] ?? vocabulary[0];
+  const previewGrammarExample = today.grammar.examples[0];
+  const previewDialogueLine = today.dialogue.lines.find((line) => line.speaker === today.dialogue.practiceSpeaker) ?? today.dialogue.lines[0];
+  const heroPreviewItems = useMemo(() => ({
+    kana: {
+      key: "kana",
+      label: "假名",
+      title: today.kanaGroup,
+      page: "kana",
+      japanese: today.kanaPreview,
+      reading: today.kanaPreview,
+      meaning: "今天先把这一组假名读顺。",
+      speakText: today.kanaPreview.replace(/\s+/g, "、"),
+    },
+    words: {
+      key: "words",
+      label: "单词",
+      title: previewWord?.japanese ?? "日本語",
+      page: "vocabulary",
+      japanese: previewWord?.japanese ?? "日本語",
+      reading: previewWord?.kana ?? "にほんご",
+      meaning: previewWord?.meaning ?? "日语",
+      speakText: previewWord?.audioText ?? previewWord?.japanese ?? "日本語",
+    },
+    grammar: {
+      key: "grammar",
+      label: "句型",
+      title: today.grammar.title,
+      page: "grammar",
+      japanese: previewGrammarExample?.japanese ?? today.grammar.pattern,
+      reading: previewGrammarExample?.kana ?? today.grammar.patternKana,
+      meaning: previewGrammarExample?.translation ?? today.grammar.explanation,
+      speakText: previewGrammarExample?.japanese ?? today.grammar.audioText ?? today.grammar.pattern,
+    },
+    number: {
+      key: "number",
+      label: "数字",
+      title: today.numberScene.title,
+      page: "numbers",
+      japanese: today.numberScene.japanese,
+      reading: today.numberScene.kana,
+      meaning: today.numberScene.meaning,
+      speakText: today.numberScene.audioText ?? today.numberScene.japanese,
+    },
+    dialogue: {
+      key: "dialogue",
+      label: "会话",
+      title: today.dialogue.title,
+      page: "conversation",
+      japanese: previewDialogueLine?.japanese ?? today.dialogue.title,
+      reading: previewDialogueLine?.kana ?? today.dialogue.situation,
+      meaning: previewDialogueLine?.translation ?? today.dialogue.situation,
+      speakText: previewDialogueLine?.audioText ?? previewDialogueLine?.japanese ?? today.dialogue.title,
+    },
+  }) satisfies Record<TodayTaskKey, HomePreviewItem>, [previewDialogueLine, previewGrammarExample, previewWord, today]);
+  const activeHeroPreview = heroPreviewItems[activeHeroPreviewKey];
   const todayTaskMeta = useMemo(() => ({
     kana: {
       title: "假名热身",
@@ -166,6 +245,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       description: `${today.kanaGroup}：${today.kanaPreview}`,
       preview: "先把今天这行读顺。",
       cta: "去看假名",
+      speakText: today.kanaPreview.replace(/\s+/g, "、"),
     },
     words: {
       title: "五个单词",
@@ -174,6 +254,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       description: today.words.map((word) => word.japanese).join(" / "),
       preview: "听单词，再看中文意思。",
       cta: "去看单词",
+      speakText: today.words.map((word) => word.audioText ?? word.japanese).join("、"),
     },
     grammar: {
       title: today.grammar.title,
@@ -182,6 +263,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       description: today.grammar.pattern,
       preview: "读一个句型和例句。",
       cta: "去学句型",
+      speakText: today.grammar.examples[0]?.japanese ?? today.grammar.audioText ?? today.grammar.pattern,
     },
     number: {
       title: today.numberScene.title,
@@ -190,6 +272,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       description: today.numberScene.highlight,
       preview: today.numberScene.situation,
       cta: "去听数字",
+      speakText: today.numberScene.audioText ?? today.numberScene.japanese,
     },
     dialogue: {
       title: today.dialogue.title,
@@ -198,6 +281,10 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       description: today.dialogue.situation,
       preview: `你说：${today.dialogue.practiceSpeaker}`,
       cta: "去练会话",
+      speakText: today.dialogue.lines
+        .filter((line) => line.speaker === today.dialogue.practiceSpeaker)
+        .map((line) => line.audioText ?? line.japanese)
+        .join("、") || today.dialogue.lines[0]?.japanese || today.dialogue.title,
     },
   }) satisfies Record<TodayTaskKey, {
     title: string;
@@ -206,6 +293,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     description: string;
     preview: string;
     cta: string;
+    speakText: string;
   }>, [today]);
   const nextTodayTask = todayTaskStats.nextTask;
   const nextTodayTaskMeta = nextTodayTask ? todayTaskMeta[nextTodayTask.key] : undefined;
@@ -273,12 +361,32 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     );
   };
 
-  const playTodayNumber = async () => {
-    setActiveTodayNumber(true);
-    setProgress(recordSeenContent(`number:${today.numberScene.id}`));
-    const ok = await onSpeak(today.numberScene.audioText ?? today.numberScene.japanese);
-    window.setTimeout(() => setActiveTodayNumber(false), ok ? 360 : 900);
+  const chooseTargetLevel = (level: JlptVocabularyLevel) => {
+    setProgress(setTargetJlptLevel(level));
+    setActiveHeroPreviewKey("words");
   };
+
+  const playTodayTask = async (task: TodayTaskProgress) => {
+    const meta = todayTaskMeta[task.key];
+
+    setActiveTodayTaskKey(task.key);
+    setProgress(recordSeenContent(task.contentIds));
+    const ok = await onSpeak(meta.speakText);
+    window.setTimeout(() => {
+      setActiveTodayTaskKey((current) => (current === task.key ? null : current));
+    }, ok ? 360 : 900);
+  };
+
+  const playHeroPreview = async () => {
+    const task = todayTasks.find((item) => item.key === activeHeroPreview.key);
+
+    if (task) {
+      setProgress(recordSeenContent(task.contentIds));
+    }
+
+    return onSpeak(activeHeroPreview.speakText);
+  };
+  const ActivePreviewIcon = todayTaskIcons[activeHeroPreview.key];
 
   return (
     <div className="space-y-7">
@@ -297,23 +405,139 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           <>
             <button
               type="button"
-              onClick={() => onNavigate("kana")}
+              onClick={() => onNavigate(continuePage)}
               className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-matcha px-4 py-2 font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-95"
             >
-              开始学五十音
+              {continueCta}
               <ArrowRight aria-hidden="true" size={18} />
             </button>
-            <button
-              type="button"
-              onClick={() => onNavigate("conversation")}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-rice/65 px-4 py-2 font-extrabold text-ink transition hover:bg-yuzu/20 active:scale-95"
+            <SpeakButton
+              ariaLabel={`播放今日预览 ${activeHeroPreview.title}`}
+              iconOnly={false}
+              onClick={playHeroPreview}
+              title="播放今日预览"
+              variant="soft"
             >
-              进入会话
-              <MessagesSquare aria-hidden="true" size={18} />
-            </button>
+              听今日预览
+            </SpeakButton>
           </>
         }
+        media={
+          <div className="overflow-hidden rounded-md border border-ink/8 bg-rice/45">
+            <div className="relative aspect-[4/3] min-h-[18rem] overflow-hidden sm:aspect-[16/10] lg:h-full">
+              <img
+                src={homeStudyScene}
+                alt="日语学习桌面插画"
+                className="h-full w-full object-cover"
+                loading="eager"
+              />
+              <div className="absolute inset-x-3 bottom-3 rounded-md border border-paper/70 bg-paper/90 p-3 shadow-card backdrop-blur">
+                <div className="mb-2 flex items-start justify-between gap-3">
+                  <div className="flex min-w-0 items-start gap-2">
+                    <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${todayTaskAccentClasses[activeHeroPreview.key]} shadow-card`}>
+                      <ActivePreviewIcon aria-hidden="true" size={18} />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-xs font-extrabold text-ink/52">今日预览 · {activeHeroPreview.label}</p>
+                      <p className="mt-0.5 truncate font-japanese text-xl font-extrabold text-ink">
+                        {activeHeroPreview.japanese}
+                      </p>
+                      <p className="truncate text-xs font-bold text-ink/58">{activeHeroPreview.reading}</p>
+                    </div>
+                  </div>
+                  <SpeakButton
+                    ariaLabel={`播放 ${activeHeroPreview.japanese}`}
+                    className="h-10 w-10"
+                    onClick={playHeroPreview}
+                    title="播放预览"
+                    variant="light"
+                  />
+                </div>
+                <p className="line-clamp-2 text-sm leading-6 text-ink/68">{activeHeroPreview.meaning}</p>
+                <div className="mt-3 grid grid-cols-5 gap-1.5">
+                  {Object.values(heroPreviewItems).map((item) => {
+                    const selected = item.key === activeHeroPreviewKey;
+                    const Icon = todayTaskIcons[item.key];
+
+                    return (
+                      <button
+                        key={item.key}
+                        type="button"
+                        onClick={() => setActiveHeroPreviewKey(item.key)}
+                        className={`grid min-h-10 cursor-pointer place-items-center rounded-md border text-xs font-extrabold transition active:scale-95 ${
+                          selected
+                            ? "border-matcha bg-matcha text-white shadow-card"
+                            : "border-ink/8 bg-rice/70 text-ink/58 hover:border-yuzu/35 hover:bg-yuzu/18 hover:text-ink"
+                        }`}
+                        aria-pressed={selected}
+                        title={item.label}
+                      >
+                        <Icon aria-hidden="true" size={15} />
+                        <span className="mt-0.5">{item.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        }
       />
+
+      <section className="rounded-lg border border-ink/8 bg-paper/92 p-4 shadow-card">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-center">
+          <div>
+            <p className="text-sm font-extrabold text-sumire">学习目标</p>
+            <h2 className="font-display text-2xl font-extrabold text-ink">今天练 {targetLevel}</h2>
+            <p className="mt-1 text-sm leading-6 text-ink/62">
+              目标会保存在本地，今日单词和单词页筛选都会跟着走。
+            </p>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <div className="rounded-md border border-sumire/14 bg-sumire/8 px-3 py-2">
+                <p className="text-xs font-bold text-ink/52">当前词库</p>
+                <p className="mt-1 text-lg font-extrabold leading-tight text-sumire">
+                  {targetLevelCount}
+                  <span className="ml-1 text-sm font-bold text-sumire/70">词</span>
+                </p>
+              </div>
+              <div className="rounded-md border border-matcha/18 bg-matcha/8 px-3 py-2">
+                <p className="text-xs font-bold text-ink/52">今日单词</p>
+                <p className="mt-1 text-lg font-extrabold leading-tight text-matcha">
+                  {today.words.length}
+                  <span className="ml-1 text-sm font-bold text-matcha/70">个</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="min-w-0">
+            <JlptLevelSelector
+              active={targetLevel}
+              counts={targetLevelCounts}
+              levels={jlptVocabularyLevels}
+              onChange={chooseTargetLevel}
+            />
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => onNavigate("vocabulary")}
+                className="flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-md bg-sumire px-3 py-2 text-sm font-extrabold text-white shadow-card transition hover:bg-sumire/90 active:scale-95"
+              >
+                查看 {targetLevel} 单词
+                <ArrowRight aria-hidden="true" size={15} />
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveHeroPreviewKey("words")}
+                className="flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-md border border-ink/10 bg-paper px-3 py-2 text-sm font-extrabold text-ink/68 transition hover:border-yuzu/35 hover:bg-yuzu/18 hover:text-ink active:scale-95"
+              >
+                看今日单词
+                <BookOpen aria-hidden="true" size={15} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section>
         <div className="mb-3">
@@ -389,7 +613,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                       ? `${task.seenCount}/${task.totalCount} 已听`
                       : "待开始";
               const StatusIcon = task.completed ? CheckCircle2 : taskStarted ? Clock3 : Circle;
-              const isNumberTask = task.key === "number";
 
               return (
                 <div
@@ -426,16 +649,14 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                       <span className="mt-1 block break-words text-sm leading-6 text-ink/64">{meta.description}</span>
                       <span className="mt-1 block truncate text-xs font-bold text-ink/46">{meta.preview}</span>
                     </button>
-                    {isNumberTask ? (
-                      <SpeakButton
-                        active={activeTodayNumber}
-                        ariaLabel={`朗读数字整句 ${today.numberScene.title}`}
-                        className="h-10 w-10"
-                        onClick={playTodayNumber}
-                        title="朗读整句"
-                        variant="light"
-                      />
-                    ) : null}
+                    <SpeakButton
+                      active={activeTodayTaskKey === task.key}
+                      ariaLabel={`预听 ${meta.title}`}
+                      className="h-10 w-10"
+                      onClick={() => playTodayTask(task)}
+                      title="预听"
+                      variant="light"
+                    />
                   </div>
                   <div className="mt-3 grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
                     <button

@@ -1,5 +1,6 @@
 import type { PageKey } from "../components/Navbar";
 import type { TodaySuggestion } from "../data/learningPath";
+import { jlptVocabularyLevels, type JlptVocabularyLevel } from "../data/vocabulary";
 
 export interface LearningProgress {
   viewedPages: PageKey[];
@@ -8,6 +9,7 @@ export interface LearningProgress {
   seenContentIds: string[];
   completedContentIds: string[];
   lastStudiedAtByContentId: Record<string, string>;
+  targetJlptLevel: JlptVocabularyLevel;
   updatedAt: string;
 }
 
@@ -43,6 +45,7 @@ const emptyProgress = (): LearningProgress => ({
   seenContentIds: [],
   completedContentIds: [],
   lastStudiedAtByContentId: {},
+  targetJlptLevel: "N5",
   updatedAt: new Date().toISOString(),
 });
 
@@ -64,6 +67,11 @@ const readStringRecord = (value: unknown): Record<string, string> => {
       .slice(0, 500),
   );
 };
+
+const readTargetJlptLevel = (value: unknown): JlptVocabularyLevel =>
+  typeof value === "string" && (jlptVocabularyLevels as readonly string[]).includes(value)
+    ? value as JlptVocabularyLevel
+    : "N5";
 
 const touchContentIds = (
   current: Record<string, string>,
@@ -95,6 +103,7 @@ export const readLearningProgress = (): LearningProgress => {
         ? parsed.completedContentIds.filter(Boolean).slice(0, 500)
         : [],
       lastStudiedAtByContentId: readStringRecord(parsed.lastStudiedAtByContentId),
+      targetJlptLevel: readTargetJlptLevel(parsed.targetJlptLevel),
       updatedAt: typeof parsed.updatedAt === "string" ? parsed.updatedAt : new Date().toISOString(),
     };
   } catch {
@@ -202,6 +211,18 @@ export const recordSeenContent = (contentIds: string | string[]) => {
     seenContentIds: Array.from(new Set([...ids, ...progress.seenContentIds])).slice(0, 500),
     lastStudiedAtByContentId: touchContentIds(progress.lastStudiedAtByContentId, ids, timestamp),
     updatedAt: timestamp,
+  };
+
+  writeLearningProgress(nextProgress);
+  return nextProgress;
+};
+
+export const setTargetJlptLevel = (level: JlptVocabularyLevel) => {
+  const progress = readLearningProgress();
+  const nextProgress = {
+    ...progress,
+    targetJlptLevel: level,
+    updatedAt: new Date().toISOString(),
   };
 
   writeLearningProgress(nextProgress);
