@@ -26,6 +26,20 @@ export interface NumberExample {
   audioText?: string;
 }
 
+export interface NumberSceneExample {
+  id: string;
+  group: NumberGroup;
+  title: string;
+  situation: string;
+  highlight: string;
+  japanese: string;
+  kana: string;
+  romaji: string;
+  meaning: string;
+  audioText?: string;
+  tags?: string[];
+}
+
 const coreNumberExamples: NumberExample[] = [
   { id: "zero", group: "基础数字", display: "0", japanese: "ゼロ", kana: "ぜろ", romaji: "zero", meaning: "零", note: "也可读 れい，多用于编号、温度等。" },
   { id: "one", group: "基础数字", display: "1", japanese: "一", kana: "いち", romaji: "ichi", meaning: "一" },
@@ -117,3 +131,110 @@ export const numberExamples: NumberExample[] = [...coreNumberExamples, ...expand
   sortOrder: item.sortOrder ?? index + 1,
   ...item,
 }));
+
+export const numberSceneExamples: NumberSceneExample[] = [
+  {
+    id: "scene-price",
+    group: "价格金额",
+    title: "便利店结账",
+    situation: "看见价格时这样确认",
+    highlight: "3,980円",
+    japanese: "これは三千九百八十円です。",
+    kana: "これはさんぜんきゅうひゃくはちじゅうえんです。",
+    romaji: "kore wa sanzen kyuuhyaku hachijuu en desu",
+    meaning: "这是 3,980 日元。",
+    audioText: "これはさんぜんきゅうひゃくはちじゅうえんです。",
+    tags: ["购物", "价格"],
+  },
+  {
+    id: "scene-time",
+    group: "日期时间",
+    title: "约见面时间",
+    situation: "确认几点见面",
+    highlight: "10:15",
+    japanese: "十時十五分に会いましょう。",
+    kana: "じゅうじじゅうごふんにあいましょう。",
+    romaji: "juuji juugo fun ni aimashou",
+    meaning: "十点十五分见吧。",
+    audioText: "じゅうじじゅうごふんにあいましょう。",
+    tags: ["时间", "会话"],
+  },
+  {
+    id: "scene-date",
+    group: "日期时间",
+    title: "预约日期",
+    situation: "登记预约日期",
+    highlight: "6月3日",
+    japanese: "予約は六月三日です。",
+    kana: "よやくはろくがつみっかです。",
+    romaji: "yoyaku wa roku gatsu mikka desu",
+    meaning: "预约是 6 月 3 日。",
+    audioText: "よやくはろくがつみっかです。",
+    tags: ["日期", "预约"],
+  },
+  {
+    id: "scene-people",
+    group: "人数年龄",
+    title: "餐厅人数",
+    situation: "进店说明几个人",
+    highlight: "4人",
+    japanese: "四人です。",
+    kana: "よにんです。",
+    romaji: "yonin desu",
+    meaning: "四个人。",
+    audioText: "よにんです。",
+    tags: ["人数", "餐饮"],
+  },
+  {
+    id: "scene-age",
+    group: "人数年龄",
+    title: "介绍年龄",
+    situation: "简单说自己的年龄",
+    highlight: "20歳",
+    japanese: "二十歳です。",
+    kana: "はたちです。",
+    romaji: "hatachi desu",
+    meaning: "二十岁。",
+    audioText: "はたちです。",
+    tags: ["年龄", "介绍"],
+  },
+  {
+    id: "scene-floor",
+    group: "楼层序号",
+    title: "找楼层",
+    situation: "问路或看指示牌",
+    highlight: "10階",
+    japanese: "十階に行きたいです。",
+    kana: "じゅっかいにいきたいです。",
+    romaji: "jukkai ni ikitai desu",
+    meaning: "我想去十楼。",
+    audioText: "じゅっかいにいきたいです。",
+    tags: ["楼层", "问路"],
+  },
+  {
+    id: "scene-phone",
+    group: "电话编号",
+    title: "报手机号",
+    situation: "电话预约或登记",
+    highlight: "080-1234-5678",
+    japanese: "電話番号はゼロ八ゼロ、一二三四、五六七八です。",
+    kana: "でんわばんごうはぜろはちぜろ、いちにさんよん、ごろくななはちです。",
+    romaji: "denwa bangou wa zero hachi zero ichi ni san yon go roku nana hachi desu",
+    meaning: "电话号码是 080-1234-5678。",
+    audioText: "でんわばんごうはぜろはちぜろ、いちにさんよん、ごろくななはちです。",
+    tags: ["电话", "预约"],
+  },
+  {
+    id: "scene-address",
+    group: "电话编号",
+    title: "地址数字",
+    situation: "地址里的数字逐段说",
+    highlight: "3-5-12",
+    japanese: "住所は三の五の十二です。",
+    kana: "じゅうしょはさんのごのじゅうにです。",
+    romaji: "juusho wa san no go no juuni desu",
+    meaning: "地址是 3-5-12。",
+    audioText: "じゅうしょはさんのごのじゅうにです。",
+    tags: ["地址", "编号"],
+  },
+];
