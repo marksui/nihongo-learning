@@ -20,7 +20,7 @@ import PageHero from "../components/PageHero";
 import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
-import { getTodaySuggestion, learningPathSteps } from "../data/learningPath";
+import { getTodaySuggestion, learningGoals, learningPathSteps } from "../data/learningPath";
 import { numberExamples } from "../data/numbers";
 import { vocabulary } from "../data/vocabulary";
 import type { PageKey } from "../components/Navbar";
@@ -39,33 +39,17 @@ interface FeatureCard {
   icon: LucideIcon;
 }
 
-interface GoalCard {
-  title: string;
-  description: string;
-  accent: string;
-  icon: LucideIcon;
-}
+const goalIcons: Record<string, LucideIcon> = {
+  read: Ear,
+  listen: Target,
+  speak: MessageCircle,
+};
 
-const goalCards: GoalCard[] = [
-  {
-    title: "看见就会读",
-    description: "假名、单词、句子都能直接点听，慢慢建立读音反应。",
-    accent: "bg-matcha",
-    icon: Ear,
-  },
-  {
-    title: "听见能跟上",
-    description: "用日语原句、假名读音和中文意思对照，听懂常见表达。",
-    accent: "bg-sora",
-    icon: Target,
-  },
-  {
-    title: "场景里能开口",
-    description: "从点餐、问路、购物到学校交流，一句一句练到能说。",
-    accent: "bg-sakura",
-    icon: MessageCircle,
-  },
-];
+const goalAccentClasses = {
+  matcha: "bg-matcha",
+  sora: "bg-sora",
+  sakura: "bg-sakura",
+} satisfies Record<(typeof learningGoals)[number]["tone"], string>;
 
 const featureCards: FeatureCard[] = [
   {
@@ -121,6 +105,7 @@ const featureCards: FeatureCard[] = [
 const Home = ({ onNavigate }: HomeProps) => {
   const today = useMemo(() => getTodaySuggestion(), []);
   const progress = useMemo(() => readLearningProgress(), []);
+  const goalsById = useMemo(() => new Map(learningGoals.map((goal) => [goal.id, goal])), []);
   const viewedPages = new Set(progress.viewedPages);
 
   return (
@@ -164,20 +149,27 @@ const Home = ({ onNavigate }: HomeProps) => {
           <h2 className="font-serif text-2xl font-bold text-ink sm:text-3xl">能听、能读、能开口</h2>
         </div>
         <div className="grid gap-3 md:grid-cols-3">
-          {goalCards.map((goal) => {
-            const Icon = goal.icon;
+          {learningGoals.map((goal) => {
+            const Icon = goalIcons[goal.id] ?? Target;
 
             return (
-              <LearningCard key={goal.title} className="p-4">
-                <div className="flex items-start gap-3">
-                  <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-md ${goal.accent} text-white shadow-card`}>
-                    <Icon aria-hidden="true" size={20} />
+              <LearningCard key={goal.id} interactive className="group p-0">
+                <button
+                  type="button"
+                  onClick={() => onNavigate(goal.page)}
+                  className="flex min-h-28 w-full cursor-pointer items-start gap-3 p-4 text-left"
+                >
+                  <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-md ${goalAccentClasses[goal.tone]} text-white shadow-card`}>
+                    <Icon aria-hidden="true" size={20} strokeWidth={2.2} />
                   </span>
-                  <div className="min-w-0">
-                    <h3 className="text-base font-extrabold text-ink">{goal.title}</h3>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-base font-extrabold text-ink">{goal.title}</h3>
+                      <ArrowRight className="mt-0.5 shrink-0 text-ink/36 transition group-hover:translate-x-0.5 group-hover:text-matcha" size={16} />
+                    </div>
                     <p className="mt-1 text-sm leading-6 text-ink/66">{goal.description}</p>
                   </div>
-                </div>
+                </button>
               </LearningCard>
             );
           })}
@@ -248,6 +240,7 @@ const Home = ({ onNavigate }: HomeProps) => {
           <div className="grid gap-2 sm:grid-cols-2">
             {learningPathSteps.map((step, index) => {
               const done = viewedPages.has(step.page);
+              const goal = goalsById.get(step.goalId);
 
               return (
                 <button
@@ -268,6 +261,11 @@ const Home = ({ onNavigate }: HomeProps) => {
                   <span className="min-w-0">
                     <span className="block text-sm font-extrabold text-ink">{step.title}</span>
                     <span className="mt-1 block text-xs leading-5 text-ink/62">{step.description}</span>
+                    {goal ? (
+                      <span className="mt-2 inline-flex rounded bg-yuzu/18 px-2 py-0.5 text-[0.7rem] font-extrabold text-ink/58">
+                        {goal.title}
+                      </span>
+                    ) : null}
                   </span>
                 </button>
               );
