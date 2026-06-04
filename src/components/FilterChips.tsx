@@ -13,13 +13,11 @@ const FilterChips = <T extends string>({
   active,
   counts,
   icon: Icon,
-  label,
   onChange,
   options,
 }: FilterChipsProps<T>) => {
   return (
     <div className="min-w-0">
-      {label ? <p className="mb-2 text-xs font-extrabold uppercase tracking-wide text-ink/48">{label}</p> : null}
       <div className="flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible">
         {options.map((option) => {
           const selected = active === option;

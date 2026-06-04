@@ -1,10 +1,10 @@
-import { AlertTriangle, BookOpenCheck, CheckCircle2 } from "lucide-react";
+import { AlertTriangle, BookOpenCheck, CheckCircle2, Clock3 } from "lucide-react";
 import { useRef, useState } from "react";
 import AnimatedReading from "./AnimatedReading";
 import LearningCard from "./LearningCard";
 import SpeakButton from "./SpeakButton";
 import type { GrammarLesson } from "../data/grammar";
-import { recordSeenContent } from "../utils/progress";
+import { isContentCompleted, markContentCompleted, readLearningProgress, recordSeenContent } from "../utils/progress";
 
 interface LessonCardProps {
   lesson: GrammarLesson;
@@ -12,15 +12,25 @@ interface LessonCardProps {
 }
 
 const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
+  const contentId = `grammar:${lesson.id}`;
   const sampleSentence = lesson.examples[0]?.japanese ?? lesson.pattern;
   const [activeReadingKey, setActiveReadingKey] = useState<string | null>(null);
+  const [studyState, setStudyState] = useState(() => {
+    const progress = readLearningProgress();
+
+    return {
+      seen: progress.seenContentIds.includes(contentId),
+      completed: isContentCompleted(progress, contentId),
+    };
+  });
   const readingRunRef = useRef(0);
 
   const speakWithReading = async (key: string, text: string) => {
     const runId = readingRunRef.current + 1;
     readingRunRef.current = runId;
     setActiveReadingKey(key);
-    recordSeenContent(`grammar:${lesson.id}`);
+    recordSeenContent(contentId);
+    setStudyState((current) => ({ ...current, seen: true }));
 
     const ok = await onSpeak(text);
     window.setTimeout(
@@ -33,13 +43,30 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
     );
   };
 
+  const markMastered = () => {
+    markContentCompleted(contentId);
+    setStudyState({ seen: true, completed: true });
+  };
+
   return (
     <LearningCard className="overflow-hidden">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="min-w-0">
-          <div className="mb-3 flex items-center gap-2 text-sm font-bold text-matcha">
+          <div className="mb-3 flex flex-wrap items-center gap-2 text-sm font-bold text-matcha">
             <BookOpenCheck aria-hidden="true" size={18} />
             <span>基础语法</span>
+            <span
+              className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
+                studyState.completed
+                  ? "bg-matcha/12 text-matcha"
+                  : studyState.seen
+                    ? "bg-yuzu/18 text-ink/62"
+                    : "bg-rice text-ink/45"
+              }`}
+            >
+              {studyState.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
+              {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
+            </span>
           </div>
           <h2 className="break-words font-display text-3xl font-extrabold text-ink">{lesson.title}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-ink/72">{lesson.explanation}</p>
@@ -65,6 +92,20 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
               active={activeReadingKey === "pattern"}
             />
           </div>
+          <button
+            type="button"
+            onClick={markMastered}
+            disabled={studyState.completed}
+            aria-pressed={studyState.completed}
+            className={`mt-3 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+              studyState.completed
+                ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
+                : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"
+            }`}
+          >
+            <CheckCircle2 aria-hidden="true" size={16} />
+            {studyState.completed ? "已掌握" : "标记掌握"}
+          </button>
         </div>
       </div>
 

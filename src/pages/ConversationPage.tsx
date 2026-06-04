@@ -65,9 +65,6 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
   return (
     <div className="min-w-0 space-y-6">
       <PageHero
-        accent="matcha"
-        eyebrow="Conversation"
-        icon={MessageCircle}
         title="日常会话"
         description="用情景模式听真实对话。先选场景，再按“你说 / 对方说”对照跟读，也可以只听对方或只听我方，像现场轮流说话一样。"
         stats={[

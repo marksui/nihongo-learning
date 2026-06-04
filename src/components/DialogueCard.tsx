@@ -1,4 +1,6 @@
 import {
+  CheckCircle2,
+  Clock3,
   Ear,
   ListMusic,
   Mic2,
@@ -9,7 +11,7 @@ import {
 } from "lucide-react";
 import { useRef, useState } from "react";
 import type { Dialogue } from "../data/dialogues";
-import { recordSeenContent } from "../utils/progress";
+import { isContentCompleted, markContentCompleted, readLearningProgress, recordSeenContent } from "../utils/progress";
 import { stopJapanese } from "../utils/speech";
 import SpeakButton from "./SpeakButton";
 
@@ -19,9 +21,18 @@ interface DialogueCardProps {
 }
 
 const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
+  const contentId = `dialogue:${dialogue.id}`;
   const [activeLine, setActiveLine] = useState<number | null>(null);
   const [nextLine, setNextLine] = useState(0);
   const [isPlayingSequence, setIsPlayingSequence] = useState(false);
+  const [studyState, setStudyState] = useState(() => {
+    const progress = readLearningProgress();
+
+    return {
+      seen: progress.seenContentIds.includes(contentId),
+      completed: isContentCompleted(progress, contentId),
+    };
+  });
   const cancelledRef = useRef(false);
 
   const partnerSpeakers = Array.from(
@@ -33,7 +44,8 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
     setActiveLine(index);
 
     const line = dialogue.lines[index];
-    recordSeenContent(`dialogue:${dialogue.id}`);
+    recordSeenContent(contentId);
+    setStudyState((current) => ({ ...current, seen: true }));
     const ok = await onSpeak(line.audioText ?? line.japanese);
 
     if (!cancelledRef.current) {
@@ -57,7 +69,8 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
 
     cancelledRef.current = false;
     setIsPlayingSequence(true);
-    recordSeenContent(`dialogue:${dialogue.id}`);
+    recordSeenContent(contentId);
+    setStudyState((current) => ({ ...current, seen: true }));
 
     for (const index of indexes) {
       if (cancelledRef.current) {
@@ -105,6 +118,11 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
     setIsPlayingSequence(false);
   };
 
+  const markMastered = () => {
+    markContentCompleted(contentId);
+    setStudyState({ seen: true, completed: true });
+  };
+
   return (
     <article className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper shadow-card">
       <div className="border-b border-ink/10 bg-paper p-5">
@@ -113,6 +131,18 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-md bg-sakura/10 px-2 py-1 text-xs font-bold text-sakura">{dialogue.mode}</span>
               <span className="text-sm font-bold text-matcha">{dialogue.situation}</span>
+              <span
+                className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
+                  studyState.completed
+                    ? "bg-matcha/12 text-matcha"
+                    : studyState.seen
+                      ? "bg-yuzu/18 text-ink/62"
+                      : "bg-rice text-ink/45"
+                }`}
+              >
+                {studyState.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
+                {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
+              </span>
             </div>
             <h2 className="mt-2 break-words font-display text-3xl font-extrabold text-ink">{dialogue.title}</h2>
 
@@ -176,6 +206,20 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             >
               <Square aria-hidden="true" size={18} />
               停止
+            </button>
+            <button
+              type="button"
+              onClick={markMastered}
+              disabled={studyState.completed}
+              aria-pressed={studyState.completed}
+              className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm font-bold transition active:scale-95 ${
+                studyState.completed
+                  ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
+                  : "border-yuzu/30 bg-yuzu/14 text-ink hover:bg-yuzu/24"
+              }`}
+            >
+              <CheckCircle2 aria-hidden="true" size={18} />
+              {studyState.completed ? "已掌握" : "标记掌握"}
             </button>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { BookOpenCheck, Search, Sparkles } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import EmptyState from "../components/EmptyState";
 import FilterChips from "../components/FilterChips";
@@ -60,9 +60,6 @@ const GrammarPage = ({ onSpeak }: GrammarPageProps) => {
   return (
     <div className="space-y-6">
       <PageHero
-        accent="sumire"
-        eyebrow="Grammar"
-        icon={BookOpenCheck}
         title="基础语法"
         description="用中文解释日语句型，例句同时给出日语、假名读法、分隔 romaji 和中文翻译。点击句子可以逐句听发音，并标出中文母语者容易混淆的地方。"
         stats={[

@@ -1,4 +1,3 @@
-import { Grid3X3 } from "lucide-react";
 import KanaCard from "../components/KanaCard";
 import PageHero from "../components/PageHero";
 import { kanaGroupNotes, kanaGroups, kanaItems } from "../data/kana";
@@ -11,9 +10,6 @@ const KanaPage = ({ onSpeak }: KanaPageProps) => {
   return (
     <div className="space-y-8">
       <PageHero
-        accent="matcha"
-        eyebrow="Kana"
-        icon={Grid3X3}
         title="五十音图"
         description="每张卡同时显示平假名、片假名、罗马音和例词。点击播放按钮就能听发音。"
         stats={[
