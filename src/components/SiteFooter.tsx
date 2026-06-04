@@ -1,4 +1,4 @@
-import { ExternalLink, Home, Table2 } from "lucide-react";
+import { ExternalLink, Home } from "lucide-react";
 import ThemeSwitcher from "./ThemeSwitcher";
 import type { PageKey } from "./Navbar";
 
@@ -33,16 +33,11 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
                 <h2 id="footer-title" className="truncate text-base font-extrabold text-ink">
                   中文学日语
                 </h2>
-                <p className="hidden text-xs font-semibold text-ink/55 sm:block">护眼点读学习</p>
               </div>
             </div>
 
             <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center lg:flex-1 lg:justify-end">
               <div className="flex min-w-0 items-center gap-2">
-                <span className="hidden shrink-0 items-center gap-1.5 text-xs font-extrabold text-ink/55 sm:flex">
-                  <Table2 aria-hidden="true" className="text-matcha" size={15} />
-                  入口
-                </span>
                 <div className="flex min-w-0 gap-2 overflow-x-auto pb-1 sm:pb-0">
                   {footerLinks.map((item) => {
                     const active = currentPage === item.page;

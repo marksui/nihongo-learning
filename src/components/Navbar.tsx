@@ -116,8 +116,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-ink/10 bg-paper px-3 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2 shadow-soft backdrop-blur-xl md:hidden">
         {moreOpen ? (
           <div className="mb-2 rounded-lg border border-ink/10 bg-rice p-2 shadow-card">
-            <div className="mb-1 flex items-center justify-between px-2 py-1">
-              <p className="text-xs font-extrabold text-ink/58">更多学习入口</p>
+            <div className="mb-1 flex justify-end px-2 py-1">
               <button
                 type="button"
                 onClick={() => setMoreOpen(false)}

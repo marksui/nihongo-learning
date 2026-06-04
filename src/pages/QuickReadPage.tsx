@@ -398,7 +398,6 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
       <section className="sticky top-20 z-20 rounded-lg border border-ink/10 bg-paper/95 p-3 shadow-card backdrop-blur md:top-24">
         <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-extrabold text-sakura">假名速读</p>
             <h1 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">{activeViewMeta.label}</h1>
           </div>
           <p className="text-sm font-bold text-ink/58">{activeViewMeta.count}</p>

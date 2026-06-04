@@ -102,9 +102,6 @@ const VocabularyPage = ({ onSpeak }: VocabularyPageProps) => {
   return (
     <div className="space-y-7">
       <PageHero
-        accent="sakura"
-        eyebrow="Vocabulary"
-        icon={BookOpen}
         title="常用单词"
         description="从 N5 入门词到 N1 考试词按场景和等级分组，包含日语、假名读法、分隔 romaji、中文意思、例句和中文翻译。食物、水果、蔬菜保留插图，适合边看边听。"
         stats={[

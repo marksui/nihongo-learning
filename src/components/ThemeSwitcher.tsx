@@ -1,4 +1,4 @@
-import { Check, Palette } from "lucide-react";
+import { Check } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { defaultThemeId, isThemeId, themes, themeStorageKey, type ThemeId } from "../data/themes";
 
@@ -34,22 +34,15 @@ const ThemeSwitcher = () => {
 
   return (
     <section className="min-w-0 rounded-md border border-ink/8 bg-paper/94 p-3 shadow-card" aria-labelledby="theme-title">
-      <div className="flex min-w-0 flex-col gap-3 lg:flex-row lg:items-center">
-        <div className="flex min-w-0 items-center gap-3">
-          <h2 id="theme-title" className="flex shrink-0 items-center gap-2 text-sm font-extrabold text-ink">
-            <Palette aria-hidden="true" className="text-matcha" size={17} />
-            主题
-          </h2>
-          <span className="shrink-0 rounded-md bg-rice px-2 py-1 text-xs font-bold text-ink/62">{activeTheme.name}</span>
-
-          <div className="hidden h-7 w-40 shrink-0 overflow-hidden rounded-md border border-ink/10 sm:flex" aria-label={`${activeTheme.name} 色板`}>
-            {Object.values(activeTheme.colors).map((color) => (
-              <span key={color} className="flex-1" style={{ backgroundColor: color }} />
-            ))}
-          </div>
+      <h2 id="theme-title" className="sr-only">主题</h2>
+      <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="hidden h-7 w-40 shrink-0 overflow-hidden rounded-md border border-ink/10 sm:flex" aria-label={`${activeTheme.name} 色板`}>
+          {Object.values(activeTheme.colors).map((color) => (
+            <span key={color} className="flex-1" style={{ backgroundColor: color }} />
+          ))}
         </div>
 
-        <div className="flex min-w-0 gap-2 overflow-x-auto pb-1 lg:flex-1 lg:justify-end lg:pb-0">
+        <div className="flex min-w-0 gap-2 overflow-x-auto pb-1 sm:flex-1 sm:justify-end sm:pb-0">
           {themes.map((theme) => {
             const active = theme.id === themeId;
 

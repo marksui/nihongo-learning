@@ -10,11 +10,8 @@ import {
   GraduationCap,
   Grid3X3,
   Hash,
-  Headphones,
-  ListChecks,
   MessageCircle,
   MessagesSquare,
-  PlayCircle,
   RotateCcw,
   Table2,
   Target,
@@ -391,9 +388,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   return (
     <div className="space-y-7">
       <PageHero
-        accent="sakura"
-        eyebrow="零基础中文路线"
-        icon={PlayCircle}
         title="中文学日语"
         description="从五十音开始，用简体中文说明、日语点读和清晰例句学习。打开就能跟着读。"
         stats={[
@@ -438,7 +432,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                       <ActivePreviewIcon aria-hidden="true" size={18} />
                     </span>
                     <div className="min-w-0">
-                      <p className="text-xs font-extrabold text-ink/52">今日预览 · {activeHeroPreview.label}</p>
+                      <p className="text-xs font-extrabold text-ink/52">{activeHeroPreview.label}</p>
                       <p className="mt-0.5 truncate font-japanese text-xl font-extrabold text-ink">
                         {activeHeroPreview.japanese}
                       </p>
@@ -487,7 +481,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       <section className="rounded-lg border border-ink/8 bg-paper/92 p-4 shadow-card">
         <div className="grid gap-4 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-center">
           <div>
-            <p className="text-sm font-extrabold text-sumire">学习目标</p>
             <h2 className="font-display text-2xl font-extrabold text-ink">今天练 {targetLevel}</h2>
             <p className="mt-1 text-sm leading-6 text-ink/62">
               目标会保存在本地，今日单词和单词页筛选都会跟着走。
@@ -541,7 +534,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
       <section>
         <div className="mb-3">
-          <p className="text-sm font-extrabold text-sakura">长期目标</p>
           <h2 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">能听、能读、能开口</h2>
         </div>
         <div className="grid gap-3 md:grid-cols-3">
@@ -576,10 +568,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         <LearningCard className="p-4">
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <div className="mb-2 flex items-center gap-2 text-sm font-extrabold text-matcha">
-                <ListChecks aria-hidden="true" size={18} />
-                今日学习
-              </div>
               <h2 className="font-display text-2xl font-extrabold text-ink">完成 5 个小任务</h2>
               <p className="mt-1 text-sm leading-6 text-ink/62">每项都可以先去学习，再回首页标记完成。</p>
             </div>
@@ -631,7 +619,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                       className="min-w-0 flex-1 cursor-pointer text-left"
                     >
                       <span className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-extrabold text-ink/52">{meta.eyebrow}</span>
                         <span
                           className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[0.68rem] font-extrabold ${
                             task.completed
@@ -739,10 +726,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
         <LearningCard className="p-4">
           <div className="mb-4 rounded-md border border-sora/18 bg-sora/8 p-3">
-            <div className="mb-2 flex items-center gap-2 text-sm font-extrabold text-sora">
-              <Headphones aria-hidden="true" size={18} />
-              继续学习
-            </div>
             <button
               type="button"
               onClick={() => onNavigate(continuePage)}
@@ -818,7 +801,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
           <div className="mb-3 flex items-center justify-between gap-3">
             <div>
-              <p className="text-sm font-extrabold text-sakura">学习路径</p>
               <h2 className="font-display text-2xl font-extrabold text-ink">按顺序走一遍</h2>
             </div>
             <span className="rounded-md bg-rice px-2 py-1 text-xs font-bold text-ink/58">
@@ -946,7 +928,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       <section>
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-extrabold text-sakura">学习入口</p>
             <h2 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">选一个开始</h2>
           </div>
         </div>

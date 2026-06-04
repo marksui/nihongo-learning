@@ -1,4 +1,3 @@
-import { Trophy } from "lucide-react";
 import type { JlptVocabularyLevel } from "../data/vocabulary";
 
 interface JlptLevelSelectorProps {
@@ -20,13 +19,6 @@ const JlptLevelSelector = ({
 
   return (
     <div className="min-w-0">
-      <div className="mb-2 flex items-center justify-between gap-3">
-        <p className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide text-ink/48">
-          <Trophy aria-hidden="true" size={15} />
-          JLPT 目标
-        </p>
-        <p className="rounded bg-rice/70 px-2 py-0.5 text-xs font-extrabold text-sumire">{active ?? "全部"}</p>
-      </div>
       <div className="flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-5 sm:overflow-visible">
         {levels.map((level) => {
           const selected = level === active;

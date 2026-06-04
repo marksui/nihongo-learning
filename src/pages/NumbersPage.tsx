@@ -1,4 +1,4 @@
-import { CheckCircle2, Clock3, Hash, Search, Sparkles } from "lucide-react";
+import { CheckCircle2, Clock3, Search, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import EmptyState from "../components/EmptyState";
 import FilterChips from "../components/FilterChips";
@@ -119,9 +119,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
   return (
     <div className="space-y-7">
       <PageHero
-        accent="yuzu"
-        eyebrow="Numbers"
-        icon={Hash}
         title="数字读法"
         description="从 0 到复杂金额、日期、人数、楼层和电话编号都整理在一起。点击数字卡片或播放按钮，就能听到日语读法。"
         stats={[
@@ -168,7 +165,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         <section className="space-y-3">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-extrabold text-sakura">真实场景速用</p>
               <h2 className="font-display text-2xl font-extrabold text-ink">直接点整句</h2>
             </div>
             <p className="text-sm font-bold text-ink/58">{filteredScenes.length} 个场景</p>
