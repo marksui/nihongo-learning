@@ -29,10 +29,10 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
         <div className="mb-3 flex items-start justify-between gap-3">
           <div>
             <div className="flex items-baseline gap-3">
-              <span className={`font-serif text-5xl font-bold transition-colors ${active ? "text-matcha" : "text-ink"}`}>
+              <span className={`font-japanese text-5xl font-bold transition-colors ${active ? "text-matcha" : "text-ink"}`}>
                 {item.hiragana}
               </span>
-              <span className={`font-serif text-4xl font-bold transition-colors ${active ? "text-sakura" : "text-sumire"}`}>
+              <span className={`font-japanese text-4xl font-bold transition-colors ${active ? "text-sakura" : "text-sumire"}`}>
                 {item.katakana}
               </span>
             </div>
@@ -50,7 +50,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
 
         <div className="rounded-md border border-sora/18 bg-sora/10 p-3">
           <p className="text-xs font-bold text-ink/52">例词</p>
-          <p className="mt-1 text-2xl font-bold text-ink">{item.example.word}</p>
+          <p className="mt-1 font-japanese text-2xl font-bold text-ink">{item.example.word}</p>
           <p className="mt-1 text-sm text-ink/62">
             {item.example.kana} · {formatRomajiReading(item.example.romaji)}
           </p>

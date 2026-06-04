@@ -41,7 +41,7 @@ const PageHero = ({
             {Icon ? <Icon aria-hidden="true" size={18} /> : null}
             <span>{eyebrow}</span>
           </div>
-          <h1 className="break-words font-serif text-3xl font-bold leading-tight text-ink sm:text-4xl">{title}</h1>
+          <h1 className="break-words font-display text-3xl font-extrabold leading-tight text-ink sm:text-4xl">{title}</h1>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-ink/72 sm:text-base">{description}</p>
           {actions ? <div className="mt-4 flex flex-wrap gap-2.5">{actions}</div> : null}
         </div>

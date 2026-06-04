@@ -155,7 +155,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
           <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-extrabold text-sakura">真实场景速用</p>
-              <h2 className="font-serif text-2xl font-bold text-ink">直接点整句</h2>
+              <h2 className="font-display text-2xl font-extrabold text-ink">直接点整句</h2>
             </div>
             <p className="text-sm font-bold text-ink/58">{filteredScenes.length} 个场景</p>
           </div>
@@ -200,7 +200,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                       }`}>
                         {scene.highlight}
                       </span>
-                      <span className="block break-words text-lg font-extrabold leading-7">{scene.japanese}</span>
+                      <span className="block break-words font-japanese text-lg font-extrabold leading-7">{scene.japanese}</span>
                       <span className="mt-2 block break-words text-sm opacity-80">{scene.kana}</span>
                       <span
                         className={`mt-1 block break-words text-sm font-semibold ${
@@ -236,7 +236,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                     <p className="mb-3 w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-extrabold text-ink/66">
                       {item.group}
                     </p>
-                    <p className="break-words font-serif text-4xl font-bold text-ink">{item.display}</p>
+                    <p className="break-words font-display text-4xl font-extrabold text-ink">{item.display}</p>
                     <p className="mt-2 text-sm font-semibold text-ink/62">{item.meaning}</p>
                   </div>
                   <SpeakButton
@@ -257,7 +257,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                   }`}
                   title="点击日语读法朗读"
                 >
-                  <span className="block break-words text-2xl font-bold">{item.japanese}</span>
+                  <span className="block break-words font-japanese text-2xl font-bold">{item.japanese}</span>
                   <span className="mt-2 block break-words text-sm opacity-80">{item.kana}</span>
                   <span
                     className={`mt-1 block break-words text-sm font-semibold ${

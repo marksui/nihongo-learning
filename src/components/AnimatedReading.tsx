@@ -28,7 +28,7 @@ const AnimatedReading = ({ kana, romaji, active = false, variant = "light" }: An
         {kana}
       </p>
       <p
-        className={`break-words font-mono text-xs transition-colors duration-300 ${romajiClass}`}
+        className={`break-words font-reading text-xs font-semibold transition-colors duration-300 ${romajiClass}`}
         data-active={active}
         aria-label={formattedRomaji}
       >

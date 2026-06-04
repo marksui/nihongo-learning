@@ -39,7 +39,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
             <p className="mb-2 w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-bold text-ink/68">
               {word.category}
             </p>
-            <h3 className={`break-words font-serif text-3xl font-bold transition-colors ${wordActive ? "text-matcha" : "text-ink"}`}>
+            <h3 className={`break-words font-japanese text-3xl font-bold transition-colors ${wordActive ? "text-matcha" : "text-ink"}`}>
               {word.japanese}
             </h3>
             <p className="mt-2 text-sm text-ink/62">
@@ -64,7 +64,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className={`text-sm font-semibold transition-colors ${sentenceActive ? "text-matcha" : "text-ink"}`}>
-                {word.sentence}
+                <span className="font-japanese">{word.sentence}</span>
               </p>
               <p className="mt-1 text-xs text-ink/58">{word.sentenceKana}</p>
             </div>

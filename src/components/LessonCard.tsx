@@ -41,14 +41,14 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
             <BookOpenCheck aria-hidden="true" size={18} />
             <span>基础语法</span>
           </div>
-          <h2 className="break-words font-serif text-3xl font-bold text-ink">{lesson.title}</h2>
+          <h2 className="break-words font-display text-3xl font-extrabold text-ink">{lesson.title}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-ink/72">{lesson.explanation}</p>
         </div>
         <div className="rounded-md border border-yuzu/28 bg-rice/70 px-4 py-3 text-ink md:min-w-72">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div className="min-w-0">
               <p className="text-xs font-bold text-ink/58">句型</p>
-              <p className="mt-1 break-words font-serif text-xl font-bold">{lesson.pattern}</p>
+              <p className="mt-1 break-words font-japanese text-xl font-bold">{lesson.pattern}</p>
             </div>
             <SpeakButton
               active={activeReadingKey === "pattern"}
@@ -89,7 +89,7 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
                       active ? "text-matcha" : "text-ink"
                     }`}
                   >
-                    {example.japanese}
+                    <span className="font-japanese">{example.japanese}</span>
                   </p>
                   <div className="mt-1">
                     <AnimatedReading kana={example.kana} romaji={example.romaji} active={active} />

@@ -221,7 +221,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       <section>
         <div className="mb-3">
           <p className="text-sm font-extrabold text-sakura">长期目标</p>
-          <h2 className="font-serif text-2xl font-bold text-ink sm:text-3xl">能听、能读、能开口</h2>
+          <h2 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">能听、能读、能开口</h2>
         </div>
         <div className="grid gap-3 md:grid-cols-3">
           {learningGoals.map((goal) => {
@@ -264,7 +264,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
               className="min-h-24 rounded-md border border-ink/8 bg-rice/48 p-3 text-left transition hover:border-matcha/28 hover:bg-rice"
             >
               <span className="text-xs font-bold text-ink/55">假名</span>
-              <span className="mt-1 block font-serif text-2xl font-bold text-ink">{today.kanaGroup}</span>
+              <span className="mt-1 block font-japanese text-2xl font-bold text-ink">{today.kanaGroup}</span>
               <span className="mt-1 block text-sm font-bold text-matcha">{today.kanaPreview}</span>
             </button>
             <button
@@ -420,7 +420,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           <div className="mb-3 flex items-center justify-between gap-3">
             <div>
               <p className="text-sm font-extrabold text-sakura">学习路径</p>
-              <h2 className="font-serif text-2xl font-bold text-ink">按顺序走一遍</h2>
+              <h2 className="font-display text-2xl font-extrabold text-ink">按顺序走一遍</h2>
             </div>
             <span className="rounded-md bg-rice px-2 py-1 text-xs font-bold text-ink/58">
               {completedPathSteps.length}/{learningPathSteps.length}
@@ -548,7 +548,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-extrabold text-sakura">学习入口</p>
-            <h2 className="font-serif text-2xl font-bold text-ink sm:text-3xl">选一个开始</h2>
+            <h2 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">选一个开始</h2>
           </div>
         </div>
 

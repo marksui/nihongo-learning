@@ -114,7 +114,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
               <span className="rounded-md bg-sakura/10 px-2 py-1 text-xs font-bold text-sakura">{dialogue.mode}</span>
               <span className="text-sm font-bold text-matcha">{dialogue.situation}</span>
             </div>
-            <h2 className="mt-2 break-words font-serif text-3xl font-bold text-ink">{dialogue.title}</h2>
+            <h2 className="mt-2 break-words font-display text-3xl font-extrabold text-ink">{dialogue.title}</h2>
 
             <div className="mt-4 grid min-w-0 gap-2 sm:grid-cols-2">
               <div className="flex min-w-0 items-center gap-3 rounded-md bg-matcha/10 px-3 py-2">
@@ -224,7 +224,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
                     />
                   </div>
 
-                  <p className="break-words text-xl font-extrabold leading-8 text-ink">{line.japanese}</p>
+                  <p className="break-words font-japanese text-xl font-extrabold leading-8 text-ink">{line.japanese}</p>
                   <p className="mt-2 break-words text-xs font-semibold leading-5 text-ink/55">{line.kana}</p>
                   <p className="mt-3 break-words text-sm font-semibold leading-6 text-ink/72">{line.translation}</p>
                 </div>

@@ -232,11 +232,11 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 aria-label={`朗读 ${kana} ${getRomajiLabel(item)}`}
                 title={`朗读 ${kana}`}
               >
-                <span className="block min-w-0 font-serif text-2xl font-bold leading-none sm:text-3xl md:text-4xl">
+                <span className="block min-w-0 font-japanese text-2xl font-bold leading-none sm:text-3xl md:text-4xl">
                   {kana}
                 </span>
                 <span
-                  className={`mt-1 block min-w-0 font-mono text-[0.62rem] font-extrabold leading-none sm:text-sm ${
+                  className={`mt-1 block min-w-0 font-reading text-[0.62rem] font-extrabold leading-none sm:text-sm ${
                     active ? "text-matcha" : "text-ink/58 group-hover:text-matcha"
                   }`}
                 >
@@ -287,11 +287,11 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
               title={`朗读 ${item.japanese}`}
             >
               <span className="block truncate text-sm font-extrabold text-ink/58">{item.label}</span>
-              <span className={`mt-2 flex items-center justify-center break-words font-serif text-3xl font-bold leading-tight sm:text-4xl ${active ? "text-matcha" : "text-ink"}`}>
+              <span className={`mt-2 flex items-center justify-center break-words font-japanese text-3xl font-bold leading-tight sm:text-4xl ${active ? "text-matcha" : "text-ink"}`}>
                 {item.japanese}
               </span>
               <span className="mt-2 block break-words text-sm font-bold leading-5 text-ink/70">{item.kana}</span>
-              <span className={`mt-1 block break-words font-mono text-xs font-extrabold leading-5 ${active ? "text-matcha" : "text-sakura/85"}`}>
+              <span className={`mt-1 block break-words font-reading text-xs font-extrabold leading-5 ${active ? "text-matcha" : "text-sakura/85"}`}>
                 {formatRomajiReading(item.romaji)}
               </span>
               <span className="mt-2 block truncate text-sm font-extrabold text-ink/62">{item.meaning}</span>
