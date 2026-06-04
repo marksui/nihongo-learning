@@ -122,6 +122,15 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const nextMilestone = nextPathStep ? milestonesById.get(nextPathStep.milestoneId) : undefined;
   const pathComplete = completedPathSteps.length === learningPathSteps.length;
   const recentReads = progress.recentReads.slice(0, 5);
+  const milestoneProgress = new Map(
+    learningMilestones.map((milestone) => {
+      const steps = learningPathSteps.filter((step) => step.milestoneId === milestone.id);
+      const done = steps.filter((step) => viewedPages.has(step.page)).length;
+      const total = steps.length || 1;
+
+      return [milestone.id, { done, percent: Math.round((done / total) * 100), total }];
+    }),
+  );
 
   return (
     <div className="space-y-7">
@@ -292,18 +301,41 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
             </button>
           ) : null}
           <div className="mb-3 grid gap-2 sm:grid-cols-3">
-            {learningMilestones.map((milestone) => (
-              <button
-                key={milestone.id}
-                type="button"
-                onClick={() => onNavigate(milestone.page)}
-                className={`min-h-24 rounded-md border p-3 text-left transition active:scale-[0.99] ${milestoneToneClasses[milestone.tone]}`}
-              >
-                <span className="text-[0.68rem] font-extrabold text-ink/52">{milestone.label}</span>
-                <span className="mt-1 block text-sm font-extrabold text-ink">{milestone.title}</span>
-                <span className="mt-1 block text-xs leading-5 text-ink/62">{milestone.description}</span>
-              </button>
-            ))}
+            {learningMilestones.map((milestone) => {
+              const progressValue = milestoneProgress.get(milestone.id) ?? { done: 0, percent: 0, total: 1 };
+              const current = !pathComplete && nextMilestone?.id === milestone.id;
+
+              return (
+                <button
+                  key={milestone.id}
+                  type="button"
+                  onClick={() => onNavigate(milestone.page)}
+                  className={`min-h-28 rounded-md border p-3 text-left transition active:scale-[0.99] ${
+                    milestoneToneClasses[milestone.tone]
+                  } ${current ? "ring-2 ring-yuzu/35" : ""}`}
+                >
+                  <span className="flex items-center justify-between gap-2">
+                    <span className="text-[0.68rem] font-extrabold text-ink/52">{milestone.label}</span>
+                    <span className={`rounded px-1.5 py-0.5 text-[0.65rem] font-extrabold ${
+                      current ? "bg-yuzu/30 text-ink" : "bg-paper/70 text-ink/52"
+                    }`}>
+                      {current ? "当前" : `${progressValue.done}/${progressValue.total}`}
+                    </span>
+                  </span>
+                  <span className="mt-1 block text-sm font-extrabold text-ink">{milestone.title}</span>
+                  <span className="mt-1 block text-xs leading-5 text-ink/62">{milestone.description}</span>
+                  <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-paper/80" aria-hidden="true">
+                    <span
+                      className={`block h-full rounded-full ${goalAccentClasses[milestone.tone]}`}
+                      style={{ width: `${progressValue.percent}%` }}
+                    />
+                  </span>
+                  <span className="mt-1 block text-[0.68rem] font-bold text-ink/50">
+                    已完成 {progressValue.done}/{progressValue.total}
+                  </span>
+                </button>
+              );
+            })}
           </div>
           <div className="grid gap-2 sm:grid-cols-2">
             {learningPathSteps.map((step, index) => {
