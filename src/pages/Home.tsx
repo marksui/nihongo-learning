@@ -115,6 +115,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const progress = useMemo(() => readLearningProgress(), []);
   const goalsById = useMemo(() => new Map(learningGoals.map((goal) => [goal.id, goal])), []);
   const milestonesById = useMemo(() => new Map(learningMilestones.map((milestone) => [milestone.id, milestone])), []);
+  const featureByPage = useMemo(() => new Map(featureCards.map((card) => [card.page, card])), []);
   const viewedPages = new Set(progress.viewedPages);
   const completedPathSteps = learningPathSteps.filter((step) => viewedPages.has(step.page));
   const nextPathStep = learningPathSteps.find((step) => !viewedPages.has(step.page)) ?? learningPathSteps[learningPathSteps.length - 1];
@@ -122,6 +123,16 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const nextMilestone = nextPathStep ? milestonesById.get(nextPathStep.milestoneId) : undefined;
   const pathComplete = completedPathSteps.length === learningPathSteps.length;
   const recentReads = progress.recentReads.slice(0, 5);
+  const recentVisitedSteps = progress.viewedPages
+    .filter((page) => page !== "home")
+    .map((page) => {
+      const step = learningPathSteps.find((item) => item.page === page);
+      const feature = featureByPage.get(page);
+
+      return step && feature ? { ...step, icon: feature.icon } : null;
+    })
+    .filter((step): step is NonNullable<typeof step> => Boolean(step))
+    .slice(0, 3);
   const milestoneProgress = new Map(
     learningMilestones.map((milestone) => {
       const steps = learningPathSteps.filter((step) => step.milestoneId === milestone.id);
@@ -299,6 +310,28 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
               </span>
               <ArrowRight aria-hidden="true" className="shrink-0 text-matcha" size={18} />
             </button>
+          ) : null}
+          {recentVisitedSteps.length ? (
+            <div className="mb-3 rounded-md border border-ink/8 bg-rice/38 p-3">
+              <p className="text-xs font-bold text-ink/55">最近访问</p>
+              <div className="mt-2 grid gap-2 sm:grid-cols-3">
+                {recentVisitedSteps.map((step) => {
+                  const Icon = step.icon;
+
+                  return (
+                    <button
+                      key={step.id}
+                      type="button"
+                      onClick={() => onNavigate(step.page)}
+                      className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-ink/8 bg-paper/78 px-2 py-1.5 text-left text-sm font-extrabold text-ink/68 transition hover:border-matcha/25 hover:bg-paper hover:text-ink active:scale-[0.99]"
+                    >
+                      <Icon aria-hidden="true" className="shrink-0 text-matcha" size={16} />
+                      <span className="truncate">{step.title}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           ) : null}
           <div className="mb-3 grid gap-2 sm:grid-cols-3">
             {learningMilestones.map((milestone) => {
