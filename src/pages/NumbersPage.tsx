@@ -220,7 +220,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         </section>
       ) : null}
 
-      <section className="grid gap-4 lg:grid-cols-2">
+      <section className="grid items-start gap-4 lg:grid-cols-2">
         {filteredNumbers.length ? (
           filteredNumbers.map((item) => {
             const active = activeNumberId === item.id;
@@ -228,7 +228,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
             return (
               <LearningCard
                 key={item.id}
-                className={active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}
+                className={`overflow-hidden p-4 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
                 interactive
               >
                 <div className="flex items-start justify-between gap-4">
@@ -250,8 +250,10 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                 <button
                   type="button"
                   onClick={() => void playNumber(item.id, item.audioText ?? item.japanese)}
-                  className={`group mt-5 w-full cursor-pointer rounded-md px-4 py-3 text-left transition active:scale-[0.99] ${
-                    active ? "bg-matcha text-white" : "bg-rice/55 hover:bg-matcha hover:text-white"
+                  className={`group mt-4 w-full cursor-pointer rounded-md border px-4 py-3 text-left transition active:scale-[0.99] ${
+                    active
+                      ? "border-matcha bg-matcha text-white"
+                      : "border-yuzu/12 bg-rice/55 hover:border-matcha/30 hover:bg-matcha hover:text-white"
                   }`}
                   title="点击日语读法朗读"
                 >
