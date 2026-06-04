@@ -3,6 +3,7 @@ import type { PageKey } from "../components/Navbar";
 export interface LearningProgress {
   viewedPages: PageKey[];
   recentReads: string[];
+  dailyDoneDates: string[];
   updatedAt: string;
 }
 
@@ -11,6 +12,7 @@ const progressStorageKey = "nihongo-learning-progress";
 const emptyProgress = (): LearningProgress => ({
   viewedPages: [],
   recentReads: [],
+  dailyDoneDates: [],
   updatedAt: new Date().toISOString(),
 });
 
@@ -31,6 +33,7 @@ export const readLearningProgress = (): LearningProgress => {
     return {
       viewedPages: Array.isArray(parsed.viewedPages) ? parsed.viewedPages.filter(Boolean) as PageKey[] : [],
       recentReads: Array.isArray(parsed.recentReads) ? parsed.recentReads.filter(Boolean).slice(0, 12) : [],
+      dailyDoneDates: Array.isArray(parsed.dailyDoneDates) ? parsed.dailyDoneDates.filter(Boolean).slice(0, 60) : [],
       updatedAt: typeof parsed.updatedAt === "string" ? parsed.updatedAt : new Date().toISOString(),
     };
   } catch {
@@ -48,6 +51,29 @@ const writeLearningProgress = (progress: LearningProgress) => {
   } catch {
     // Progress is a small convenience feature, so storage failures should not interrupt learning.
   }
+};
+
+const getDateKey = (date = new Date()) => {
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
+
+  return `${date.getFullYear()}-${month}-${day}`;
+};
+
+export const isTodaySuggestionDone = (progress: LearningProgress, date = new Date()) =>
+  progress.dailyDoneDates.includes(getDateKey(date));
+
+export const markTodaySuggestionDone = (date = new Date()) => {
+  const progress = readLearningProgress();
+  const dateKey = getDateKey(date);
+  const nextProgress = {
+    ...progress,
+    dailyDoneDates: Array.from(new Set([dateKey, ...progress.dailyDoneDates])).slice(0, 60),
+    updatedAt: new Date().toISOString(),
+  };
+
+  writeLearningProgress(nextProgress);
+  return nextProgress;
 };
 
 export const recordPageVisit = (page: PageKey) => {

@@ -14,7 +14,7 @@ import {
   Table2,
   Target,
 } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import LearningCard from "../components/LearningCard";
 import PageHero from "../components/PageHero";
 import SpeakButton from "../components/SpeakButton";
@@ -25,7 +25,7 @@ import { getTodaySuggestion, learningGoals, learningMilestones, learningPathStep
 import { numberExamples } from "../data/numbers";
 import { vocabulary } from "../data/vocabulary";
 import type { PageKey } from "../components/Navbar";
-import { readLearningProgress } from "../utils/progress";
+import { isTodaySuggestionDone, markTodaySuggestionDone, readLearningProgress } from "../utils/progress";
 
 interface HomeProps {
   onNavigate: (page: PageKey) => void;
@@ -112,10 +112,11 @@ const featureCards: FeatureCard[] = [
 
 const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const today = useMemo(() => getTodaySuggestion(), []);
-  const progress = useMemo(() => readLearningProgress(), []);
+  const [progress, setProgress] = useState(() => readLearningProgress());
   const goalsById = useMemo(() => new Map(learningGoals.map((goal) => [goal.id, goal])), []);
   const milestonesById = useMemo(() => new Map(learningMilestones.map((milestone) => [milestone.id, milestone])), []);
   const featureByPage = useMemo(() => new Map(featureCards.map((card) => [card.page, card])), []);
+  const todayDone = isTodaySuggestionDone(progress);
   const viewedPages = new Set(progress.viewedPages);
   const completedPathSteps = learningPathSteps.filter((step) => viewedPages.has(step.page));
   const nextPathStep = learningPathSteps.find((step) => !viewedPages.has(step.page)) ?? learningPathSteps[learningPathSteps.length - 1];
@@ -146,6 +147,12 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const currentMilestoneRemaining = currentMilestoneProgress
     ? Math.max(currentMilestoneProgress.total - currentMilestoneProgress.done, 0)
     : 0;
+
+  const completeToday = () => {
+    if (!todayDone) {
+      setProgress(markTodaySuggestionDone());
+    }
+  };
 
   return (
     <div className="space-y-7">
@@ -284,6 +291,20 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           >
             <span className="truncate">会话：{today.dialogue.title}</span>
             <ArrowRight aria-hidden="true" size={16} />
+          </button>
+          <button
+            type="button"
+            onClick={completeToday}
+            disabled={todayDone}
+            aria-pressed={todayDone}
+            className={`mt-3 flex min-h-11 w-full items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+              todayDone
+                ? "cursor-default border-matcha/25 bg-matcha/12 text-matcha"
+                : "cursor-pointer border-yuzu/30 bg-yuzu/18 text-ink hover:bg-yuzu/28"
+            }`}
+          >
+            <CheckCircle2 aria-hidden="true" size={17} />
+            {todayDone ? "今日已完成" : "完成今日建议"}
           </button>
         </LearningCard>
 
