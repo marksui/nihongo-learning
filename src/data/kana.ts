@@ -29,11 +29,38 @@ export const kanaGroups = [
   "や行",
   "ら行",
   "わ行",
-  "濁音",
-  "半濁音",
+  "浊音",
+  "半浊音",
   "拗音",
-  "促音・長音",
+  "促音・长音",
 ] as const;
+
+export const kanaGroupNotes: Partial<Record<(typeof kanaGroups)[number], {
+  description: string;
+  pattern: string;
+  examples: string[];
+}>> = {
+  浊音: {
+    description: "在清音右上角加两点，声音会变浊，比如 か 变成 が。",
+    pattern: "か → が / さ → ざ / た → だ / は → ば",
+    examples: ["がっこう", "じかん", "だいがく"],
+  },
+  半浊音: {
+    description: "只发生在は行，右上角加小圆点，读成 p 开头的音。",
+    pattern: "は → ぱ / ひ → ぴ / ふ → ぷ",
+    examples: ["ぱん", "ぴんく", "ぷーる"],
+  },
+  拗音: {
+    description: "一个大假名加小 や / ゆ / よ，合成一拍读出来。",
+    pattern: "き + ゃ → きゃ / し + ゅ → しゅ",
+    examples: ["きょう", "しゃしん", "りょうり"],
+  },
+  "促音・长音": {
+    description: "小 っ 表示停一拍，ー 或长元音表示把前面的音拉长。",
+    pattern: "きっぷ / コーヒー / きょう",
+    examples: ["きっぷ", "コーヒー", "おばあさん"],
+  },
+};
 
 const basicKanaItems: KanaItem[] = [
   { id: "a", group: "あ行", hiragana: "あ", katakana: "ア", romaji: "a", example: { word: "雨", kana: "あめ", romaji: "ame", meaning: "雨" } },
@@ -85,31 +112,31 @@ const basicKanaItems: KanaItem[] = [
 ];
 
 const kanaExtensionItems: KanaItem[] = [
-  { id: "ga", group: "濁音", hiragana: "が", katakana: "ガ", romaji: "ga", example: { word: "学校", kana: "がっこう", romaji: "gakkou", meaning: "学校" }, level: "基础", tags: ["浊音"], sortOrder: 101 },
-  { id: "gi", group: "濁音", hiragana: "ぎ", katakana: "ギ", romaji: "gi", example: { word: "銀行", kana: "ぎんこう", romaji: "ginkou", meaning: "银行" }, level: "基础", tags: ["浊音"], sortOrder: 102 },
-  { id: "gu", group: "濁音", hiragana: "ぐ", katakana: "グ", romaji: "gu", example: { word: "具合", kana: "ぐあい", romaji: "guai", meaning: "情况 / 身体状况" }, level: "基础", tags: ["浊音"], sortOrder: 103 },
-  { id: "ge", group: "濁音", hiragana: "げ", katakana: "ゲ", romaji: "ge", example: { word: "元気", kana: "げんき", romaji: "genki", meaning: "精神 / 健康" }, level: "基础", tags: ["浊音"], sortOrder: 104 },
-  { id: "go-daku", group: "濁音", hiragana: "ご", katakana: "ゴ", romaji: "go", example: { word: "午後", kana: "ごご", romaji: "gogo", meaning: "下午" }, level: "基础", tags: ["浊音"], sortOrder: 105 },
-  { id: "za", group: "濁音", hiragana: "ざ", katakana: "ザ", romaji: "za", example: { word: "座席", kana: "ざせき", romaji: "zaseki", meaning: "座位" }, level: "基础", tags: ["浊音"], sortOrder: 106 },
-  { id: "ji", group: "濁音", hiragana: "じ", katakana: "ジ", romaji: "ji", example: { word: "時間", kana: "じかん", romaji: "jikan", meaning: "时间" }, level: "基础", tags: ["浊音"], sortOrder: 107 },
-  { id: "zu", group: "濁音", hiragana: "ず", katakana: "ズ", romaji: "zu", example: { word: "地図", kana: "ちず", romaji: "chizu", meaning: "地图" }, level: "基础", tags: ["浊音"], sortOrder: 108 },
-  { id: "ze", group: "濁音", hiragana: "ぜ", katakana: "ゼ", romaji: "ze", example: { word: "全部", kana: "ぜんぶ", romaji: "zenbu", meaning: "全部" }, level: "基础", tags: ["浊音"], sortOrder: 109 },
-  { id: "zo", group: "濁音", hiragana: "ぞ", katakana: "ゾ", romaji: "zo", example: { word: "家族", kana: "かぞく", romaji: "kazoku", meaning: "家人" }, level: "基础", tags: ["浊音"], sortOrder: 110 },
-  { id: "da", group: "濁音", hiragana: "だ", katakana: "ダ", romaji: "da", example: { word: "大学", kana: "だいがく", romaji: "daigaku", meaning: "大学" }, level: "基础", tags: ["浊音"], sortOrder: 111 },
-  { id: "di", group: "濁音", hiragana: "ぢ", katakana: "ヂ", romaji: "ji", example: { word: "鼻血", kana: "はなぢ", romaji: "hanaji", meaning: "鼻血" }, level: "进阶入门", tags: ["浊音"], sortOrder: 112 },
-  { id: "du", group: "濁音", hiragana: "づ", katakana: "ヅ", romaji: "zu", example: { word: "続く", kana: "つづく", romaji: "tsuzuku", meaning: "继续" }, level: "进阶入门", tags: ["浊音"], sortOrder: 113 },
-  { id: "de", group: "濁音", hiragana: "で", katakana: "デ", romaji: "de", example: { word: "出口", kana: "でぐち", romaji: "deguchi", meaning: "出口" }, level: "基础", tags: ["浊音"], sortOrder: 114 },
-  { id: "do", group: "濁音", hiragana: "ど", katakana: "ド", romaji: "do", example: { word: "どこ", kana: "どこ", romaji: "doko", meaning: "哪里" }, level: "基础", tags: ["浊音"], sortOrder: 115 },
-  { id: "ba", group: "濁音", hiragana: "ば", katakana: "バ", romaji: "ba", example: { word: "番号", kana: "ばんごう", romaji: "bangou", meaning: "号码" }, level: "基础", tags: ["浊音"], sortOrder: 116 },
-  { id: "bi", group: "濁音", hiragana: "び", katakana: "ビ", romaji: "bi", example: { word: "病院", kana: "びょういん", romaji: "byouin", meaning: "医院" }, level: "基础", tags: ["浊音"], sortOrder: 117 },
-  { id: "bu", group: "濁音", hiragana: "ぶ", katakana: "ブ", romaji: "bu", example: { word: "豚肉", kana: "ぶたにく", romaji: "butaniku", meaning: "猪肉" }, level: "基础", tags: ["浊音"], sortOrder: 118 },
-  { id: "be", group: "濁音", hiragana: "べ", katakana: "ベ", romaji: "be", example: { word: "勉強", kana: "べんきょう", romaji: "benkyou", meaning: "学习" }, level: "基础", tags: ["浊音"], sortOrder: 119 },
-  { id: "bo", group: "濁音", hiragana: "ぼ", katakana: "ボ", romaji: "bo", example: { word: "帽子", kana: "ぼうし", romaji: "boushi", meaning: "帽子" }, level: "基础", tags: ["浊音"], sortOrder: 120 },
-  { id: "pa", group: "半濁音", hiragana: "ぱ", katakana: "パ", romaji: "pa", example: { word: "パン", kana: "ぱん", romaji: "pan", meaning: "面包" }, level: "基础", tags: ["半浊音"], sortOrder: 121 },
-  { id: "pi", group: "半濁音", hiragana: "ぴ", katakana: "ピ", romaji: "pi", example: { word: "ピンク", kana: "ぴんく", romaji: "pinku", meaning: "粉色" }, level: "基础", tags: ["半浊音"], sortOrder: 122 },
-  { id: "pu", group: "半濁音", hiragana: "ぷ", katakana: "プ", romaji: "pu", example: { word: "プール", kana: "ぷーる", romaji: "puuru", meaning: "游泳池" }, level: "基础", tags: ["半浊音"], sortOrder: 123 },
-  { id: "pe", group: "半濁音", hiragana: "ぺ", katakana: "ペ", romaji: "pe", example: { word: "ペン", kana: "ぺん", romaji: "pen", meaning: "笔" }, level: "基础", tags: ["半浊音"], sortOrder: 124 },
-  { id: "po", group: "半濁音", hiragana: "ぽ", katakana: "ポ", romaji: "po", example: { word: "ポスト", kana: "ぽすと", romaji: "posuto", meaning: "邮箱" }, level: "基础", tags: ["半浊音"], sortOrder: 125 },
+  { id: "ga", group: "浊音", hiragana: "が", katakana: "ガ", romaji: "ga", example: { word: "学校", kana: "がっこう", romaji: "gakkou", meaning: "学校" }, level: "基础", tags: ["浊音"], sortOrder: 101 },
+  { id: "gi", group: "浊音", hiragana: "ぎ", katakana: "ギ", romaji: "gi", example: { word: "銀行", kana: "ぎんこう", romaji: "ginkou", meaning: "银行" }, level: "基础", tags: ["浊音"], sortOrder: 102 },
+  { id: "gu", group: "浊音", hiragana: "ぐ", katakana: "グ", romaji: "gu", example: { word: "具合", kana: "ぐあい", romaji: "guai", meaning: "情况 / 身体状况" }, level: "基础", tags: ["浊音"], sortOrder: 103 },
+  { id: "ge", group: "浊音", hiragana: "げ", katakana: "ゲ", romaji: "ge", example: { word: "元気", kana: "げんき", romaji: "genki", meaning: "精神 / 健康" }, level: "基础", tags: ["浊音"], sortOrder: 104 },
+  { id: "go-daku", group: "浊音", hiragana: "ご", katakana: "ゴ", romaji: "go", example: { word: "午後", kana: "ごご", romaji: "gogo", meaning: "下午" }, level: "基础", tags: ["浊音"], sortOrder: 105 },
+  { id: "za", group: "浊音", hiragana: "ざ", katakana: "ザ", romaji: "za", example: { word: "座席", kana: "ざせき", romaji: "zaseki", meaning: "座位" }, level: "基础", tags: ["浊音"], sortOrder: 106 },
+  { id: "ji", group: "浊音", hiragana: "じ", katakana: "ジ", romaji: "ji", example: { word: "時間", kana: "じかん", romaji: "jikan", meaning: "时间" }, level: "基础", tags: ["浊音"], sortOrder: 107 },
+  { id: "zu", group: "浊音", hiragana: "ず", katakana: "ズ", romaji: "zu", example: { word: "地図", kana: "ちず", romaji: "chizu", meaning: "地图" }, level: "基础", tags: ["浊音"], sortOrder: 108 },
+  { id: "ze", group: "浊音", hiragana: "ぜ", katakana: "ゼ", romaji: "ze", example: { word: "全部", kana: "ぜんぶ", romaji: "zenbu", meaning: "全部" }, level: "基础", tags: ["浊音"], sortOrder: 109 },
+  { id: "zo", group: "浊音", hiragana: "ぞ", katakana: "ゾ", romaji: "zo", example: { word: "家族", kana: "かぞく", romaji: "kazoku", meaning: "家人" }, level: "基础", tags: ["浊音"], sortOrder: 110 },
+  { id: "da", group: "浊音", hiragana: "だ", katakana: "ダ", romaji: "da", example: { word: "大学", kana: "だいがく", romaji: "daigaku", meaning: "大学" }, level: "基础", tags: ["浊音"], sortOrder: 111 },
+  { id: "di", group: "浊音", hiragana: "ぢ", katakana: "ヂ", romaji: "ji", example: { word: "鼻血", kana: "はなぢ", romaji: "hanaji", meaning: "鼻血" }, level: "进阶入门", tags: ["浊音"], sortOrder: 112 },
+  { id: "du", group: "浊音", hiragana: "づ", katakana: "ヅ", romaji: "zu", example: { word: "続く", kana: "つづく", romaji: "tsuzuku", meaning: "继续" }, level: "进阶入门", tags: ["浊音"], sortOrder: 113 },
+  { id: "de", group: "浊音", hiragana: "で", katakana: "デ", romaji: "de", example: { word: "出口", kana: "でぐち", romaji: "deguchi", meaning: "出口" }, level: "基础", tags: ["浊音"], sortOrder: 114 },
+  { id: "do", group: "浊音", hiragana: "ど", katakana: "ド", romaji: "do", example: { word: "どこ", kana: "どこ", romaji: "doko", meaning: "哪里" }, level: "基础", tags: ["浊音"], sortOrder: 115 },
+  { id: "ba", group: "浊音", hiragana: "ば", katakana: "バ", romaji: "ba", example: { word: "番号", kana: "ばんごう", romaji: "bangou", meaning: "号码" }, level: "基础", tags: ["浊音"], sortOrder: 116 },
+  { id: "bi", group: "浊音", hiragana: "び", katakana: "ビ", romaji: "bi", example: { word: "病院", kana: "びょういん", romaji: "byouin", meaning: "医院" }, level: "基础", tags: ["浊音"], sortOrder: 117 },
+  { id: "bu", group: "浊音", hiragana: "ぶ", katakana: "ブ", romaji: "bu", example: { word: "豚肉", kana: "ぶたにく", romaji: "butaniku", meaning: "猪肉" }, level: "基础", tags: ["浊音"], sortOrder: 118 },
+  { id: "be", group: "浊音", hiragana: "べ", katakana: "ベ", romaji: "be", example: { word: "勉強", kana: "べんきょう", romaji: "benkyou", meaning: "学习" }, level: "基础", tags: ["浊音"], sortOrder: 119 },
+  { id: "bo", group: "浊音", hiragana: "ぼ", katakana: "ボ", romaji: "bo", example: { word: "帽子", kana: "ぼうし", romaji: "boushi", meaning: "帽子" }, level: "基础", tags: ["浊音"], sortOrder: 120 },
+  { id: "pa", group: "半浊音", hiragana: "ぱ", katakana: "パ", romaji: "pa", example: { word: "パン", kana: "ぱん", romaji: "pan", meaning: "面包" }, level: "基础", tags: ["半浊音"], sortOrder: 121 },
+  { id: "pi", group: "半浊音", hiragana: "ぴ", katakana: "ピ", romaji: "pi", example: { word: "ピンク", kana: "ぴんく", romaji: "pinku", meaning: "粉色" }, level: "基础", tags: ["半浊音"], sortOrder: 122 },
+  { id: "pu", group: "半浊音", hiragana: "ぷ", katakana: "プ", romaji: "pu", example: { word: "プール", kana: "ぷーる", romaji: "puuru", meaning: "游泳池" }, level: "基础", tags: ["半浊音"], sortOrder: 123 },
+  { id: "pe", group: "半浊音", hiragana: "ぺ", katakana: "ペ", romaji: "pe", example: { word: "ペン", kana: "ぺん", romaji: "pen", meaning: "笔" }, level: "基础", tags: ["半浊音"], sortOrder: 124 },
+  { id: "po", group: "半浊音", hiragana: "ぽ", katakana: "ポ", romaji: "po", example: { word: "ポスト", kana: "ぽすと", romaji: "posuto", meaning: "邮箱" }, level: "基础", tags: ["半浊音"], sortOrder: 125 },
   { id: "kya", group: "拗音", hiragana: "きゃ", katakana: "キャ", romaji: "kya", example: { word: "客", kana: "きゃく", romaji: "kyaku", meaning: "客人" }, level: "基础", tags: ["拗音"], sortOrder: 126 },
   { id: "kyu", group: "拗音", hiragana: "きゅ", katakana: "キュ", romaji: "kyu", example: { word: "急行", kana: "きゅうこう", romaji: "kyuukou", meaning: "急行" }, level: "基础", tags: ["拗音"], sortOrder: 127 },
   { id: "kyo", group: "拗音", hiragana: "きょ", katakana: "キョ", romaji: "kyo", example: { word: "今日", kana: "きょう", romaji: "kyou", meaning: "今天" }, level: "基础", tags: ["拗音"], sortOrder: 128 },
@@ -143,8 +170,8 @@ const kanaExtensionItems: KanaItem[] = [
   { id: "pya", group: "拗音", hiragana: "ぴゃ", katakana: "ピャ", romaji: "pya", example: { word: "六百", kana: "ろっぴゃく", romaji: "roppyaku", meaning: "六百" }, level: "基础", tags: ["拗音", "半浊音"], sortOrder: 156 },
   { id: "pyu", group: "拗音", hiragana: "ぴゅ", katakana: "ピュ", romaji: "pyu", example: { word: "ピュア", kana: "ぴゅあ", romaji: "pyua", meaning: "纯粹" }, level: "进阶入门", tags: ["拗音", "半浊音"], sortOrder: 157 },
   { id: "pyo", group: "拗音", hiragana: "ぴょ", katakana: "ピョ", romaji: "pyo", example: { word: "発表", kana: "はっぴょう", romaji: "happyou", meaning: "发表" }, level: "基础", tags: ["拗音", "半浊音"], sortOrder: 158 },
-  { id: "sokuon", group: "促音・長音", hiragana: "っ", katakana: "ッ", romaji: "small tsu", example: { word: "切符", kana: "きっぷ", romaji: "kippu", meaning: "车票" }, level: "基础", tags: ["促音"], sortOrder: 159, audioText: "きっぷ" },
-  { id: "chouon", group: "促音・長音", hiragana: "ー", katakana: "ー", romaji: "long vowel", example: { word: "コーヒー", kana: "こーひー", romaji: "koohii", meaning: "咖啡" }, level: "基础", tags: ["长音"], sortOrder: 160, audioText: "コーヒー" },
+  { id: "sokuon", group: "促音・长音", hiragana: "っ", katakana: "ッ", romaji: "small tsu", example: { word: "切符", kana: "きっぷ", romaji: "kippu", meaning: "车票" }, level: "基础", tags: ["促音"], sortOrder: 159, audioText: "きっぷ" },
+  { id: "chouon", group: "促音・长音", hiragana: "ー", katakana: "ー", romaji: "long vowel", example: { word: "コーヒー", kana: "こーひー", romaji: "koohii", meaning: "咖啡" }, level: "基础", tags: ["长音"], sortOrder: 160, audioText: "コーヒー" },
 ];
 
 export const kanaItems: KanaItem[] = [...basicKanaItems, ...kanaExtensionItems];
