@@ -21,15 +21,15 @@ const footerLinks: Array<{ label: string; page: PageKey }> = [
 
 const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
   return (
-    <footer className="border-t border-ink/8 bg-rice/72 px-4 pb-28 pt-5 text-ink sm:px-6 md:pb-6 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <section className="rounded-lg border border-ink/8 bg-paper/94 p-4 shadow-card" aria-labelledby="footer-title">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
+    <footer className="border-t border-ink/8 bg-rice/72 px-3 pb-28 pt-5 text-ink sm:px-4 md:pb-6 lg:px-6">
+      <div className="mx-auto max-w-7xl space-y-3">
+        <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/94 p-4 shadow-card" aria-labelledby="footer-title">
+          <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex min-w-0 items-center gap-3">
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-matcha text-base font-extrabold text-white">
                 日
               </span>
-              <div>
+              <div className="min-w-0">
                 <h2 id="footer-title" className="text-lg font-extrabold text-ink">
                   中文学日语
                 </h2>
@@ -41,7 +41,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
               target="_blank"
               rel="noreferrer"
               aria-label="打开 Mark 的作者主页"
-              className="flex min-h-10 items-center gap-2 rounded-md border border-ink/10 bg-rice/50 px-3 py-2 text-sm font-extrabold text-ink transition hover:border-matcha/30 hover:bg-rice"
+              className="flex min-h-10 w-full items-center justify-center gap-2 rounded-md border border-ink/10 bg-rice/50 px-3 py-2 text-sm font-extrabold text-ink transition hover:border-matcha/30 hover:bg-rice sm:w-auto"
             >
               <Home aria-hidden="true" size={17} />
               作者 Mark
@@ -54,7 +54,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
               <Table2 aria-hidden="true" className="text-matcha" size={17} />
               快速入口
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-7">
               {footerLinks.map((item) => {
                 const active = currentPage === item.page;
 
@@ -63,7 +63,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
                     key={item.page}
                     type="button"
                     onClick={() => onNavigate(item.page)}
-                    className={`min-h-10 cursor-pointer rounded-md border px-3 py-1.5 text-sm font-extrabold transition active:scale-[0.99] ${
+                    className={`min-h-10 min-w-0 cursor-pointer rounded-md border px-2 py-1.5 text-sm font-extrabold transition active:scale-[0.99] ${
                       active
                         ? "border-matcha bg-matcha text-white"
                         : "border-ink/10 bg-rice/35 text-ink/68 hover:border-matcha/25 hover:bg-rice/65 hover:text-ink"
