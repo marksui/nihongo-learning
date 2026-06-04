@@ -142,6 +142,10 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       return [milestone.id, { done, percent: Math.round((done / total) * 100), total }];
     }),
   );
+  const currentMilestoneProgress = nextMilestone ? milestoneProgress.get(nextMilestone.id) : undefined;
+  const currentMilestoneRemaining = currentMilestoneProgress
+    ? Math.max(currentMilestoneProgress.total - currentMilestoneProgress.done, 0)
+    : 0;
 
   return (
     <div className="space-y-7">
@@ -306,6 +310,9 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                 <span className="mt-0.5 block text-base font-extrabold text-ink">{nextPathStep.title}</span>
                 <span className="mt-0.5 block truncate text-xs font-bold text-ink/58">
                   {[nextMilestone?.label, nextGoal?.title].filter(Boolean).join(" · ")}
+                </span>
+                <span className="mt-1 inline-flex rounded bg-paper/80 px-2 py-0.5 text-[0.68rem] font-extrabold text-ink/55">
+                  {pathComplete ? "整条路线已走完" : `本阶段还差 ${currentMilestoneRemaining} 步`}
                 </span>
               </span>
               <ArrowRight aria-hidden="true" className="shrink-0 text-matcha" size={18} />
