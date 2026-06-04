@@ -15,6 +15,7 @@ import {
   speakJapanese,
   stopJapanese,
 } from "./utils/speech";
+import { recordPageVisit, recordRecentRead } from "./utils/progress";
 
 const pages: PageKey[] = [
   "home",
@@ -43,6 +44,10 @@ const App = () => {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
+  useEffect(() => {
+    recordPageVisit(currentPage);
+  }, [currentPage]);
+
   const navigate = useCallback((page: PageKey) => {
     setCurrentPage(page);
     window.location.hash = page === "home" ? "" : page;
@@ -53,6 +58,7 @@ const App = () => {
     setSpeechWarning(null);
     setSpeechActive(true);
     setSpeechPaused(false);
+    recordRecentRead(text);
 
     const result = await speakJapanese(text);
 

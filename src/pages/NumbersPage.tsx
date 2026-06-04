@@ -132,14 +132,14 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                   <SpeakButton
                     active={active}
                     ariaLabel={`朗读 ${item.japanese}`}
-                    onClick={() => playNumber(item.id, item.japanese)}
+                    onClick={() => playNumber(item.id, item.audioText ?? item.japanese)}
                     title="朗读"
                   />
                 </div>
 
                 <button
                   type="button"
-                  onClick={() => void playNumber(item.id, item.japanese)}
+                  onClick={() => void playNumber(item.id, item.audioText ?? item.japanese)}
                   className={`group mt-5 w-full cursor-pointer rounded-md px-4 py-3 text-left transition active:scale-[0.99] ${
                     active ? "bg-matcha text-white" : "bg-rice/55 hover:bg-matcha hover:text-white"
                   }`}

@@ -20,9 +20,13 @@ export interface NumberExample {
   romaji: string;
   meaning: string;
   note?: string;
+  level?: "入门" | "基础" | "进阶入门";
+  tags?: string[];
+  sortOrder?: number;
+  audioText?: string;
 }
 
-export const numberExamples: NumberExample[] = [
+const coreNumberExamples: NumberExample[] = [
   { id: "zero", group: "基础数字", display: "0", japanese: "ゼロ", kana: "ぜろ", romaji: "zero", meaning: "零", note: "也可读 れい，多用于编号、温度等。" },
   { id: "one", group: "基础数字", display: "1", japanese: "一", kana: "いち", romaji: "ichi", meaning: "一" },
   { id: "two", group: "基础数字", display: "2", japanese: "二", kana: "に", romaji: "ni", meaning: "二" },
@@ -90,3 +94,26 @@ export const numberExamples: NumberExample[] = [
   { id: "room-305", group: "电话编号", display: "305号室", japanese: "三百五号室", kana: "さんびゃくごごうしつ", romaji: "sanbyaku go goushitsu", meaning: "305 号房" },
   { id: "postal", group: "电话编号", display: "〒160-0022", japanese: "一六〇の〇〇二二", kana: "いちろくぜろのぜろぜろにに", romaji: "ichi roku zero no zero zero ni ni", meaning: "邮编 160-0022" },
 ];
+
+const expandedNumberExamples: NumberExample[] = [
+  { id: "yen-3980", group: "价格金额", display: "3,980円", japanese: "三千九百八十円", kana: "さんぜんきゅうひゃくはちじゅうえん", romaji: "sanzen kyuuhyaku hachijuu en", meaning: "3,980 日元", tags: ["购物", "价格"] },
+  { id: "yen-45800", group: "价格金额", display: "45,800円", japanese: "四万五千八百円", kana: "よんまんごせんはっぴゃくえん", romaji: "yonman gosen happyaku en", meaning: "45,800 日元", tags: ["购物", "价格"] },
+  { id: "yen-120000", group: "价格金额", display: "120,000円", japanese: "十二万円", kana: "じゅうにまんえん", romaji: "juuniman en", meaning: "十二万日元", tags: ["租房", "价格"] },
+  { id: "time-1015", group: "日期时间", display: "10:15", japanese: "十時十五分", kana: "じゅうじじゅうごふん", romaji: "juuji juugo fun", meaning: "十点十五分", tags: ["时间"] },
+  { id: "time-1245", group: "日期时间", display: "12:45", japanese: "十二時四十五分", kana: "じゅうにじよんじゅうごふん", romaji: "juuniji yonjuugo fun", meaning: "十二点四十五分", tags: ["时间"] },
+  { id: "date-2026-06-03", group: "日期时间", display: "2026年6月3日", japanese: "二千二十六年六月三日", kana: "にせんにじゅうろくねんろくがつみっか", romaji: "nisen nijuu roku nen roku gatsu mikka", meaning: "2026 年 6 月 3 日", tags: ["日期"] },
+  { id: "people-four", group: "人数年龄", display: "4人", japanese: "四人", kana: "よにん", romaji: "yonin", meaning: "四个人", note: "人数里的 4 人读 よにん。", tags: ["人数"] },
+  { id: "people-seven", group: "人数年龄", display: "7人", japanese: "七人", kana: "しちにん / ななにん", romaji: "shichinin / nananin", meaning: "七个人", tags: ["人数"] },
+  { id: "age-four", group: "人数年龄", display: "4岁", japanese: "四歳", kana: "よんさい", romaji: "yonsai", meaning: "四岁", tags: ["年龄"] },
+  { id: "age-thirty", group: "人数年龄", display: "30岁", japanese: "三十歳", kana: "さんじゅっさい", romaji: "san jussai", meaning: "三十岁", tags: ["年龄"] },
+  { id: "floor-two", group: "楼层序号", display: "2楼", japanese: "二階", kana: "にかい", romaji: "nikai", meaning: "二楼", tags: ["楼层"] },
+  { id: "floor-ten", group: "楼层序号", display: "10楼", japanese: "十階", kana: "じゅっかい", romaji: "jukkai", meaning: "十楼", tags: ["楼层"] },
+  { id: "room-1208", group: "楼层序号", display: "1208号室", japanese: "千二百八号室", kana: "せんにひゃくはちごうしつ", romaji: "sen nihyaku hachi goushitsu", meaning: "1208 号房", tags: ["房间"] },
+  { id: "phone-mobile", group: "电话编号", display: "080-1234-5678", japanese: "ゼロ八ゼロ 一二三四 五六七八", kana: "ぜろはちぜろ いちにさんよん ごろくななはち", romaji: "zero hachi zero ichi ni san yon go roku nana hachi", meaning: "手机号 080-1234-5678", note: "电话号码逐位读，4 常读 よん，7 常读 なな。", tags: ["电话"] },
+  { id: "address-block", group: "电话编号", display: "3-5-12", japanese: "三の五の十二", kana: "さんのごのじゅうに", romaji: "san no go no juuni", meaning: "地址中的 3-5-12", tags: ["地址"] },
+];
+
+export const numberExamples: NumberExample[] = [...coreNumberExamples, ...expandedNumberExamples].map((item, index) => ({
+  sortOrder: item.sortOrder ?? index + 1,
+  ...item,
+}));

@@ -9,6 +9,13 @@ export const vocabularyCategories = [
   "学校",
   "动词",
   "形容词",
+  "旅行",
+  "交通",
+  "便利店",
+  "身体",
+  "天气",
+  "情绪",
+  "工作",
 ] as const;
 
 export type VocabularyCategory = (typeof vocabularyCategories)[number];
@@ -23,9 +30,13 @@ export interface VocabularyItem {
   sentence: string;
   sentenceKana: string;
   translation: string;
+  level?: "入门" | "基础" | "进阶入门";
+  tags?: string[];
+  sortOrder?: number;
+  audioText?: string;
 }
 
-export const vocabulary: VocabularyItem[] = [
+const coreVocabulary: VocabularyItem[] = [
   {
     id: "greeting-konnichiwa",
     category: "问候",
@@ -940,3 +951,140 @@ export const vocabulary: VocabularyItem[] = [
     translation: "今天非常忙。",
   },
 ];
+
+const makeVocabulary = (
+  id: string,
+  category: VocabularyCategory,
+  japanese: string,
+  kana: string,
+  romaji: string,
+  meaning: string,
+  sentence: string,
+  sentenceKana: string,
+  translation: string,
+  tags: string[] = [category],
+): VocabularyItem => ({
+  id,
+  category,
+  japanese,
+  kana,
+  romaji,
+  meaning,
+  sentence,
+  sentenceKana,
+  translation,
+  level: "基础",
+  tags,
+});
+
+const expandedVocabulary: VocabularyItem[] = [
+  makeVocabulary("travel-ryokan", "旅行", "旅館", "りょかん", "ryokan", "日式旅馆", "この旅館は静かです。", "このりょかんはしずかです。", "这家日式旅馆很安静。"),
+  makeVocabulary("travel-yoyaku", "旅行", "予約", "よやく", "yoyaku", "预约 / 预订", "ホテルの予約があります。", "ほてるのよやくがあります。", "我有酒店预订。"),
+  makeVocabulary("travel-passport", "旅行", "パスポート", "ぱすぽーと", "pasupooto", "护照", "パスポートを見せてください。", "ぱすぽーとをみせてください。", "请出示护照。"),
+  makeVocabulary("travel-nimotsu", "旅行", "荷物", "にもつ", "nimotsu", "行李", "荷物をここに置きます。", "にもつをここにおきます。", "把行李放在这里。"),
+  makeVocabulary("travel-kankou", "旅行", "観光", "かんこう", "kankou", "观光", "京都を観光します。", "きょうとをかんこうします。", "去京都观光。"),
+  makeVocabulary("travel-shashin", "旅行", "写真", "しゃしん", "shashin", "照片", "写真を撮ってもいいですか。", "しゃしんをとってもいいですか。", "可以拍照吗？"),
+  makeVocabulary("travel-omiyage", "旅行", "お土産", "おみやげ", "omiyage", "伴手礼", "友だちにお土産を買います。", "ともだちにおみやげをかいます。", "给朋友买伴手礼。"),
+  makeVocabulary("travel-chizu", "旅行", "地図", "ちず", "chizu", "地图", "地図を見ます。", "ちずをみます。", "看地图。"),
+  makeVocabulary("travel-juusho", "旅行", "住所", "じゅうしょ", "juusho", "地址", "住所を教えてください。", "じゅうしょをおしえてください。", "请告诉我地址。"),
+  makeVocabulary("travel-annai", "旅行", "案内", "あんない", "annai", "引导 / 指引", "駅まで案内します。", "えきまであんないします。", "我带你到车站。"),
+  makeVocabulary("travel-kuukou", "旅行", "空港", "くうこう", "kuukou", "机场", "空港へ行きます。", "くうこうへいきます。", "去机场。"),
+  makeVocabulary("travel-hoteru", "旅行", "ホテル", "ほてる", "hoteru", "酒店", "ホテルは駅の近くです。", "ほてるはえきのちかくです。", "酒店在车站附近。"),
+  makeVocabulary("travel-onsen", "旅行", "温泉", "おんせん", "onsen", "温泉", "温泉に入りたいです。", "おんせんにはいりたいです。", "我想泡温泉。"),
+  makeVocabulary("travel-kippu", "旅行", "切符", "きっぷ", "kippu", "车票", "切符を一枚ください。", "きっぷをいちまいください。", "请给我一张票。"),
+
+  makeVocabulary("traffic-densha", "交通", "電車", "でんしゃ", "densha", "电车", "電車で学校へ行きます。", "でんしゃでがっこうへいきます。", "坐电车去学校。"),
+  makeVocabulary("traffic-basu", "交通", "バス", "ばす", "basu", "公交车", "バスに乗ります。", "ばすにのります。", "坐公交车。"),
+  makeVocabulary("traffic-taxi", "交通", "タクシー", "たくしー", "takushii", "出租车", "タクシーを呼んでください。", "たくしーをよんでください。", "请帮我叫出租车。"),
+  makeVocabulary("traffic-chikatetsu", "交通", "地下鉄", "ちかてつ", "chikatetsu", "地铁", "地下鉄は便利です。", "ちかてつはべんりです。", "地铁很方便。"),
+  makeVocabulary("traffic-eki", "交通", "駅", "えき", "eki", "车站", "駅はどこですか。", "えきはどこですか。", "车站在哪里？"),
+  makeVocabulary("traffic-noriba", "交通", "乗り場", "のりば", "noriba", "乘车处", "バス乗り場はあちらです。", "ばすのりばはあちらです。", "公交乘车处在那边。"),
+  makeVocabulary("traffic-kaisatsu", "交通", "改札", "かいさつ", "kaisatsu", "检票口", "改札で待ちます。", "かいさつでまちます。", "在检票口等。"),
+  makeVocabulary("traffic-hoomu", "交通", "ホーム", "ほーむ", "hoomu", "站台", "三番ホームへ行きます。", "さんばんほーむへいきます。", "去三号站台。"),
+  makeVocabulary("traffic-futsuu", "交通", "普通", "ふつう", "futsuu", "普通车", "普通電車に乗ります。", "ふつうでんしゃにのります。", "坐普通电车。"),
+  makeVocabulary("traffic-kyuukou", "交通", "急行", "きゅうこう", "kyuukou", "急行车", "急行は速いです。", "きゅうこうははやいです。", "急行车很快。"),
+  makeVocabulary("traffic-noru", "交通", "乗る", "のる", "noru", "乘坐", "次の駅で乗ります。", "つぎのえきでのります。", "在下一站上车。"),
+  makeVocabulary("traffic-oriru", "交通", "降りる", "おりる", "oriru", "下车", "新宿で降ります。", "しんじゅくでおります。", "在新宿下车。"),
+  makeVocabulary("traffic-okureru", "交通", "遅れる", "おくれる", "okureru", "迟到 / 晚点", "電車が少し遅れます。", "でんしゃがすこしおくれます。", "电车会稍微晚点。"),
+  makeVocabulary("traffic-norikae", "交通", "乗り換え", "のりかえ", "norikae", "换乘", "ここで乗り換えます。", "ここでのりかえます。", "在这里换乘。"),
+
+  makeVocabulary("store-konbini", "便利店", "コンビニ", "こんびに", "konbini", "便利店", "コンビニで水を買います。", "こんびにでみずをかいます。", "在便利店买水。"),
+  makeVocabulary("store-onigiri", "便利店", "おにぎり", "おにぎり", "onigiri", "饭团", "おにぎりを二つください。", "おにぎりをふたつください。", "请给我两个饭团。"),
+  makeVocabulary("store-bentou", "便利店", "弁当", "べんとう", "bentou", "便当", "弁当を温めますか。", "べんとうをあたためますか。", "便当需要加热吗？"),
+  makeVocabulary("store-nomimono", "便利店", "飲み物", "のみもの", "nomimono", "饮料", "冷たい飲み物が欲しいです。", "つめたいのみものがほしいです。", "想要冷饮。"),
+  makeVocabulary("store-reji", "便利店", "レジ", "れじ", "reji", "收银台", "レジはあちらです。", "れじはあちらです。", "收银台在那边。"),
+  makeVocabulary("store-fukuro", "便利店", "袋", "ふくろ", "fukuro", "袋子", "袋はいりません。", "ふくろはいりません。", "不需要袋子。"),
+  makeVocabulary("store-hashi", "便利店", "箸", "はし", "hashi", "筷子", "箸をください。", "はしをください。", "请给我筷子。"),
+  makeVocabulary("store-atatameru", "便利店", "温める", "あたためる", "atatameru", "加热", "これを温めてください。", "これをあたためてください。", "请加热这个。"),
+  makeVocabulary("store-genkin", "便利店", "現金", "げんきん", "genkin", "现金", "現金で払います。", "げんきんではらいます。", "用现金付款。"),
+  makeVocabulary("store-kaado", "便利店", "カード", "かーど", "kaado", "卡", "カードは使えますか。", "かーどはつかえますか。", "可以用卡吗？"),
+  makeVocabulary("store-ryoushuusho", "便利店", "領収書", "りょうしゅうしょ", "ryoushuusho", "收据", "領収書をお願いします。", "りょうしゅうしょをおねがいします。", "请给我收据。"),
+  makeVocabulary("store-pointo", "便利店", "ポイント", "ぽいんと", "pointo", "积分", "ポイントカードはありますか。", "ぽいんとかーどはありますか。", "有积分卡吗？"),
+  makeVocabulary("store-kopii", "便利店", "コピー", "こぴー", "kopii", "复印", "ここでコピーできます。", "ここでこぴーできます。", "这里可以复印。"),
+  makeVocabulary("store-takuhai", "便利店", "宅配便", "たくはいびん", "takuhaibin", "快递", "宅配便を送りたいです。", "たくはいびんをおくりたいです。", "我想寄快递。"),
+
+  makeVocabulary("body-atama", "身体", "頭", "あたま", "atama", "头", "頭が痛いです。", "あたまがいたいです。", "头痛。"),
+  makeVocabulary("body-kao", "身体", "顔", "かお", "kao", "脸", "顔を洗います。", "かおをあらいます。", "洗脸。"),
+  makeVocabulary("body-me", "身体", "目", "め", "me", "眼睛", "目が疲れました。", "めがつかれました。", "眼睛累了。"),
+  makeVocabulary("body-mimi", "身体", "耳", "みみ", "mimi", "耳朵", "耳が少し痛いです。", "みみがすこしいたいです。", "耳朵有点痛。"),
+  makeVocabulary("body-kuchi", "身体", "口", "くち", "kuchi", "嘴", "口を開けてください。", "くちをあけてください。", "请张嘴。"),
+  makeVocabulary("body-ha", "身体", "歯", "は", "ha", "牙齿", "歯が痛いです。", "はがいたいです。", "牙痛。"),
+  makeVocabulary("body-nodo", "身体", "喉", "のど", "nodo", "喉咙", "喉が痛いです。", "のどがいたいです。", "喉咙痛。"),
+  makeVocabulary("body-te", "身体", "手", "て", "te", "手", "手を洗います。", "てをあらいます。", "洗手。"),
+  makeVocabulary("body-ashi", "身体", "足", "あし", "ashi", "脚 / 腿", "足が疲れました。", "あしがつかれました。", "脚累了。"),
+  makeVocabulary("body-onaka", "身体", "お腹", "おなか", "onaka", "肚子", "お腹がすきました。", "おなかがすきました。", "肚子饿了。"),
+  makeVocabulary("body-senaka", "身体", "背中", "せなか", "senaka", "背", "背中が痛いです。", "せなかがいたいです。", "背痛。"),
+  makeVocabulary("body-netsu", "身体", "熱", "ねつ", "netsu", "发烧 / 热度", "熱があります。", "ねつがあります。", "我发烧了。"),
+  makeVocabulary("body-itai", "身体", "痛い", "いたい", "itai", "痛", "ここが痛いです。", "ここがいたいです。", "这里痛。"),
+  makeVocabulary("body-kusuri", "身体", "薬", "くすり", "kusuri", "药", "薬を飲みます。", "くすりをのみます。", "吃药。"),
+
+  makeVocabulary("weather-hare", "天气", "晴れ", "はれ", "hare", "晴天", "今日は晴れです。", "きょうははれです。", "今天是晴天。"),
+  makeVocabulary("weather-ame", "天气", "雨", "あめ", "ame", "雨", "雨が降っています。", "あめがふっています。", "正在下雨。"),
+  makeVocabulary("weather-kumori", "天气", "曇り", "くもり", "kumori", "阴天", "明日は曇りです。", "あしたはくもりです。", "明天阴天。"),
+  makeVocabulary("weather-yuki", "天气", "雪", "ゆき", "yuki", "雪", "雪が降りました。", "ゆきがふりました。", "下雪了。"),
+  makeVocabulary("weather-kaze", "天气", "風", "かぜ", "kaze", "风", "風が強いです。", "かぜがつよいです。", "风很大。"),
+  makeVocabulary("weather-taifuu", "天气", "台風", "たいふう", "taifuu", "台风", "台風が来ます。", "たいふうがきます。", "台风要来了。"),
+  makeVocabulary("weather-atsui", "天气", "暑い", "あつい", "atsui", "热", "今日は暑いです。", "きょうはあついです。", "今天很热。"),
+  makeVocabulary("weather-samui", "天气", "寒い", "さむい", "samui", "冷", "朝は寒いです。", "あさはさむいです。", "早上很冷。"),
+  makeVocabulary("weather-suzushii", "天气", "涼しい", "すずしい", "suzushii", "凉爽", "夜は涼しいです。", "よるはすずしいです。", "晚上很凉爽。"),
+  makeVocabulary("weather-atatakai", "天气", "暖かい", "あたたかい", "atatakai", "温暖", "春は暖かいです。", "はるはあたたかいです。", "春天很暖和。"),
+  makeVocabulary("weather-shikke", "天气", "湿気", "しっけ", "shikke", "湿气", "湿気が多いです。", "しっけがおおいです。", "湿气很重。"),
+  makeVocabulary("weather-yohou", "天气", "天気予報", "てんきよほう", "tenki yohou", "天气预报", "天気予報を見ます。", "てんきよほうをみます。", "看天气预报。"),
+  makeVocabulary("weather-kion", "天气", "気温", "きおん", "kion", "气温", "今日の気温は二十度です。", "きょうのきおんはにじゅうどです。", "今天气温是二十度。"),
+  makeVocabulary("weather-kasa", "天气", "傘", "かさ", "kasa", "伞", "傘を持って行きます。", "かさをもっていきます。", "带伞出门。"),
+
+  makeVocabulary("emotion-ureshii", "情绪", "嬉しい", "うれしい", "ureshii", "开心", "会えて嬉しいです。", "あえてうれしいです。", "见到你很开心。"),
+  makeVocabulary("emotion-kanashii", "情绪", "悲しい", "かなしい", "kanashii", "难过", "悲しい映画を見ました。", "かなしいえいがをみました。", "看了悲伤的电影。"),
+  makeVocabulary("emotion-tanoshii", "情绪", "楽しい", "たのしい", "tanoshii", "快乐 / 有趣", "旅行は楽しいです。", "りょこうはたのしいです。", "旅行很开心。"),
+  makeVocabulary("emotion-shinpai", "情绪", "心配", "しんぱい", "shinpai", "担心", "少し心配です。", "すこししんぱいです。", "有点担心。"),
+  makeVocabulary("emotion-anshin", "情绪", "安心", "あんしん", "anshin", "放心", "友だちが来て安心しました。", "ともだちがきてあんしんしました。", "朋友来了，我放心了。"),
+  makeVocabulary("emotion-kowai", "情绪", "怖い", "こわい", "kowai", "害怕", "夜の道は怖いです。", "よるのみちはこわいです。", "晚上的路很可怕。"),
+  makeVocabulary("emotion-sabishii", "情绪", "寂しい", "さびしい", "sabishii", "寂寞", "一人で少し寂しいです。", "ひとりですこしさびしいです。", "一个人有点寂寞。"),
+  makeVocabulary("emotion-tsukareta", "情绪", "疲れた", "つかれた", "tsukareta", "累了", "今日は疲れました。", "きょうはつかれました。", "今天累了。"),
+  makeVocabulary("emotion-nemui", "情绪", "眠い", "ねむい", "nemui", "困", "朝は眠いです。", "あさはねむいです。", "早上很困。"),
+  makeVocabulary("emotion-hazukashii", "情绪", "恥ずかしい", "はずかしい", "hazukashii", "害羞 / 难为情", "少し恥ずかしいです。", "すこしはずかしいです。", "有点不好意思。"),
+  makeVocabulary("emotion-suki", "情绪", "好き", "すき", "suki", "喜欢", "日本語が好きです。", "にほんごがすきです。", "我喜欢日语。"),
+  makeVocabulary("emotion-kirai", "情绪", "嫌い", "きらい", "kirai", "讨厌", "辛い食べ物は嫌いです。", "からいたべものはきらいです。", "我不喜欢辣的食物。"),
+  makeVocabulary("emotion-bikkuri", "情绪", "びっくり", "びっくり", "bikkuri", "吃惊", "大きな音にびっくりしました。", "おおきなおとにびっくりしました。", "被很大的声音吓了一跳。"),
+  makeVocabulary("emotion-kinchou", "情绪", "緊張", "きんちょう", "kinchou", "紧张", "面接で緊張しました。", "めんせつできんちょうしました。", "面试时紧张了。"),
+
+  makeVocabulary("work-kaisha", "工作", "会社", "かいしゃ", "kaisha", "公司", "会社へ行きます。", "かいしゃへいきます。", "去公司。"),
+  makeVocabulary("work-shigoto", "工作", "仕事", "しごと", "shigoto", "工作", "仕事が終わりました。", "しごとがおわりました。", "工作结束了。"),
+  makeVocabulary("work-kaigi", "工作", "会議", "かいぎ", "kaigi", "会议", "午後に会議があります。", "ごごにかいぎがあります。", "下午有会议。"),
+  makeVocabulary("work-meeru", "工作", "メール", "めーる", "meeru", "邮件", "メールを送ります。", "めーるをおくります。", "发送邮件。"),
+  makeVocabulary("work-shiryou", "工作", "資料", "しりょう", "shiryou", "资料", "資料を作ります。", "しりょうをつくります。", "制作资料。"),
+  makeVocabulary("work-joushi", "工作", "上司", "じょうし", "joushi", "上司", "上司に相談します。", "じょうしにそうだんします。", "和上司商量。"),
+  makeVocabulary("work-douryou", "工作", "同僚", "どうりょう", "douryou", "同事", "同僚と昼ご飯を食べます。", "どうりょうとひるごはんをたべます。", "和同事吃午饭。"),
+  makeVocabulary("work-shucchou", "工作", "出張", "しゅっちょう", "shucchou", "出差", "来週、大阪へ出張します。", "らいしゅう、おおさかへしゅっちょうします。", "下周去大阪出差。"),
+  makeVocabulary("work-yasumi", "工作", "休み", "やすみ", "yasumi", "休息 / 假期", "明日は休みです。", "あしたはやすみです。", "明天休息。"),
+  makeVocabulary("work-kyuuryou", "工作", "給料", "きゅうりょう", "kyuuryou", "工资", "給料日は金曜日です。", "きゅうりょうびはきんようびです。", "发薪日是星期五。"),
+  makeVocabulary("work-meishi", "工作", "名刺", "めいし", "meishi", "名片", "名刺を交換します。", "めいしをこうかんします。", "交换名片。"),
+  makeVocabulary("work-mensetsu", "工作", "面接", "めんせつ", "mensetsu", "面试", "明日、面接があります。", "あした、めんせつがあります。", "明天有面试。"),
+  makeVocabulary("work-renraku", "工作", "連絡", "れんらく", "renraku", "联系", "あとで連絡します。", "あとでれんらくします。", "稍后联系。"),
+  makeVocabulary("work-shimekiri", "工作", "締切", "しめきり", "shimekiri", "截止日期", "締切は今日です。", "しめきりはきょうです。", "截止日期是今天。"),
+];
+
+export const vocabulary: VocabularyItem[] = [...coreVocabulary, ...expandedVocabulary].map((word, index) => ({
+  sortOrder: word.sortOrder ?? index + 1,
+  ...word,
+}));

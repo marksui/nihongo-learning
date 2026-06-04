@@ -3,9 +3,10 @@ export interface DialogueLine {
   japanese: string;
   kana: string;
   translation: string;
+  audioText?: string;
 }
 
-export const dialogueModes = ["社交", "餐饮", "出行", "购物", "校园", "旅行", "生活", "紧急"] as const;
+export const dialogueModes = ["社交", "餐饮", "出行", "购物", "校园", "旅行", "生活", "紧急", "工作"] as const;
 
 export type DialogueMode = (typeof dialogueModes)[number];
 
@@ -16,9 +17,13 @@ export interface Dialogue {
   practiceSpeaker: string;
   situation: string;
   lines: DialogueLine[];
+  level?: "入门" | "基础" | "进阶入门";
+  tags?: string[];
+  sortOrder?: number;
+  audioText?: string;
 }
 
-export const dialogues: Dialogue[] = [
+const coreDialogues: Dialogue[] = [
   {
     id: "self-introduction",
     title: "自我介绍",
@@ -322,3 +327,174 @@ export const dialogues: Dialogue[] = [
     ],
   },
 ];
+
+const makeDialogue = (
+  id: string,
+  title: string,
+  mode: DialogueMode,
+  practiceSpeaker: string,
+  situation: string,
+  lines: DialogueLine[],
+  tags: string[] = [mode],
+): Dialogue => ({
+  id,
+  title,
+  mode,
+  practiceSpeaker,
+  situation,
+  lines,
+  level: "基础",
+  tags,
+});
+
+const expandedDialogues: Dialogue[] = [
+  makeDialogue("coin-laundry", "投币洗衣", "生活", "客人", "在自助洗衣店询问机器用法", [
+    { speaker: "客人", japanese: "すみません、この洗濯機は使えますか。", kana: "すみません、このせんたくきはつかえますか。", translation: "不好意思，这台洗衣机可以用吗？" },
+    { speaker: "店员", japanese: "はい、使えます。硬貨を入れてください。", kana: "はい、つかえます。こうかをいれてください。", translation: "可以。请投入硬币。" },
+    { speaker: "客人", japanese: "洗剤は必要ですか。", kana: "せんざいはひつようですか。", translation: "需要洗衣液吗？" },
+    { speaker: "店员", japanese: "自動で入ります。", kana: "じどうではいります。", translation: "会自动加入。" },
+  ]),
+  makeDialogue("post-office", "邮局寄件", "生活", "客人", "在邮局寄明信片和包裹", [
+    { speaker: "客人", japanese: "中国まで送りたいです。", kana: "ちゅうごくまでおくりたいです。", translation: "我想寄到中国。" },
+    { speaker: "职员", japanese: "中身は何ですか。", kana: "なかみはなんですか。", translation: "里面是什么？" },
+    { speaker: "客人", japanese: "服と本です。", kana: "ふくとほんです。", translation: "衣服和书。" },
+    { speaker: "职员", japanese: "この用紙に住所を書いてください。", kana: "このようしにじゅうしょをかいてください。", translation: "请在这张表上写地址。" },
+  ]),
+  makeDialogue("bank-atm", "银行取钱", "生活", "客人", "在银行询问取钱方式", [
+    { speaker: "客人", japanese: "現金を下ろしたいです。", kana: "げんきんをおろしたいです。", translation: "我想取现金。" },
+    { speaker: "职员", japanese: "ATMはあちらです。", kana: "えーてぃーえむはあちらです。", translation: "ATM 在那边。" },
+    { speaker: "客人", japanese: "中国のカードは使えますか。", kana: "ちゅうごくのかーどはつかえますか。", translation: "中国的卡能用吗？" },
+    { speaker: "职员", japanese: "この機械なら使えます。", kana: "このきかいならつかえます。", translation: "这台机器可以用。" },
+  ]),
+  makeDialogue("library-card", "办借书卡", "校园", "学生", "在图书馆办理借书卡", [
+    { speaker: "学生", japanese: "図書館カードを作りたいです。", kana: "としょかんかーどをつくりたいです。", translation: "我想办借书卡。" },
+    { speaker: "职员", japanese: "学生証はありますか。", kana: "がくせいしょうはありますか。", translation: "有学生证吗？" },
+    { speaker: "学生", japanese: "はい、あります。", kana: "はい、あります。", translation: "有。" },
+    { speaker: "职员", japanese: "こちらに名前を書いてください。", kana: "こちらになまえをかいてください。", translation: "请在这里写名字。" },
+  ]),
+  makeDialogue("apartment-viewing", "看房", "生活", "李", "看出租房时询问房间和费用", [
+    { speaker: "李", japanese: "この部屋は明るいですね。", kana: "このへやはあかるいですね。", translation: "这个房间很明亮呢。" },
+    { speaker: "中介", japanese: "はい、南向きです。", kana: "はい、みなみむきです。", translation: "是的，朝南。" },
+    { speaker: "李", japanese: "家賃はいくらですか。", kana: "やちんはいくらですか。", translation: "房租多少钱？" },
+    { speaker: "中介", japanese: "一か月八万円です。", kana: "いっかげつはちまんえんです。", translation: "一个月八万日元。" },
+  ]),
+  makeDialogue("garbage-rules", "倒垃圾", "生活", "住户", "向邻居确认垃圾分类", [
+    { speaker: "住户", japanese: "燃えるごみは何曜日ですか。", kana: "もえるごみはなんようびですか。", translation: "可燃垃圾是星期几？" },
+    { speaker: "邻居", japanese: "月曜日と木曜日です。", kana: "げつようびともくようびです。", translation: "星期一和星期四。" },
+    { speaker: "住户", japanese: "瓶はどこに出しますか。", kana: "びんはどこにだしますか。", translation: "瓶子放在哪里？" },
+    { speaker: "邻居", japanese: "あそこの箱に入れてください。", kana: "あそこのはこにいれてください。", translation: "请放进那边的箱子里。" },
+  ]),
+  makeDialogue("hair-salon", "理发", "生活", "客人", "在理发店说明发型", [
+    { speaker: "店员", japanese: "今日はどうしますか。", kana: "きょうはどうしますか。", translation: "今天想怎么剪？" },
+    { speaker: "客人", japanese: "少し短くしてください。", kana: "すこしみじかくしてください。", translation: "请稍微剪短一点。" },
+    { speaker: "店员", japanese: "前髪も切りますか。", kana: "まえがみもきりますか。", translation: "刘海也剪吗？" },
+    { speaker: "客人", japanese: "はい、お願いします。", kana: "はい、おねがいします。", translation: "是的，麻烦您。" },
+  ]),
+  makeDialogue("izakaya", "居酒屋", "餐饮", "客人", "在居酒屋点饮料和小菜", [
+    { speaker: "店员", japanese: "お飲み物は何にしますか。", kana: "おのみものはなににしますか。", translation: "饮料要点什么？" },
+    { speaker: "客人", japanese: "ウーロン茶をお願いします。", kana: "うーろんちゃをおねがいします。", translation: "请给我乌龙茶。" },
+    { speaker: "店员", japanese: "食べ物はいかがですか。", kana: "たべものはいかがですか。", translation: "吃的要点什么？" },
+    { speaker: "客人", japanese: "唐揚げを一つください。", kana: "からあげをひとつください。", translation: "请给我一份炸鸡块。" },
+  ]),
+  makeDialogue("food-allergy", "过敏说明", "餐饮", "客人", "点餐前说明不能吃的东西", [
+    { speaker: "客人", japanese: "すみません、卵は入っていますか。", kana: "すみません、たまごははいっていますか。", translation: "不好意思，里面有鸡蛋吗？" },
+    { speaker: "店员", japanese: "はい、少し入っています。", kana: "はい、すこしはいっています。", translation: "有，放了一点。" },
+    { speaker: "客人", japanese: "卵アレルギーがあります。", kana: "たまごあれるぎーがあります。", translation: "我对鸡蛋过敏。" },
+    { speaker: "店员", japanese: "では、別の料理をご案内します。", kana: "では、べつのりょうりをごあんないします。", translation: "那么我给您介绍别的菜。" },
+  ]),
+  makeDialogue("museum-ticket", "博物馆买票", "旅行", "游客", "买门票并询问拍照", [
+    { speaker: "游客", japanese: "大人一枚ください。", kana: "おとないちまいください。", translation: "请给我一张成人票。" },
+    { speaker: "职员", japanese: "千二百円です。", kana: "せんにひゃくえんです。", translation: "一千二百日元。" },
+    { speaker: "游客", japanese: "写真を撮ってもいいですか。", kana: "しゃしんをとってもいいですか。", translation: "可以拍照吗？" },
+    { speaker: "职员", japanese: "フラッシュは使わないでください。", kana: "ふらっしゅはつかわないでください。", translation: "请不要使用闪光灯。" },
+  ]),
+  makeDialogue("shrine-visit", "参拜神社", "旅行", "游客", "在神社询问参拜方式", [
+    { speaker: "游客", japanese: "参拝の仕方を教えてください。", kana: "さんぱいのしかたをおしえてください。", translation: "请告诉我参拜方式。" },
+    { speaker: "工作人员", japanese: "まず手を洗います。", kana: "まずてをあらいます。", translation: "首先洗手。" },
+    { speaker: "游客", japanese: "お守りはどこで買えますか。", kana: "おまもりはどこでかえますか。", translation: "护身符在哪里买？" },
+    { speaker: "工作人员", japanese: "あちらで買えます。", kana: "あちらでかえます。", translation: "在那边可以买。" },
+  ]),
+  makeDialogue("wifi-question", "询问网络", "生活", "客人", "在咖啡店询问网络和座位", [
+    { speaker: "客人", japanese: "すみません、Wi-Fiはありますか。", kana: "すみません、わいふぁいはありますか。", translation: "不好意思，有 Wi-Fi 吗？" },
+    { speaker: "店员", japanese: "はい、あります。", kana: "はい、あります。", translation: "有。" },
+    { speaker: "客人", japanese: "パスワードを教えてください。", kana: "ぱすわーどをおしえてください。", translation: "请告诉我密码。" },
+    { speaker: "店员", japanese: "レシートに書いてあります。", kana: "れしーとにかいてあります。", translation: "写在小票上。" },
+  ]),
+  makeDialogue("office-greeting", "办公室问候", "工作", "新人", "第一天到公司简单问候", [
+    { speaker: "新人", japanese: "おはようございます。今日からお世話になります。", kana: "おはようございます。きょうからおせわになります。", translation: "早上好。从今天开始请多关照。" },
+    { speaker: "同僚", japanese: "よろしくお願いします。席はこちらです。", kana: "よろしくおねがいします。せきはこちらです。", translation: "请多关照。你的座位在这边。" },
+    { speaker: "新人", japanese: "ありがとうございます。", kana: "ありがとうございます。", translation: "谢谢。" },
+    { speaker: "同僚", japanese: "分からないことがあれば聞いてください。", kana: "わからないことがあればきいてください。", translation: "有不懂的事请问我。" },
+  ]),
+  makeDialogue("work-meeting", "会议确认", "工作", "李", "确认会议时间和资料", [
+    { speaker: "李", japanese: "今日の会議は何時からですか。", kana: "きょうのかいぎはなんじからですか。", translation: "今天的会议从几点开始？" },
+    { speaker: "同僚", japanese: "三時からです。", kana: "さんじからです。", translation: "从三点开始。" },
+    { speaker: "李", japanese: "資料は必要ですか。", kana: "しりょうはひつようですか。", translation: "需要资料吗？" },
+    { speaker: "同僚", japanese: "はい、この資料を持って来てください。", kana: "はい、このしりょうをもってきてください。", translation: "需要，请带这份资料来。" },
+  ]),
+  makeDialogue("online-meeting", "线上会议", "工作", "参加者", "线上会议开始前确认声音", [
+    { speaker: "参加者", japanese: "声は聞こえますか。", kana: "こえはきこえますか。", translation: "能听到声音吗？" },
+    { speaker: "主持", japanese: "はい、聞こえます。", kana: "はい、きこえます。", translation: "可以听到。" },
+    { speaker: "参加者", japanese: "画面を共有します。", kana: "がめんをきょうゆうします。", translation: "我来共享屏幕。" },
+    { speaker: "主持", japanese: "お願いします。", kana: "おねがいします。", translation: "麻烦你。" },
+  ]),
+  makeDialogue("delivery-receive", "收快递", "生活", "住户", "快递员送包裹到门口", [
+    { speaker: "快递员", japanese: "宅配便です。", kana: "たくはいびんです。", translation: "快递。" },
+    { speaker: "住户", japanese: "はい、今行きます。", kana: "はい、いまいきます。", translation: "好的，我现在过去。" },
+    { speaker: "快递员", japanese: "こちらにサインをお願いします。", kana: "こちらにさいんをおねがいします。", translation: "请在这里签名。" },
+    { speaker: "住户", japanese: "ありがとうございます。", kana: "ありがとうございます。", translation: "谢谢。" },
+  ]),
+  makeDialogue("return-item", "退换商品", "购物", "客人", "买到不合适的衣服后询问退换", [
+    { speaker: "客人", japanese: "すみません、サイズを間違えました。", kana: "すみません、さいずをまちがえました。", translation: "不好意思，我买错尺寸了。" },
+    { speaker: "店员", japanese: "レシートはありますか。", kana: "れしーとはありますか。", translation: "有小票吗？" },
+    { speaker: "客人", japanese: "はい、あります。交換できますか。", kana: "はい、あります。こうかんできますか。", translation: "有。可以换吗？" },
+    { speaker: "店员", japanese: "はい、大丈夫です。", kana: "はい、だいじょうぶです。", translation: "可以，没问题。" },
+  ]),
+  makeDialogue("clothes-shopping", "买衣服", "购物", "客人", "试穿衣服并询问颜色", [
+    { speaker: "客人", japanese: "これを試着してもいいですか。", kana: "これをしちゃくしてもいいですか。", translation: "可以试穿这个吗？" },
+    { speaker: "店员", japanese: "はい、どうぞ。", kana: "はい、どうぞ。", translation: "可以，请。" },
+    { speaker: "客人", japanese: "もう少し大きいサイズはありますか。", kana: "もうすこしおおきいさいずはありますか。", translation: "有稍微大一点的尺寸吗？" },
+    { speaker: "店员", japanese: "はい、持ってきます。", kana: "はい、もってきます。", translation: "有，我拿过来。" },
+  ]),
+  makeDialogue("bookstore", "书店找书", "购物", "客人", "在书店寻找日语教材", [
+    { speaker: "客人", japanese: "日本語の本はどこですか。", kana: "にほんごのほんはどこですか。", translation: "日语书在哪里？" },
+    { speaker: "店员", japanese: "二階にあります。", kana: "にかいにあります。", translation: "在二楼。" },
+    { speaker: "客人", japanese: "初心者向けの本はありますか。", kana: "しょしんしゃむけのほんはありますか。", translation: "有面向初学者的书吗？" },
+    { speaker: "店员", japanese: "こちらがおすすめです。", kana: "こちらがおすすめです。", translation: "推荐这本。" },
+  ]),
+  makeDialogue("city-office", "市役所手续", "生活", "居民", "在市役所询问住址登记", [
+    { speaker: "居民", japanese: "住所の手続きをしたいです。", kana: "じゅうしょのてつづきをしたいです。", translation: "我想办理住址手续。" },
+    { speaker: "职员", japanese: "在留カードはありますか。", kana: "ざいりゅうかーどはありますか。", translation: "有在留卡吗？" },
+    { speaker: "居民", japanese: "はい、あります。", kana: "はい、あります。", translation: "有。" },
+    { speaker: "职员", japanese: "この番号でお待ちください。", kana: "このばんごうでおまちください。", translation: "请拿这个号码等待。" },
+  ]),
+  makeDialogue("police-box", "派出所问路", "出行", "李", "在交番询问迷路后的方向", [
+    { speaker: "李", japanese: "すみません、道に迷いました。", kana: "すみません、みちにまよいました。", translation: "不好意思，我迷路了。" },
+    { speaker: "警察", japanese: "どこへ行きたいですか。", kana: "どこへいきたいですか。", translation: "你想去哪里？" },
+    { speaker: "李", japanese: "このホテルへ行きたいです。", kana: "このほてるへいきたいです。", translation: "我想去这家酒店。" },
+    { speaker: "警察", japanese: "ここから歩いて十分ぐらいです。", kana: "ここからあるいてじゅっぷんぐらいです。", translation: "从这里走路大约十分钟。" },
+  ]),
+  makeDialogue("earthquake", "地震时", "紧急", "李", "发生地震时听从指示", [
+    { speaker: "工作人员", japanese: "机の下に入ってください。", kana: "つくえのしたにはいってください。", translation: "请躲到桌子下面。" },
+    { speaker: "李", japanese: "はい、分かりました。", kana: "はい、わかりました。", translation: "好的，明白了。" },
+    { speaker: "工作人员", japanese: "落ち着いてください。", kana: "おちついてください。", translation: "请冷静。" },
+    { speaker: "李", japanese: "出口はどこですか。", kana: "でぐちはどこですか。", translation: "出口在哪里？" },
+  ]),
+  makeDialogue("dentist", "牙科就诊", "紧急", "患者", "牙痛时在牙科说明情况", [
+    { speaker: "受付", japanese: "今日はどうしましたか。", kana: "きょうはどうしましたか。", translation: "今天怎么了？" },
+    { speaker: "患者", japanese: "歯が痛いです。", kana: "はがいたいです。", translation: "牙痛。" },
+    { speaker: "受付", japanese: "予約はありますか。", kana: "よやくはありますか。", translation: "有预约吗？" },
+    { speaker: "患者", japanese: "いいえ、ありません。", kana: "いいえ、ありません。", translation: "没有。" },
+  ]),
+  makeDialogue("campus-office", "学校事务处", "校园", "学生", "向学校事务处确认证明文件", [
+    { speaker: "学生", japanese: "在学証明書が必要です。", kana: "ざいがくしょうめいしょがひつようです。", translation: "我需要在学证明。" },
+    { speaker: "职员", japanese: "学生証を見せてください。", kana: "がくせいしょうをみせてください。", translation: "请出示学生证。" },
+    { speaker: "学生", japanese: "いつ受け取れますか。", kana: "いつうけとれますか。", translation: "什么时候能领取？" },
+    { speaker: "职员", japanese: "明日の午後です。", kana: "あしたのごごです。", translation: "明天下午。" },
+  ]),
+];
+
+export const dialogues: Dialogue[] = [...coreDialogues, ...expandedDialogues].map((dialogue, index) => ({
+  sortOrder: dialogue.sortOrder ?? index + 1,
+  ...dialogue,
+}));

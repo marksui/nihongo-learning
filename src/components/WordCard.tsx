@@ -46,7 +46,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
           </div>
           <SpeakButton
             active={wordActive}
-            onClick={() => play("word", word.japanese)}
+            onClick={() => play("word", word.audioText ?? word.japanese)}
             ariaLabel={`播放 ${word.japanese} 的日语发音`}
             title="播放单词"
           />

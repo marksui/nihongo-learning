@@ -31,7 +31,8 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
     cancelledRef.current = false;
     setActiveLine(index);
 
-    const ok = await onSpeak(dialogue.lines[index].japanese);
+    const line = dialogue.lines[index];
+    const ok = await onSpeak(line.audioText ?? line.japanese);
 
     if (!cancelledRef.current) {
       setActiveLine(null);
@@ -61,7 +62,8 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
       }
 
       setActiveLine(index);
-      const ok = await onSpeak(dialogue.lines[index].japanese);
+      const line = dialogue.lines[index];
+      const ok = await onSpeak(line.audioText ?? line.japanese);
 
       if (!ok) {
         break;

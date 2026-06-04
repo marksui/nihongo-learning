@@ -14,7 +14,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
 
   const playKana = async () => {
     setActive(true);
-    const ok = await onSpeak(item.hiragana);
+    const ok = await onSpeak(item.audioText ?? item.hiragana);
     window.setTimeout(() => setActive(false), ok ? 240 : 900);
   };
 
