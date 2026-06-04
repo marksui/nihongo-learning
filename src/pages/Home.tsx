@@ -17,6 +17,7 @@ import {
 import { useMemo } from "react";
 import LearningCard from "../components/LearningCard";
 import PageHero from "../components/PageHero";
+import SpeakButton from "../components/SpeakButton";
 import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
@@ -28,6 +29,7 @@ import { readLearningProgress } from "../utils/progress";
 
 interface HomeProps {
   onNavigate: (page: PageKey) => void;
+  onSpeak: (text: string) => Promise<boolean>;
 }
 
 interface FeatureCard {
@@ -108,7 +110,7 @@ const featureCards: FeatureCard[] = [
   },
 ];
 
-const Home = ({ onNavigate }: HomeProps) => {
+const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const today = useMemo(() => getTodaySuggestion(), []);
   const progress = useMemo(() => readLearningProgress(), []);
   const goalsById = useMemo(() => new Map(learningGoals.map((goal) => [goal.id, goal])), []);
@@ -119,6 +121,7 @@ const Home = ({ onNavigate }: HomeProps) => {
   const nextGoal = nextPathStep ? goalsById.get(nextPathStep.goalId) : undefined;
   const nextMilestone = nextPathStep ? milestonesById.get(nextPathStep.milestoneId) : undefined;
   const pathComplete = completedPathSteps.length === learningPathSteps.length;
+  const recentReads = progress.recentReads.slice(0, 5);
 
   return (
     <div className="space-y-7">
@@ -229,6 +232,27 @@ const Home = ({ onNavigate }: HomeProps) => {
               ))}
             </div>
           </div>
+          {recentReads.length ? (
+            <div className="mt-3 rounded-md border border-matcha/18 bg-matcha/8 px-3 py-2">
+              <p className="text-xs font-bold text-ink/55">最近点读</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {recentReads.map((text) => (
+                  <SpeakButton
+                    key={text}
+                    ariaLabel={`再听一次 ${text}`}
+                    className="max-w-full justify-start"
+                    iconOnly={false}
+                    onSpeak={onSpeak}
+                    text={text}
+                    title="再听一次"
+                    variant="light"
+                  >
+                    <span className="max-w-[11rem] truncate">{text}</span>
+                  </SpeakButton>
+                ))}
+              </div>
+            </div>
+          ) : null}
           <button
             type="button"
             onClick={() => onNavigate("conversation")}

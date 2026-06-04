@@ -87,7 +87,7 @@ const App = () => {
         return <QuickReadPage onSpeak={handleSpeak} />;
       case "home":
       default:
-        return <Home onNavigate={navigate} />;
+        return <Home onNavigate={navigate} onSpeak={handleSpeak} />;
     }
   }, [currentPage, handleSpeak, navigate]);
 
