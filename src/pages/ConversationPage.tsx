@@ -1,6 +1,7 @@
-import { MessageCircle, Sparkles, Users } from "lucide-react";
+import { MessageCircle, Search, Sparkles, Users } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import DialogueCard from "../components/DialogueCard";
+import EmptyState from "../components/EmptyState";
 import FilterChips from "../components/FilterChips";
 import PageHero from "../components/PageHero";
 import { dialogueModes, dialogues, type DialogueMode } from "../data/dialogues";
@@ -11,9 +12,12 @@ interface ConversationPageProps {
 
 type ModeFilter = "全部" | DialogueMode;
 
+const quickSceneTerms = ["机场", "电车", "酒店", "付款", "身体", "请假", "拍照", "维修"];
+
 const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
   const [selectedMode, setSelectedMode] = useState<ModeFilter>("全部");
   const [selectedDialogueId, setSelectedDialogueId] = useState(dialogues[0]?.id ?? "");
+  const [query, setQuery] = useState("");
 
   const modeOptions = useMemo(() => ["全部", ...dialogueModes] as ModeFilter[], []);
 
@@ -24,10 +28,28 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
     }, {} as Record<ModeFilter, number>);
   }, [modeOptions]);
 
-  const visibleDialogues = useMemo(
-    () => (selectedMode === "全部" ? dialogues : dialogues.filter((dialogue) => dialogue.mode === selectedMode)),
-    [selectedMode],
-  );
+  const visibleDialogues = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+
+    return dialogues.filter((dialogue) => {
+      const matchesMode = selectedMode === "全部" || dialogue.mode === selectedMode;
+      const matchesQuery =
+        !normalizedQuery ||
+        [
+          dialogue.title,
+          dialogue.mode,
+          dialogue.practiceSpeaker,
+          dialogue.situation,
+          ...(dialogue.tags ?? []),
+          ...dialogue.lines.flatMap((line) => [line.speaker, line.japanese, line.kana, line.translation]),
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(normalizedQuery);
+
+      return matchesMode && matchesQuery;
+    });
+  }, [query, selectedMode]);
 
   useEffect(() => {
     if (visibleDialogues.length && !visibleDialogues.some((dialogue) => dialogue.id === selectedDialogueId)) {
@@ -36,7 +58,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
   }, [selectedDialogueId, visibleDialogues]);
 
   const selectedDialogue =
-    visibleDialogues.find((dialogue) => dialogue.id === selectedDialogueId) ?? visibleDialogues[0] ?? dialogues[0];
+    visibleDialogues.find((dialogue) => dialogue.id === selectedDialogueId) ?? visibleDialogues[0];
 
   const totalLines = dialogues.reduce((sum, dialogue) => sum + dialogue.lines.length, 0);
 
@@ -56,14 +78,61 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
       />
 
       <section className="rounded-lg border border-ink/10 bg-paper p-4 shadow-card">
-        <FilterChips
-          active={selectedMode}
-          counts={modeCounts}
-          icon={Sparkles}
-          label="情景模式"
-          onChange={setSelectedMode}
-          options={modeOptions}
-        />
+        <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <label className="relative block">
+            <Search
+              aria-hidden="true"
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink/42"
+              size={20}
+            />
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="搜机场、付款、请假、身体、日语或中文"
+              className="min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
+            />
+          </label>
+          <p className="text-sm font-bold text-ink/60">
+            {visibleDialogues.length} / {dialogues.length} 个场景
+          </p>
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          {quickSceneTerms.map((term) => (
+            <button
+              key={term}
+              type="button"
+              onClick={() => {
+                setSelectedMode("全部");
+                setQuery(term);
+              }}
+              className="min-h-10 rounded-md border border-ink/10 bg-rice/45 px-3 py-1.5 text-sm font-extrabold text-ink/70 transition hover:border-matcha/25 hover:bg-rice hover:text-ink"
+            >
+              {term}
+            </button>
+          ))}
+          {query ? (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              className="min-h-10 rounded-md border border-sakura/20 bg-sakura/8 px-3 py-1.5 text-sm font-extrabold text-sakura transition hover:bg-sakura/12"
+            >
+              清空
+            </button>
+          ) : null}
+        </div>
+
+        <div className="mt-4">
+          <FilterChips
+            active={selectedMode}
+            counts={modeCounts}
+            icon={Sparkles}
+            label="情景模式"
+            onChange={setSelectedMode}
+            options={modeOptions}
+          />
+        </div>
       </section>
 
       <section className="grid min-w-0 gap-5 lg:grid-cols-[21rem_minmax(0,1fr)]">
@@ -118,7 +187,11 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
           </div>
         </aside>
 
-        {selectedDialogue ? <DialogueCard key={selectedDialogue.id} dialogue={selectedDialogue} onSpeak={onSpeak} /> : null}
+        {selectedDialogue ? (
+          <DialogueCard key={selectedDialogue.id} dialogue={selectedDialogue} onSpeak={onSpeak} />
+        ) : (
+          <EmptyState title="没有找到会话" description="换一个关键词，或清空搜索后再选情景。" />
+        )}
       </section>
     </div>
   );
