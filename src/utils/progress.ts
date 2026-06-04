@@ -60,8 +60,31 @@ const getDateKey = (date = new Date()) => {
   return `${date.getFullYear()}-${month}-${day}`;
 };
 
+const addDays = (date: Date, amount: number) => {
+  const nextDate = new Date(date);
+  nextDate.setDate(nextDate.getDate() + amount);
+
+  return nextDate;
+};
+
 export const isTodaySuggestionDone = (progress: LearningProgress, date = new Date()) =>
   progress.dailyDoneDates.includes(getDateKey(date));
+
+export const getDailyCompletionStats = (progress: LearningProgress, date = new Date()) => {
+  const doneDates = new Set(progress.dailyDoneDates.filter(Boolean));
+  let currentStreak = 0;
+  let cursor = new Date(date);
+
+  while (doneDates.has(getDateKey(cursor))) {
+    currentStreak += 1;
+    cursor = addDays(cursor, -1);
+  }
+
+  return {
+    totalDays: doneDates.size,
+    currentStreak,
+  };
+};
 
 export const markTodaySuggestionDone = (date = new Date()) => {
   const progress = readLearningProgress();

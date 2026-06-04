@@ -25,7 +25,7 @@ import { getTodaySuggestion, learningGoals, learningMilestones, learningPathStep
 import { numberExamples } from "../data/numbers";
 import { vocabulary } from "../data/vocabulary";
 import type { PageKey } from "../components/Navbar";
-import { isTodaySuggestionDone, markTodaySuggestionDone, readLearningProgress } from "../utils/progress";
+import { getDailyCompletionStats, isTodaySuggestionDone, markTodaySuggestionDone, readLearningProgress } from "../utils/progress";
 
 interface HomeProps {
   onNavigate: (page: PageKey) => void;
@@ -117,6 +117,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const milestonesById = useMemo(() => new Map(learningMilestones.map((milestone) => [milestone.id, milestone])), []);
   const featureByPage = useMemo(() => new Map(featureCards.map((card) => [card.page, card])), []);
   const todayDone = isTodaySuggestionDone(progress);
+  const dailyStats = getDailyCompletionStats(progress);
   const viewedPages = new Set(progress.viewedPages);
   const completedPathSteps = learningPathSteps.filter((step) => viewedPages.has(step.page));
   const nextPathStep = learningPathSteps.find((step) => !viewedPages.has(step.page)) ?? learningPathSteps[learningPathSteps.length - 1];
@@ -306,6 +307,24 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
             <CheckCircle2 aria-hidden="true" size={17} />
             {todayDone ? "今日已完成" : "完成今日建议"}
           </button>
+          {dailyStats.totalDays ? (
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <div className="rounded-md border border-ink/8 bg-rice/45 px-3 py-2">
+                <p className="text-xs font-bold text-ink/52">累计完成</p>
+                <p className="mt-1 text-lg font-extrabold leading-tight text-ink">
+                  {dailyStats.totalDays}
+                  <span className="ml-1 text-sm font-bold text-ink/55">天</span>
+                </p>
+              </div>
+              <div className="rounded-md border border-matcha/18 bg-matcha/8 px-3 py-2">
+                <p className="text-xs font-bold text-ink/52">连续学习</p>
+                <p className="mt-1 text-lg font-extrabold leading-tight text-matcha">
+                  {dailyStats.currentStreak ? dailyStats.currentStreak : "今天待完成"}
+                  {dailyStats.currentStreak ? <span className="ml-1 text-sm font-bold text-matcha/70">天</span> : null}
+                </p>
+              </div>
+            </div>
+          ) : null}
         </LearningCard>
 
         <LearningCard className="p-4">
