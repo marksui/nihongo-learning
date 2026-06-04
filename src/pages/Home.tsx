@@ -114,6 +114,11 @@ const Home = ({ onNavigate }: HomeProps) => {
   const goalsById = useMemo(() => new Map(learningGoals.map((goal) => [goal.id, goal])), []);
   const milestonesById = useMemo(() => new Map(learningMilestones.map((milestone) => [milestone.id, milestone])), []);
   const viewedPages = new Set(progress.viewedPages);
+  const completedPathSteps = learningPathSteps.filter((step) => viewedPages.has(step.page));
+  const nextPathStep = learningPathSteps.find((step) => !viewedPages.has(step.page)) ?? learningPathSteps[learningPathSteps.length - 1];
+  const nextGoal = nextPathStep ? goalsById.get(nextPathStep.goalId) : undefined;
+  const nextMilestone = nextPathStep ? milestonesById.get(nextPathStep.milestoneId) : undefined;
+  const pathComplete = completedPathSteps.length === learningPathSteps.length;
 
   return (
     <div className="space-y-7">
@@ -241,9 +246,27 @@ const Home = ({ onNavigate }: HomeProps) => {
               <h2 className="font-serif text-2xl font-bold text-ink">按顺序走一遍</h2>
             </div>
             <span className="rounded-md bg-rice px-2 py-1 text-xs font-bold text-ink/58">
-              {progress.viewedPages.length}/{learningPathSteps.length}
+              {completedPathSteps.length}/{learningPathSteps.length}
             </span>
           </div>
+          {nextPathStep ? (
+            <button
+              type="button"
+              onClick={() => onNavigate(nextPathStep.page)}
+              className="mb-3 flex min-h-16 w-full cursor-pointer items-center justify-between gap-3 rounded-md border border-matcha/20 bg-matcha/10 px-3 py-2 text-left transition hover:border-matcha/35 hover:bg-matcha/14 active:scale-[0.99]"
+            >
+              <span className="min-w-0">
+                <span className="block text-xs font-extrabold text-matcha">
+                  {pathComplete ? "继续复习" : "下一步"}
+                </span>
+                <span className="mt-0.5 block text-base font-extrabold text-ink">{nextPathStep.title}</span>
+                <span className="mt-0.5 block truncate text-xs font-bold text-ink/58">
+                  {[nextMilestone?.label, nextGoal?.title].filter(Boolean).join(" · ")}
+                </span>
+              </span>
+              <ArrowRight aria-hidden="true" className="shrink-0 text-matcha" size={18} />
+            </button>
+          ) : null}
           <div className="mb-3 grid gap-2 sm:grid-cols-3">
             {learningMilestones.map((milestone) => (
               <button
