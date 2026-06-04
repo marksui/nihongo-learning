@@ -1,11 +1,37 @@
 import type { PageKey } from "../components/Navbar";
+import type { TodaySuggestion } from "../data/learningPath";
 
 export interface LearningProgress {
   viewedPages: PageKey[];
   recentReads: string[];
   dailyDoneDates: string[];
   seenContentIds: string[];
+  completedContentIds: string[];
+  lastStudiedAtByContentId: Record<string, string>;
   updatedAt: string;
+}
+
+export type TodayTaskKey = "kana" | "words" | "grammar" | "number" | "dialogue";
+
+export interface TodayTaskProgress {
+  key: TodayTaskKey;
+  contentIds: string[];
+  completed: boolean;
+  seen: boolean;
+  completedCount: number;
+  seenCount: number;
+  totalCount: number;
+}
+
+export interface TodayTaskStats {
+  tasks: TodayTaskProgress[];
+  completedTasks: number;
+  totalTasks: number;
+  completedContentCount: number;
+  seenContentCount: number;
+  totalContentCount: number;
+  percent: number;
+  nextTask?: TodayTaskProgress;
 }
 
 const progressStorageKey = "nihongo-learning-progress";
@@ -15,10 +41,38 @@ const emptyProgress = (): LearningProgress => ({
   recentReads: [],
   dailyDoneDates: [],
   seenContentIds: [],
+  completedContentIds: [],
+  lastStudiedAtByContentId: {},
   updatedAt: new Date().toISOString(),
 });
 
 const canUseStorage = () => typeof window !== "undefined" && Boolean(window.localStorage);
+
+const normalizeContentIds = (contentIds: string | string[]) =>
+  (Array.isArray(contentIds) ? contentIds : [contentIds])
+    .map((id) => id.trim())
+    .filter(Boolean);
+
+const readStringRecord = (value: unknown): Record<string, string> => {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    Object.entries(value)
+      .filter(([key, item]) => Boolean(key.trim()) && typeof item === "string")
+      .slice(0, 500),
+  );
+};
+
+const touchContentIds = (
+  current: Record<string, string>,
+  contentIds: string[],
+  timestamp: string,
+) => ({
+  ...current,
+  ...Object.fromEntries(contentIds.map((id) => [id, timestamp])),
+});
 
 export const readLearningProgress = (): LearningProgress => {
   if (!canUseStorage()) {
@@ -37,6 +91,10 @@ export const readLearningProgress = (): LearningProgress => {
       recentReads: Array.isArray(parsed.recentReads) ? parsed.recentReads.filter(Boolean).slice(0, 12) : [],
       dailyDoneDates: Array.isArray(parsed.dailyDoneDates) ? parsed.dailyDoneDates.filter(Boolean).slice(0, 60) : [],
       seenContentIds: Array.isArray(parsed.seenContentIds) ? parsed.seenContentIds.filter(Boolean).slice(0, 500) : [],
+      completedContentIds: Array.isArray(parsed.completedContentIds)
+        ? parsed.completedContentIds.filter(Boolean).slice(0, 500)
+        : [],
+      lastStudiedAtByContentId: readStringRecord(parsed.lastStudiedAtByContentId),
       updatedAt: typeof parsed.updatedAt === "string" ? parsed.updatedAt : new Date().toISOString(),
     };
   } catch {
@@ -115,11 +173,15 @@ export const getWeeklyCompletionDays = (progress: LearningProgress, date = new D
 export const markTodaySuggestionDone = (contentIds: string[] = [], date = new Date()) => {
   const progress = readLearningProgress();
   const dateKey = getDateKey(date);
+  const ids = normalizeContentIds(contentIds);
+  const timestamp = new Date().toISOString();
   const nextProgress = {
     ...progress,
     dailyDoneDates: Array.from(new Set([dateKey, ...progress.dailyDoneDates])).slice(0, 60),
-    seenContentIds: Array.from(new Set([...contentIds.filter(Boolean), ...progress.seenContentIds])).slice(0, 500),
-    updatedAt: new Date().toISOString(),
+    seenContentIds: Array.from(new Set([...ids, ...progress.seenContentIds])).slice(0, 500),
+    completedContentIds: Array.from(new Set([...ids, ...progress.completedContentIds])).slice(0, 500),
+    lastStudiedAtByContentId: touchContentIds(progress.lastStudiedAtByContentId, ids, timestamp),
+    updatedAt: timestamp,
   };
 
   writeLearningProgress(nextProgress);
@@ -127,23 +189,98 @@ export const markTodaySuggestionDone = (contentIds: string[] = [], date = new Da
 };
 
 export const recordSeenContent = (contentIds: string | string[]) => {
-  const ids = (Array.isArray(contentIds) ? contentIds : [contentIds])
-    .map((id) => id.trim())
-    .filter(Boolean);
+  const ids = normalizeContentIds(contentIds);
   const progress = readLearningProgress();
 
   if (!ids.length) {
     return progress;
   }
 
+  const timestamp = new Date().toISOString();
   const nextProgress = {
     ...progress,
     seenContentIds: Array.from(new Set([...ids, ...progress.seenContentIds])).slice(0, 500),
-    updatedAt: new Date().toISOString(),
+    lastStudiedAtByContentId: touchContentIds(progress.lastStudiedAtByContentId, ids, timestamp),
+    updatedAt: timestamp,
   };
 
   writeLearningProgress(nextProgress);
   return nextProgress;
+};
+
+export const markContentCompleted = (contentIds: string | string[]) => {
+  const ids = normalizeContentIds(contentIds);
+  const progress = readLearningProgress();
+
+  if (!ids.length) {
+    return progress;
+  }
+
+  const timestamp = new Date().toISOString();
+  const nextProgress = {
+    ...progress,
+    seenContentIds: Array.from(new Set([...ids, ...progress.seenContentIds])).slice(0, 500),
+    completedContentIds: Array.from(new Set([...ids, ...progress.completedContentIds])).slice(0, 500),
+    lastStudiedAtByContentId: touchContentIds(progress.lastStudiedAtByContentId, ids, timestamp),
+    updatedAt: timestamp,
+  };
+
+  writeLearningProgress(nextProgress);
+  return nextProgress;
+};
+
+export const isContentCompleted = (progress: LearningProgress, contentId: string) =>
+  progress.completedContentIds.includes(contentId);
+
+export const getTodayTaskStats = (progress: LearningProgress, today: TodaySuggestion): TodayTaskStats => {
+  const legacyTodayDone = isTodaySuggestionDone(progress);
+  const completedIds = new Set(progress.completedContentIds.filter(Boolean));
+  const seenIds = new Set(progress.seenContentIds.filter(Boolean));
+  const taskContentIds: Array<{ key: TodayTaskKey; contentIds: string[] }> = [
+    { key: "kana", contentIds: [`kana:${today.kanaGroup}`] },
+    { key: "words", contentIds: today.words.map((word) => `word:${word.id}`) },
+    { key: "grammar", contentIds: [`grammar:${today.grammar.id}`] },
+    { key: "number", contentIds: [`number:${today.numberScene.id}`] },
+    { key: "dialogue", contentIds: [`dialogue:${today.dialogue.id}`] },
+  ];
+
+  const tasks = taskContentIds.map(({ key, contentIds }) => {
+    const totalCount = contentIds.length || 1;
+    const legacyCompletedCount = legacyTodayDone
+      ? contentIds.filter((id) => seenIds.has(id)).length
+      : 0;
+    const completedCount = Math.max(
+      contentIds.filter((id) => completedIds.has(id)).length,
+      legacyCompletedCount,
+    );
+    const seenCount = contentIds.filter((id) => seenIds.has(id)).length;
+
+    return {
+      key,
+      contentIds,
+      completed: completedCount >= totalCount,
+      seen: seenCount >= totalCount,
+      completedCount,
+      seenCount,
+      totalCount,
+    };
+  });
+
+  const completedTasks = tasks.filter((task) => task.completed).length;
+  const totalContentCount = tasks.reduce((sum, task) => sum + task.totalCount, 0);
+  const completedContentCount = tasks.reduce((sum, task) => sum + task.completedCount, 0);
+  const seenContentCount = tasks.reduce((sum, task) => sum + task.seenCount, 0);
+
+  return {
+    tasks,
+    completedTasks,
+    totalTasks: tasks.length,
+    completedContentCount,
+    seenContentCount,
+    totalContentCount,
+    percent: Math.round((completedTasks / tasks.length) * 100),
+    nextTask: tasks.find((task) => !task.completed),
+  };
 };
 
 export const recordPageVisit = (page: PageKey) => {

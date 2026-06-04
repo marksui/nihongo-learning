@@ -1,4 +1,4 @@
-import { Hash, Search, Sparkles } from "lucide-react";
+import { CheckCircle2, Clock3, Hash, Search, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import EmptyState from "../components/EmptyState";
 import FilterChips from "../components/FilterChips";
@@ -6,7 +6,7 @@ import LearningCard from "../components/LearningCard";
 import PageHero from "../components/PageHero";
 import SpeakButton from "../components/SpeakButton";
 import { numberExamples, numberGroups, numberSceneExamples, type NumberGroup } from "../data/numbers";
-import { recordSeenContent } from "../utils/progress";
+import { isContentCompleted, markContentCompleted, readLearningProgress, recordSeenContent } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 
 interface NumbersPageProps {
@@ -20,6 +20,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
   const [group, setGroup] = useState<NumberFilter>("全部");
   const [activeNumberId, setActiveNumberId] = useState<string | null>(null);
   const [activeSceneId, setActiveSceneId] = useState<string | null>(null);
+  const [learningProgress, setLearningProgress] = useState(() => readLearningProgress());
 
   const filterOptions = useMemo(() => ["全部", ...numberGroups] as NumberFilter[], []);
 
@@ -84,7 +85,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
 
   const playNumber = async (id: string, text: string) => {
     setActiveNumberId(id);
-    recordSeenContent(`number:${id}`);
+    setLearningProgress(recordSeenContent(`number:${id}`));
     const ok = await onSpeak(text);
 
     window.setTimeout(() => {
@@ -94,12 +95,25 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
 
   const playScene = async (id: string, text: string) => {
     setActiveSceneId(id);
-    recordSeenContent(`number:${id}`);
+    setLearningProgress(recordSeenContent(`number:${id}`));
     const ok = await onSpeak(text);
 
     window.setTimeout(() => {
       setActiveSceneId((current) => (current === id ? null : current));
     }, ok ? 360 : 900);
+  };
+
+  const markNumberMastered = (id: string) => {
+    setLearningProgress(markContentCompleted(`number:${id}`));
+  };
+
+  const getNumberStatus = (id: string) => {
+    const contentId = `number:${id}`;
+
+    return {
+      seen: learningProgress.seenContentIds.includes(contentId),
+      completed: isContentCompleted(learningProgress, contentId),
+    };
   };
 
   return (
@@ -163,6 +177,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             {filteredScenes.map((scene) => {
               const active = activeSceneId === scene.id;
+              const status = getNumberStatus(scene.id);
 
               return (
                 <LearningCard
@@ -175,6 +190,18 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                       <div className="min-w-0">
                         <p className="mb-2 w-fit rounded-md bg-rice px-2 py-1 text-xs font-extrabold text-ink/58">
                           {scene.group}
+                        </p>
+                        <p
+                          className={`mb-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
+                            status.completed
+                              ? "bg-matcha/12 text-matcha"
+                              : status.seen
+                                ? "bg-yuzu/18 text-ink/62"
+                                : "bg-paper text-ink/45"
+                          }`}
+                        >
+                          {status.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
+                          {status.completed ? "已掌握" : status.seen ? "已听过" : "未开始"}
                         </p>
                         <h3 className="text-base font-extrabold text-ink">{scene.title}</h3>
                         <p className="mt-1 text-sm leading-5 text-ink/60">{scene.situation}</p>
@@ -212,6 +239,20 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                     </button>
 
                     <p className="mt-3 text-sm font-semibold leading-6 text-ink/70">中文：{scene.meaning}</p>
+                    <button
+                      type="button"
+                      onClick={() => markNumberMastered(scene.id)}
+                      disabled={status.completed}
+                      aria-pressed={status.completed}
+                      className={`mt-3 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+                        status.completed
+                          ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
+                          : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"
+                      }`}
+                    >
+                      <CheckCircle2 aria-hidden="true" size={16} />
+                      {status.completed ? "已掌握" : "标记掌握"}
+                    </button>
                   </div>
                 </LearningCard>
               );
@@ -224,6 +265,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         {filteredNumbers.length ? (
           filteredNumbers.map((item) => {
             const active = activeNumberId === item.id;
+            const status = getNumberStatus(item.id);
 
             return (
               <LearningCard
@@ -233,9 +275,23 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <p className="mb-3 w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-extrabold text-ink/66">
-                      {item.group}
-                    </p>
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      <p className="w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-extrabold text-ink/66">
+                        {item.group}
+                      </p>
+                      <p
+                        className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
+                          status.completed
+                            ? "bg-matcha/12 text-matcha"
+                            : status.seen
+                              ? "bg-yuzu/18 text-ink/62"
+                              : "bg-rice text-ink/45"
+                        }`}
+                      >
+                        {status.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
+                        {status.completed ? "已掌握" : status.seen ? "已听过" : "未开始"}
+                      </p>
+                    </div>
                     <p className="break-words font-display text-4xl font-extrabold text-ink">{item.display}</p>
                     <p className="mt-2 text-sm font-semibold text-ink/62">{item.meaning}</p>
                   </div>
@@ -273,6 +329,20 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                     {item.note}
                   </p>
                 ) : null}
+                <button
+                  type="button"
+                  onClick={() => markNumberMastered(item.id)}
+                  disabled={status.completed}
+                  aria-pressed={status.completed}
+                  className={`mt-4 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+                    status.completed
+                      ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
+                      : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"
+                  }`}
+                >
+                  <CheckCircle2 aria-hidden="true" size={16} />
+                  {status.completed ? "已掌握" : "标记掌握"}
+                </button>
               </LearningCard>
             );
           })
