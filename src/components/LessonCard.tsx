@@ -4,6 +4,7 @@ import AnimatedReading from "./AnimatedReading";
 import LearningCard from "./LearningCard";
 import SpeakButton from "./SpeakButton";
 import type { GrammarLesson } from "../data/grammar";
+import { recordSeenContent } from "../utils/progress";
 
 interface LessonCardProps {
   lesson: GrammarLesson;
@@ -19,6 +20,7 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
     const runId = readingRunRef.current + 1;
     readingRunRef.current = runId;
     setActiveReadingKey(key);
+    recordSeenContent(`grammar:${lesson.id}`);
 
     const ok = await onSpeak(text);
     window.setTimeout(

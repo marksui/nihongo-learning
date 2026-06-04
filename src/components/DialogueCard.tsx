@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useRef, useState } from "react";
 import type { Dialogue } from "../data/dialogues";
+import { recordSeenContent } from "../utils/progress";
 import { stopJapanese } from "../utils/speech";
 import SpeakButton from "./SpeakButton";
 
@@ -32,6 +33,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
     setActiveLine(index);
 
     const line = dialogue.lines[index];
+    recordSeenContent(`dialogue:${dialogue.id}`);
     const ok = await onSpeak(line.audioText ?? line.japanese);
 
     if (!cancelledRef.current) {
@@ -55,6 +57,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
 
     cancelledRef.current = false;
     setIsPlayingSequence(true);
+    recordSeenContent(`dialogue:${dialogue.id}`);
 
     for (const index of indexes) {
       if (cancelledRef.current) {

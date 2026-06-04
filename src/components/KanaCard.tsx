@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { KanaItem } from "../data/kana";
+import { recordSeenContent } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 import LearningCard from "./LearningCard";
 import SpeakButton from "./SpeakButton";
@@ -14,6 +15,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
 
   const playKana = async () => {
     setActive(true);
+    recordSeenContent(`kana:${item.id}`);
     const ok = await onSpeak(item.audioText ?? item.hiragana);
     window.setTimeout(() => setActive(false), ok ? 240 : 900);
   };

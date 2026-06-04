@@ -1,6 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { useState } from "react";
 import type { VocabularyItem } from "../data/vocabulary";
+import { recordSeenContent } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 import FoodIllustration from "./FoodIllustration";
 import LearningCard from "./LearningCard";
@@ -16,6 +17,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
 
   const play = async (target: "word" | "sentence", text: string) => {
     setActiveTarget(target);
+    recordSeenContent(`word:${word.id}`);
     const ok = await onSpeak(text);
     window.setTimeout(() => {
       setActiveTarget((current) => (current === target ? null : current));

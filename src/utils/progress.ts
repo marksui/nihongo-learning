@@ -126,6 +126,26 @@ export const markTodaySuggestionDone = (contentIds: string[] = [], date = new Da
   return nextProgress;
 };
 
+export const recordSeenContent = (contentIds: string | string[]) => {
+  const ids = (Array.isArray(contentIds) ? contentIds : [contentIds])
+    .map((id) => id.trim())
+    .filter(Boolean);
+  const progress = readLearningProgress();
+
+  if (!ids.length) {
+    return progress;
+  }
+
+  const nextProgress = {
+    ...progress,
+    seenContentIds: Array.from(new Set([...ids, ...progress.seenContentIds])).slice(0, 500),
+    updatedAt: new Date().toISOString(),
+  };
+
+  writeLearningProgress(nextProgress);
+  return nextProgress;
+};
+
 export const recordPageVisit = (page: PageKey) => {
   const progress = readLearningProgress();
   writeLearningProgress({

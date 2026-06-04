@@ -32,6 +32,7 @@ import {
   isTodaySuggestionDone,
   markTodaySuggestionDone,
   readLearningProgress,
+  recordSeenContent,
 } from "../utils/progress";
 
 interface HomeProps {
@@ -177,6 +178,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
   const playTodayNumber = async () => {
     setActiveTodayNumber(true);
+    setProgress(recordSeenContent(`number:${today.numberScene.id}`));
     const ok = await onSpeak(today.numberScene.audioText ?? today.numberScene.japanese);
     window.setTimeout(() => setActiveTodayNumber(false), ok ? 360 : 900);
   };

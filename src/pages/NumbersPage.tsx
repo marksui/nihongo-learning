@@ -6,6 +6,7 @@ import LearningCard from "../components/LearningCard";
 import PageHero from "../components/PageHero";
 import SpeakButton from "../components/SpeakButton";
 import { numberExamples, numberGroups, numberSceneExamples, type NumberGroup } from "../data/numbers";
+import { recordSeenContent } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 
 interface NumbersPageProps {
@@ -83,6 +84,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
 
   const playNumber = async (id: string, text: string) => {
     setActiveNumberId(id);
+    recordSeenContent(`number:${id}`);
     const ok = await onSpeak(text);
 
     window.setTimeout(() => {
@@ -92,6 +94,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
 
   const playScene = async (id: string, text: string) => {
     setActiveSceneId(id);
+    recordSeenContent(`number:${id}`);
     const ok = await onSpeak(text);
 
     window.setTimeout(() => {
