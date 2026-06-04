@@ -2,6 +2,7 @@ import type { PageKey } from "../components/Navbar";
 import { dialogues } from "./dialogues";
 import { grammarLessons } from "./grammar";
 import { kanaGroups, kanaItems } from "./kana";
+import { numberSceneExamples } from "./numbers";
 import { vocabulary } from "./vocabulary";
 
 export interface LearningPathStep {
@@ -46,6 +47,7 @@ export interface TodaySuggestion {
   words: typeof vocabulary;
   grammar: (typeof grammarLessons)[number];
   dialogue: (typeof dialogues)[number];
+  numberScene: (typeof numberSceneExamples)[number];
 }
 
 export const learningGoals: LearningGoal[] = [
@@ -153,5 +155,6 @@ export const getTodaySuggestion = (date = new Date()): TodaySuggestion => {
     words: pickMany(vocabulary, dayIndex * 5, 5),
     grammar: grammarLessons[dayIndex % grammarLessons.length],
     dialogue: dialogues[dayIndex % dialogues.length],
+    numberScene: numberSceneExamples[dayIndex % numberSceneExamples.length],
   };
 };

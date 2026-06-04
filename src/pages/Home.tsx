@@ -113,6 +113,7 @@ const featureCards: FeatureCard[] = [
 const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const today = useMemo(() => getTodaySuggestion(), []);
   const [progress, setProgress] = useState(() => readLearningProgress());
+  const [activeTodayNumber, setActiveTodayNumber] = useState(false);
   const goalsById = useMemo(() => new Map(learningGoals.map((goal) => [goal.id, goal])), []);
   const milestonesById = useMemo(() => new Map(learningMilestones.map((milestone) => [milestone.id, milestone])), []);
   const featureByPage = useMemo(() => new Map(featureCards.map((card) => [card.page, card])), []);
@@ -153,6 +154,12 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     if (!todayDone) {
       setProgress(markTodaySuggestionDone());
     }
+  };
+
+  const playTodayNumber = async () => {
+    setActiveTodayNumber(true);
+    const ok = await onSpeak(today.numberScene.audioText ?? today.numberScene.japanese);
+    window.setTimeout(() => setActiveTodayNumber(false), ok ? 360 : 900);
   };
 
   return (
@@ -229,7 +236,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
             <CalendarDays aria-hidden="true" size={18} />
             今日建议
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-3">
             <button
               type="button"
               onClick={() => onNavigate("kana")}
@@ -248,6 +255,30 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
               <span className="mt-1 block break-words text-base font-extrabold text-ink">{today.grammar.title}</span>
               <span className="mt-1 block truncate text-sm text-ink/62">{today.grammar.pattern}</span>
             </button>
+            <div
+              className={`min-h-24 rounded-md border p-3 transition ${
+                activeTodayNumber ? "border-matcha/40 bg-matcha/10 ring-2 ring-matcha/24" : "border-ink/8 bg-rice/48 hover:border-matcha/28 hover:bg-rice"
+              }`}
+            >
+              <div className="flex items-start justify-between gap-2">
+                <button
+                  type="button"
+                  onClick={() => onNavigate("numbers")}
+                  className="min-w-0 flex-1 cursor-pointer text-left"
+                >
+                  <span className="text-xs font-bold text-ink/55">数字整句</span>
+                  <span className="mt-1 block truncate text-lg font-extrabold text-ink">{today.numberScene.highlight}</span>
+                  <span className="mt-1 block truncate text-sm font-bold text-matcha">{today.numberScene.title}</span>
+                </button>
+                <SpeakButton
+                  active={activeTodayNumber}
+                  ariaLabel={`朗读数字整句 ${today.numberScene.title}`}
+                  onClick={playTodayNumber}
+                  title="朗读整句"
+                  variant="light"
+                />
+              </div>
+            </div>
           </div>
           <div className="mt-3 rounded-md border border-ink/8 bg-paper px-3 py-2">
             <p className="text-xs font-bold text-ink/55">单词</p>
