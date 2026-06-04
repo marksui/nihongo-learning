@@ -38,6 +38,9 @@ const VocabularyPage = ({ onSpeak }: VocabularyPageProps) => {
           word.kana,
           word.romaji,
           formatRomajiReading(word.romaji),
+          word.category,
+          word.level,
+          word.tags?.join(" "),
           word.meaning,
           word.sentence,
           word.translation,
@@ -57,7 +60,7 @@ const VocabularyPage = ({ onSpeak }: VocabularyPageProps) => {
         eyebrow="Vocabulary"
         icon={BookOpen}
         title="常用单词"
-        description="入门词卡按场景分组，包含日语、假名读法、分隔 romaji、中文意思、例句和中文翻译。食物、水果、蔬菜保留插图，适合边看边听。"
+        description="从入门词到 N3 核心词按场景分组，包含日语、假名读法、分隔 romaji、中文意思、例句和中文翻译。食物、水果、蔬菜保留插图，适合边看边听。"
         stats={[
           { label: "分类", value: vocabularyCategories.length },
           { label: "词卡", value: vocabulary.length },
@@ -101,7 +104,7 @@ const VocabularyPage = ({ onSpeak }: VocabularyPageProps) => {
           filteredWords.map((word) => <WordCard key={word.id} word={word} onSpeak={onSpeak} />)
         ) : (
           <div className="md:col-span-2 xl:col-span-3">
-            <EmptyState title="没有找到单词" description="换一个假名、中文意思或分类再试试。" />
+            <EmptyState title="没有找到单词" description="换一个假名、中文意思、N3、标签或分类再试试。" />
           </div>
         )}
       </section>

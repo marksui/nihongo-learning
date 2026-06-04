@@ -55,6 +55,11 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
               <p className="w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-bold text-ink/68">
                 {word.category}
               </p>
+              {word.level ? (
+                <p className="w-fit rounded-md bg-sora/12 px-2 py-1 text-xs font-extrabold text-sora">
+                  {word.level}
+                </p>
+              ) : null}
               <p
                 className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
                   studyState.completed

@@ -111,8 +111,8 @@ const featureCards: FeatureCard[] = [
   {
     title: "常用单词",
     page: "vocabulary",
-    description: "按场景找词，听单词和例句。",
-    metric: `${vocabulary.length} 个入门词`,
+    description: "入门到 N3，按场景找词。",
+    metric: `${vocabulary.length} 个核心词`,
     accent: "bg-sakura",
     icon: BookOpen,
   },
