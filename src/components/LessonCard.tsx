@@ -47,35 +47,48 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
     markContentCompleted(contentId);
     setStudyState({ seen: true, completed: true });
   };
+  const StatusIcon = studyState.completed ? CheckCircle2 : Clock3;
+  const statusLabel = studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始";
 
   return (
-    <LearningCard className="overflow-hidden">
-      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-        <div className="min-w-0">
-          <div className="mb-3 flex flex-wrap items-center gap-2 text-sm font-bold text-matcha">
-            <BookOpenCheck aria-hidden="true" size={18} />
-            <span>基础语法</span>
+    <LearningCard className="overflow-hidden bg-paper/96">
+      <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.38fr)] lg:items-start">
+        <div className="min-w-0 lg:pt-1">
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-sumire/10 text-sumire">
+              <BookOpenCheck aria-hidden="true" size={18} />
+            </span>
             <span
-              className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
+              className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-extrabold ${
                 studyState.completed
                   ? "bg-matcha/12 text-matcha"
                   : studyState.seen
                     ? "bg-yuzu/18 text-ink/62"
-                    : "bg-rice text-ink/45"
+                    : "bg-ink/5 text-ink/50"
               }`}
             >
-              {studyState.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
-              {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
+              <StatusIcon aria-hidden="true" size={14} />
+              {statusLabel}
             </span>
+            {lesson.level ? (
+              <span className="rounded-md bg-rice/70 px-2.5 py-1 text-xs font-extrabold text-ink/52">{lesson.level}</span>
+            ) : null}
           </div>
-          <h2 className="break-words font-display text-3xl font-extrabold text-ink">{lesson.title}</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-ink/72">{lesson.explanation}</p>
+          <h2 className="break-words font-display text-3xl font-extrabold leading-tight text-ink">{lesson.title}</h2>
+          <p className="mt-3 max-w-4xl text-sm leading-7 text-ink/70">{lesson.explanation}</p>
         </div>
-        <div className="rounded-md border border-yuzu/28 bg-rice/70 px-4 py-3 text-ink md:min-w-72">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+
+        <div className="rounded-md border border-matcha/18 bg-matcha/8 p-3 text-ink">
+          <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <p className="text-xs font-bold text-ink/58">句型</p>
-              <p className="mt-1 break-words font-japanese text-xl font-bold">{lesson.pattern}</p>
+              <p className="break-words font-japanese text-2xl font-extrabold leading-tight">{lesson.pattern}</p>
+              <div className="mt-2">
+                <AnimatedReading
+                  kana={lesson.patternKana}
+                  romaji={lesson.patternRomaji}
+                  active={activeReadingKey === "pattern"}
+                />
+              </div>
             </div>
             <SpeakButton
               active={activeReadingKey === "pattern"}
@@ -85,22 +98,15 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
               variant="soft"
             />
           </div>
-          <div className="mt-3 space-y-1 border-t border-ink/10 pt-3">
-            <AnimatedReading
-              kana={lesson.patternKana}
-              romaji={lesson.patternRomaji}
-              active={activeReadingKey === "pattern"}
-            />
-          </div>
           <button
             type="button"
             onClick={markMastered}
             disabled={studyState.completed}
             aria-pressed={studyState.completed}
-            className={`mt-3 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+            className={`mt-4 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
               studyState.completed
                 ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
-                : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"
+                : "border-yuzu/30 bg-yuzu/16 text-ink/70 hover:bg-yuzu/25 hover:text-ink"
             }`}
           >
             <CheckCircle2 aria-hidden="true" size={16} />
@@ -109,61 +115,65 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-3 md:grid-cols-3">
-        {lesson.examples.map((example, index) => {
-          const readingKey = `example-${index}`;
-          const active = activeReadingKey === readingKey;
+      <div className="border-t border-ink/8 bg-rice/25 px-4 py-4 sm:px-5">
+        <div className="grid gap-px overflow-hidden rounded-md border border-ink/8 bg-ink/8 md:grid-cols-3">
+          {lesson.examples.map((example, index) => {
+            const readingKey = `example-${index}`;
+            const active = activeReadingKey === readingKey;
 
-          return (
-            <div
-              key={example.japanese}
-              className={`rounded-md border p-4 transition duration-300 ${
-                active
-                  ? "border-yuzu/50 bg-yuzu/10 shadow-card ring-2 ring-yuzu/25"
-                  : "border-ink/8 bg-rice/68"
-              }`}
-            >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div className="min-w-0">
-                  <p
-                    className={`break-words text-lg font-bold transition-colors ${
-                      active ? "text-matcha" : "text-ink"
-                    }`}
-                  >
-                    <span className="font-japanese">{example.japanese}</span>
-                  </p>
-                  <div className="mt-1">
-                    <AnimatedReading kana={example.kana} romaji={example.romaji} active={active} />
+            return (
+              <div
+                key={example.japanese}
+                className={`min-w-0 p-4 transition duration-300 ${
+                  active ? "bg-yuzu/15 ring-2 ring-inset ring-yuzu/30" : "bg-paper/92"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p
+                      className={`break-words font-japanese text-xl font-extrabold leading-snug transition-colors ${
+                        active ? "text-matcha" : "text-ink"
+                      }`}
+                    >
+                      {example.japanese}
+                    </p>
+                    <div className="mt-2">
+                      <AnimatedReading kana={example.kana} romaji={example.romaji} active={active} />
+                    </div>
                   </div>
+                  <SpeakButton
+                    active={active}
+                    ariaLabel={`播放 ${example.japanese}`}
+                    className="h-10 w-10"
+                    onClick={() => speakWithReading(readingKey, example.japanese)}
+                    title="播放"
+                    variant={active ? "solid" : "light"}
+                  />
                 </div>
-                <SpeakButton
-                  active={active}
-                  ariaLabel={`播放 ${example.japanese}`}
-                  className="h-10 w-10"
-                  onClick={() => speakWithReading(readingKey, example.japanese)}
-                  title="播放"
-                  variant={active ? "solid" : "light"}
-                />
+                <p className="mt-3 text-sm leading-6 text-ink/68">{example.translation}</p>
               </div>
-              <p className="mt-3 text-sm text-ink/72">{example.translation}</p>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
-      <div className="mt-6 rounded-md border border-sakura/22 bg-sakura/8 p-4">
-        <div className="mb-3 flex items-center gap-2 text-sm font-bold text-sakura">
-          <AlertTriangle aria-hidden="true" size={18} />
-          <span>中文母语者常见误区</span>
+      <div className="border-t border-sakura/14 bg-sakura/8 px-4 py-4 sm:px-5">
+        <div className="flex gap-3">
+          <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-md bg-sakura/12 text-sakura">
+            <AlertTriangle aria-hidden="true" size={17} />
+          </span>
+          <div className="min-w-0 flex-1">
+            <h3 className="text-sm font-extrabold text-sakura">常见误区</h3>
+            <ul className="mt-2 grid gap-2 text-sm leading-6 text-ink/70 md:grid-cols-3">
+              {lesson.commonMistakes.map((mistake) => (
+                <li key={mistake} className="flex gap-2">
+                  <CheckCircle2 aria-hidden="true" className="mt-0.5 shrink-0 text-matcha" size={16} />
+                  <span>{mistake}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <ul className="grid gap-2 text-sm leading-6 text-ink/72 md:grid-cols-3">
-          {lesson.commonMistakes.map((mistake) => (
-            <li key={mistake} className="flex gap-2">
-              <CheckCircle2 aria-hidden="true" className="mt-0.5 shrink-0 text-matcha" size={16} />
-              <span>{mistake}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </LearningCard>
   );
