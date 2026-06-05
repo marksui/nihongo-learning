@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Navbar, { type PageKey } from "./components/Navbar";
 import SiteFooter from "./components/SiteFooter";
 import ConversationPage from "./pages/ConversationPage";
+import ExamVocabularyPage from "./pages/ExamVocabularyPage";
 import GrammarPage from "./pages/GrammarPage";
 import Home from "./pages/Home";
 import KanaPage from "./pages/KanaPage";
@@ -22,6 +23,7 @@ const pages: PageKey[] = [
   "kana",
   "numbers",
   "vocabulary",
+  "exam-vocabulary",
   "grammar",
   "conversation",
   "quickread",
@@ -78,7 +80,9 @@ const App = () => {
       case "numbers":
         return <NumbersPage onSpeak={handleSpeak} />;
       case "vocabulary":
-        return <VocabularyPage onSpeak={handleSpeak} />;
+        return <VocabularyPage onOpenExamVocabulary={() => navigate("exam-vocabulary")} onSpeak={handleSpeak} />;
+      case "exam-vocabulary":
+        return <ExamVocabularyPage onSpeak={handleSpeak} />;
       case "grammar":
         return <GrammarPage onSpeak={handleSpeak} />;
       case "conversation":

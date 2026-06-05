@@ -9,6 +9,7 @@ import {
   MessagesSquare,
   MoreHorizontal,
   Table2,
+  Trophy,
   X,
 } from "lucide-react";
 import { useState } from "react";
@@ -18,6 +19,7 @@ export type PageKey =
   | "kana"
   | "numbers"
   | "vocabulary"
+  | "exam-vocabulary"
   | "grammar"
   | "conversation"
   | "quickread";
@@ -33,6 +35,7 @@ const desktopItems: NavItem[] = [
   { page: "kana", label: "五十音", icon: Grid3X3 },
   { page: "numbers", label: "数字", icon: Hash },
   { page: "vocabulary", label: "单词", icon: BookOpen },
+  { page: "exam-vocabulary", label: "考试词", icon: Trophy },
   { page: "grammar", label: "语法", icon: GraduationCap },
   { page: "conversation", label: "会话", icon: MessagesSquare },
   { page: "quickread", label: "速读", icon: Table2 },
@@ -47,6 +50,7 @@ const mobilePrimaryItems: NavItem[] = [
 
 const moreItems: NavItem[] = [
   { page: "numbers", label: "数字读法", icon: Hash },
+  { page: "exam-vocabulary", label: "考试词汇", icon: Trophy },
   { page: "grammar", label: "基础语法", icon: GraduationCap },
   { page: "quickread", label: "假名速读", icon: Table2 },
 ];
@@ -126,7 +130,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                 <X aria-hidden="true" size={17} />
               </button>
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               {moreItems.map((item) => {
                 const Icon = item.icon;
                 const active = currentPage === item.page;

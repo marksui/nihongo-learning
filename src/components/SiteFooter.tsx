@@ -14,6 +14,7 @@ const footerLinks: Array<{ label: string; page: PageKey }> = [
   { label: "五十音", page: "kana" },
   { label: "数字", page: "numbers" },
   { label: "单词", page: "vocabulary" },
+  { label: "考试词", page: "exam-vocabulary" },
   { label: "语法", page: "grammar" },
   { label: "会话", page: "conversation" },
   { label: "速读", page: "quickread" },

@@ -15,6 +15,7 @@ import {
   RotateCcw,
   Table2,
   Target,
+  Trophy,
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import JlptLevelSelector from "../components/JlptLevelSelector";
@@ -110,6 +111,8 @@ const todayTaskCardClasses = {
   dialogue: "border-sora/20 bg-sora/8",
 } satisfies Record<TodayTaskKey, string>;
 
+const commonVocabularyCount = vocabulary.filter((word) => word.category !== "考试单词").length;
+
 const featureCards: FeatureCard[] = [
   {
     title: "五十音图",
@@ -122,10 +125,18 @@ const featureCards: FeatureCard[] = [
   {
     title: "常用单词",
     page: "vocabulary",
-    description: "入门到 N1，按场景和等级找词。",
-    metric: `${vocabulary.length} 个核心/考试词`,
+    description: "按场景找日常高频词。",
+    metric: `${commonVocabularyCount} 个场景词`,
     accent: "bg-sakura",
     icon: BookOpen,
+  },
+  {
+    title: "考试词汇",
+    page: "exam-vocabulary",
+    description: "按 N5 到 N1 选择词汇。",
+    metric: `${vocabulary.length} 个 N 级词`,
+    accent: "bg-sumire",
+    icon: Trophy,
   },
   {
     title: "数字读法",
@@ -247,7 +258,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     words: {
       title: "五个单词",
       eyebrow: "词汇",
-      page: "vocabulary",
+      page: "exam-vocabulary",
       description: today.words.map((word) => word.japanese).join(" / "),
       preview: "听单词，再看中文意思。",
       cta: "去看单词",
@@ -513,10 +524,10 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               <button
                 type="button"
-                onClick={() => onNavigate("vocabulary")}
+                onClick={() => onNavigate("exam-vocabulary")}
                 className="flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-md bg-sumire px-3 py-2 text-sm font-extrabold text-white shadow-card transition hover:bg-sumire/90 active:scale-95"
               >
-                查看 {targetLevel} 单词
+                查看 {targetLevel} 考试词
                 <ArrowRight aria-hidden="true" size={15} />
               </button>
               <button
