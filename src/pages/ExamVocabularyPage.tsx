@@ -1,6 +1,7 @@
-import { RotateCcw, Search } from "lucide-react";
-import { useMemo, useState } from "react";
+import { RotateCcw, Search, Tags } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import EmptyState from "../components/EmptyState";
+import FilterChips from "../components/FilterChips";
 import JlptLevelSelector from "../components/JlptLevelSelector";
 import PageHero from "../components/PageHero";
 import WordCard from "../components/WordCard";
@@ -12,7 +13,20 @@ interface ExamVocabularyPageProps {
   onSpeak: (text: string) => Promise<boolean>;
 }
 
-const wordMatchesQuery = (word: (typeof vocabulary)[number], normalizedQuery: string) =>
+type VocabularyWord = (typeof vocabulary)[number];
+
+const allTopicsLabel = "全部主题";
+const reservedTopicLabels = new Set<string>(["JLPT", "考试单词", ...jlptVocabularyLevels]);
+
+const getWordTopics = (word: VocabularyWord) => {
+  const topics = [word.category, ...(word.tags ?? [])].filter((topic) => {
+    return topic && !reservedTopicLabels.has(topic) && topic !== word.level;
+  });
+
+  return [...new Set(topics.length ? topics : ["综合"])];
+};
+
+const wordMatchesQuery = (word: VocabularyWord, normalizedQuery: string) =>
   !normalizedQuery ||
   [
     word.japanese,
@@ -34,40 +48,94 @@ const wordMatchesQuery = (word: (typeof vocabulary)[number], normalizedQuery: st
 const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
   const [query, setQuery] = useState("");
   const [activeLevel, setActiveLevel] = useState<JlptVocabularyLevel>(() => readLearningProgress().targetJlptLevel);
+  const [activeTopic, setActiveTopic] = useState(allTopicsLabel);
+
+  const examWords = useMemo(() => {
+    const byKey = new Map<string, VocabularyWord>();
+
+    vocabulary.forEach((word) => {
+      const key = `${getVocabularyJlptLevel(word)}:${word.japanese}:${word.kana}`;
+      const existing = byKey.get(key);
+
+      if (!existing || word.category === "考试单词") {
+        byKey.set(key, word);
+      }
+    });
+
+    return [...byKey.values()].sort((first, second) => (first.sortOrder ?? 0) - (second.sortOrder ?? 0));
+  }, []);
 
   const levelCounts = useMemo(
     () =>
       jlptVocabularyLevels.reduce<Record<JlptVocabularyLevel, number>>((counts, level) => {
-        counts[level] = vocabulary.filter((word) => getVocabularyJlptLevel(word) === level).length;
+        counts[level] = examWords.filter((word) => getVocabularyJlptLevel(word) === level).length;
         return counts;
       }, {} as Record<JlptVocabularyLevel, number>),
-    [],
+    [examWords],
   );
 
   const selectedLevelWords = useMemo(
-    () => vocabulary.filter((word) => getVocabularyJlptLevel(word) === activeLevel),
-    [activeLevel],
+    () => examWords.filter((word) => getVocabularyJlptLevel(word) === activeLevel),
+    [activeLevel, examWords],
+  );
+
+  const topicCounts = useMemo(() => {
+    const counts: Record<string, number> = { [allTopicsLabel]: selectedLevelWords.length };
+
+    selectedLevelWords.forEach((word) => {
+      getWordTopics(word).forEach((topic) => {
+        counts[topic] = (counts[topic] ?? 0) + 1;
+      });
+    });
+
+    return counts;
+  }, [selectedLevelWords]);
+
+  const topicOptions = useMemo(
+    () => [
+      allTopicsLabel,
+      ...Object.keys(topicCounts)
+        .filter((topic) => topic !== allTopicsLabel)
+        .sort((first, second) => topicCounts[second] - topicCounts[first] || first.localeCompare(second, "zh-Hans-CN")),
+    ],
+    [topicCounts],
   );
 
   const filteredWords = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-    return selectedLevelWords.filter((word) => wordMatchesQuery(word, normalizedQuery));
-  }, [query, selectedLevelWords]);
+    return selectedLevelWords.filter((word) => {
+      const matchesTopic = activeTopic === allTopicsLabel || getWordTopics(word).includes(activeTopic);
+      return matchesTopic && wordMatchesQuery(word, normalizedQuery);
+    });
+  }, [activeTopic, query, selectedLevelWords]);
+
+  useEffect(() => {
+    if (!topicOptions.includes(activeTopic)) {
+      setActiveTopic(allTopicsLabel);
+    }
+  }, [activeTopic, topicOptions]);
 
   const chooseLevel = (level: JlptVocabularyLevel) => {
     setActiveLevel(level);
     setTargetJlptLevel(level);
   };
 
+  const resetFilters = () => {
+    setQuery("");
+    setActiveTopic(allTopicsLabel);
+  };
+
+  const hasActiveFilters = query.trim().length > 0 || activeTopic !== allTopicsLabel;
+
   return (
     <div className="space-y-7">
       <PageHero
-        title="JLPT 考试词汇"
-        description="按 N5 到 N1 分级复习词汇。选择目标等级后，只看该等级词卡；点播放听单词和例句，掌握后直接标记。"
+        title="JLPT 备考词库"
+        description="按 N5 到 N1 分级看词，配合主题筛选和点读。适合从零基础慢慢扩到能力考常见词。"
         stats={[
-          { label: "等级", value: "N5-N1" },
+          { label: "总词量", value: examWords.length },
           { label: activeLevel, value: levelCounts[activeLevel] },
-          { label: "当前", value: filteredWords.length },
+          { label: activeTopic === allTopicsLabel ? "当前" : activeTopic, value: filteredWords.length },
         ]}
       />
 
@@ -85,7 +153,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
                   type="search"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
-                  placeholder={`搜索 ${activeLevel} 日语、假名、romaji 或中文`}
+                  placeholder={`搜索 ${activeLevel} 日语、假名、romaji、中文或主题`}
                   className="min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
                 />
               </label>
@@ -94,13 +162,23 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
               </p>
             </div>
 
-            {query ? (
+            <div className="mt-3">
+              <FilterChips
+                active={activeTopic}
+                counts={topicCounts}
+                icon={Tags}
+                onChange={setActiveTopic}
+                options={topicOptions}
+              />
+            </div>
+
+            {hasActiveFilters ? (
               <button
                 type="button"
-                onClick={() => setQuery("")}
+                onClick={resetFilters}
                 className="mt-3 flex min-h-10 cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-paper px-3 py-2 text-sm font-extrabold text-ink/62 transition hover:border-sakura/25 hover:bg-sakura/8 hover:text-ink active:scale-95"
               >
-                清空搜索
+                清空筛选
                 <RotateCcw aria-hidden="true" size={15} />
               </button>
             ) : null}
