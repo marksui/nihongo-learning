@@ -1522,6 +1522,39 @@ const supplementalCommonVocabulary: VocabularyItem[] = [
   makeCommonTerm("common-plus-setsuzoku", "科技", "接続", "せつぞく", "setsuzoku", "连接", "基础", ["科技"]),
 ];
 
+const dailyLifeVocabulary: VocabularyItem[] = [
+  makeCommonTerm("daily-life-fuku", "生活", "服", "ふく", "fuku", "衣服", "基础", ["生活", "购物"]),
+  makeCommonTerm("daily-life-uwagi", "生活", "上着", "うわぎ", "uwagi", "外套", "基础", ["生活", "购物"]),
+  makeCommonTerm("daily-life-shatsu", "生活", "シャツ", "しゃつ", "shatsu", "衬衫", "基础", ["生活", "购物"]),
+  makeCommonTerm("daily-life-sukaato", "生活", "スカート", "すかーと", "sukaato", "裙子", "基础", ["生活", "购物"]),
+  makeCommonTerm("daily-life-zubon", "生活", "ズボン", "ずぼん", "zubon", "裤子", "基础", ["生活", "购物"]),
+  makeCommonTerm("daily-life-kutsu", "生活", "靴", "くつ", "kutsu", "鞋", "基础", ["生活", "购物"]),
+  makeCommonTerm("daily-life-kutsushita", "生活", "靴下", "くつした", "kutsushita", "袜子", "基础", ["生活", "购物"]),
+  makeCommonTerm("daily-life-boushi", "生活", "帽子", "ぼうし", "boushi", "帽子", "基础", ["生活", "购物"]),
+  makeCommonTerm("daily-life-megane", "生活", "眼鏡", "めがね", "megane", "眼镜", "基础", ["生活"]),
+  makeCommonTerm("daily-life-kasa", "生活", "傘", "かさ", "kasa", "伞", "基础", ["生活", "天气"]),
+  makeCommonTerm("daily-life-sentakuki", "生活", "洗濯機", "せんたくき", "sentakuki", "洗衣机", "基础", ["生活", "家电"]),
+  makeCommonTerm("daily-life-reizouko", "生活", "冷蔵庫", "れいぞうこ", "reizouko", "冰箱", "基础", ["生活", "家电"]),
+  makeCommonTerm("daily-life-denshirenji", "生活", "電子レンジ", "でんしれんじ", "denshi renji", "微波炉", "基础", ["生活", "家电"]),
+  makeCommonTerm("daily-life-suihanki", "生活", "炊飯器", "すいはんき", "suihanki", "电饭煲", "基础", ["生活", "家电"]),
+  makeCommonTerm("daily-life-soujiki", "生活", "掃除機", "そうじき", "soujiki", "吸尘器", "基础", ["生活", "家电"]),
+  makeCommonTerm("daily-life-eakon", "生活", "エアコン", "えあこん", "eakon", "空调", "基础", ["生活", "家电"]),
+  makeCommonTerm("daily-life-senmenjo", "生活", "洗面所", "せんめんじょ", "senmenjo", "洗漱间", "基础", ["生活", "场所"]),
+  makeCommonTerm("daily-life-furoba", "生活", "風呂場", "ふろば", "furoba", "浴室", "基础", ["生活", "场所"]),
+  makeCommonTerm("daily-life-genkan", "生活", "玄関", "げんかん", "genkan", "玄关 / 门厅", "基础", ["生活", "场所"]),
+  makeCommonTerm("daily-life-veranda", "生活", "ベランダ", "べらんだ", "beranda", "阳台", "基础", ["生活", "场所"]),
+  makeCommonTerm("daily-life-gomi", "生活", "ごみ", "ごみ", "gomi", "垃圾", "基础", ["生活"]),
+  makeCommonTerm("daily-life-gomibukuro", "生活", "ごみ袋", "ごみぶくろ", "gomibukuro", "垃圾袋", "基础", ["生活"]),
+  makeCommonTerm("daily-life-kan", "生活", "缶", "かん", "kan", "罐 / 罐头", "基础", ["生活"]),
+  makeCommonTerm("daily-life-bin", "生活", "瓶", "びん", "bin", "瓶子", "基础", ["生活"]),
+  makeCommonTerm("daily-life-petto-botoru", "生活", "ペットボトル", "ぺっとぼとる", "petto botoru", "塑料瓶", "基础", ["生活"]),
+  makeCommonTerm("daily-life-nenryou", "生活", "燃料", "ねんりょう", "nenryou", "燃料", "基础", ["生活"]),
+  makeCommonTerm("daily-life-denchi", "生活", "電池", "でんち", "denchi", "电池", "基础", ["生活", "科技"]),
+  makeCommonTerm("daily-life-shuuden", "科技", "充電", "じゅうでん", "juuden", "充电", "基础", ["科技", "生活"]),
+  makeCommonTerm("daily-life-kosho", "生活", "故障", "こしょう", "koshou", "故障", "基础", ["生活", "科技"]),
+  makeCommonTerm("daily-life-setsumei", "生活", "説明", "せつめい", "setsumei", "说明 / 解释", "基础", ["生活", "表达"]),
+];
+
 const n5ExamVocabulary: VocabularyItem[] = [
   makeExamTerm("exam-n5-watashi", "N5", "私", "わたし", "watashi", "我", ["人物"]),
   makeExamTerm("exam-n5-anata", "N5", "あなた", "あなた", "anata", "你", ["人物"]),
@@ -2080,6 +2113,7 @@ export const vocabulary: VocabularyItem[] = [
   ...coreVocabulary,
   ...expandedVocabulary,
   ...supplementalCommonVocabulary,
+  ...dailyLifeVocabulary,
   ...n3Vocabulary,
   ...examVocabulary,
 ].map((word, index) => ({
