@@ -223,7 +223,22 @@ select:focus-visible {
 }
 
 .exam-result-shell {
+  position: relative;
   animation: exam-result-shell 0.38s ease-out both;
+}
+
+.exam-result-shell::before {
+  position: absolute;
+  top: -0.35rem;
+  left: 0;
+  width: min(44%, 18rem);
+  height: 2px;
+  border-radius: 999px;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(90deg, rgb(var(--color-matcha) / 0), rgb(var(--color-matcha) / 0.42), rgb(var(--color-yuzu) / 0));
+  transform-origin: left center;
+  animation: exam-result-refresh-line 0.62s ease-out both;
 }
 
 .exam-filter-panel-active {
@@ -537,6 +552,22 @@ select:focus-visible {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes exam-result-refresh-line {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.08);
+  }
+
+  48% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
   }
 }
 
