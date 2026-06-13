@@ -144,7 +144,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
         <div className="grid gap-4 xl:grid-cols-[minmax(0,0.86fr)_minmax(360px,0.74fr)] xl:items-start">
           <div className="min-w-0">
             <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-              <label className="relative block">
+              <label className="exam-search-field relative block rounded-md">
                 <Search
                   aria-hidden="true"
                   className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink/42"
@@ -155,7 +155,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder={`搜索 ${activeLevel} 日语、假名、romaji、中文或主题`}
-                  className="min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
+                  className="exam-search-input min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
                 />
               </label>
               <p
