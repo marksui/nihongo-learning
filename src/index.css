@@ -158,6 +158,22 @@ select:focus-visible {
   animation: level-chip-shine 1.4s ease-in-out both;
 }
 
+.filter-chip-selected {
+  position: relative;
+  overflow: hidden;
+  animation: filter-chip-selected 0.42s ease-out both;
+}
+
+.filter-chip-selected::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.24), transparent);
+  transform: translateX(-120%);
+  animation: filter-chip-shine 0.96s ease-out both;
+}
+
 .level-count-pop {
   animation: level-count-pop 0.48s ease both;
 }
@@ -300,6 +316,27 @@ select:focus-visible {
   }
 
   58%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes filter-chip-selected {
+  0% {
+    transform: translateY(0.06rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes filter-chip-shine {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  68%,
   100% {
     transform: translateX(120%);
   }
