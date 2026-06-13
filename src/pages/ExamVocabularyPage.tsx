@@ -147,7 +147,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
               <label className="exam-search-field relative block rounded-md">
                 <Search
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink/42"
+                  className={`pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink/42 ${hasActiveFilters ? "exam-search-icon-active" : ""}`}
                   size={20}
                 />
                 <input

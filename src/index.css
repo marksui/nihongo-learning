@@ -214,6 +214,10 @@ select:focus-visible {
   animation: exam-search-focus 0.48s ease-out both;
 }
 
+.exam-search-icon-active {
+  animation: exam-search-icon-active 0.88s ease-out both;
+}
+
 .seen-pop {
   animation: seen-pop 0.46s ease-out both;
 }
@@ -438,6 +442,23 @@ select:focus-visible {
   100% {
     background-color: rgb(var(--color-rice) / 0.72);
     box-shadow: 0 0 0 5px rgb(var(--color-sora) / 0.08);
+  }
+}
+
+@keyframes exam-search-icon-active {
+  0% {
+    color: rgb(var(--color-ink) / 0.42);
+    transform: translateY(-50%) scale(1);
+  }
+
+  45% {
+    color: rgb(var(--color-sakura));
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  100% {
+    color: rgb(var(--color-sora));
+    transform: translateY(-50%) scale(1);
   }
 }
 
