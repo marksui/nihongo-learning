@@ -37,7 +37,11 @@ const FilterChips = <T extends string>({
               {Icon ? <Icon aria-hidden="true" size={15} /> : null}
               <span>{option}</span>
               {counts?.[option] !== undefined ? (
-                <span className={`rounded px-1.5 py-0.5 text-xs ${selected ? "bg-white/16" : "bg-rice text-ink/58"}`}>
+                <span
+                  className={`rounded px-1.5 py-0.5 text-xs ${
+                    selected ? "filter-chip-count-pop bg-white/16" : "bg-rice text-ink/58"
+                  }`}
+                >
                   {counts[option]}
                 </span>
               ) : null}

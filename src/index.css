@@ -174,6 +174,10 @@ select:focus-visible {
   animation: filter-chip-shine 0.96s ease-out both;
 }
 
+.filter-chip-count-pop {
+  animation: filter-chip-count-pop 0.52s ease-out both;
+}
+
 .level-count-pop {
   animation: level-count-pop 0.48s ease both;
 }
@@ -388,6 +392,23 @@ select:focus-visible {
   68%,
   100% {
     transform: translateX(120%);
+  }
+}
+
+@keyframes filter-chip-count-pop {
+  0% {
+    box-shadow: 0 0 0 0 rgb(255 255 255 / 0);
+    transform: translateY(0.08rem) scale(0.94);
+  }
+
+  55% {
+    box-shadow: 0 0 0 5px rgb(255 255 255 / 0.16);
+    transform: translateY(-0.03rem) scale(1.06);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgb(255 255 255 / 0);
+    transform: translateY(0) scale(1);
   }
 }
 
