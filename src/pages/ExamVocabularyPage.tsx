@@ -191,7 +191,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
             ) : null}
           </div>
 
-          <div className="rounded-md border border-sumire/12 bg-sumire/6 p-3">
+          <div key={activeLevel} className="exam-level-panel rounded-md border border-sumire/12 bg-sumire/6 p-3">
             <JlptLevelSelector
               active={activeLevel}
               counts={levelCounts}

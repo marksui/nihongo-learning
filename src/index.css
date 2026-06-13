@@ -218,6 +218,22 @@ select:focus-visible {
   animation: exam-search-icon-active 0.88s ease-out both;
 }
 
+.exam-level-panel {
+  position: relative;
+  overflow: hidden;
+  animation: exam-level-panel 0.52s ease-out both;
+}
+
+.exam-level-panel::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(105deg, transparent 8%, rgb(var(--color-sumire) / 0.12), transparent 56%);
+  transform: translateX(-120%);
+  animation: exam-level-panel-shine 0.92s ease-out both;
+}
+
 .seen-pop {
   animation: seen-pop 0.46s ease-out both;
 }
@@ -459,6 +475,40 @@ select:focus-visible {
   100% {
     color: rgb(var(--color-sora));
     transform: translateY(-50%) scale(1);
+  }
+}
+
+@keyframes exam-level-panel {
+  0% {
+    border-color: rgb(var(--color-sumire) / 0.12);
+    box-shadow: 0 0 0 0 rgb(var(--color-sumire) / 0);
+    transform: translateY(0.18rem);
+  }
+
+  45% {
+    border-color: rgb(var(--color-sumire) / 0.28);
+    box-shadow: 0 10px 24px -18px rgb(var(--color-sumire) / 0.42);
+    transform: translateY(-0.06rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes exam-level-panel-shine {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+
+  28% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(120%);
   }
 }
 
