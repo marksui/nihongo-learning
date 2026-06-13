@@ -63,7 +63,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
               <p
                 className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
                   studyState.completed
-                    ? "bg-matcha/12 text-matcha"
+                    ? "mastery-pop bg-matcha/12 text-matcha"
                     : studyState.seen
                       ? "bg-yuzu/18 text-ink/62"
                       : "bg-rice text-ink/45"
@@ -125,7 +125,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
           aria-pressed={studyState.completed}
           className={`mt-4 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
             studyState.completed
-              ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
+              ? "mastered-action-pop cursor-default border-matcha/20 bg-matcha/10 text-matcha"
               : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"
           }`}
         >
