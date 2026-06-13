@@ -2159,6 +2159,7 @@ const contributionVocabulary: VocabularyItem[] = [
   makeExamTerm("exam-push-021-noriba", "N4", "乗り場", "のりば", "noriba", "乘车处", ["交通", "旅行"]),
   makeExamTerm("exam-push-022-oriba", "N4", "降り場", "おりば", "oriba", "下车处", ["交通", "旅行"]),
   makeExamTerm("exam-push-023-kaisatsu", "N4", "改札", "かいさつ", "kaisatsu", "检票口", ["交通", "旅行"]),
+  makeExamTerm("exam-push-024-katamichi", "N4", "片道", "かたみち", "katamichi", "单程", ["交通", "旅行"]),
 ];
 
 const examVocabulary: VocabularyItem[] = [
