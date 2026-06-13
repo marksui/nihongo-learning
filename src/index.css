@@ -162,6 +162,12 @@ select:focus-visible {
   animation: level-count-pop 0.48s ease both;
 }
 
+.exam-card-reveal {
+  opacity: 0;
+  transform: translateY(0.35rem);
+  animation: exam-card-reveal 0.46s ease-out forwards;
+}
+
 @keyframes reading-token-pulse {
   0% {
     background: transparent;
@@ -262,6 +268,18 @@ select:focus-visible {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes exam-card-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

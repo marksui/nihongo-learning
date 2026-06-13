@@ -198,7 +198,15 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {filteredWords.length ? (
-          filteredWords.map((word) => <WordCard key={word.id} word={word} onSpeak={onSpeak} />)
+          filteredWords.map((word, index) => (
+            <div
+              key={word.id}
+              className="exam-card-reveal"
+              style={{ animationDelay: `${Math.min(index, 14) * 22}ms` }}
+            >
+              <WordCard word={word} onSpeak={onSpeak} />
+            </div>
+          ))
         ) : (
           <div className="md:col-span-2 xl:col-span-3">
             <EmptyState title="没有找到考试词" description="换一个日语、假名、romaji 或中文关键词再试。" />
