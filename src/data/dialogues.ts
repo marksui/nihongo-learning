@@ -600,6 +600,14 @@ const expandedDialogues: Dialogue[] = [
     { speaker: "游客", japanese: "このボタンを押してください。", kana: "このぼたんをおしてください。", translation: "请按这个按钮。" },
     { speaker: "路人", japanese: "はい、撮ります。", kana: "はい、とります。", translation: "好的，要拍了。" },
   ], ["社交", "旅行", "拍照"]),
+  makeDialogue("rental-contract", "租房签约", "生活", "李", "决定租房后确认合同和入住日期", [
+    { speaker: "李", japanese: "この部屋を借りたいです。", kana: "このへやをかりたいです。", translation: "我想租这个房间。" },
+    { speaker: "中介", japanese: "では、契約書を確認しましょう。", kana: "では、けいやくしょをかくにんしましょう。", translation: "那么我们确认一下合同吧。" },
+    { speaker: "李", japanese: "入居日はいつになりますか。", kana: "にゅうきょびはいつになりますか。", translation: "入住日期是什么时候？" },
+    { speaker: "中介", japanese: "来月一日から入れます。", kana: "らいげつついたちからはいれます。", translation: "下个月一号可以入住。" },
+    { speaker: "李", japanese: "初期費用はいくらですか。", kana: "しょきひようはいくらですか。", translation: "初期费用是多少？" },
+    { speaker: "中介", japanese: "全部で二十万円ぐらいです。", kana: "ぜんぶでにじゅうまんえんぐらいです。", translation: "总共大约二十万日元。" },
+  ], ["住房", "合同", "生活"]),
 ];
 
 export const dialogues: Dialogue[] = [...coreDialogues, ...expandedDialogues].map((dialogue, index) => ({
