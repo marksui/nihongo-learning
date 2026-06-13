@@ -2135,12 +2135,17 @@ const n5N4N3CompletionVocabulary: VocabularyItem[] = [
   makeExamTerm("exam-core-n3-fuantei", "N3", "不安定", "ふあんてい", "fuantei", "不稳定", ["表达"]),
 ];
 
+const contributionVocabulary: VocabularyItem[] = [
+  makeExamTerm("exam-push-001-kusuri", "N5", "薬", "くすり", "kusuri", "药", ["身体", "生活"]),
+];
+
 const examVocabulary: VocabularyItem[] = [
   ...n5ExamVocabulary,
   ...n4ExamVocabulary,
   ...n3ExamVocabulary,
   ...extendedExamVocabulary,
   ...n5N4N3CompletionVocabulary,
+  ...contributionVocabulary,
   makeExamVocabulary("exam-n2-chuushou", "N2", "抽象", "ちゅうしょう", "chuushou", "抽象 / 抽象概念"),
   makeExamVocabulary("exam-n2-gutai", "N2", "具体", "ぐたい", "gutai", "具体"),
   makeExamVocabulary("exam-n2-genshou", "N2", "現象", "げんしょう", "genshou", "现象"),
