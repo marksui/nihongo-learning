@@ -142,6 +142,26 @@ select:focus-visible {
   animation: speak-bar-sweep 1.15s ease-in-out infinite;
 }
 
+.level-chip-active {
+  position: relative;
+  overflow: hidden;
+  animation: level-chip-settle 0.42s ease both;
+}
+
+.level-chip-active::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgb(var(--color-yuzu) / 0.24), transparent);
+  transform: translateX(-120%);
+  animation: level-chip-shine 1.4s ease-in-out both;
+}
+
+.level-count-pop {
+  animation: level-count-pop 0.48s ease both;
+}
+
 @keyframes reading-token-pulse {
   0% {
     background: transparent;
@@ -209,6 +229,39 @@ select:focus-visible {
 
   100% {
     transform: translateX(320%);
+  }
+}
+
+@keyframes level-chip-settle {
+  0% {
+    transform: translateY(0.08rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes level-chip-shine {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  58%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes level-count-pop {
+  0% {
+    opacity: 0.62;
+    transform: scale(0.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
