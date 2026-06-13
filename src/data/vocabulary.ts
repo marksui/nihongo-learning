@@ -2164,6 +2164,7 @@ const contributionVocabulary: VocabularyItem[] = [
   makeExamTerm("exam-push-026-chien", "N3", "遅延", "ちえん", "chien", "延误", ["交通", "旅行"]),
   makeExamTerm("exam-push-027-unkyuu", "N3", "運休", "うんきゅう", "unkyuu", "停运", ["交通", "旅行"]),
   makeExamTerm("exam-push-028-joushaken", "N3", "乗車券", "じょうしゃけん", "jousha ken", "车票", ["交通", "旅行"]),
+  makeExamTerm("exam-push-029-teikiken", "N3", "定期券", "ていきけん", "teiki ken", "定期票 / 月票", ["交通", "生活"]),
 ];
 
 const examVocabulary: VocabularyItem[] = [
