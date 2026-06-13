@@ -116,7 +116,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
               title="播放例句"
             />
           </div>
-          <p className="mt-3 text-sm text-ink/70">{word.translation}</p>
+          <p className={`mt-3 text-sm text-ink/70 ${sentenceActive ? "translation-spark" : ""}`}>{word.translation}</p>
         </div>
         <button
           type="button"
