@@ -154,6 +154,25 @@ select:focus-visible {
   animation: word-card-scan 0.72s ease-out both;
 }
 
+.study-state-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.study-state-badge::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.38), transparent);
+  transform: translateX(-120%);
+}
+
+.word-card-shell:hover .study-state-badge::after,
+.word-card-shell:focus-within .study-state-badge::after {
+  animation: study-state-badge-shine 0.82s ease-out both;
+}
+
 .speak-text-glow {
   animation: speak-text-glow 0.9s ease-in-out infinite alternate;
 }
@@ -384,6 +403,16 @@ select:focus-visible {
   100% {
     opacity: 0;
     transform: translateX(130%) scaleX(1);
+  }
+}
+
+@keyframes study-state-badge-shine {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(120%);
   }
 }
 

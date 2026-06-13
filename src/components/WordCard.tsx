@@ -61,7 +61,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
                 {jlptLevel}
               </p>
               <p
-                className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
+                className={`study-state-badge inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
                   studyState.completed
                     ? "mastery-pop bg-matcha/12 text-matcha"
                     : studyState.seen
