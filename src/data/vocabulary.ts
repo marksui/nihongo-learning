@@ -2155,6 +2155,7 @@ const contributionVocabulary: VocabularyItem[] = [
   makeExamTerm("exam-push-017-koutsuu", "N4", "交通", "こうつう", "koutsuu", "交通", ["交通"]),
   makeExamTerm("exam-push-018-chikatetsu", "N5", "地下鉄", "ちかてつ", "chikatetsu", "地铁", ["交通", "旅行"]),
   makeExamTerm("exam-push-019-shinkansen", "N4", "新幹線", "しんかんせん", "shinkansen", "新干线", ["交通", "旅行"]),
+  makeExamTerm("exam-push-020-kuukou", "N4", "空港", "くうこう", "kuukou", "机场", ["交通", "旅行", "场所"]),
 ];
 
 const examVocabulary: VocabularyItem[] = [
