@@ -2141,6 +2141,7 @@ const contributionVocabulary: VocabularyItem[] = [
   makeExamTerm("exam-push-003-byouin", "N5", "病院", "びょういん", "byouin", "医院", ["身体", "场所"]),
   makeExamTerm("exam-push-004-isha", "N5", "医者", "いしゃ", "isha", "医生", ["身体", "人物"]),
   makeExamTerm("exam-push-005-netsu", "N4", "熱", "ねつ", "netsu", "发烧 / 热度", ["身体", "天气"]),
+  makeExamTerm("exam-push-006-zutsuu", "N4", "頭痛", "ずつう", "zutsuu", "头痛", ["身体"]),
 ];
 
 const examVocabulary: VocabularyItem[] = [
