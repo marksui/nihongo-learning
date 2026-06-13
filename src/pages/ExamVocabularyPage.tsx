@@ -147,7 +147,11 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
         ]}
       />
 
-      <section className="sticky top-20 z-20 rounded-lg border border-ink/10 bg-paper p-4 shadow-card backdrop-blur md:top-24">
+      <section
+        className={`exam-filter-panel sticky top-20 z-20 rounded-lg border border-ink/10 bg-paper p-4 shadow-card backdrop-blur md:top-24 ${
+          hasActiveFilters ? "exam-filter-panel-active" : ""
+        }`}
+      >
         <div className="grid gap-4 xl:grid-cols-[minmax(0,0.86fr)_minmax(360px,0.74fr)] xl:items-start">
           <div className="min-w-0">
             <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">

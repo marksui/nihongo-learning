@@ -226,6 +226,10 @@ select:focus-visible {
   animation: exam-result-shell 0.38s ease-out both;
 }
 
+.exam-filter-panel-active {
+  animation: exam-filter-panel-active 0.58s ease-out both;
+}
+
 .exam-level-panel {
   position: relative;
   overflow: hidden;
@@ -529,6 +533,23 @@ select:focus-visible {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes exam-filter-panel-active {
+  0% {
+    border-color: rgb(var(--color-ink) / 0.1);
+    box-shadow: 0 0 0 0 rgb(var(--color-yuzu) / 0);
+  }
+
+  48% {
+    border-color: rgb(var(--color-yuzu) / 0.42);
+    box-shadow: 0 0 0 5px rgb(var(--color-yuzu) / 0.11);
+  }
+
+  100% {
+    border-color: rgb(var(--color-ink) / 0.1);
+    box-shadow: 0 0 0 0 rgb(var(--color-yuzu) / 0);
   }
 }
 
