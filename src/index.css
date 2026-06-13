@@ -130,6 +130,30 @@ select:focus-visible {
   animation: speak-card-lift 0.58s ease both;
 }
 
+.word-card-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.word-card-shell::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(58%, 18rem);
+  height: 3px;
+  border-radius: 999px;
+  pointer-events: none;
+  content: "";
+  opacity: 0;
+  background: linear-gradient(90deg, rgb(var(--color-matcha) / 0), rgb(var(--color-matcha) / 0.4), rgb(var(--color-yuzu) / 0.34), rgb(var(--color-matcha) / 0));
+  transform: translateX(-60%) scaleX(0.72);
+}
+
+.word-card-shell:hover::before,
+.word-card-shell:focus-within::before {
+  animation: word-card-scan 0.72s ease-out both;
+}
+
 .speak-text-glow {
   animation: speak-text-glow 0.9s ease-in-out infinite alternate;
 }
@@ -344,6 +368,22 @@ select:focus-visible {
 
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes word-card-scan {
+  0% {
+    opacity: 0;
+    transform: translateX(-70%) scaleX(0.68);
+  }
+
+  42% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(130%) scaleX(1);
   }
 }
 
