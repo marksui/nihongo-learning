@@ -154,6 +154,20 @@ select:focus-visible {
   animation: word-card-scan 0.72s ease-out both;
 }
 
+.word-card-mastered::after {
+  position: absolute;
+  right: 1rem;
+  bottom: 0;
+  left: 1rem;
+  height: 3px;
+  border-radius: 999px 999px 0 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(90deg, rgb(var(--color-matcha) / 0.08), rgb(var(--color-matcha) / 0.62), rgb(var(--color-yuzu) / 0.36));
+  transform-origin: left center;
+  animation: mastered-card-line 0.72s ease-out both;
+}
+
 .study-state-badge {
   position: relative;
   overflow: hidden;
@@ -403,6 +417,22 @@ select:focus-visible {
   100% {
     opacity: 0;
     transform: translateX(130%) scaleX(1);
+  }
+}
+
+@keyframes mastered-card-line {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.12);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
   }
 }
 

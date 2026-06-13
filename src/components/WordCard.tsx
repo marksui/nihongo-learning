@@ -47,7 +47,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
   return (
     <LearningCard
       interactive
-      className={`word-card-shell flex min-h-80 flex-col justify-between p-5 ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
+      className={`word-card-shell flex min-h-80 flex-col justify-between p-5 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
     >
       <div>
         <FoodIllustration word={word} />
