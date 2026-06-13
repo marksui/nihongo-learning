@@ -160,7 +160,10 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
               </label>
               <p
                 key={filterSignature}
-                className="result-count-pop rounded-md border border-ink/8 bg-rice/50 px-3 py-2 text-sm font-extrabold text-ink/60"
+                aria-live="polite"
+                className={`result-count-pop rounded-md border border-ink/8 bg-rice/50 px-3 py-2 text-sm font-extrabold text-ink/60 ${
+                  hasActiveFilters ? "filter-count-focus" : ""
+                }`}
               >
                 {filteredWords.length} / {selectedLevelWords.length} 个词
               </p>

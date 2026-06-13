@@ -177,6 +177,23 @@ select:focus-visible {
   animation: result-count-pop 0.42s ease-out both;
 }
 
+.filter-count-focus {
+  position: relative;
+  overflow: hidden;
+  color: rgb(var(--color-ink) / 0.76);
+  animation: filter-count-focus 0.74s ease-out both;
+}
+
+.filter-count-focus::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgb(var(--color-yuzu) / 0.26), transparent);
+  transform: translateX(-120%);
+  animation: filter-count-shine 1.1s ease-out both;
+}
+
 .seen-pop {
   animation: seen-pop 0.46s ease-out both;
 }
@@ -337,6 +354,29 @@ select:focus-visible {
   100% {
     background-color: rgb(var(--color-rice) / 0.5);
     transform: scale(1);
+  }
+}
+
+@keyframes filter-count-focus {
+  0% {
+    border-color: rgb(var(--color-yuzu) / 0.32);
+    transform: translateY(0.04rem);
+  }
+
+  100% {
+    border-color: rgb(var(--color-ink) / 0.08);
+    transform: translateY(0);
+  }
+}
+
+@keyframes filter-count-shine {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  70%,
+  100% {
+    transform: translateX(120%);
   }
 }
 
