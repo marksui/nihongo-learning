@@ -76,7 +76,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
             <h3 className={`break-words font-japanese text-3xl font-bold transition-colors ${wordActive ? "speak-text-glow text-matcha" : "text-ink"}`}>
               {word.japanese}
             </h3>
-            <p className="mt-2 text-sm text-ink/62">
+            <p className={`mt-2 text-sm text-ink/62 ${wordActive ? "reading-line-spark" : ""}`}>
               {word.kana} · {formatRomajiReading(word.romaji)}
             </p>
           </div>
