@@ -233,7 +233,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
             >
               <div className="flex items-center justify-between gap-3">
                 <span className="text-sm font-extrabold text-ink">{item.level}</span>
-                <span className={`rounded-md px-2 py-1 text-xs font-extrabold ${selected ? "bg-matcha text-white" : "bg-rice text-ink/58"}`}>
+                <span className={`rounded-md px-2 py-1 text-xs font-extrabold ${selected ? "exam-coverage-count-pop bg-matcha text-white" : "bg-rice text-ink/58"}`}>
                   {item.count} 词
                 </span>
               </div>

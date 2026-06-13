@@ -263,6 +263,10 @@ select:focus-visible {
     exam-coverage-bar-breathe 1.6s ease-in-out 0.85s infinite;
 }
 
+.exam-coverage-count-pop {
+  animation: exam-coverage-count-pop 0.56s ease-out both;
+}
+
 .seen-pop {
   animation: seen-pop 0.46s ease-out both;
 }
@@ -617,6 +621,20 @@ select:focus-visible {
 
   50% {
     box-shadow: 0 0 0 5px rgb(var(--color-matcha) / 0.12);
+  }
+}
+
+@keyframes exam-coverage-count-pop {
+  0% {
+    transform: translateY(0.08rem) scale(0.96);
+  }
+
+  55% {
+    transform: translateY(-0.03rem) scale(1.07);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
   }
 }
 
