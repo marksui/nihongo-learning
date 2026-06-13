@@ -65,7 +65,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
                   studyState.completed
                     ? "mastery-pop bg-matcha/12 text-matcha"
                     : studyState.seen
-                      ? "bg-yuzu/18 text-ink/62"
+                      ? "seen-pop bg-yuzu/18 text-ink/62"
                       : "bg-rice text-ink/45"
                 }`}
               >
