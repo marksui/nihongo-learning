@@ -2138,6 +2138,7 @@ const n5N4N3CompletionVocabulary: VocabularyItem[] = [
 const contributionVocabulary: VocabularyItem[] = [
   makeExamTerm("exam-push-001-kusuri", "N5", "薬", "くすり", "kusuri", "药", ["身体", "生活"]),
   makeExamTerm("exam-push-002-byouki", "N5", "病気", "びょうき", "byouki", "生病 / 疾病", ["身体", "生活"]),
+  makeExamTerm("exam-push-003-byouin", "N5", "病院", "びょういん", "byouin", "医院", ["身体", "场所"]),
 ];
 
 const examVocabulary: VocabularyItem[] = [
