@@ -234,6 +234,23 @@ select:focus-visible {
   animation: exam-level-panel-shine 0.92s ease-out both;
 }
 
+.exam-coverage-card {
+  opacity: 0;
+  transform: translateY(0.3rem);
+  animation: exam-coverage-card 0.48s ease-out forwards;
+}
+
+.exam-coverage-bar {
+  transform-origin: left center;
+  animation: exam-coverage-bar 0.82s cubic-bezier(0.2, 0.82, 0.22, 1) both;
+}
+
+.exam-coverage-card[aria-pressed="true"] .exam-coverage-bar {
+  animation:
+    exam-coverage-bar 0.82s cubic-bezier(0.2, 0.82, 0.22, 1) both,
+    exam-coverage-bar-breathe 1.6s ease-in-out 0.85s infinite;
+}
+
 .seen-pop {
   animation: seen-pop 0.46s ease-out both;
 }
@@ -509,6 +526,39 @@ select:focus-visible {
   100% {
     opacity: 0;
     transform: translateX(120%);
+  }
+}
+
+@keyframes exam-coverage-card {
+  0% {
+    opacity: 0;
+    transform: translateY(0.3rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes exam-coverage-bar {
+  0% {
+    transform: scaleX(0.08);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes exam-coverage-bar-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(var(--color-matcha) / 0);
+  }
+
+  50% {
+    box-shadow: 0 0 0 5px rgb(var(--color-matcha) / 0.12);
   }
 }
 

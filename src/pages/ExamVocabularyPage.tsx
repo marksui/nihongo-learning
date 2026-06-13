@@ -17,6 +17,7 @@ type VocabularyWord = (typeof vocabulary)[number];
 
 const allTopicsLabel = "全部主题";
 const reservedTopicLabels = new Set<string>(["JLPT", "考试单词", ...jlptVocabularyLevels]);
+const coreJlptLevels: readonly JlptVocabularyLevel[] = ["N5", "N4", "N3"];
 
 const getWordTopics = (word: VocabularyWord) => {
   const topics = [word.category, ...(word.tags ?? [])].filter((topic) => {
@@ -73,6 +74,12 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
       }, {} as Record<JlptVocabularyLevel, number>),
     [examWords],
   );
+  const coreLevelMaxCount = Math.max(...coreJlptLevels.map((level) => levelCounts[level] ?? 0), 1);
+  const coreLevelCoverage = coreJlptLevels.map((level) => ({
+    level,
+    count: levelCounts[level],
+    percent: Math.max(8, Math.round(((levelCounts[level] ?? 0) / coreLevelMaxCount) * 100)),
+  }));
 
   const selectedLevelWords = useMemo(
     () => examWords.filter((word) => getVocabularyJlptLevel(word) === activeLevel),
@@ -201,6 +208,43 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
             />
           </div>
         </div>
+      </section>
+
+      <section className="grid gap-3 md:grid-cols-3" aria-label="N5 N4 N3 词库覆盖概览">
+        {coreLevelCoverage.map((item, index) => {
+          const selected = activeLevel === item.level;
+
+          return (
+            <button
+              key={item.level}
+              type="button"
+              onClick={() => chooseLevel(item.level)}
+              aria-pressed={selected}
+              className={`exam-coverage-card rounded-md border p-3 text-left transition active:scale-[0.99] ${
+                selected
+                  ? "border-matcha/35 bg-matcha/10 text-ink shadow-card"
+                  : "border-ink/8 bg-paper/78 text-ink hover:border-yuzu/35 hover:bg-yuzu/10"
+              }`}
+              style={{ animationDelay: `${index * 72}ms` }}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-sm font-extrabold text-ink">{item.level}</span>
+                <span className={`rounded-md px-2 py-1 text-xs font-extrabold ${selected ? "bg-matcha text-white" : "bg-rice text-ink/58"}`}>
+                  {item.count} 词
+                </span>
+              </div>
+              <div className="mt-3 h-2 overflow-hidden rounded-full bg-rice">
+                <span
+                  className={`exam-coverage-bar block h-full rounded-full ${selected ? "bg-matcha" : "bg-sora/72"}`}
+                  style={{ width: `${item.percent}%` }}
+                />
+              </div>
+              <p className="mt-2 text-xs font-bold text-ink/52">
+                {selected ? "正在查看这个等级" : "点击切换到这个等级"}
+              </p>
+            </button>
+          );
+        })}
       </section>
 
       <section key={filterSignature} className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
