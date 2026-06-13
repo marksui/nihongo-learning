@@ -2152,6 +2152,7 @@ const contributionVocabulary: VocabularyItem[] = [
   makeExamTerm("exam-push-014-shinsatsu", "N3", "診察", "しんさつ", "shinsatsu", "诊察 / 看诊", ["身体", "生活"]),
   makeExamTerm("exam-push-015-kaikei", "N3", "会計", "かいけい", "kaikei", "结账 / 会计", ["生活", "工作"]),
   makeExamTerm("exam-push-016-shohousen", "N3", "処方箋", "しょほうせん", "shohousen", "处方笺", ["身体", "生活"]),
+  makeExamTerm("exam-push-017-koutsuu", "N4", "交通", "こうつう", "koutsuu", "交通", ["交通"]),
 ];
 
 const examVocabulary: VocabularyItem[] = [
