@@ -428,15 +428,20 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           </>
         }
         media={
-          <div className="overflow-hidden rounded-md border border-ink/8 bg-rice/45">
-            <div className="relative aspect-[4/3] min-h-[18rem] overflow-hidden sm:aspect-[16/10] lg:h-full">
+          <div className="overflow-hidden rounded-md border border-sora/18 bg-paper shadow-card">
+            <div className="relative aspect-[9/13] min-h-[26rem] overflow-hidden sm:aspect-[4/5] lg:h-full lg:min-h-[34rem]">
               <img
                 src={homeStudyScene}
-                alt="日语学习桌面插画"
-                className="h-full w-full object-cover"
+                alt="大阪道顿堀河岸街景封面"
+                className="h-full w-full object-cover object-[center_44%]"
                 loading="eager"
               />
-              <div className="absolute inset-x-3 bottom-3 rounded-md border border-paper/70 bg-paper/90 p-3 shadow-card backdrop-blur">
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/42 via-ink/0 to-paper/10" />
+              <div className="absolute left-3 top-3 rounded-md border border-paper/70 bg-paper/86 px-3 py-2 shadow-card backdrop-blur">
+                <p className="font-display text-lg italic leading-none text-ink">Japan</p>
+                <p className="mt-1 text-sm font-extrabold text-ink/68">日本 / Osaka 大阪</p>
+              </div>
+              <div className="absolute inset-x-3 bottom-3 rounded-md border border-paper/70 bg-paper/92 p-3 shadow-card backdrop-blur">
                 <div className="mb-2 flex items-start justify-between gap-3">
                   <div className="flex min-w-0 items-start gap-2">
                     <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${todayTaskAccentClasses[activeHeroPreview.key]} shadow-card`}>
