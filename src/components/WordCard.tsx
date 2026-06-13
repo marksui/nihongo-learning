@@ -91,7 +91,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
           <span className={`block h-full w-1/3 rounded-full bg-matcha/80 ${speaking ? "speak-bar" : ""}`} />
         </div>
 
-        <p className="mt-4 text-lg font-bold text-sakura">{word.meaning}</p>
+        <p className={`mt-4 text-lg font-bold text-sakura ${speaking ? "meaning-spark" : ""}`}>{word.meaning}</p>
 
         <div
           className={`mt-5 rounded-md border p-4 transition ${

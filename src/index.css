@@ -185,6 +185,10 @@ select:focus-visible {
   animation: word-level-spark 0.82s ease-out both;
 }
 
+.meaning-spark {
+  animation: meaning-spark 0.82s ease-out both;
+}
+
 .mastery-pop {
   animation: mastery-pop 0.5s ease-out both;
 }
@@ -361,6 +365,23 @@ select:focus-visible {
 
   100% {
     box-shadow: 0 0 0 0 rgb(var(--color-sora) / 0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes meaning-spark {
+  0% {
+    color: rgb(var(--color-sakura));
+    transform: translateY(0);
+  }
+
+  45% {
+    color: rgb(var(--color-matcha));
+    transform: translateY(-0.06rem);
+  }
+
+  100% {
+    color: rgb(var(--color-sakura));
     transform: translateY(0);
   }
 }
