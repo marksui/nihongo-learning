@@ -126,6 +126,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
   };
 
   const hasActiveFilters = query.trim().length > 0 || activeTopic !== allTopicsLabel;
+  const filterSignature = `${activeLevel}-${activeTopic}-${query.trim()}-${filteredWords.length}`;
 
   return (
     <div className="space-y-7">
@@ -157,7 +158,10 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
                   className="min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
                 />
               </label>
-              <p className="rounded-md border border-ink/8 bg-rice/50 px-3 py-2 text-sm font-extrabold text-ink/60">
+              <p
+                key={filterSignature}
+                className="result-count-pop rounded-md border border-ink/8 bg-rice/50 px-3 py-2 text-sm font-extrabold text-ink/60"
+              >
                 {filteredWords.length} / {selectedLevelWords.length} 个词
               </p>
             </div>
@@ -196,7 +200,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section key={filterSignature} className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {filteredWords.length ? (
           filteredWords.map((word, index) => (
             <div

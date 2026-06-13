@@ -168,6 +168,10 @@ select:focus-visible {
   animation: exam-card-reveal 0.46s ease-out forwards;
 }
 
+.result-count-pop {
+  animation: result-count-pop 0.42s ease-out both;
+}
+
 @keyframes reading-token-pulse {
   0% {
     background: transparent;
@@ -280,6 +284,18 @@ select:focus-visible {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes result-count-pop {
+  0% {
+    background-color: rgb(var(--color-yuzu) / 0.22);
+    transform: scale(0.985);
+  }
+
+  100% {
+    background-color: rgb(var(--color-rice) / 0.5);
+    transform: scale(1);
   }
 }
 
