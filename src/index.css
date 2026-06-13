@@ -162,6 +162,11 @@ select:focus-visible {
   animation: level-count-pop 0.48s ease both;
 }
 
+.level-progress-spark {
+  width: 46%;
+  animation: level-progress-spark 1.35s ease-in-out infinite;
+}
+
 .exam-card-reveal {
   opacity: 0;
   transform: translateY(0.35rem);
@@ -284,6 +289,22 @@ select:focus-visible {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes level-progress-spark {
+  0% {
+    opacity: 0.48;
+    transform: translateX(-130%);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.78;
+    transform: translateX(190%);
   }
 }
 
