@@ -247,7 +247,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
         })}
       </section>
 
-      <section key={filterSignature} className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section key={filterSignature} className="exam-result-shell grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {filteredWords.length ? (
           filteredWords.map((word, index) => (
             <div

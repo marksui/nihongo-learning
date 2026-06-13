@@ -222,6 +222,10 @@ select:focus-visible {
   animation: exam-search-icon-active 0.88s ease-out both;
 }
 
+.exam-result-shell {
+  animation: exam-result-shell 0.38s ease-out both;
+}
+
 .exam-level-panel {
   position: relative;
   overflow: hidden;
@@ -513,6 +517,18 @@ select:focus-visible {
   100% {
     color: rgb(var(--color-sora));
     transform: translateY(-50%) scale(1);
+  }
+}
+
+@keyframes exam-result-shell {
+  0% {
+    opacity: 0.82;
+    transform: translateY(0.22rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
