@@ -181,6 +181,10 @@ select:focus-visible {
   animation: seen-pop 0.46s ease-out both;
 }
 
+.word-level-spark {
+  animation: word-level-spark 0.82s ease-out both;
+}
+
 .mastery-pop {
   animation: mastery-pop 0.5s ease-out both;
 }
@@ -340,6 +344,23 @@ select:focus-visible {
 
   100% {
     background-color: rgb(var(--color-yuzu) / 0.18);
+    transform: translateY(0);
+  }
+}
+
+@keyframes word-level-spark {
+  0% {
+    box-shadow: 0 0 0 0 rgb(var(--color-sora) / 0.28);
+    transform: translateY(0);
+  }
+
+  45% {
+    box-shadow: 0 0 0 7px rgb(var(--color-sora) / 0);
+    transform: translateY(-0.06rem);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgb(var(--color-sora) / 0);
     transform: translateY(0);
   }
 }
