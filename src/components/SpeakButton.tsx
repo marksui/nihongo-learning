@@ -50,7 +50,7 @@ const SpeakButton = ({
         await onSpeak(text);
       }
     } finally {
-      window.setTimeout(() => setLocalActive(false), 220);
+      window.setTimeout(() => setLocalActive(false), 520);
     }
   };
 
@@ -60,7 +60,7 @@ const SpeakButton = ({
       onClick={handleClick}
       className={`cursor-pointer items-center justify-center gap-2 rounded-md text-sm font-extrabold transition active:scale-95 ${
         iconOnly ? "grid h-11 w-11 shrink-0 place-items-center" : "flex min-h-11 px-3 py-2"
-      } ${variantClasses[variant]} ${speaking ? "animate-pulse ring-2 ring-yuzu/40" : ""} ${className}`}
+      } ${variantClasses[variant]} ${speaking ? "speak-button-active ring-2 ring-yuzu/40" : ""} ${className}`}
       aria-label={ariaLabel}
       title={title}
     >

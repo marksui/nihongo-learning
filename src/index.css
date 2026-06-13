@@ -126,6 +126,22 @@ select:focus-visible {
   animation: reading-token-pulse 1.15s ease both;
 }
 
+.speak-card {
+  animation: speak-card-lift 0.58s ease both;
+}
+
+.speak-text-glow {
+  animation: speak-text-glow 0.9s ease-in-out infinite alternate;
+}
+
+.speak-button-active {
+  animation: speak-button-breathe 0.9s ease-in-out infinite;
+}
+
+.speak-bar {
+  animation: speak-bar-sweep 1.15s ease-in-out infinite;
+}
+
 @keyframes reading-token-pulse {
   0% {
     background: transparent;
@@ -146,6 +162,53 @@ select:focus-visible {
   100% {
     background: transparent;
     transform: translateY(0);
+  }
+}
+
+@keyframes speak-card-lift {
+  0% {
+    transform: translateY(0);
+  }
+
+  42% {
+    transform: translateY(-0.18rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes speak-text-glow {
+  0% {
+    text-shadow: 0 0 0 rgb(var(--color-matcha) / 0);
+  }
+
+  100% {
+    text-shadow: 0 0 18px rgb(var(--color-yuzu) / 0.45);
+  }
+}
+
+@keyframes speak-button-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgb(var(--color-yuzu) / 0.35);
+  }
+
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 0 8px rgb(var(--color-yuzu) / 0);
+  }
+}
+
+@keyframes speak-bar-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(320%);
   }
 }
 
