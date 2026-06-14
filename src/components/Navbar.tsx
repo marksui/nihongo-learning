@@ -117,14 +117,14 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
         <div className="fixed inset-0 z-40 bg-ink/12 backdrop-blur-[2px] md:hidden" onClick={() => setMoreOpen(false)} />
       ) : null}
 
-      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-ink/10 bg-paper px-3 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2 shadow-soft backdrop-blur-xl md:hidden">
+      <div className="mobile-bottom-nav fixed bottom-0 left-0 right-0 z-50 border-t border-ink/10 bg-paper/96 px-2.5 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2 shadow-soft backdrop-blur-xl md:hidden">
         {moreOpen ? (
-          <div className="mb-2 rounded-lg border border-ink/10 bg-rice p-2 shadow-card">
+          <div className="mb-2 max-h-[min(64vh,24rem)] overflow-y-auto rounded-lg border border-ink/10 bg-rice p-2 shadow-card">
             <div className="mb-1 flex justify-end px-2 py-1">
               <button
                 type="button"
                 onClick={() => setMoreOpen(false)}
-                className="grid h-8 w-8 cursor-pointer place-items-center rounded-md text-ink/55 hover:bg-paper"
+                className="grid h-11 w-11 touch-manipulation cursor-pointer place-items-center rounded-md text-ink/55 hover:bg-paper"
                 aria-label="关闭更多菜单"
               >
                 <X aria-hidden="true" size={17} />
@@ -140,12 +140,12 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                     key={item.page}
                     type="button"
                     onClick={() => navigate(item.page)}
-                    className={`grid min-h-16 cursor-pointer place-items-center rounded-md px-2 py-2 text-xs font-extrabold transition active:scale-95 ${
+                    className={`grid min-h-16 touch-manipulation cursor-pointer place-items-center rounded-md px-2 py-2 text-xs font-extrabold transition active:scale-95 ${
                       active ? "bg-matcha text-white" : "bg-paper text-ink/68 hover:bg-yuzu/14 hover:text-ink"
                     }`}
                   >
                     <Icon aria-hidden="true" size={20} />
-                    <span className="mt-1">{item.label}</span>
+                    <span className="mt-1 text-center leading-tight">{item.label}</span>
                   </button>
                 );
               })}
@@ -153,7 +153,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
           </div>
         ) : null}
 
-        <nav className="grid grid-cols-5 gap-1">
+        <nav className="grid grid-cols-5 gap-1" aria-label="手机主导航">
           {mobilePrimaryItems.map((item) => {
             const Icon = item.icon;
             const active = currentPage === item.page;
@@ -164,12 +164,12 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                 type="button"
                 onClick={() => navigate(item.page)}
                 aria-current={active ? "page" : undefined}
-                className={`grid min-h-14 cursor-pointer place-items-center rounded-md px-1 py-1 text-[0.68rem] font-extrabold transition active:scale-95 ${
+                className={`grid min-h-14 touch-manipulation cursor-pointer place-items-center rounded-md px-1 py-1 text-[0.68rem] font-extrabold transition active:scale-95 ${
                   active ? "bg-matcha text-white" : "text-ink/58 hover:bg-rice hover:text-ink"
                 }`}
               >
                 <Icon aria-hidden="true" size={20} />
-                <span>{item.label}</span>
+                <span className="leading-tight">{item.label}</span>
               </button>
             );
           })}
@@ -178,12 +178,12 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
             type="button"
             onClick={() => setMoreOpen((value) => !value)}
             aria-expanded={moreOpen}
-            className={`grid min-h-14 cursor-pointer place-items-center rounded-md px-1 py-1 text-[0.68rem] font-extrabold transition active:scale-95 ${
+            className={`grid min-h-14 touch-manipulation cursor-pointer place-items-center rounded-md px-1 py-1 text-[0.68rem] font-extrabold transition active:scale-95 ${
               moreActive || moreOpen ? "bg-matcha text-white" : "text-ink/58 hover:bg-rice hover:text-ink"
             }`}
           >
             {moreOpen ? <ChevronUp aria-hidden="true" size={20} /> : <MoreHorizontal aria-hidden="true" size={20} />}
-            <span>更多</span>
+            <span className="leading-tight">更多</span>
           </button>
         </nav>
       </div>

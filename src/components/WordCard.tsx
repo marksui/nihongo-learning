@@ -47,7 +47,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
   return (
     <LearningCard
       interactive
-      className={`word-card-shell flex min-h-80 flex-col justify-between p-5 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
+      className={`word-card-shell flex min-h-[18rem] flex-col justify-between p-4 sm:min-h-80 sm:p-5 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
     >
       <div>
         <FoodIllustration word={word} />
@@ -73,7 +73,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
                 {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
               </p>
             </div>
-            <h3 className={`break-words font-japanese text-3xl font-bold transition-colors ${wordActive ? "speak-text-glow text-matcha" : "text-ink"}`}>
+            <h3 className={`break-words font-japanese text-2xl font-bold transition-colors sm:text-3xl ${wordActive ? "speak-text-glow text-matcha" : "text-ink"}`}>
               {word.japanese}
             </h3>
             <p className={`mt-2 text-sm text-ink/62 ${wordActive ? "reading-line-spark" : ""}`}>
@@ -94,7 +94,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
         <p className={`mt-4 text-lg font-bold text-sakura ${speaking ? "meaning-spark" : ""}`}>{word.meaning}</p>
 
         <div
-          className={`mt-5 rounded-md border p-4 transition ${
+          className={`mt-4 rounded-md border p-3 transition sm:mt-5 sm:p-4 ${
             sentenceActive ? "border-yuzu/45 bg-yuzu/10" : "border-sora/18 bg-sora/10"
           }`}
         >
@@ -123,7 +123,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
           onClick={markMastered}
           disabled={studyState.completed}
           aria-pressed={studyState.completed}
-          className={`mt-4 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+          className={`mt-4 flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
             studyState.completed
               ? "mastered-action-pop cursor-default border-matcha/20 bg-matcha/10 text-matcha"
               : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"

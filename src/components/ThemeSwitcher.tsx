@@ -42,7 +42,7 @@ const ThemeSwitcher = () => {
           ))}
         </div>
 
-        <div className="flex min-w-0 gap-2 overflow-x-auto pb-1 sm:flex-1 sm:justify-end sm:pb-0">
+        <div className="filter-scroll-row flex min-w-0 gap-2 overflow-x-auto pb-1 sm:flex-1 sm:justify-end sm:overflow-visible sm:pb-0" aria-label="主题颜色" role="group">
           {themes.map((theme) => {
             const active = theme.id === themeId;
 
@@ -52,13 +52,13 @@ const ThemeSwitcher = () => {
                 type="button"
                 onClick={() => setThemeId(theme.id)}
                 aria-pressed={active}
-                className={`flex min-h-10 shrink-0 cursor-pointer items-center gap-2 rounded-md border px-2.5 py-1.5 text-left transition active:scale-[0.99] ${
+                className={`flex min-h-11 max-w-[12rem] shrink-0 snap-start touch-manipulation cursor-pointer items-center gap-2 rounded-md border px-2.5 py-1.5 text-left transition active:scale-[0.99] ${
                   active
                     ? "border-matcha bg-matcha text-white shadow-card"
                     : "border-ink/10 bg-rice/35 text-ink hover:border-matcha/25 hover:bg-rice/65"
                 }`}
               >
-                <span className="text-sm font-extrabold leading-5">{theme.name}</span>
+                <span className="truncate text-sm font-extrabold leading-5">{theme.name}</span>
                 <span className="flex items-center gap-1">
                   {Object.values(theme.colors)
                     .slice(1, 5)

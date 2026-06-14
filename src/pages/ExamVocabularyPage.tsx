@@ -148,7 +148,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
       />
 
       <section
-        className={`exam-filter-panel sticky top-20 z-20 rounded-lg border border-ink/10 bg-paper p-4 shadow-card backdrop-blur md:top-24 ${
+        className={`exam-filter-panel sticky top-[4.5rem] z-20 max-h-[calc(100vh-8.5rem)] overflow-y-auto rounded-lg border border-ink/10 bg-paper p-3 shadow-card backdrop-blur sm:p-4 md:top-24 ${
           hasActiveFilters ? "exam-filter-panel-active" : ""
         }`}
       >

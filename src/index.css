@@ -24,6 +24,8 @@ html[data-theme="hidamari"] {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-padding-top: 5rem;
+  scroll-padding-bottom: calc(7rem + env(safe-area-inset-bottom));
 }
 
 html[data-theme="matcha"] {
@@ -164,6 +166,7 @@ a,
 input,
 select {
   font: inherit;
+  touch-action: manipulation;
 }
 
 button,
@@ -181,6 +184,33 @@ select:focus-visible {
 
 ::selection {
   background: rgb(var(--color-yuzu) / 0.38);
+}
+
+.filter-scroll-row {
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: 0.25rem;
+  scroll-snap-type: x proximity;
+  scrollbar-color: rgb(var(--color-matcha) / 0.5) rgb(var(--color-rice) / 0.7);
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-scroll-row::-webkit-scrollbar {
+  height: 0.45rem;
+}
+
+.filter-scroll-row::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgb(var(--color-rice) / 0.72);
+}
+
+.filter-scroll-row::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgb(var(--color-matcha) / 0.42);
+}
+
+.mobile-bottom-nav {
+  box-shadow: 0 -14px 34px rgb(var(--color-ink) / 0.1);
 }
 
 .reading-token {

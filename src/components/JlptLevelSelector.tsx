@@ -19,7 +19,7 @@ const JlptLevelSelector = ({
 
   return (
     <div className="min-w-0">
-      <div className="flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-5 sm:overflow-visible">
+      <div className="filter-scroll-row flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-5 sm:overflow-visible" aria-label="JLPT 等级" role="group">
         {levels.map((level) => {
           const selected = level === active;
 
@@ -29,7 +29,7 @@ const JlptLevelSelector = ({
               type="button"
               onClick={() => onChange(level)}
               aria-pressed={selected}
-              className={`min-w-[4.75rem] shrink-0 cursor-pointer rounded-md border px-2 text-center transition active:scale-95 ${
+              className={`min-w-[4.75rem] shrink-0 snap-start touch-manipulation cursor-pointer rounded-md border px-2 text-center transition active:scale-95 ${
                 compact ? "min-h-12 py-1.5" : "min-h-16 py-2"
               } ${
                 selected

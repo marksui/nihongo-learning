@@ -114,13 +114,13 @@ const App = () => {
   return (
     <div className="min-h-screen overflow-x-hidden text-ink">
       <Navbar currentPage={currentPage} onNavigate={navigate} />
-      <main className="mx-auto max-w-7xl px-4 pb-28 pt-5 sm:px-6 md:pb-8 lg:px-8 lg:py-8">{page}</main>
+      <main className="mx-auto max-w-7xl px-3 pb-[calc(7.5rem+env(safe-area-inset-bottom))] pt-4 sm:px-6 sm:pt-5 md:pb-8 lg:px-8 lg:py-8">{page}</main>
       <SiteFooter currentPage={currentPage} onNavigate={navigate} />
 
       {speechWarning ? (
         <div
           role="status"
-          className="fixed bottom-24 left-4 right-4 z-[60] rounded-lg border border-sakura/30 bg-paper p-4 text-sm text-ink shadow-soft sm:left-auto sm:max-w-md md:bottom-4"
+          className="fixed bottom-[calc(5.75rem+env(safe-area-inset-bottom))] left-3 right-3 z-[60] rounded-lg border border-sakura/30 bg-paper p-3 text-sm text-ink shadow-soft sm:left-auto sm:max-w-md sm:p-4 md:bottom-4 md:left-4 md:right-auto"
         >
           <div className="flex items-start gap-3">
             <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-sakura/12 font-bold text-sakura">
@@ -141,7 +141,7 @@ const App = () => {
       ) : null}
 
       {speechActive ? (
-        <div className="fixed bottom-24 left-4 z-[60] flex gap-2 rounded-lg border border-ink/10 bg-paper p-2 shadow-soft md:bottom-4">
+        <div className="fixed bottom-[calc(5.75rem+env(safe-area-inset-bottom))] left-3 z-[60] flex gap-2 rounded-lg border border-ink/10 bg-paper p-2 shadow-soft md:bottom-4 md:left-4">
           <button
             type="button"
             onClick={speechPaused ? resumeSpeech : pauseSpeech}

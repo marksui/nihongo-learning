@@ -121,7 +121,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
           onClick={markMastered}
           disabled={studyState.completed}
           aria-pressed={studyState.completed}
-          className={`flex min-h-9 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md border px-2.5 py-1.5 text-xs font-extrabold transition active:scale-[0.99] ${
+          className={`flex min-h-11 shrink-0 touch-manipulation cursor-pointer items-center justify-center gap-1.5 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
             studyState.completed
               ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
               : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"

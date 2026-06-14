@@ -429,7 +429,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         }
         media={
           <div className="home-osaka-cover overflow-hidden rounded-lg border border-sora/18 bg-paper p-3 shadow-card sm:p-4">
-            <div className="home-osaka-cover-inner relative aspect-[9/13] min-h-[26rem] overflow-hidden rounded-md sm:aspect-[4/5] lg:h-full lg:min-h-[34rem]">
+            <div className="home-osaka-cover-inner relative aspect-[9/13] min-h-[23rem] overflow-hidden rounded-md sm:aspect-[4/5] sm:min-h-[26rem] lg:h-full lg:min-h-[34rem]">
               <img
                 src={homeStudyScene}
                 alt="大阪道顿堀河岸街景封面"

@@ -39,7 +39,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
 
             <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center lg:flex-1 lg:justify-end">
               <div className="flex min-w-0 items-center gap-2">
-                <div className="flex min-w-0 gap-2 overflow-x-auto pb-1 sm:pb-0">
+                <div className="filter-scroll-row flex min-w-0 gap-2 overflow-x-auto pb-1 sm:overflow-visible sm:pb-0" aria-label="页脚快速入口" role="group">
                   {footerLinks.map((item) => {
                     const active = currentPage === item.page;
 
@@ -48,7 +48,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
                         key={item.page}
                         type="button"
                         onClick={() => onNavigate(item.page)}
-                        className={`min-h-9 shrink-0 cursor-pointer rounded-md border px-2.5 py-1 text-sm font-extrabold transition active:scale-[0.99] ${
+                        className={`min-h-10 shrink-0 snap-start touch-manipulation cursor-pointer rounded-md border px-2.5 py-1 text-sm font-extrabold transition active:scale-[0.99] ${
                           active
                             ? "border-matcha bg-matcha text-white"
                             : "border-ink/10 bg-rice/35 text-ink/68 hover:border-matcha/25 hover:bg-rice/65 hover:text-ink"
@@ -66,7 +66,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="打开 Mark 的作者主页"
-                className="flex min-h-9 shrink-0 items-center justify-center gap-2 rounded-md border border-ink/10 bg-rice/50 px-2.5 py-1 text-sm font-extrabold text-ink transition hover:border-matcha/30 hover:bg-rice"
+                className="flex min-h-10 shrink-0 touch-manipulation items-center justify-center gap-2 rounded-md border border-ink/10 bg-rice/50 px-2.5 py-1 text-sm font-extrabold text-ink transition hover:border-matcha/30 hover:bg-rice"
               >
                 <Home aria-hidden="true" size={16} />
                 作者
