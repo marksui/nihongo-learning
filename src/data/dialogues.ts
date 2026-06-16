@@ -1183,6 +1183,73 @@ const noticeCounterDialogues: Dialogue[] = [
   ], ["出行", "车站", "行李", "告示"]),
 ];
 
+const municipalLifeDialogues: Dialogue[] = [
+  makeDialogue("scenario-city-office-pension-enrollment", "年金加入咨询", "生活", "居民", "刚开始工作或搬来日本后在市役所咨询国民年金手续", [
+    { speaker: "居民", japanese: "国民年金について聞きたいです。", kana: "こくみんねんきんについてききたいです。", translation: "我想咨询国民年金。" },
+    { speaker: "职员", japanese: "会社の社会保険には入っていますか。", kana: "かいしゃのしゃかいほけんにはいっていますか。", translation: "您加入公司的社会保险了吗？" },
+    { speaker: "居民", japanese: "まだ入っていません。", kana: "まだはいっていません。", translation: "还没有加入。" },
+    { speaker: "职员", japanese: "では、国民年金の手続きが必要です。", kana: "では、こくみんねんきんのてつづきがひつようです。", translation: "那么需要办理国民年金手续。" },
+    { speaker: "居民", japanese: "必要な書類は何ですか。", kana: "ひつようなしょるいはなんですか。", translation: "需要哪些材料？" },
+    { speaker: "职员", japanese: "在留カードとマイナンバーをお願いします。", kana: "ざいりゅうかーどとまいなんばーをおねがいします。", translation: "请出示在留卡和个人编号。" },
+  ], ["生活", "市役所", "年金", "手续"]),
+  makeDialogue("scenario-city-office-my-number-card", "申请个人编号卡", "生活", "居民", "在市役所确认マイナンバーカード申请、照片和领取通知", [
+    { speaker: "居民", japanese: "マイナンバーカードを申請したいです。", kana: "まいなんばーかーどをしんせいしたいです。", translation: "我想申请个人编号卡。" },
+    { speaker: "职员", japanese: "申請書はお持ちですか。", kana: "しんせいしょはおもちですか。", translation: "您带申请书了吗？" },
+    { speaker: "居民", japanese: "はい、郵便で届きました。", kana: "はい、ゆうびんでとどきました。", translation: "带了，是邮寄来的。" },
+    { speaker: "职员", japanese: "写真を貼るか、オンラインで申請できます。", kana: "しゃしんをはるか、おんらいんでしんせいできます。", translation: "可以贴照片，也可以线上申请。" },
+    { speaker: "居民", japanese: "受け取りはいつですか。", kana: "うけとりはいつですか。", translation: "什么时候领取？" },
+    { speaker: "职员", japanese: "交付通知書が届いたら、予約してください。", kana: "こうふつうちしょがとどいたら、よやくしてください。", translation: "收到交付通知书后，请预约。" },
+  ], ["生活", "市役所", "マイナンバー", "申请"]),
+  makeDialogue("scenario-city-office-seal-certificate", "印章证明", "生活", "居民", "需要提交材料时在窗口确认印鉴登记和印章证明", [
+    { speaker: "居民", japanese: "印鑑証明が必要です。", kana: "いんかんしょうめいがひつようです。", translation: "我需要印章证明。" },
+    { speaker: "职员", japanese: "印鑑登録はお済みですか。", kana: "いんかんとうろくはおすみですか。", translation: "您已经完成印章登记了吗？" },
+    { speaker: "居民", japanese: "まだ登録していません。", kana: "まだとうろくしていません。", translation: "还没有登记。" },
+    { speaker: "职员", japanese: "先に印鑑登録の手続きをしてください。", kana: "さきにいんかんとうろくのてつづきをしてください。", translation: "请先办理印章登记手续。" },
+    { speaker: "居民", japanese: "この印鑑で大丈夫ですか。", kana: "このいんかんでだいじょうぶですか。", translation: "这个印章可以吗？" },
+    { speaker: "职员", japanese: "確認しますので、少々お待ちください。", kana: "かくにんしますので、しょうしょうおまちください。", translation: "我确认一下，请稍等。" },
+  ], ["生活", "市役所", "印鑑", "证明"]),
+  makeDialogue("scenario-city-office-moving-out", "提交搬出届", "生活", "居民", "搬去其他城市前在市役所提交転出届并确认证明", [
+    { speaker: "居民", japanese: "来月、ほかの市へ引っ越します。", kana: "らいげつ、ほかのしへひっこします。", translation: "下个月我要搬到其他市。" },
+    { speaker: "职员", japanese: "転出届の手続きですね。", kana: "てんしゅつとどけのてつづきですね。", translation: "是办理迁出申报手续对吧。" },
+    { speaker: "居民", japanese: "いつから手続きできますか。", kana: "いつからてつづきできますか。", translation: "什么时候开始可以办理？" },
+    { speaker: "职员", japanese: "引っ越し予定日の十四日前からできます。", kana: "ひっこしよていびのじゅうよっかまえからできます。", translation: "从预定搬家日前 14 天开始可以办理。" },
+    { speaker: "居民", japanese: "転出証明書は必要ですか。", kana: "てんしゅつしょうめいしょはひつようですか。", translation: "需要迁出证明吗？" },
+    { speaker: "职员", japanese: "新しい市役所で使いますので、なくさないでください。", kana: "あたらしいしやくしょでつかいますので、なくさないでください。", translation: "新市役所会用到，请不要弄丢。" },
+  ], ["生活", "市役所", "搬家", "転出"]),
+  makeDialogue("scenario-city-office-garbage-sorting", "垃圾分类说明", "生活", "居民", "搬家后在市役所领取垃圾日历并确认分类规则", [
+    { speaker: "居民", japanese: "ごみの分別について教えてください。", kana: "ごみのぶんべつについておしえてください。", translation: "请告诉我垃圾分类方法。" },
+    { speaker: "职员", japanese: "こちらがごみ収集カレンダーです。", kana: "こちらがごみしゅうしゅうかれんだーです。", translation: "这是垃圾收集日历。" },
+    { speaker: "居民", japanese: "燃えないごみはいつ出しますか。", kana: "もえないごみはいつだしますか。", translation: "不可燃垃圾什么时候丢？" },
+    { speaker: "职员", japanese: "第二と第四水曜日です。", kana: "だいにとだいよんすいようびです。", translation: "第二和第四个星期三。" },
+    { speaker: "居民", japanese: "粗大ごみは予約が必要ですか。", kana: "そだいごみはよやくがひつようですか。", translation: "大型垃圾需要预约吗？" },
+    { speaker: "职员", japanese: "はい、電話かウェブで申し込んでください。", kana: "はい、でんわかうぇぶでもうしこんでください。", translation: "是的，请电话或网上申请。" },
+  ], ["生活", "市役所", "垃圾", "规则"]),
+  makeDialogue("scenario-city-office-child-allowance", "儿童补贴咨询", "生活", "家长", "有孩子的家庭在市役所确认儿童津贴申请材料", [
+    { speaker: "家长", japanese: "児童手当の申請をしたいです。", kana: "じどうてあてのしんせいをしたいです。", translation: "我想申请儿童津贴。" },
+    { speaker: "职员", japanese: "お子さんの健康保険証はありますか。", kana: "おこさんのけんこうほけんしょうはありますか。", translation: "有孩子的健康保险证吗？" },
+    { speaker: "家长", japanese: "はい、持っています。", kana: "はい、もっています。", translation: "有，带着。" },
+    { speaker: "职员", japanese: "振込先の口座も必要です。", kana: "ふりこみさきのこうざもひつようです。", translation: "还需要收款账户。" },
+    { speaker: "家长", japanese: "申請期限はありますか。", kana: "しんせいきげんはありますか。", translation: "有申请期限吗？" },
+    { speaker: "职员", japanese: "引っ越し後、十五日以内に申請してください。", kana: "ひっこしご、じゅうごにちいないにしんせいしてください。", translation: "搬家后请在 15 天内申请。" },
+  ], ["生活", "市役所", "家庭", "补贴"]),
+  makeDialogue("scenario-city-office-tax-certificate", "申请纳税证明", "生活", "居民", "办签证或租房时在市役所申请纳税证明", [
+    { speaker: "居民", japanese: "納税証明書を発行したいです。", kana: "のうぜいしょうめいしょをはっこうしたいです。", translation: "我想开具纳税证明。" },
+    { speaker: "职员", japanese: "何年度の証明書が必要ですか。", kana: "なんねんどのしょうめいしょがひつようですか。", translation: "需要哪一年度的证明？" },
+    { speaker: "居民", japanese: "今年度のものを一通お願いします。", kana: "こんねんどのものをいっつうおねがいします。", translation: "请给我一份本年度的。" },
+    { speaker: "职员", japanese: "本人確認書類を見せてください。", kana: "ほんにんかくにんしょるいをみせてください。", translation: "请出示本人确认材料。" },
+    { speaker: "居民", japanese: "手数料はいくらですか。", kana: "てすうりょうはいくらですか。", translation: "手续费是多少？" },
+    { speaker: "职员", japanese: "一通三百円です。", kana: "いっつうさんびゃくえんです。", translation: "一份三百日元。" },
+  ], ["生活", "市役所", "税金", "证明"]),
+  makeDialogue("scenario-city-office-interpreter-request", "窗口请求翻译帮助", "生活", "居民", "日语不够熟练时在窗口请求简单说明或翻译支持", [
+    { speaker: "居民", japanese: "すみません、日本語がまだあまり分かりません。", kana: "すみません、にほんごがまだあまりわかりません。", translation: "不好意思，我日语还不太懂。" },
+    { speaker: "职员", japanese: "ゆっくり説明しますね。", kana: "ゆっくりせつめいしますね。", translation: "我慢慢说明。" },
+    { speaker: "居民", japanese: "中国語の案内はありますか。", kana: "ちゅうごくごのあんないはありますか。", translation: "有中文指南吗？" },
+    { speaker: "职员", japanese: "こちらの資料をご覧ください。", kana: "こちらのしりょうをごらんください。", translation: "请看这份资料。" },
+    { speaker: "居民", japanese: "分からないところを聞いてもいいですか。", kana: "わからないところをきいてもいいですか。", translation: "不懂的地方可以问吗？" },
+    { speaker: "职员", japanese: "もちろんです。番号で呼びますので、少しお待ちください。", kana: "もちろんです。ばんごうでよびますので、すこしおまちください。", translation: "当然可以。会按号码叫您，请稍等。" },
+  ], ["生活", "市役所", "语言", "手续"]),
+];
+
 const convenienceStoreDialogues: Dialogue[] = [
   makeDialogue("scenario-konbini-bento-heating", "便利店便当加热", "生活", "客人", "买便当时确认是否加热、是否需要筷子和袋子", [
     { speaker: "店员", japanese: "こちらのお弁当は温めますか。", kana: "こちらのおべんとうはあたためますか。", translation: "这个便当需要加热吗？" },
@@ -1451,6 +1518,7 @@ export const dialogues: Dialogue[] = [
   ...additionalScenarioDialogues,
   ...workProcedureDialogues,
   ...noticeCounterDialogues,
+  ...municipalLifeDialogues,
   ...convenienceStoreDialogues,
   ...weatherDailyDialogues,
   ...travelAccommodationDialogues,
