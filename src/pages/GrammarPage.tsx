@@ -10,7 +10,7 @@ interface GrammarPageProps {
   onSpeak: (text: string) => Promise<boolean>;
 }
 
-const grammarTopicOptions = ["全部", "助词", "动词", "形容词", "时间", "请求", "比较", "存在", "喜好", "可能", "规则", "手续", "通知"] as const;
+const grammarTopicOptions = ["全部", "助词", "动词", "形容词", "时间", "请求", "比较", "存在", "喜好", "可能", "规则", "手续", "通知", "安全", "灾害", "广播"] as const;
 
 type GrammarTopic = (typeof grammarTopicOptions)[number];
 
