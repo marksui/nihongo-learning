@@ -20,7 +20,7 @@ interface SpeakButtonProps {
 const variantClasses = {
   solid: "bg-matcha text-white shadow-sm hover:bg-matcha/90",
   soft: "border border-matcha/25 bg-matcha/10 text-matcha hover:bg-matcha hover:text-white",
-  light: "border border-ink/10 bg-paper text-matcha shadow-sm hover:border-matcha/28 hover:bg-matcha hover:text-white",
+  light: "border border-ink/10 bg-paper/92 text-matcha shadow-sm hover:border-matcha/28 hover:bg-matcha hover:text-white",
   dark: "bg-white/12 text-white hover:bg-white/22",
 };
 

@@ -186,25 +186,25 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-5">
-      <section className="relative min-h-[24rem] overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-soft sm:min-h-[28rem] lg:min-h-[31rem]">
+    <div className="space-y-5 sm:space-y-6">
+      <section className="relative min-h-[23rem] overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-soft sm:min-h-[29rem] lg:min-h-[32rem]">
         <img
           src={homeStudyScene}
           alt="大阪道顿堀河岸街景封面"
           className="home-osaka-cover-image absolute inset-0 h-full w-full object-cover object-[center_52%]"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-ink/6" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/84 via-ink/35 to-ink/4" />
         <div className="absolute inset-0 flex items-end">
           <div className="w-full p-4 sm:p-6 lg:p-8">
-            <p className="mb-3 inline-flex rounded-md border border-white/22 bg-white/16 px-3 py-1 text-xs font-extrabold text-white backdrop-blur">
+            <p className="mb-3 inline-flex rounded-md border border-white/24 bg-white/16 px-3 py-1 text-xs font-extrabold text-white backdrop-blur">
               零基础中文路线
             </p>
-            <h1 className="font-display break-words text-[2.2rem] font-extrabold leading-none text-white sm:text-[3.05rem] lg:text-[3.8rem]">
+            <h1 className="font-display max-w-3xl break-words text-[2.35rem] font-extrabold leading-none text-white sm:text-[3.25rem] lg:text-[4rem]">
               中文学日语
             </h1>
-            <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-white/88 sm:text-lg">
-              打开就能跟读。日语、假名、romaji 和中文意思放在一起，先听，再看，再开口。
+            <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-white/90 sm:text-lg">
+              日语、假名、romaji 和中文意思放在一起。先听，再看，最后跟着说。
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">
@@ -219,7 +219,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
               <button
                 type="button"
                 onClick={() => onNavigate("conversation")}
-                className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg border border-white/22 bg-white/88 px-4 py-2.5 font-extrabold text-ink shadow-sm transition hover:bg-white active:scale-95"
+                className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg border border-white/22 bg-white/90 px-4 py-2.5 font-extrabold text-ink shadow-sm transition hover:bg-white active:scale-95"
               >
                 进入会话
                 <ArrowRight aria-hidden="true" size={18} />
@@ -232,7 +232,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                 { label: "词汇", value: vocabulary.length },
                 { label: "会话", value: dialogues.length },
               ].map((stat) => (
-                <div key={stat.label} className="rounded-md border border-white/18 bg-white/15 px-3 py-2 text-white backdrop-blur">
+                <div key={stat.label} className="rounded-md border border-white/18 bg-white/16 px-3 py-2 text-white backdrop-blur">
                   <p className="text-xl font-extrabold leading-none">{stat.value}</p>
                   <p className="mt-1 text-xs font-bold text-white/78">{stat.label}</p>
                 </div>
@@ -245,8 +245,8 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       <LearningCard className="p-3 sm:p-4">
         <div className="mb-3 flex items-end justify-between gap-3">
           <div>
-            <p className="text-sm font-extrabold text-matcha">今日点读</p>
-          <h2 className="section-title text-2xl">先听 5 个</h2>
+            <p className="text-sm font-extrabold text-matcha">今日跟读</p>
+            <h2 className="section-title text-2xl">先点这 5 个</h2>
           </div>
           <button
             type="button"
@@ -257,7 +257,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           </button>
         </div>
 
-        <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-5">
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {previewItems.map((item) => {
             const Icon = item.icon;
             const active = activeTaskKey === item.key;
@@ -268,7 +268,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                 className={`min-w-0 rounded-lg border p-3 transition ${
                   active
                     ? "border-yuzu/55 bg-yuzu/14 ring-2 ring-yuzu/20"
-                    : "border-ink/8 bg-rice/38"
+                    : "border-ink/8 bg-paper/70"
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -277,7 +277,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                     onClick={() => onNavigate(item.page)}
                     className="min-w-0 cursor-pointer text-left"
                   >
-                    <span className="mb-2 inline-flex items-center gap-1.5 rounded-md bg-paper/80 px-2 py-1 text-xs font-extrabold text-ink/55">
+                    <span className="mb-2 inline-flex items-center gap-1.5 rounded-md bg-rice/70 px-2 py-1 text-xs font-extrabold text-ink/55">
                       <Icon aria-hidden="true" size={14} />
                       {item.label}
                     </span>
@@ -306,7 +306,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         <div className="mb-3 flex items-end justify-between gap-3">
           <div>
             <p className="text-sm font-extrabold text-sora">学习入口</p>
-            <h2 className="section-title text-2xl">想学什么就点什么</h2>
+            <h2 className="section-title text-2xl">选择一个页面开始</h2>
           </div>
         </div>
 
@@ -319,15 +319,15 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                 <button
                   type="button"
                   onClick={() => onNavigate(card.page)}
-                  className="flex min-h-28 w-full cursor-pointer items-start gap-3 p-4 text-left"
+                  className="flex min-h-32 w-full cursor-pointer items-start gap-3 p-4 text-left"
                 >
                   <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${card.accent} shadow-card`}>
                     <Icon aria-hidden="true" size={20} />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="text-lg font-extrabold text-ink">{card.title}</span>
-                    <span className="mt-1.5 block text-sm leading-6 text-ink/66">{card.description}</span>
-                    <span className="mt-2 flex items-center justify-between gap-3 text-xs font-extrabold text-ink/52">
+                    <span className="mt-1.5 block text-[0.95rem] leading-6 text-ink/66">{card.description}</span>
+                    <span className="mt-3 flex items-center justify-between gap-3 text-xs font-extrabold text-ink/52">
                       <span className="truncate">{card.metric}</span>
                       <ArrowRight className="shrink-0 transition group-hover:translate-x-0.5" size={16} />
                     </span>

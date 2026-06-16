@@ -82,7 +82,7 @@ const GrammarPage = ({ onSpeak }: GrammarPageProps) => {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="搜助词、动词、て形、できる、例句或中文意思"
-              className="min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38 focus:border-sumire/45 focus:outline-none focus:ring-2 focus:ring-sumire/18"
+              className="input-surface min-h-12 w-full rounded-md pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
             />
           </label>
           <p className="text-sm font-bold text-ink/60">

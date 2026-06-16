@@ -87,7 +87,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="搜机场、付款、请假、身体、日语或中文"
-              className="min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
+              className="input-surface min-h-12 w-full rounded-md pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
             />
           </label>
           <p className="text-sm font-bold text-ink/60">

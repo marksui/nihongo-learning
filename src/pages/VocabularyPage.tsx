@@ -94,7 +94,7 @@ const VocabularyPage = ({ onOpenExamVocabulary, onSpeak }: VocabularyPageProps) 
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="搜索日语、假名、romaji、中文或 N3"
-              className="min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
+              className="input-surface min-h-12 w-full rounded-md pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
             />
           </label>
           <p className="rounded-md border border-ink/8 bg-rice/50 px-3 py-2 text-sm font-extrabold text-ink/60">

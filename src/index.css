@@ -4,18 +4,18 @@
 
 :root,
 html[data-theme="hidamari"] {
-  --color-ink: 31 36 34;
-  --color-rice: 248 244 232;
+  --color-ink: 27 39 42;
+  --color-rice: 242 247 240;
   --color-paper: 255 253 247;
-  --color-sakura: 212 91 111;
-  --color-matcha: 48 133 96;
-  --color-sora: 47 126 178;
-  --color-yuzu: 230 180 75;
-  --color-sumire: 103 92 150;
-  --color-sky: 239 246 243;
-  --page-start: 252 249 240;
-  --page-end: 240 244 235;
-  --grid-line: 63 74 68;
+  --color-sakura: 213 88 112;
+  --color-matcha: 46 128 91;
+  --color-sora: 50 119 164;
+  --color-yuzu: 232 177 72;
+  --color-sumire: 93 87 143;
+  --color-sky: 232 242 241;
+  --page-start: 247 251 247;
+  --page-end: 235 242 238;
+  --grid-line: 48 76 72;
   color: rgb(var(--color-ink));
   background: rgb(var(--color-rice));
   font-synthesis: none;
@@ -27,43 +27,43 @@ html[data-theme="hidamari"] {
 }
 
 html[data-theme="matcha"] {
-  --color-ink: 32 47 40;
-  --color-rice: 239 247 235;
+  --color-ink: 29 47 40;
+  --color-rice: 239 248 238;
   --color-paper: 254 255 250;
-  --color-sakura: 197 87 105;
-  --color-matcha: 55 123 83;
-  --color-sora: 71 132 160;
-  --color-yuzu: 211 164 70;
-  --color-sumire: 93 101 145;
-  --color-sky: 226 238 224;
-  --page-start: 247 252 241;
-  --page-end: 225 238 221;
+  --color-sakura: 199 84 102;
+  --color-matcha: 51 126 83;
+  --color-sora: 62 129 158;
+  --color-yuzu: 216 166 70;
+  --color-sumire: 86 96 143;
+  --color-sky: 226 239 227;
+  --page-start: 248 253 244;
+  --page-end: 226 240 225;
   --grid-line: 78 103 76;
 }
 
 html[data-theme="momo"] {
-  --color-ink: 48 40 38;
-  --color-rice: 255 244 237;
+  --color-ink: 47 39 40;
+  --color-rice: 255 246 241;
   --color-paper: 255 253 249;
-  --color-sakura: 203 86 101;
-  --color-matcha: 72 125 89;
-  --color-sora: 80 132 170;
-  --color-yuzu: 219 164 78;
-  --color-sumire: 118 92 137;
-  --color-sky: 247 232 224;
+  --color-sakura: 205 82 103;
+  --color-matcha: 68 124 91;
+  --color-sora: 73 128 169;
+  --color-yuzu: 222 165 76;
+  --color-sumire: 112 90 137;
+  --color-sky: 246 235 229;
   --page-start: 255 249 244;
   --page-end: 249 231 221;
   --grid-line: 111 84 73;
 }
 
 html[data-theme="washi"] {
-  --color-ink: 39 40 38;
-  --color-rice: 242 239 229;
+  --color-ink: 38 42 40;
+  --color-rice: 243 241 232;
   --color-paper: 254 252 245;
-  --color-sakura: 181 95 105;
-  --color-matcha: 73 114 85;
-  --color-sora: 73 116 146;
-  --color-yuzu: 188 150 69;
+  --color-sakura: 183 91 104;
+  --color-matcha: 70 114 84;
+  --color-sora: 70 116 147;
+  --color-yuzu: 191 150 68;
   --color-sumire: 91 91 122;
   --color-sky: 230 228 218;
   --page-start: 250 248 240;
@@ -81,10 +81,12 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 54%, rgb(var(--page-end)) 100%);
+    radial-gradient(circle at 12% 0%, rgb(var(--color-sora) / 0.08), transparent 22rem),
+    radial-gradient(circle at 100% 8%, rgb(var(--color-yuzu) / 0.12), transparent 20rem),
+    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 48%, rgb(var(--page-end)) 100%);
   font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16px;
-  line-height: 1.68;
+  font-size: 16.5px;
+  line-height: 1.72;
   letter-spacing: 0;
   font-variant-east-asian: proportional-width;
 }
@@ -99,7 +101,7 @@ body::before {
     linear-gradient(90deg, rgb(var(--grid-line) / 0.022) 1px, transparent 1px),
     linear-gradient(180deg, rgb(var(--grid-line) / 0.018) 1px, transparent 1px);
   background-size: 48px 48px;
-  opacity: 0.22;
+  opacity: 0.16;
 }
 
 .font-display,
@@ -121,7 +123,7 @@ body::before {
 
 .section-title {
   font-weight: 800;
-  line-height: 1.16;
+  line-height: 1.18;
   color: rgb(var(--color-ink));
 }
 
@@ -165,24 +167,24 @@ select:focus-visible {
 .app-panel,
 .sticky-learn-toolbar {
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.88) inset,
-    0 10px 22px rgb(var(--color-ink) / 0.052);
+    0 1px 0 rgb(255 255 255 / 0.94) inset,
+    0 10px 22px rgb(var(--color-ink) / 0.045);
 }
 
 .app-panel,
 .sticky-learn-toolbar {
-  border: 1px solid rgb(var(--color-ink) / 0.08);
+  border: 1px solid rgb(var(--color-ink) / 0.075);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.96);
+  background: rgb(var(--color-paper) / 0.94);
 }
 
 .calm-grid-card {
   position: relative;
   background:
-    linear-gradient(135deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.64));
+    linear-gradient(135deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.72));
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.92) inset,
-    0 14px 30px rgb(var(--color-ink) / 0.07);
+    0 1px 0 rgb(255 255 255 / 0.94) inset,
+    0 18px 38px rgb(var(--color-ink) / 0.055);
 }
 
 .calm-grid-card::before {
@@ -193,7 +195,7 @@ select:focus-visible {
   background-image:
     linear-gradient(90deg, rgb(var(--color-ink) / 0.018) 1px, transparent 1px),
     linear-gradient(180deg, rgb(var(--color-ink) / 0.014) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-size: 40px 40px;
   -webkit-mask-image: linear-gradient(135deg, black 0%, transparent 76%);
   mask-image: linear-gradient(135deg, black 0%, transparent 76%);
 }
@@ -208,10 +210,10 @@ select:focus-visible {
 
 .app-card-hover:hover,
 .app-card-hover:focus-within {
-  border-color: rgb(var(--color-matcha) / 0.3);
+  border-color: rgb(var(--color-sora) / 0.28);
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.88) inset,
-    0 12px 24px rgb(var(--color-ink) / 0.07);
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 14px 26px rgb(var(--color-ink) / 0.06);
   transform: translateY(-1px);
 }
 
@@ -244,15 +246,15 @@ select:focus-visible {
 }
 
 .mobile-bottom-nav {
-  right: 0.75rem;
-  bottom: 0.75rem;
-  left: 0.75rem;
+  right: 0.65rem;
+  bottom: 0.65rem;
+  left: 0.65rem;
   width: auto;
   max-width: none;
   box-sizing: border-box;
-  border: 1px solid rgb(var(--color-ink) / 0.09);
+  border: 1px solid rgb(var(--color-ink) / 0.08);
   border-radius: 0.75rem;
-  box-shadow: 0 16px 34px rgb(var(--color-ink) / 0.14);
+  box-shadow: 0 18px 42px rgb(var(--color-ink) / 0.15);
 }
 
 .quickread-card {
@@ -291,22 +293,22 @@ select:focus-visible {
 
 .readable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
-  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14.5rem), 1fr));
+  gap: 0.9rem;
   align-items: start;
 }
 
 .comfortable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 0.95rem;
   align-items: start;
 }
 
 .tool-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.9rem;
   align-items: stretch;
 }
 
@@ -314,10 +316,62 @@ select:focus-visible {
   min-width: 0;
   border: 1px solid rgb(var(--color-ink) / 0.08);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.96);
+  background: rgb(var(--color-paper) / 0.95);
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.88) inset,
-    0 8px 18px rgb(var(--color-ink) / 0.048);
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 8px 18px rgb(var(--color-ink) / 0.042);
+}
+
+.app-page-shell {
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgb(var(--color-paper) / 0.52), transparent 32rem),
+    transparent;
+}
+
+.nav-surface {
+  border: 1px solid rgb(var(--color-ink) / 0.075);
+  background: rgb(var(--color-paper) / 0.9);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 12px 28px rgb(var(--color-ink) / 0.06);
+}
+
+.control-surface {
+  border: 1px solid rgb(var(--color-ink) / 0.09);
+  background: rgb(var(--color-paper) / 0.92);
+}
+
+.input-surface {
+  border: 1px solid rgb(var(--color-ink) / 0.1);
+  background: rgb(var(--color-paper) / 0.92);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.86) inset;
+}
+
+.input-surface:focus {
+  border-color: rgb(var(--color-sora) / 0.48);
+  box-shadow:
+    0 0 0 3px rgb(var(--color-sora) / 0.14),
+    0 1px 0 rgb(255 255 255 / 0.86) inset;
+}
+
+.app-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 0.45rem;
+  border: 1px solid rgb(var(--color-matcha) / 0.16);
+  background: rgb(var(--color-matcha) / 0.08);
+  padding: 0.28rem 0.58rem;
+  color: rgb(var(--color-matcha));
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.number-glyph {
+  font-family: "Segoe UI", "Arial", "Microsoft YaHei UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
 }
 
 .screen-reader-friendly-scroll {

@@ -166,7 +166,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder={`搜索 ${activeLevel} 日语、假名、romaji、中文或主题`}
-                  className="exam-search-input min-h-12 w-full rounded-md border border-ink/10 bg-rice/72 pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
+                  className="exam-search-input input-surface min-h-12 w-full rounded-md pl-11 pr-4 text-sm font-semibold text-ink placeholder:text-ink/38"
                 />
               </label>
               <p

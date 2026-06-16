@@ -33,7 +33,7 @@ const ThemeSwitcher = () => {
   }, [themeId]);
 
   return (
-    <section className="rounded-lg border border-ink/8 bg-paper/88 p-3 shadow-card" aria-labelledby="theme-title">
+    <section className="nav-surface min-w-0 rounded-lg p-3" aria-labelledby="theme-title">
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-sora/12 text-sora">
@@ -65,7 +65,7 @@ const ThemeSwitcher = () => {
               className={`tap-surface min-w-0 cursor-pointer rounded-lg border p-2 text-left transition active:scale-[0.99] ${
                 active
                   ? "border-matcha bg-matcha text-white shadow-sm"
-                  : "border-ink/10 bg-rice/42 text-ink hover:border-matcha/25 hover:bg-paper"
+                  : "border-ink/10 bg-paper/60 text-ink hover:border-sora/25 hover:bg-rice"
               }`}
             >
               <span className="flex min-w-0 items-center justify-between gap-2">
