@@ -1183,6 +1183,72 @@ const noticeCounterDialogues: Dialogue[] = [
   ], ["出行", "车站", "行李", "告示"]),
 ];
 
+const travelAccommodationDialogues: Dialogue[] = [
+  makeDialogue("scenario-hotel-late-checkin", "深夜入住确认", "旅行", "客人", "晚上到达酒店，向前台确认预约、护照和早餐时间", [
+    { speaker: "客人", japanese: "こんばんは。予約している李です。", kana: "こんばんは。よやくしているりです。", translation: "晚上好。我是预约了的李。" },
+    { speaker: "前台", japanese: "お待ちしておりました。パスポートをお願いします。", kana: "おまちしておりました。ぱすぽーとをおねがいします。", translation: "恭候您。请出示护照。" },
+    { speaker: "客人", japanese: "チェックインが遅くなってすみません。", kana: "ちぇっくいんがおそくなってすみません。", translation: "办理入住晚了，不好意思。" },
+    { speaker: "前台", japanese: "大丈夫です。こちらがカードキーです。", kana: "だいじょうぶです。こちらがかーどきーです。", translation: "没关系。这是房卡。" },
+    { speaker: "客人", japanese: "朝食は何時からですか。", kana: "ちょうしょくはなんじからですか。", translation: "早餐从几点开始？" },
+    { speaker: "前台", japanese: "七時から十時までです。", kana: "しちじからじゅうじまでです。", translation: "从七点到十点。" },
+  ], ["旅行", "酒店", "入住", "早餐"]),
+  makeDialogue("scenario-hotel-amenities", "领取客房用品", "旅行", "客人", "入住后确认牙刷、毛巾、吹风机和加湿器", [
+    { speaker: "客人", japanese: "アメニティは部屋にありますか。", kana: "あめにてぃはへやにありますか。", translation: "客房用品在房间里吗？" },
+    { speaker: "前台", japanese: "歯ブラシとタオルは部屋にあります。", kana: "はぶらしとたおるはへやにあります。", translation: "牙刷和毛巾在房间里。" },
+    { speaker: "客人", japanese: "加湿器を借りられますか。", kana: "かしつきをかりられますか。", translation: "可以借加湿器吗？" },
+    { speaker: "前台", japanese: "はい、フロントでお渡しします。", kana: "はい、ふろんとでおわたしします。", translation: "可以，在前台交给您。" },
+    { speaker: "客人", japanese: "ドライヤーもありますか。", kana: "どらいやーもありますか。", translation: "也有吹风机吗？" },
+    { speaker: "前台", japanese: "はい、洗面台の下にあります。", kana: "はい、せんめんだいのしたにあります。", translation: "有，在洗脸台下面。" },
+  ], ["旅行", "酒店", "用品", "设备"]),
+  makeDialogue("scenario-hotel-wifi-password", "酒店 Wi-Fi 密码", "旅行", "客人", "房间网络无法连接，向前台确认密码和处理方式", [
+    { speaker: "客人", japanese: "部屋でWi-Fiが使えません。", kana: "へやでわいふぁいがつかえません。", translation: "房间里用不了 Wi-Fi。" },
+    { speaker: "前台", japanese: "パスワードをもう一度入力してください。", kana: "ぱすわーどをもういちどにゅうりょくしてください。", translation: "请再输入一次密码。" },
+    { speaker: "客人", japanese: "パスワードはどこに書いてありますか。", kana: "ぱすわーどはどこにかいてありますか。", translation: "密码写在哪里？" },
+    { speaker: "前台", japanese: "カードキーのケースに書いてあります。", kana: "かーどきーのけーすにかいてあります。", translation: "写在房卡套上。" },
+    { speaker: "客人", japanese: "それでもつながらない場合はどうしますか。", kana: "それでもつながらないばあいはどうしますか。", translation: "还是连不上时怎么办？" },
+    { speaker: "前台", japanese: "フロントまでご連絡ください。", kana: "ふろんとまでごれんらくください。", translation: "请联系前台。" },
+  ], ["旅行", "酒店", "Wi-Fi", "网络"]),
+  makeDialogue("scenario-hotel-room-temperature", "房间温度调节", "旅行", "客人", "房间太冷，向前台询问空调和加湿器", [
+    { speaker: "客人", japanese: "部屋が少し寒いです。", kana: "へやがすこしさむいです。", translation: "房间有点冷。" },
+    { speaker: "前台", japanese: "暖房を強くできますか。", kana: "だんぼうをつよくできますか。", translation: "可以把暖气调强吗？" },
+    { speaker: "客人", japanese: "エアコンの使い方が分かりません。", kana: "えあこんのつかいかたがわかりません。", translation: "我不知道空调怎么用。" },
+    { speaker: "前台", japanese: "今から説明に伺います。", kana: "いまからせつめいにうかがいます。", translation: "我现在过去说明。" },
+    { speaker: "客人", japanese: "加湿器もお願いできますか。", kana: "かしつきもおねがいできますか。", translation: "加湿器也可以麻烦您吗？" },
+    { speaker: "前台", japanese: "はい、お持ちします。", kana: "はい、おもちします。", translation: "好的，我给您拿过去。" },
+  ], ["旅行", "酒店", "空调", "设备"]),
+  makeDialogue("scenario-hotel-key-lost", "房卡丢失", "旅行", "客人", "找不到房卡，向前台确认房间号、身份和补发费用", [
+    { speaker: "客人", japanese: "カードキーをなくしました。", kana: "かーどきーをなくしました。", translation: "我弄丢房卡了。" },
+    { speaker: "前台", japanese: "お部屋番号を教えてください。", kana: "おへやばんごうをおしえてください。", translation: "请告诉我房间号。" },
+    { speaker: "客人", japanese: "五〇三号室です。", kana: "ごまるさんごうしつです。", translation: "是 503 号房。" },
+    { speaker: "前台", japanese: "本人確認のため、パスポートをお願いします。", kana: "ほんにんかくにんのため、ぱすぽーとをおねがいします。", translation: "为确认本人，请出示护照。" },
+    { speaker: "客人", japanese: "再発行に料金はかかりますか。", kana: "さいはっこうにりょうきんはかかりますか。", translation: "重新发行要收费吗？" },
+    { speaker: "前台", japanese: "今回は無料です。", kana: "こんかいはむりょうです。", translation: "这次免费。" },
+  ], ["旅行", "酒店", "房卡", "身份确认"]),
+  makeDialogue("scenario-hotel-extend-stay", "酒店延住", "旅行", "客人", "旅行计划改变，向前台确认能否同房延住", [
+    { speaker: "客人", japanese: "一日延泊できますか。", kana: "いちにちえんぱくできますか。", translation: "可以延住一天吗？" },
+    { speaker: "前台", japanese: "空室を確認します。", kana: "くうしつをかくにんします。", translation: "我确认一下空房。" },
+    { speaker: "前台", japanese: "同じ部屋で延泊できます。", kana: "おなじへやでえんぱくできます。", translation: "可以在同一间房延住。" },
+    { speaker: "客人", japanese: "追加料金はいくらですか。", kana: "ついかりょうきんはいくらですか。", translation: "追加费用是多少？" },
+    { speaker: "前台", japanese: "一泊八千円です。", kana: "いっぱくはっせんえんです。", translation: "一晚八千日元。" },
+    { speaker: "客人", japanese: "では、お願いします。", kana: "では、おねがいします。", translation: "那么拜托了。" },
+  ], ["旅行", "酒店", "延住", "费用"]),
+  makeDialogue("scenario-hotel-cleaning-request", "清扫和毛巾更换", "旅行", "客人", "住客不需要清扫，只想更换毛巾", [
+    { speaker: "客人", japanese: "今日は清掃不要です。", kana: "きょうはせいそうふようです。", translation: "今天不需要清扫。" },
+    { speaker: "前台", japanese: "承知しました。タオルの交換は必要ですか。", kana: "しょうちしました。たおるのこうかんはひつようですか。", translation: "明白了。需要更换毛巾吗？" },
+    { speaker: "客人", japanese: "バスタオルを二枚ください。", kana: "ばすたおるをにまいください。", translation: "请给我两条浴巾。" },
+    { speaker: "前台", japanese: "ドアの前に置いておきます。", kana: "どあのまえにおいておきます。", translation: "我放在门前。" },
+    { speaker: "客人", japanese: "ありがとうございます。", kana: "ありがとうございます。", translation: "谢谢。" },
+  ], ["旅行", "酒店", "清扫", "毛巾"]),
+  makeDialogue("scenario-hotel-checkout-receipt", "退房和收据", "旅行", "客人", "退房时确认追加费用并索取住宿费收据", [
+    { speaker: "客人", japanese: "チェックアウトをお願いします。", kana: "ちぇっくあうとをおねがいします。", translation: "我要办理退房。" },
+    { speaker: "前台", japanese: "追加料金はありません。", kana: "ついかりょうきんはありません。", translation: "没有追加费用。" },
+    { speaker: "客人", japanese: "宿泊費の領収書をください。", kana: "しゅくはくひのりょうしゅうしょをください。", translation: "请给我住宿费收据。" },
+    { speaker: "前台", japanese: "宛名はどうしますか。", kana: "あてなはどうしますか。", translation: "抬头怎么写？" },
+    { speaker: "客人", japanese: "李でお願いします。", kana: "りでおねがいします。", translation: "请写李。" },
+    { speaker: "前台", japanese: "こちらが領収書です。", kana: "こちらがりょうしゅうしょです。", translation: "这是收据。" },
+  ], ["旅行", "酒店", "退房", "收据"]),
+];
+
 const safetyEmergencyDialogues: Dialogue[] = [
   makeDialogue("scenario-earthquake-evacuation-route", "地震后避难路线", "紧急", "李", "地震后在设施里听从工作人员引导避难", [
     { speaker: "广播", japanese: "ただいま地震が発生しました。落ち着いて行動してください。", kana: "ただいまじしんがはっせいしました。おちついてこうどうしてください。", translation: "刚刚发生地震。请冷静行动。" },
@@ -1256,6 +1322,7 @@ export const dialogues: Dialogue[] = [
   ...additionalScenarioDialogues,
   ...workProcedureDialogues,
   ...noticeCounterDialogues,
+  ...travelAccommodationDialogues,
   ...safetyEmergencyDialogues,
 ].map((dialogue, index) => ({
   sortOrder: dialogue.sortOrder ?? index + 1,
