@@ -351,6 +351,31 @@ const quickPhraseSections: QuickReadSection[] = [
     ],
   },
   {
+    id: "safety-emergency-phrases",
+    title: "SAFETY & EMERGENCY",
+    subtitle: "安全广播",
+    items: [
+      { id: "earthquake-alert", label: "地震速报", japanese: "緊急地震速報です", kana: "きんきゅうじしんそくほうです", romaji: "kinkyuu jishin sokuhou desu", meaning: "这是紧急地震速报" },
+      { id: "protect-head", label: "护头", japanese: "頭を守ってください", kana: "あたまをまもってください", romaji: "atama o mamotte kudasai", meaning: "请保护头部" },
+      { id: "under-desk", label: "桌下", japanese: "机の下に入ってください", kana: "つくえのしたにはいってください", romaji: "tsukue no shita ni haitte kudasai", meaning: "请躲到桌子下面" },
+      { id: "leave-coast", label: "离海岸", japanese: "海岸から離れてください", kana: "かいがんからはなれてください", romaji: "kaigan kara hanarete kudasai", meaning: "请远离海岸" },
+      { id: "higher-ground", label: "高处", japanese: "高台へ避難してください", kana: "たかだいへひなんしてください", romaji: "takadai e hinan shite kudasai", meaning: "请到高处避难" },
+      { id: "emergency-exit", label: "紧急出口", japanese: "非常口へ進んでください", kana: "ひじょうぐちへすすんでください", romaji: "hijouguchi e susunde kudasai", meaning: "请前往紧急出口" },
+      { id: "no-elevator", label: "不用电梯", japanese: "エレベーターを使わないでください", kana: "えれべーたーをつかわないでください", romaji: "erebeetaa o tsukawanaide kudasai", meaning: "请不要使用电梯" },
+      { id: "avoid-smoke", label: "避烟", japanese: "煙を吸わないようにしてください", kana: "けむりをすわないようにしてください", romaji: "kemuri o suwanai you ni shite kudasai", meaning: "请注意不要吸入烟" },
+      { id: "follow-staff", label: "听指示", japanese: "係員の指示に従ってください", kana: "かかりいんのしじにしたがってください", romaji: "kakariin no shiji ni shitagatte kudasai", meaning: "请听从工作人员指示" },
+      { id: "do-not-return", label: "别返回", japanese: "荷物を取りに戻らないでください", kana: "にもつをとりにもどらないでください", romaji: "nimotsu o tori ni modoranaide kudasai", meaning: "请不要回去拿行李" },
+      { id: "life-first", label: "生命优先", japanese: "命を優先してください", kana: "いのちをゆうせんしてください", romaji: "inochi o yuusen shite kudasai", meaning: "请优先保命" },
+      { id: "first-aid-station", label: "救护站", japanese: "救護所はどこですか", kana: "きゅうごじょはどこですか", romaji: "kyuugojo wa doko desu ka", meaning: "救护站在哪里？" },
+      { id: "no-consciousness", label: "无意识", japanese: "意識がありません", kana: "いしきがありません", romaji: "ishiki ga arimasen", meaning: "没有意识" },
+      { id: "hard-breathing", label: "呼吸困难", japanese: "呼吸が苦しいです", kana: "こきゅうがくるしいです", romaji: "kokyuu ga kurushii desu", meaning: "呼吸困难" },
+      { id: "water-station", label: "供水点", japanese: "給水所はどこですか", kana: "きゅうすいじょはどこですか", romaji: "kyuusuijo wa doko desu ka", meaning: "供水点在哪里？" },
+      { id: "train-suspended", label: "停运", japanese: "電車は運転見合わせです", kana: "でんしゃはうんてんみあわせです", romaji: "densha wa unten miawase desu", meaning: "电车暂停运行" },
+      { id: "alternate-transport", label: "改乘", japanese: "振替輸送を利用できますか", kana: "ふりかえゆそうをりようできますか", romaji: "furikae yusou o riyou dekimasu ka", meaning: "可以使用替代运输吗？" },
+      { id: "delay-paper", label: "延误证明", japanese: "遅延証明書をください", kana: "ちえんしょうめいしょをください", romaji: "chien shoumeisho o kudasai", meaning: "请给我延误证明" },
+    ],
+  },
+  {
     id: "station-ticket-phrases",
     title: "STATION & TICKETS",
     subtitle: "车站购票",
@@ -455,7 +480,7 @@ const quickReadViews: QuickReadViewMeta[] = [
   { id: "extra", label: "浊音拗音", detail: "浊音、半浊音、拗音", count: `${kanaExtensionSections.length} 组` },
   { id: "numbers", label: "数字速读", detail: "数字和大数字", count: `${numberQuickReadSections.length} 组` },
   { id: "time", label: "日期时间", detail: "月份、日期、星期", count: `${timeQuickReadSections.length} 组` },
-  { id: "phrases", label: "常用短句", detail: "出行、手续、告示", count: `${quickPhraseSections.reduce((total, section) => total + section.items.length, 0)} 句` },
+  { id: "phrases", label: "常用短句", detail: "出行、手续、安全", count: `${quickPhraseSections.reduce((total, section) => total + section.items.length, 0)} 句` },
 ];
 
 interface KanaPosterSectionProps {
