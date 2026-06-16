@@ -128,7 +128,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         ]}
       />
 
-      <section className="sticky top-[4.5rem] z-20 max-h-[calc(100vh-8.5rem)] overflow-y-auto rounded-lg border border-ink/10 bg-paper p-3 shadow-card backdrop-blur sm:p-4 md:top-24">
+      <section className="compact-sticky-panel sticky top-[4.5rem] z-20 overflow-y-auto rounded-lg border border-ink/10 bg-paper p-3 shadow-card backdrop-blur sm:p-4 md:top-24">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <label className="relative block">
             <Search
@@ -170,7 +170,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
             <p className="text-sm font-bold text-ink/58">{filteredScenes.length} 个场景</p>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {filteredScenes.map((scene) => {
               const active = activeSceneId === scene.id;
               const status = getNumberStatus(scene.id);
@@ -181,8 +181,8 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                   className={`p-0 ${active ? "border-matcha/70 bg-matcha/8 ring-2 ring-matcha/24" : ""}`}
                   interactive
                 >
-                  <div className="flex h-full flex-col p-4">
-                    <div className="mb-3 flex items-start justify-between gap-3">
+                  <div className="flex h-full flex-col p-3 sm:p-4">
+                    <div className="mb-2 flex items-start justify-between gap-3">
                       <div className="min-w-0">
                         <p className="mb-2 w-fit rounded-md bg-rice px-2 py-1 text-xs font-extrabold text-ink/58">
                           {scene.group}
@@ -213,7 +213,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                     <button
                       type="button"
                       onClick={() => void playScene(scene.id, scene.audioText ?? scene.japanese)}
-                      className={`mt-auto min-h-36 w-full cursor-pointer rounded-md px-3 py-3 text-left transition active:scale-[0.99] ${
+                      className={`mt-auto min-h-28 w-full cursor-pointer rounded-md px-3 py-3 text-left transition active:scale-[0.99] ${
                         active ? "bg-matcha text-white" : "bg-yuzu/12 hover:bg-matcha hover:text-white"
                       }`}
                       title="点击整句朗读"
@@ -224,7 +224,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                         {scene.highlight}
                       </span>
                       <span className="block break-words font-japanese text-lg font-extrabold leading-7">{scene.japanese}</span>
-                      <span className="mt-2 block break-words text-sm opacity-80">{scene.kana}</span>
+                      <span className="mt-1.5 block break-words text-sm font-semibold opacity-80">{scene.kana}</span>
                       <span
                         className={`mt-1 block break-words text-sm font-semibold ${
                           active ? "text-white" : "text-sakura"
@@ -234,13 +234,13 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                       </span>
                     </button>
 
-                    <p className="mt-3 text-sm font-semibold leading-6 text-ink/70">中文：{scene.meaning}</p>
+                    <p className="mt-2 text-sm font-semibold leading-6 text-ink/70">中文：{scene.meaning}</p>
                     <button
                       type="button"
                       onClick={() => markNumberMastered(scene.id)}
                       disabled={status.completed}
                       aria-pressed={status.completed}
-                      className={`mt-3 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+                      className={`mt-2 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
                         status.completed
                           ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
                           : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"
@@ -257,7 +257,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         </section>
       ) : null}
 
-      <section className="grid items-start gap-4 lg:grid-cols-2">
+      <section className="grid items-start gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
         {filteredNumbers.length ? (
           filteredNumbers.map((item) => {
             const active = activeNumberId === item.id;
@@ -266,12 +266,12 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
             return (
               <LearningCard
                 key={item.id}
-                className={`overflow-hidden p-4 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
+                className={`overflow-hidden p-3 sm:p-4 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
                 interactive
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="min-w-0">
-                    <div className="mb-3 flex flex-wrap gap-2">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-2 flex flex-wrap gap-2">
                       <p className="w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-extrabold text-ink/66">
                         {item.group}
                       </p>
@@ -288,8 +288,10 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                         {status.completed ? "已掌握" : status.seen ? "已听过" : "未开始"}
                       </p>
                     </div>
-                    <p className="break-words font-display text-4xl font-extrabold text-ink">{item.display}</p>
-                    <p className="mt-2 text-sm font-semibold text-ink/62">{item.meaning}</p>
+                    <div className="flex min-w-0 items-baseline gap-3">
+                      <p className="break-words font-sans text-3xl font-extrabold leading-none text-ink sm:text-4xl">{item.display}</p>
+                      <p className="min-w-0 break-words text-base font-extrabold text-ink/62">{item.meaning}</p>
+                    </div>
                   </div>
                   <SpeakButton
                     active={active}
@@ -302,17 +304,17 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                 <button
                   type="button"
                   onClick={() => void playNumber(item.id, item.audioText ?? item.japanese)}
-                  className={`group mt-4 w-full cursor-pointer rounded-md border px-4 py-3 text-left transition active:scale-[0.99] ${
+                  className={`group mt-3 w-full cursor-pointer rounded-md border px-3 py-3 text-left transition active:scale-[0.99] ${
                     active
                       ? "border-matcha bg-matcha text-white"
                       : "border-yuzu/12 bg-rice/55 hover:border-matcha/30 hover:bg-matcha hover:text-white"
                   }`}
                   title="点击日语读法朗读"
                 >
-                  <span className="block break-words font-japanese text-2xl font-bold">{item.japanese}</span>
-                  <span className="mt-2 block break-words text-sm opacity-80">{item.kana}</span>
+                  <span className="block break-words font-japanese text-2xl font-bold leading-tight">{item.japanese}</span>
+                  <span className="mt-1.5 block break-words text-sm font-semibold opacity-80">{item.kana}</span>
                   <span
-                    className={`mt-1 block break-words text-sm font-semibold ${
+                    className={`mt-1 block break-words font-reading text-sm font-extrabold ${
                       active ? "text-white" : "text-sakura group-hover:text-white"
                     }`}
                   >
@@ -321,7 +323,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                 </button>
 
                 {item.note ? (
-                  <p className="mt-4 rounded-md border border-sakura/20 bg-sakura/8 px-3 py-2 text-sm leading-6 text-ink/70">
+                  <p className="mt-3 rounded-md border border-sakura/20 bg-sakura/8 px-3 py-2 text-sm leading-6 text-ink/70">
                     {item.note}
                   </p>
                 ) : null}

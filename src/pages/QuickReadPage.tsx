@@ -1,3 +1,4 @@
+import { Volume2 } from "lucide-react";
 import { useRef, useState } from "react";
 import { kanaItems, type KanaItem } from "../data/kana";
 import { recordSeenContent } from "../utils/progress";
@@ -214,6 +215,81 @@ const quickPhraseSections: QuickReadSection[] = [
       { id: "doko", label: "位置", japanese: "どこですか", kana: "どこですか", romaji: "doko desu ka", meaning: "在哪里" },
     ],
   },
+  {
+    id: "transport-phrases",
+    title: "TRANSPORT",
+    subtitle: "出行换乘",
+    items: [
+      { id: "norikae", label: "换乘", japanese: "どこで乗り換えますか", kana: "どこでのりかえますか", romaji: "doko de norikaemasu ka", meaning: "在哪里换乘？" },
+      { id: "platform", label: "站台", japanese: "何番線ですか", kana: "なんばんせんですか", romaji: "nanbansen desu ka", meaning: "几号站台？" },
+      { id: "delay", label: "晚点", japanese: "電車は遅れていますか", kana: "でんしゃはおくれていますか", romaji: "densha wa okurete imasu ka", meaning: "电车晚点了吗？" },
+      { id: "charge-card", label: "充值", japanese: "このカードにチャージしたいです", kana: "このかーどにちゃーじしたいです", romaji: "kono kaado ni chaaji shitai desu", meaning: "想给这张卡充值" },
+      { id: "lost-wallet", label: "失物", japanese: "財布を落としました", kana: "さいふをおとしました", romaji: "saifu o otoshimashita", meaning: "我丢了钱包" },
+      { id: "taxi-address", label: "出租车", japanese: "この住所までお願いします", kana: "このじゅうしょまでおねがいします", romaji: "kono juusho made onegaishimasu", meaning: "请到这个地址" },
+      { id: "bus-stop", label: "公交", japanese: "どこで降りればいいですか", kana: "どこでおりればいいですか", romaji: "doko de orireba ii desu ka", meaning: "在哪里下车好？" },
+      { id: "hurry", label: "赶时间", japanese: "急いでいるのでお願いします", kana: "いそいでいるのでおねがいします", romaji: "isoide iru node onegaishimasu", meaning: "我比较赶时间，麻烦您" },
+    ],
+  },
+  {
+    id: "food-shopping-phrases",
+    title: "FOOD & SHOPPING",
+    subtitle: "点餐购物",
+    items: [
+      { id: "allergy", label: "过敏", japanese: "卵アレルギーがあります", kana: "たまごあれるぎーがあります", romaji: "tamago arerugii ga arimasu", meaning: "我对鸡蛋过敏" },
+      { id: "no-meat", label: "不吃肉", japanese: "肉を使っていない料理はありますか", kana: "にくをつかっていないりょうりはありますか", romaji: "niku o tsukatte inai ryouri wa arimasu ka", meaning: "有不含肉的料理吗？" },
+      { id: "less-spicy", label: "少辣", japanese: "辛さを少なくしてください", kana: "からさをすくなくしてください", romaji: "karasa o sukunaku shite kudasai", meaning: "请少辣一点" },
+      { id: "takeout", label: "外带", japanese: "持ち帰りでお願いします", kana: "もちかえりでおねがいします", romaji: "mochikaeri de onegaishimasu", meaning: "请外带" },
+      { id: "bigger-size", label: "大一号", japanese: "もう少し大きいサイズはありますか", kana: "もうすこしおおきいさいずはありますか", romaji: "mou sukoshi ookii saizu wa arimasu ka", meaning: "有大一点的尺寸吗？" },
+      { id: "exchange", label: "换货", japanese: "交換できますか", kana: "こうかんできますか", romaji: "koukan dekimasu ka", meaning: "可以换货吗？" },
+      { id: "tax-free", label: "免税", japanese: "免税できますか", kana: "めんぜいできますか", romaji: "menzei dekimasu ka", meaning: "可以免税吗？" },
+      { id: "receipt-please", label: "收据", japanese: "領収書をお願いします", kana: "りょうしゅうしょをおねがいします", romaji: "ryoushuusho o onegaishimasu", meaning: "请给我收据" },
+    ],
+  },
+  {
+    id: "health-help-phrases",
+    title: "HEALTH & HELP",
+    subtitle: "身体求助",
+    items: [
+      { id: "throat", label: "喉咙痛", japanese: "のどが痛いです", kana: "のどがいたいです", romaji: "nodo ga itai desu", meaning: "嗓子痛" },
+      { id: "fever", label: "发烧", japanese: "熱があります", kana: "ねつがあります", romaji: "netsu ga arimasu", meaning: "我发烧了" },
+      { id: "medicine", label: "买药", japanese: "薬はありますか", kana: "くすりはありますか", romaji: "kusuri wa arimasu ka", meaning: "有药吗？" },
+      { id: "after-meal", label: "饭后", japanese: "食後に飲んでください", kana: "しょくごにのんでください", romaji: "shokugo ni nonde kudasai", meaning: "请饭后服用" },
+      { id: "ambulance", label: "救护车", japanese: "救急車を呼んでください", kana: "きゅうきゅうしゃをよんでください", romaji: "kyuukyuusha o yonde kudasai", meaning: "请叫救护车" },
+      { id: "passport-lost", label: "护照", japanese: "パスポートをなくしました", kana: "ぱすぽーとをなくしました", romaji: "pasupooto o nakushimashita", meaning: "我的护照丢了" },
+      { id: "insurance-card", label: "医保卡", japanese: "保険証を持っています", kana: "ほけんしょうをもっています", romaji: "hokenshou o motte imasu", meaning: "我带着医保卡" },
+      { id: "call-someone", label: "打电话", japanese: "ここに電話してください", kana: "ここにでんわしてください", romaji: "koko ni denwa shite kudasai", meaning: "请打这个电话" },
+    ],
+  },
+  {
+    id: "daily-life-phrases",
+    title: "DAILY LIFE",
+    subtitle: "生活手续",
+    items: [
+      { id: "garbage-day", label: "垃圾日", japanese: "燃えるごみは何曜日ですか", kana: "もえるごみはなんようびですか", romaji: "moeru gomi wa nan youbi desu ka", meaning: "可燃垃圾是星期几？" },
+      { id: "laundry", label: "洗衣", japanese: "この洗濯機は使えますか", kana: "このせんたくきはつかえますか", romaji: "kono sentakuki wa tsukaemasu ka", meaning: "这台洗衣机可以用吗？" },
+      { id: "repair", label: "维修", japanese: "電気がつきません", kana: "でんきがつきません", romaji: "denki ga tsukimasen", meaning: "灯打不开" },
+      { id: "print", label: "打印", japanese: "印刷したいです", kana: "いんさつしたいです", romaji: "insatsu shitai desu", meaning: "我想打印" },
+      { id: "wifi-pass", label: "网络", japanese: "パスワードを教えてください", kana: "ぱすわーどをおしえてください", romaji: "pasuwaado o oshiete kudasai", meaning: "请告诉我密码" },
+      { id: "borrow-umbrella", label: "借伞", japanese: "傘を借りられますか", kana: "かさをかりられますか", romaji: "kasa o kariraremasu ka", meaning: "可以借伞吗？" },
+      { id: "city-office", label: "市役所", japanese: "住所の手続きをしたいです", kana: "じゅうしょのてつづきをしたいです", romaji: "juusho no tetsuzuki o shitai desu", meaning: "我想办理住址手续" },
+      { id: "battery-empty", label: "没电", japanese: "携帯の電池がなくなりました", kana: "けいたいのでんちがなくなりました", romaji: "keitai no denchi ga nakunarimashita", meaning: "手机没电了" },
+    ],
+  },
+  {
+    id: "study-work-phrases",
+    title: "STUDY & WORK",
+    subtitle: "学习工作",
+    items: [
+      { id: "presentation-theme", label: "发表", japanese: "発表のテーマを決めましょう", kana: "はっぴょうのてーまをきめましょう", romaji: "happyou no teema o kimemashou", meaning: "决定发表主题吧" },
+      { id: "collect-materials", label: "资料", japanese: "資料を集めます", kana: "しりょうをあつめます", romaji: "shiryou o atsumemasu", meaning: "我来收集资料" },
+      { id: "part-time", label: "兼职", japanese: "アルバイトを探しています", kana: "あるばいとをさがしています", romaji: "arubaito o sagashite imasu", meaning: "我在找兼职" },
+      { id: "work-days", label: "排班", japanese: "週三日働けます", kana: "しゅうみっかはたらけます", romaji: "shuu mikka hatarakemasu", meaning: "每周可以工作三天" },
+      { id: "meeting-time", label: "会议", japanese: "会議は何時からですか", kana: "かいぎはなんじからですか", romaji: "kaigi wa nanji kara desu ka", meaning: "会议几点开始？" },
+      { id: "send-email", label: "邮件", japanese: "メールを送ります", kana: "めーるをおくります", romaji: "meeru o okurimasu", meaning: "我会发送邮件" },
+      { id: "deadline", label: "截止", japanese: "締切は今日です", kana: "しめきりはきょうです", romaji: "shimekiri wa kyou desu", meaning: "截止日期是今天" },
+      { id: "please-explain", label: "说明", japanese: "もう少し説明してください", kana: "もうすこしせつめいしてください", romaji: "mou sukoshi setsumei shite kudasai", meaning: "请再说明一点" },
+    ],
+  },
 ];
 
 const numberQuickReadSections = quickReadSections.filter((section) =>
@@ -229,7 +305,7 @@ const quickReadViews: QuickReadViewMeta[] = [
   { id: "extra", label: "浊音拗音", detail: "浊音、半浊音、拗音", count: `${kanaExtensionSections.length} 组` },
   { id: "numbers", label: "数字速读", detail: "数字和大数字", count: `${numberQuickReadSections.length} 组` },
   { id: "time", label: "日期时间", detail: "月份、日期、星期", count: `${timeQuickReadSections.length} 组` },
-  { id: "phrases", label: "常用短句", detail: "问候和课堂句", count: `${quickPhraseSections.reduce((total, section) => total + section.items.length, 0)} 句` },
+  { id: "phrases", label: "常用短句", detail: "出行、点餐、求助", count: `${quickPhraseSections.reduce((total, section) => total + section.items.length, 0)} 句` },
 ];
 
 interface KanaPosterSectionProps {
@@ -246,14 +322,14 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
       <div className="text-center">
         <h1
           id={`${script}-title`}
-          className="text-4xl font-extrabold leading-none text-ink sm:text-5xl"
+          className="text-3xl font-extrabold leading-none text-ink sm:text-5xl"
         >
           {title}
         </h1>
         <p className="mt-1 text-base font-semibold text-ink/72 sm:text-lg">{subtitle}</p>
       </div>
 
-      <div className="grid min-w-0 grid-cols-6 gap-1.5 sm:grid-cols-[repeat(11,minmax(0,1fr))] sm:gap-2">
+      <div className="grid min-w-0 grid-cols-5 gap-1.5 min-[390px]:grid-cols-6 sm:grid-cols-[repeat(11,minmax(0,1fr))] sm:gap-2">
         {kanaRows.flatMap((row, rowIndex) =>
           row.map((id, columnIndex) => {
             if (!id) {
@@ -281,7 +357,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 type="button"
                 onClick={() => onPlay(key, kana)}
                 aria-pressed={active}
-                className={`group grid min-h-16 min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.62)] transition duration-200 active:scale-95 sm:min-h-16 sm:px-0.5 sm:py-1 ${
+                className={`quickread-card group grid min-h-16 min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center transition duration-200 active:scale-95 sm:min-h-16 sm:px-0.5 sm:py-1 ${
                   active
                     ? "border-yuzu/70 bg-yuzu/25 text-ink ring-2 ring-yuzu/30"
                     : "border-ink/10 bg-rice/40 text-ink hover:border-yuzu/40 hover:bg-yuzu/10"
@@ -315,16 +391,22 @@ interface QuickReadTableSectionProps {
 }
 
 const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSectionProps) => {
+  const phraseLike = quickPhraseSections.some((phraseSection) => phraseSection.id === section.id);
+
   return (
     <section aria-labelledby={`${section.id}-title`} className="space-y-4">
       <div className="text-center">
-        <h2 id={`${section.id}-title`} className="text-3xl font-extrabold leading-none text-ink sm:text-4xl">
+        <h2 id={`${section.id}-title`} className="text-2xl font-extrabold leading-none text-ink sm:text-4xl">
           {section.title}
         </h2>
         <p className="mt-1 text-sm font-semibold text-ink/68 sm:text-base">{section.subtitle}</p>
       </div>
 
-      <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className={`grid min-w-0 gap-2.5 ${
+        phraseLike
+          ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3"
+          : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+      }`}>
         {section.items.map((item) => {
           const key = `${section.id}-${item.id}`;
           const active = activeKey === key;
@@ -335,23 +417,32 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
               type="button"
               onClick={() => onPlay(key, item.audioText ?? item.kana.split(" / ")[0])}
               aria-pressed={active}
-              className={`group grid min-h-36 min-w-0 cursor-pointer grid-rows-[auto_1fr_auto_auto_auto] rounded-md border px-3 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.68)] transition active:scale-95 sm:min-h-40 ${
+              className={`quickread-card group flex min-w-0 cursor-pointer flex-col rounded-md border px-3 py-3 transition active:scale-[0.98] ${
                 active
                   ? "border-yuzu/70 bg-yuzu/24 ring-2 ring-yuzu/30"
                   : "border-ink/10 bg-rice/45 hover:border-yuzu/40 hover:bg-yuzu/10"
-              }`}
+              } ${phraseLike ? "min-h-0 text-left" : "min-h-32 text-center sm:min-h-36"}`}
               aria-label={`朗读 ${item.label} ${item.kana}`}
               title={`朗读 ${item.japanese}`}
             >
-              <span className="block truncate text-sm font-extrabold text-ink/58">{item.label}</span>
-              <span className={`mt-2 flex items-center justify-center break-words font-japanese text-3xl font-bold leading-tight sm:text-4xl ${active ? "text-matcha" : "text-ink"}`}>
+              <span className={`flex items-center justify-between gap-2 ${phraseLike ? "" : "justify-center"}`}>
+                <span className="min-w-0 truncate rounded bg-paper/72 px-2 py-0.5 text-xs font-extrabold text-ink/58">{item.label}</span>
+                <Volume2
+                  aria-hidden="true"
+                  className={`shrink-0 ${active ? "text-matcha" : "text-ink/34 group-hover:text-matcha"}`}
+                  size={16}
+                />
+              </span>
+              <span className={`mt-2 flex items-center break-words font-japanese font-bold leading-tight ${
+                phraseLike ? "min-h-0 justify-start text-[1.35rem] sm:text-2xl" : "min-h-12 justify-center text-2xl sm:text-3xl"
+              } ${active ? "text-matcha" : "text-ink"}`}>
                 {item.japanese}
               </span>
-              <span className="mt-2 block break-words text-sm font-bold leading-5 text-ink/70">{item.kana}</span>
-              <span className={`mt-1 block break-words font-reading text-xs font-extrabold leading-5 ${active ? "text-matcha" : "text-sakura/85"}`}>
+              <span className="mt-1.5 block break-words text-sm font-bold leading-5 text-ink/70">{item.kana}</span>
+              <span className={`mt-1 block break-words font-reading text-sm font-extrabold leading-5 ${active ? "text-matcha" : "text-sakura/85"}`}>
                 {formatRomajiReading(item.romaji)}
               </span>
-              <span className="mt-2 block truncate text-sm font-extrabold text-ink/62">{item.meaning}</span>
+              <span className="mt-auto block break-words pt-1.5 text-sm font-extrabold text-ink/62">{item.meaning}</span>
             </button>
           );
         })}
@@ -395,15 +486,15 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
 
   return (
     <div className="space-y-4">
-      <section className="sticky top-[4.5rem] z-20 max-h-[calc(100vh-8.5rem)] overflow-y-auto rounded-lg border border-ink/10 bg-paper/95 p-3 shadow-card backdrop-blur md:top-24">
-        <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+      <section className="compact-sticky-panel sticky top-[3.85rem] z-20 overflow-y-auto rounded-lg border border-ink/10 bg-paper/95 p-2.5 shadow-card backdrop-blur md:top-24 md:p-3">
+        <div className="mb-2 flex items-center justify-between gap-3">
           <div>
-            <h1 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">{activeViewMeta.label}</h1>
+            <h1 className="font-display text-xl font-extrabold text-ink sm:text-3xl">{activeViewMeta.label}</h1>
           </div>
-          <p className="text-sm font-bold text-ink/58">{activeViewMeta.count}</p>
+          <p className="shrink-0 rounded bg-rice px-2 py-1 text-xs font-bold text-ink/58 sm:text-sm">{activeViewMeta.count}</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="filter-scroll-row flex gap-2 overflow-x-auto pb-1 lg:grid lg:grid-cols-5 lg:overflow-visible lg:pb-0">
           {quickReadViews.map((view) => {
             const active = activeView === view.id;
 
@@ -416,7 +507,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
                   setActiveKey(null);
                 }}
                 aria-pressed={active}
-                className={`min-h-14 cursor-pointer rounded-md border px-3 py-2 text-left transition active:scale-[0.99] ${
+                className={`min-h-12 w-[8.75rem] shrink-0 cursor-pointer snap-start rounded-md border px-3 py-2 text-left transition active:scale-[0.99] lg:w-auto ${
                   active
                     ? "border-matcha bg-matcha text-white shadow-card"
                     : "border-ink/10 bg-rice/45 text-ink hover:border-matcha/25 hover:bg-rice/70"
@@ -432,7 +523,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
         </div>
       </section>
 
-      <article className="mx-auto w-full max-w-[22rem] overflow-hidden rounded-lg border border-ink/10 bg-paper px-2.5 py-7 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
+      <article className="mx-auto w-full overflow-hidden rounded-lg border border-ink/10 bg-paper px-2.5 py-6 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
         <div className="space-y-9 sm:space-y-10">
           {activeView === "basic" ? (
             <>
