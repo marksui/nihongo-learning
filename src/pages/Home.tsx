@@ -13,7 +13,6 @@ import {
 import { useMemo, useState } from "react";
 import LearningCard from "../components/LearningCard";
 import type { PageKey } from "../components/Navbar";
-import PageHero from "../components/PageHero";
 import SpeakButton from "../components/SpeakButton";
 import homeStudyScene from "../assets/home-study-scene.jpg";
 import { dialogues } from "../data/dialogues";
@@ -188,52 +187,60 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
   return (
     <div className="space-y-4 sm:space-y-5">
-      <PageHero
-        title="中文学日语"
-        eyebrow="零基础点读"
-        description="打开就能跟着读：日语原文、假名、romaji 和中文意思放在同一张卡里。先听，再看，再开口。"
-        stats={[
-          { label: "假名", value: kanaItems.length },
-          { label: "词汇", value: vocabulary.length },
-          { label: "会话", value: dialogues.length },
-        ]}
-        actions={
-          <>
-            <button
-              type="button"
-              onClick={() => onNavigate("quickread")}
-              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg bg-matcha px-4 py-2.5 font-extrabold text-white shadow-sm transition hover:bg-matcha/90 active:scale-95"
-            >
-              直接点读
-              <Play aria-hidden="true" size={18} />
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate("conversation")}
-              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg border border-ink/10 bg-paper px-4 py-2.5 font-extrabold text-ink shadow-sm transition hover:border-sora/30 hover:bg-sora/10 active:scale-95"
-            >
-              进入会话
-              <ArrowRight aria-hidden="true" size={18} />
-            </button>
-          </>
-        }
-        media={
-          <div className="overflow-hidden rounded-lg border border-ink/10 bg-paper p-1 shadow-sm lg:h-[24rem]">
-            <div className="relative h-[15rem] overflow-hidden rounded-lg sm:h-[20rem] lg:h-full">
-              <img
-                src={homeStudyScene}
-                alt="大阪道顿堀河岸街景封面"
-                className="home-osaka-cover-image h-full w-full object-cover object-[center_52%]"
-                loading="eager"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/62 via-ink/12 to-transparent" />
-              <div className="absolute inset-x-3 bottom-3">
-                <p className="w-fit rounded-md bg-paper/90 px-2 py-1 text-xs font-extrabold text-ink/62 backdrop-blur">Osaka / 大阪</p>
-              </div>
+      <section className="relative min-h-[23rem] overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-soft sm:min-h-[28rem] lg:min-h-[31rem]">
+        <img
+          src={homeStudyScene}
+          alt="大阪道顿堀河岸街景封面"
+          className="home-osaka-cover-image absolute inset-0 h-full w-full object-cover object-[center_52%]"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-ink/6" />
+        <div className="absolute inset-0 flex items-end">
+          <div className="w-full p-4 sm:p-6 lg:p-8">
+            <p className="mb-3 inline-flex rounded-md border border-white/22 bg-white/14 px-3 py-1 text-xs font-extrabold text-white backdrop-blur">
+              零基础点读
+            </p>
+            <h1 className="break-words text-[2.25rem] font-extrabold leading-none text-white sm:text-[3.15rem] lg:text-[4rem]">
+              中文学日语
+            </h1>
+            <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-white/85 sm:text-lg">
+              打开就能跟着读：日语原文、假名、romaji 和中文意思放在同一张卡里。先听，再看，再开口。
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => onNavigate("quickread")}
+                className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg bg-matcha px-4 py-2.5 font-extrabold text-white shadow-sm transition hover:bg-matcha/90 active:scale-95"
+              >
+                直接点读
+                <Play aria-hidden="true" size={18} />
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate("conversation")}
+                className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg border border-white/22 bg-white/88 px-4 py-2.5 font-extrabold text-ink shadow-sm transition hover:bg-white active:scale-95"
+              >
+                进入会话
+                <ArrowRight aria-hidden="true" size={18} />
+              </button>
+            </div>
+
+            <div className="mt-5 grid w-full max-w-md grid-cols-3 gap-2">
+              {[
+                { label: "假名", value: kanaItems.length },
+                { label: "词汇", value: vocabulary.length },
+                { label: "会话", value: dialogues.length },
+              ].map((stat) => (
+                <div key={stat.label} className="rounded-md border border-white/18 bg-white/15 px-3 py-2 text-white backdrop-blur">
+                  <p className="text-xl font-extrabold leading-none">{stat.value}</p>
+                  <p className="mt-1 text-xs font-bold text-white/78">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
-        }
-      />
+        </div>
+      </section>
 
       <LearningCard className="p-3 sm:p-4">
         <div className="mb-3 flex items-end justify-between gap-3">

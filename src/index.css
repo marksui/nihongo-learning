@@ -4,71 +4,71 @@
 
 :root,
 html[data-theme="hidamari"] {
-  --color-ink: 31 36 40;
-  --color-rice: 246 246 238;
-  --color-paper: 255 255 250;
-  --color-sakura: 218 91 112;
-  --color-matcha: 55 129 88;
-  --color-sora: 54 129 176;
-  --color-yuzu: 232 176 64;
-  --color-sumire: 105 99 154;
-  --color-sky: 238 244 240;
-  --page-start: 250 250 244;
-  --page-end: 238 243 238;
-  --grid-line: 52 60 64;
+  --color-ink: 38 39 38;
+  --color-rice: 247 244 234;
+  --color-paper: 255 253 247;
+  --color-sakura: 210 88 105;
+  --color-matcha: 62 133 91;
+  --color-sora: 67 135 177;
+  --color-yuzu: 224 172 66;
+  --color-sumire: 101 94 145;
+  --color-sky: 239 242 234;
+  --page-start: 250 248 241;
+  --page-end: 238 242 232;
+  --grid-line: 80 87 78;
   color: rgb(var(--color-ink));
   background: rgb(var(--color-rice));
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 5.5rem;
   scroll-padding-bottom: calc(7rem + env(safe-area-inset-bottom));
 }
 
 html[data-theme="matcha"] {
-  --color-ink: 30 46 38;
-  --color-rice: 239 246 233;
-  --color-paper: 253 255 248;
-  --color-sakura: 198 91 108;
-  --color-matcha: 54 124 79;
-  --color-sora: 75 132 162;
-  --color-yuzu: 213 166 70;
+  --color-ink: 32 47 40;
+  --color-rice: 239 247 235;
+  --color-paper: 254 255 250;
+  --color-sakura: 197 87 105;
+  --color-matcha: 55 123 83;
+  --color-sora: 71 132 160;
+  --color-yuzu: 211 164 70;
   --color-sumire: 93 101 145;
-  --color-sky: 225 237 224;
-  --page-start: 248 252 240;
-  --page-end: 226 238 221;
-  --grid-line: 67 95 66;
+  --color-sky: 226 238 224;
+  --page-start: 247 252 241;
+  --page-end: 225 238 221;
+  --grid-line: 78 103 76;
 }
 
 html[data-theme="momo"] {
-  --color-ink: 50 39 36;
-  --color-rice: 255 243 235;
+  --color-ink: 48 40 38;
+  --color-rice: 255 244 237;
   --color-paper: 255 253 249;
-  --color-sakura: 207 88 104;
-  --color-matcha: 73 126 90;
-  --color-sora: 82 133 172;
-  --color-yuzu: 221 165 77;
-  --color-sumire: 119 93 138;
-  --color-sky: 247 232 222;
-  --page-start: 255 248 240;
-  --page-end: 249 230 219;
-  --grid-line: 108 82 70;
+  --color-sakura: 203 86 101;
+  --color-matcha: 72 125 89;
+  --color-sora: 80 132 170;
+  --color-yuzu: 219 164 78;
+  --color-sumire: 118 92 137;
+  --color-sky: 247 232 224;
+  --page-start: 255 249 244;
+  --page-end: 249 231 221;
+  --grid-line: 111 84 73;
 }
 
 html[data-theme="washi"] {
-  --color-ink: 36 39 38;
-  --color-rice: 242 240 231;
-  --color-paper: 253 251 244;
-  --color-sakura: 181 96 105;
-  --color-matcha: 72 113 84;
+  --color-ink: 39 40 38;
+  --color-rice: 242 239 229;
+  --color-paper: 254 252 245;
+  --color-sakura: 181 95 105;
+  --color-matcha: 73 114 85;
   --color-sora: 73 116 146;
   --color-yuzu: 188 150 69;
   --color-sumire: 91 91 122;
-  --color-sky: 230 229 219;
-  --page-start: 249 248 241;
-  --page-end: 234 232 221;
-  --grid-line: 86 84 76;
+  --color-sky: 230 228 218;
+  --page-start: 250 248 240;
+  --page-end: 234 232 220;
+  --grid-line: 88 86 78;
 }
 
 html,
@@ -81,11 +81,10 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at 12% 0%, rgb(var(--color-yuzu) / 0.12), transparent 26rem),
-    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 52%, rgb(var(--page-end)) 100%);
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16px;
-  line-height: 1.68;
+    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 50%, rgb(var(--page-end)) 100%);
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16.5px;
+  line-height: 1.66;
   letter-spacing: 0;
 }
 
@@ -96,26 +95,38 @@ body::before {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(90deg, rgb(var(--grid-line) / 0.014) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(var(--grid-line) / 0.011) 1px, transparent 1px);
-  background-size: 56px 56px;
-  opacity: 0.13;
+    linear-gradient(90deg, rgb(var(--grid-line) / 0.022) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--grid-line) / 0.018) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.36;
 }
 
-.font-display {
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+.font-display,
+.section-title {
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
   letter-spacing: 0;
 }
 
-.font-japanese {
-  font-family: "Yu Gothic UI", "Meiryo", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Microsoft YaHei UI", sans-serif;
+.font-japanese,
+.jp-display {
+  font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Microsoft YaHei UI", sans-serif;
   letter-spacing: 0;
-  line-height: 1.34;
 }
 
 .font-reading {
   font-family: "Yu Gothic UI", "Meiryo", "Noto Sans JP", "Microsoft YaHei UI", "Segoe UI", system-ui, -apple-system, sans-serif;
   letter-spacing: 0;
+}
+
+.section-title {
+  font-weight: 850;
+  line-height: 1.18;
+  color: rgb(var(--color-ink));
+}
+
+.jp-display {
+  font-weight: 850;
+  line-height: 1.14;
 }
 
 button,
@@ -140,7 +151,7 @@ select:focus-visible {
 }
 
 ::selection {
-  background: rgb(var(--color-yuzu) / 0.38);
+  background: rgb(var(--color-yuzu) / 0.34);
 }
 
 .tap-surface {
@@ -149,19 +160,28 @@ select:focus-visible {
   touch-action: manipulation;
 }
 
-.soft-surface {
+.soft-surface,
+.app-panel,
+.sticky-learn-toolbar {
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.82) inset,
-    0 10px 24px rgb(var(--color-ink) / 0.05);
+    0 10px 24px rgb(var(--color-ink) / 0.055);
+}
+
+.app-panel,
+.sticky-learn-toolbar {
+  border: 1px solid rgb(var(--color-ink) / 0.085);
+  border-radius: 0.75rem;
+  background: rgb(var(--color-paper) / 0.94);
 }
 
 .calm-grid-card {
   position: relative;
   background:
-    linear-gradient(180deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.38));
+    linear-gradient(135deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.54));
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.86) inset,
-    0 12px 28px rgb(var(--color-ink) / 0.06);
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 16px 36px rgb(var(--color-ink) / 0.075);
 }
 
 .calm-grid-card::before {
@@ -170,11 +190,11 @@ select:focus-visible {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(90deg, rgb(var(--color-ink) / 0.012) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(var(--color-ink) / 0.01) 1px, transparent 1px);
-  background-size: 34px 34px;
-  -webkit-mask-image: linear-gradient(135deg, black 0%, transparent 72%);
-  mask-image: linear-gradient(135deg, black 0%, transparent 72%);
+    linear-gradient(90deg, rgb(var(--color-ink) / 0.018) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--color-ink) / 0.014) 1px, transparent 1px);
+  background-size: 36px 36px;
+  -webkit-mask-image: linear-gradient(135deg, black 0%, transparent 76%);
+  mask-image: linear-gradient(135deg, black 0%, transparent 76%);
 }
 
 .app-card-hover {
@@ -187,18 +207,18 @@ select:focus-visible {
 
 .app-card-hover:hover,
 .app-card-hover:focus-within {
-  border-color: rgb(var(--color-matcha) / 0.3);
+  border-color: rgb(var(--color-matcha) / 0.34);
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.86) inset,
-    0 10px 22px rgb(var(--color-ink) / 0.065);
-  transform: translateY(-1px);
+    0 1px 0 rgb(255 255 255 / 0.88) inset,
+    0 14px 30px rgb(var(--color-ink) / 0.08);
+  transform: translateY(-2px);
 }
 
 .filter-scroll-row {
   overscroll-behavior-x: contain;
-  scroll-padding-inline: 0.25rem;
+  scroll-padding-inline: 0.35rem;
   scroll-snap-type: x proximity;
-  scrollbar-color: rgb(var(--color-matcha) / 0.46) rgb(var(--color-rice) / 0.7);
+  scrollbar-color: rgb(var(--color-matcha) / 0.45) rgb(var(--color-rice) / 0.7);
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
 }
@@ -222,40 +242,36 @@ select:focus-visible {
   position: static !important;
 }
 
-.sticky-tool-panel {
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.82) inset,
-    0 8px 20px rgb(var(--color-ink) / 0.055);
-}
-
 .mobile-bottom-nav {
-  right: 0.6rem;
-  bottom: 0.6rem;
-  left: 0.6rem;
-  width: min(calc(100% - 1.2rem), 42rem);
-  margin-inline: auto;
+  right: 0.5rem;
+  bottom: 0.65rem;
+  left: 0.5rem;
+  width: auto;
+  max-width: none;
+  box-sizing: border-box;
   border: 1px solid rgb(var(--color-ink) / 0.095);
   border-radius: 0.75rem;
-  box-shadow: 0 14px 30px rgb(var(--color-ink) / 0.14);
+  box-shadow: 0 16px 34px rgb(var(--color-ink) / 0.16);
 }
 
 .quickread-card {
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.86) inset,
-    0 8px 18px rgb(var(--color-ink) / 0.06);
+    0 1px 0 rgb(255 255 255 / 0.82) inset,
+    0 8px 18px rgb(var(--color-ink) / 0.055);
 }
 
 .quickread-card[aria-pressed="true"] {
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.74) inset,
-    0 12px 24px rgb(var(--color-yuzu) / 0.17);
+    0 12px 24px rgb(var(--color-yuzu) / 0.18);
 }
 
 .learning-grid {
   align-items: stretch;
 }
 
-.learning-grid > * {
+.learning-grid > *,
+.word-card-shell {
   min-width: 0;
 }
 
@@ -265,57 +281,24 @@ select:focus-visible {
 }
 
 .readable-kana-grid {
-  grid-auto-rows: minmax(4.15rem, auto);
+  grid-auto-rows: minmax(4.35rem, auto);
 }
 
 .number-card-panel {
-  background:
-    linear-gradient(180deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-rice) / 0.54));
-}
-
-.app-panel {
-  border: 1px solid rgb(var(--color-ink) / 0.075);
-  border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.96);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.82) inset,
-    0 8px 18px rgb(var(--color-ink) / 0.045);
-}
-
-.section-title {
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
-  font-weight: 800;
-  line-height: 1.16;
-  color: rgb(var(--color-ink));
-}
-
-.jp-display {
-  font-family: "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", "Noto Sans JP", "Microsoft YaHei UI", sans-serif;
-  font-weight: 800;
-  letter-spacing: 0;
-  line-height: 1.14;
-}
-
-.sticky-learn-toolbar {
-  border: 1px solid rgb(var(--color-ink) / 0.085);
-  border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.95);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.82) inset,
-    0 8px 20px rgb(var(--color-ink) / 0.045);
+  background: rgb(var(--color-paper) / 0.9);
 }
 
 .readable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.25rem), 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 0.85rem;
   align-items: start;
 }
 
 .comfortable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.75rem), 1fr));
-  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 0.9rem;
   align-items: start;
 }
 
@@ -334,11 +317,11 @@ select:focus-visible {
   border-radius: 999px 999px 0 0;
   pointer-events: none;
   content: "";
-  background: linear-gradient(90deg, rgb(var(--color-matcha) / 0.12), rgb(var(--color-matcha) / 0.58), rgb(var(--color-yuzu) / 0.32));
+  background: linear-gradient(90deg, rgb(var(--color-matcha) / 0.12), rgb(var(--color-matcha) / 0.6), rgb(var(--color-yuzu) / 0.34));
 }
 
 .home-osaka-cover-image {
-  filter: saturate(1.04) contrast(1.02);
+  filter: saturate(1.02) contrast(1.01);
 }
 
 .speak-card {
@@ -490,7 +473,7 @@ select:focus-visible {
   }
 
   body::before {
-    background-size: 40px 40px;
+    background-size: 42px 42px;
     opacity: 0.22;
   }
 

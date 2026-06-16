@@ -116,7 +116,7 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
       </div>
 
       <div className="border-t border-ink/8 bg-rice/25 px-4 py-4 sm:px-5">
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-3 lg:grid-cols-3">
           {lesson.examples.map((example, index) => {
             const readingKey = `example-${index}`;
             const active = activeReadingKey === readingKey;

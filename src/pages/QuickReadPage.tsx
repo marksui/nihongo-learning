@@ -661,7 +661,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
 
   return (
     <div className="space-y-4">
-      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-3 backdrop-blur lg:top-4">
+      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-3 backdrop-blur lg:top-[5rem]">
         <div className="mb-2 flex items-center justify-between gap-3">
           <div>
             <h1 className="section-title text-xl sm:text-3xl">{activeViewMeta.label}</h1>
