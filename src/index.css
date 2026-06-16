@@ -6,18 +6,18 @@
 
 :root,
 html[data-theme="hidamari"] {
-  --color-ink: 43 36 24;
-  --color-rice: 255 244 207;
-  --color-paper: 255 253 241;
-  --color-sakura: 217 111 126;
-  --color-matcha: 78 141 97;
-  --color-sora: 93 155 203;
-  --color-yuzu: 233 185 73;
-  --color-sumire: 116 105 154;
-  --color-sky: 244 235 200;
-  --page-start: 255 248 220;
-  --page-end: 255 243 199;
-  --grid-line: 107 80 34;
+  --color-ink: 34 36 34;
+  --color-rice: 249 244 226;
+  --color-paper: 255 253 246;
+  --color-sakura: 217 92 116;
+  --color-matcha: 61 134 92;
+  --color-sora: 75 142 190;
+  --color-yuzu: 232 176 62;
+  --color-sumire: 103 99 156;
+  --color-sky: 235 241 236;
+  --page-start: 252 248 235;
+  --page-end: 241 235 218;
+  --grid-line: 76 67 48;
   color: rgb(var(--color-ink));
   background: rgb(var(--color-rice));
   font-synthesis: none;
@@ -33,48 +33,48 @@ html {
 }
 
 html[data-theme="matcha"] {
-  --color-ink: 33 54 38;
-  --color-rice: 237 247 222;
-  --color-paper: 251 255 241;
-  --color-sakura: 202 112 121;
-  --color-matcha: 72 135 82;
-  --color-sora: 86 145 177;
-  --color-yuzu: 220 179 72;
-  --color-sumire: 105 111 145;
-  --color-sky: 225 239 216;
-  --page-start: 248 255 231;
-  --page-end: 232 244 209;
-  --grid-line: 75 103 59;
+  --color-ink: 30 48 37;
+  --color-rice: 236 244 226;
+  --color-paper: 252 255 244;
+  --color-sakura: 200 98 112;
+  --color-matcha: 55 127 79;
+  --color-sora: 78 139 170;
+  --color-yuzu: 217 173 71;
+  --color-sumire: 96 105 148;
+  --color-sky: 224 237 222;
+  --page-start: 247 252 238;
+  --page-end: 226 239 219;
+  --grid-line: 65 94 63;
 }
 
 html[data-theme="momo"] {
-  --color-ink: 67 39 34;
-  --color-rice: 255 238 221;
-  --color-paper: 255 250 242;
-  --color-sakura: 210 103 114;
-  --color-matcha: 84 132 94;
-  --color-sora: 92 142 181;
-  --color-yuzu: 228 174 85;
-  --color-sumire: 128 100 143;
-  --color-sky: 249 230 211;
-  --page-start: 255 244 229;
-  --page-end: 255 231 214;
-  --grid-line: 132 83 64;
+  --color-ink: 60 41 37;
+  --color-rice: 255 239 228;
+  --color-paper: 255 252 246;
+  --color-sakura: 208 92 108;
+  --color-matcha: 76 129 91;
+  --color-sora: 84 137 176;
+  --color-yuzu: 223 167 76;
+  --color-sumire: 122 96 142;
+  --color-sky: 247 232 219;
+  --page-start: 255 246 237;
+  --page-end: 250 229 217;
+  --grid-line: 112 79 67;
 }
 
 html[data-theme="washi"] {
   --color-ink: 36 40 38;
-  --color-rice: 242 238 220;
-  --color-paper: 252 250 239;
-  --color-sakura: 178 111 116;
-  --color-matcha: 82 121 88;
-  --color-sora: 86 124 153;
-  --color-yuzu: 190 157 79;
-  --color-sumire: 100 98 128;
-  --color-sky: 232 229 213;
-  --page-start: 249 247 235;
-  --page-end: 238 232 211;
-  --grid-line: 95 90 77;
+  --color-rice: 241 238 225;
+  --color-paper: 252 250 242;
+  --color-sakura: 184 100 108;
+  --color-matcha: 75 116 86;
+  --color-sora: 76 119 149;
+  --color-yuzu: 190 153 67;
+  --color-sumire: 92 92 125;
+  --color-sky: 229 228 217;
+  --page-start: 248 247 239;
+  --page-end: 235 232 219;
+  --grid-line: 89 86 75;
 }
 
 body {
@@ -113,10 +113,11 @@ body::before {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(90deg, rgb(var(--grid-line) / 0.018) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(var(--grid-line) / 0.014) 1px, transparent 1px);
-  background-size: 56px 56px;
-  opacity: 0.22;
+    linear-gradient(90deg, rgb(var(--grid-line) / 0.024) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--grid-line) / 0.018) 1px, transparent 1px),
+    linear-gradient(135deg, rgb(var(--color-paper) / 0.64), transparent 42%);
+  background-size: 54px 54px, 54px 54px, 100% 100%;
+  opacity: 0.42;
 }
 
 .home-osaka-cover {
@@ -232,11 +233,20 @@ select:focus-visible {
 }
 
 .mobile-bottom-nav {
-  box-shadow: 0 -14px 34px rgb(var(--color-ink) / 0.1);
+  right: 0.55rem;
+  bottom: 0.55rem;
+  left: 0.55rem;
+  width: min(calc(100% - 1.1rem), 42rem);
+  margin-inline: auto;
+  border: 1px solid rgb(var(--color-ink) / 0.1);
+  border-radius: 0.75rem;
+  box-shadow: 0 18px 42px rgb(var(--color-ink) / 0.14);
 }
 
 .soft-surface {
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.78) inset, 0 10px 24px rgb(var(--color-ink) / 0.055);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.88) inset,
+    0 12px 26px rgb(var(--color-ink) / 0.07);
 }
 
 .compact-sticky-panel {
@@ -245,7 +255,9 @@ select:focus-visible {
 }
 
 .quickread-card {
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.72) inset;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.78) inset,
+    0 8px 18px rgb(var(--color-ink) / 0.055);
 }
 
 .quickread-card[aria-pressed="true"] {
@@ -258,8 +270,56 @@ select:focus-visible {
 }
 
 .calm-grid-card {
+  position: relative;
   background:
-    linear-gradient(180deg, rgb(var(--color-paper) / 0.96), rgb(var(--color-rice) / 0.34));
+    linear-gradient(135deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-paper) / 0.9) 52%, rgb(var(--color-yuzu) / 0.12));
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.86) inset,
+    0 18px 38px rgb(var(--color-ink) / 0.08);
+}
+
+.calm-grid-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(90deg, rgb(var(--color-ink) / 0.026) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--color-ink) / 0.018) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: linear-gradient(135deg, black, transparent 74%);
+  mask-image: linear-gradient(135deg, black, transparent 74%);
+}
+
+.app-card-hover {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.app-card-hover:hover,
+.app-card-hover:focus-within {
+  border-color: rgb(var(--color-matcha) / 0.28);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 18px 36px rgb(var(--color-ink) / 0.09);
+  transform: translateY(-2px);
+}
+
+.sticky-tool-panel {
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.82) inset,
+    0 12px 26px rgb(var(--color-ink) / 0.07);
+}
+
+.learning-grid {
+  align-items: stretch;
+}
+
+.learning-grid > * {
+  min-width: 0;
 }
 
 .reading-token {

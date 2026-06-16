@@ -27,6 +27,7 @@ export type PageKey =
 interface NavItem {
   page: PageKey;
   label: string;
+  shortLabel?: string;
   icon: LucideIcon;
 }
 
@@ -43,7 +44,7 @@ const desktopItems: NavItem[] = [
 
 const mobilePrimaryItems: NavItem[] = [
   { page: "home", label: "首页", icon: Home },
-  { page: "kana", label: "五十音", icon: Grid3X3 },
+  { page: "kana", label: "五十音", shortLabel: "假名", icon: Grid3X3 },
   { page: "vocabulary", label: "单词", icon: BookOpen },
   { page: "conversation", label: "会话", icon: MessagesSquare },
 ];
@@ -71,23 +72,27 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-2 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-40 border-b border-ink/8 bg-paper/88 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-3 py-2.5 sm:px-6 lg:px-8">
           <button
             type="button"
             onClick={() => navigate("home")}
-            className="tap-surface flex min-w-0 cursor-pointer items-center gap-2 rounded-md px-1.5 py-1 text-left transition hover:text-sakura"
+            className="tap-surface group flex min-w-0 cursor-pointer items-center gap-2.5 rounded-lg px-1.5 py-1 text-left transition hover:text-matcha"
             aria-label="返回首页"
           >
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-sakura/20 bg-sakura/10 text-sm font-extrabold text-sakura shadow-card">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-matcha/18 bg-matcha/10 font-japanese text-lg font-extrabold text-matcha shadow-card transition group-hover:bg-matcha group-hover:text-white">
               日
             </span>
             <span className="min-w-0">
-              <span className="block truncate text-base font-extrabold text-ink">中文学日语</span>
+              <span className="block truncate text-base font-extrabold leading-tight text-ink">中文学日语</span>
+              <span className="block truncate text-xs font-bold leading-tight text-ink/48">点读学习</span>
             </span>
           </button>
 
-          <nav className="hidden gap-1 rounded-md border border-ink/8 bg-rice/55 p-1 shadow-card md:flex">
+          <nav
+            className="hidden min-w-0 items-center gap-1 rounded-lg border border-ink/8 bg-rice/58 p-1 shadow-card lg:flex"
+            aria-label="桌面导航"
+          >
             {desktopItems.map((item) => {
               const Icon = item.icon;
               const active = currentPage === item.page;
@@ -98,14 +103,17 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                   type="button"
                   onClick={() => navigate(item.page)}
                   aria-current={active ? "page" : undefined}
-                  className={`tap-surface flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-extrabold transition active:scale-95 ${
+                  className={`tap-surface relative flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-extrabold transition active:scale-95 lg:px-3 ${
                     active
-                      ? "bg-matcha text-white"
-                      : "text-ink/64 hover:bg-rice hover:text-ink"
+                      ? "bg-paper text-matcha shadow-card"
+                      : "text-ink/62 hover:bg-paper/72 hover:text-ink"
                   }`}
                 >
-                  <Icon aria-hidden="true" size={17} strokeWidth={2.2} />
+                  <Icon aria-hidden="true" size={17} strokeWidth={2.25} />
                   <span>{item.label}</span>
+                  {active ? (
+                    <span className="absolute inset-x-2 -bottom-1 h-0.5 rounded-full bg-matcha" aria-hidden="true" />
+                  ) : null}
                 </button>
               );
             })}
@@ -114,20 +122,24 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
       </header>
 
       {moreOpen ? (
-        <div className="fixed inset-0 z-40 bg-ink/12 backdrop-blur-[2px] md:hidden" onClick={() => setMoreOpen(false)} />
+        <div
+          className="fixed inset-0 z-40 bg-ink/18 backdrop-blur-[2px] lg:hidden"
+          onClick={() => setMoreOpen(false)}
+        />
       ) : null}
 
-      <div className="mobile-bottom-nav fixed bottom-0 left-0 right-0 z-50 border-t border-ink/10 bg-paper/97 px-2.5 pb-[max(env(safe-area-inset-bottom),0.55rem)] pt-2 shadow-soft backdrop-blur-xl md:hidden">
+      <div className="mobile-bottom-nav fixed bottom-0 left-0 right-0 z-50 bg-paper/96 px-2.5 pb-[max(env(safe-area-inset-bottom),0.55rem)] pt-2 shadow-soft backdrop-blur-xl lg:hidden">
         {moreOpen ? (
-          <div className="mb-2 max-h-[min(64vh,24rem)] overflow-y-auto rounded-lg border border-ink/10 bg-rice p-2 shadow-soft">
-            <div className="mb-1 flex justify-end px-2 py-1">
+          <div className="mb-2 max-h-[min(62vh,24rem)] overflow-y-auto rounded-lg border border-ink/10 bg-paper p-2 shadow-soft">
+            <div className="mb-1 flex items-center justify-between px-1 py-1">
+              <p className="px-2 text-sm font-extrabold text-ink">更多入口</p>
               <button
                 type="button"
                 onClick={() => setMoreOpen(false)}
-                className="grid h-11 w-11 touch-manipulation cursor-pointer place-items-center rounded-md text-ink/55 hover:bg-paper"
+                className="grid h-11 w-11 touch-manipulation cursor-pointer place-items-center rounded-md text-ink/55 transition hover:bg-rice hover:text-ink"
                 aria-label="关闭更多菜单"
               >
-                <X aria-hidden="true" size={17} />
+                <X aria-hidden="true" size={18} />
               </button>
             </div>
             <div className="grid grid-cols-2 gap-2">
@@ -140,8 +152,10 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                     key={item.page}
                     type="button"
                     onClick={() => navigate(item.page)}
-                    className={`tap-surface grid min-h-16 cursor-pointer place-items-center rounded-md px-2 py-2 text-xs font-extrabold transition active:scale-95 ${
-                      active ? "bg-matcha text-white" : "bg-paper text-ink/68 hover:bg-yuzu/14 hover:text-ink"
+                    className={`tap-surface grid min-h-16 cursor-pointer place-items-center rounded-lg border px-2 py-2 text-xs font-extrabold transition active:scale-95 ${
+                      active
+                        ? "border-matcha bg-matcha text-white shadow-card"
+                        : "border-ink/8 bg-rice/48 text-ink/68 hover:border-yuzu/35 hover:bg-yuzu/14 hover:text-ink"
                     }`}
                   >
                     <Icon aria-hidden="true" size={20} />
@@ -164,12 +178,14 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                 type="button"
                 onClick={() => navigate(item.page)}
                 aria-current={active ? "page" : undefined}
-                className={`tap-surface grid min-h-[3.3rem] cursor-pointer place-items-center rounded-md px-1 py-1 text-[0.74rem] font-extrabold leading-tight transition active:scale-95 ${
-                  active ? "bg-matcha text-white shadow-card" : "text-ink/62 hover:bg-rice hover:text-ink"
+                className={`tap-surface grid min-h-[3.3rem] cursor-pointer place-items-center rounded-lg border px-1 py-1 text-[0.72rem] font-extrabold leading-tight transition active:scale-95 ${
+                  active
+                    ? "border-matcha bg-matcha text-white shadow-card"
+                    : "border-transparent text-ink/58 hover:bg-rice hover:text-ink"
                 }`}
               >
                 <Icon aria-hidden="true" size={19} />
-                <span>{item.label}</span>
+                <span>{item.shortLabel ?? item.label}</span>
               </button>
             );
           })}
@@ -178,8 +194,10 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
             type="button"
             onClick={() => setMoreOpen((value) => !value)}
             aria-expanded={moreOpen}
-            className={`tap-surface grid min-h-[3.3rem] cursor-pointer place-items-center rounded-md px-1 py-1 text-[0.74rem] font-extrabold leading-tight transition active:scale-95 ${
-              moreActive || moreOpen ? "bg-matcha text-white shadow-card" : "text-ink/62 hover:bg-rice hover:text-ink"
+            className={`tap-surface grid min-h-[3.3rem] cursor-pointer place-items-center rounded-lg border px-1 py-1 text-[0.72rem] font-extrabold leading-tight transition active:scale-95 ${
+              moreActive || moreOpen
+                ? "border-matcha bg-matcha text-white shadow-card"
+                : "border-transparent text-ink/58 hover:bg-rice hover:text-ink"
             }`}
           >
             {moreOpen ? <ChevronUp aria-hidden="true" size={19} /> : <MoreHorizontal aria-hidden="true" size={19} />}

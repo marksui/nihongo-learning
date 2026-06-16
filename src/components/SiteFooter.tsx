@@ -22,19 +22,19 @@ const footerLinks: Array<{ label: string; page: PageKey }> = [
 
 const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
   return (
-    <footer className="border-t border-ink/8 bg-rice/70 px-3 pb-28 pt-4 text-ink sm:px-4 md:pb-6 lg:px-6">
-      <div className="mx-auto grid max-w-7xl gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.42fr)]">
-        <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/92 p-3 shadow-card sm:p-4" aria-labelledby="footer-title">
+    <footer className="border-t border-ink/8 bg-paper/62 px-3 pb-28 pt-5 text-ink backdrop-blur sm:px-4 lg:px-6 lg:pb-7">
+      <div className="mx-auto grid max-w-7xl gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.38fr)]">
+        <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/88 p-3 shadow-card sm:p-4" aria-labelledby="footer-title">
           <div className="flex min-w-0 flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex min-w-0 items-center gap-2.5">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-matcha text-sm font-extrabold text-white">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-matcha text-sm font-extrabold text-white shadow-card">
                 日
               </span>
               <div className="min-w-0">
                 <h2 id="footer-title" className="truncate text-base font-extrabold text-ink">
                   中文学日语
                 </h2>
-                <p className="truncate text-xs font-bold text-ink/52">护眼点读学习</p>
+                <p className="truncate text-xs font-bold text-ink/52">护眼点读 · 手机友好</p>
               </div>
             </div>
 
@@ -49,7 +49,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
                         key={item.page}
                         type="button"
                         onClick={() => onNavigate(item.page)}
-                        className={`tap-surface shrink-0 cursor-pointer rounded-md border px-2.5 py-1 text-sm font-extrabold transition active:scale-[0.99] ${
+                        className={`tap-surface shrink-0 cursor-pointer rounded-lg border px-2.5 py-1 text-sm font-extrabold transition active:scale-[0.99] ${
                           active
                             ? "border-matcha bg-matcha text-white"
                             : "border-ink/10 bg-rice/35 text-ink/68 hover:border-matcha/25 hover:bg-rice/65 hover:text-ink"
@@ -67,7 +67,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="打开 Mark 的作者主页"
-                className="tap-surface flex shrink-0 items-center justify-center gap-2 rounded-md border border-ink/10 bg-rice/50 px-3 py-1.5 text-sm font-extrabold text-ink transition hover:border-matcha/30 hover:bg-rice"
+                className="tap-surface flex shrink-0 items-center justify-center gap-2 rounded-lg border border-ink/10 bg-rice/50 px-3 py-1.5 text-sm font-extrabold text-ink transition hover:border-matcha/30 hover:bg-rice"
               >
                 <Home aria-hidden="true" size={16} />
                 Mark 主页

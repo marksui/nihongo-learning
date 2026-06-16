@@ -29,7 +29,7 @@ const JlptLevelSelector = ({
               type="button"
               onClick={() => onChange(level)}
               aria-pressed={selected}
-              className={`tap-surface min-w-0 cursor-pointer rounded-md border px-1 text-center transition active:scale-95 sm:px-2 ${
+              className={`tap-surface min-w-0 cursor-pointer rounded-lg border px-1 text-center shadow-sm transition active:scale-95 sm:px-2 ${
                 compact ? "py-1.5" : "min-h-14 py-2 sm:min-h-16"
               } ${
                 selected
@@ -38,8 +38,8 @@ const JlptLevelSelector = ({
               }`}
             >
               <span className={`${compact ? "text-base" : "text-lg"} block font-extrabold leading-tight`}>{level}</span>
-              <span className={`mt-0.5 block text-[0.68rem] font-bold ${selected ? "level-count-pop text-white/78" : "text-ink/48"}`}>
-                {counts[level]} 词
+              <span className={`mt-0.5 block text-[0.68rem] font-bold leading-tight ${selected ? "level-count-pop text-white/78" : "text-ink/48"}`}>
+                {compact ? counts[level] : `${counts[level]} 词`}
               </span>
               <span
                 aria-hidden="true"
