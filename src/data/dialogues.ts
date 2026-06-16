@@ -1246,6 +1246,72 @@ const convenienceStoreDialogues: Dialogue[] = [
   ], ["便利店", "充值卡", "付款", "说明"]),
 ];
 
+const weatherDailyDialogues: Dialogue[] = [
+  makeDialogue("scenario-weather-forecast-morning", "出门前看天气", "生活", "李", "早上出门前和朋友确认天气预报、是否要带伞", [
+    { speaker: "李", japanese: "今日の天気予報を見ましたか。", kana: "きょうのてんきよほうをみましたか。", translation: "你看今天的天气预报了吗？" },
+    { speaker: "友人", japanese: "午後から雨が降るそうです。", kana: "ごごからあめがふるそうです。", translation: "听说下午开始会下雨。" },
+    { speaker: "李", japanese: "傘を持って行ったほうがいいですか。", kana: "かさをもっていったほうがいいですか。", translation: "最好带伞吗？" },
+    { speaker: "友人", japanese: "はい、折りたたみ傘があると安心です。", kana: "はい、おりたたみがさがあるとあんしんです。", translation: "是的，有折叠伞会更安心。" },
+    { speaker: "李", japanese: "では、バッグに入れておきます。", kana: "では、ばっぐにいれておきます。", translation: "那我放进包里。" },
+  ], ["天气", "生活", "雨", "出门"]),
+  makeDialogue("scenario-weather-heatstroke-prevention", "酷暑防中暑", "生活", "李", "夏天很热时确认喝水、休息和中暑预防", [
+    { speaker: "李", japanese: "今日はとても暑いですね。", kana: "きょうはとてもあついですね。", translation: "今天非常热呢。" },
+    { speaker: "田中", japanese: "熱中症に気をつけてください。", kana: "ねっちゅうしょうにきをつけてください。", translation: "请小心中暑。" },
+    { speaker: "李", japanese: "水をこまめに飲んだほうがいいですか。", kana: "みずをこまめにのんだほうがいいですか。", translation: "最好勤喝水吗？" },
+    { speaker: "田中", japanese: "はい。日陰で休んでください。", kana: "はい。ひかげでやすんでください。", translation: "是的。请在阴凉处休息。" },
+    { speaker: "李", japanese: "少し頭が痛いです。", kana: "すこしあたまがいたいです。", translation: "我有点头痛。" },
+    { speaker: "田中", japanese: "無理しないで、涼しい場所へ行きましょう。", kana: "むりしないで、すずしいばしょへいきましょう。", translation: "不要勉强，我们去凉快的地方吧。" },
+  ], ["天气", "身体", "夏天", "中暑"]),
+  makeDialogue("scenario-weather-snow-train-delay", "雪天电车延误", "出行", "乘客", "下雪导致电车延误，在车站确认运行和延误证明", [
+    { speaker: "乘客", japanese: "雪で電車は遅れていますか。", kana: "ゆきででんしゃはおくれていますか。", translation: "因为下雪，电车晚点了吗？" },
+    { speaker: "駅员", japanese: "はい、十分くらい遅れています。", kana: "はい、じゅっぷんくらいおくれています。", translation: "是的，大约晚点十分钟。" },
+    { speaker: "乘客", japanese: "新宿まで行けますか。", kana: "しんじゅくまでいけますか。", translation: "能到新宿吗？" },
+    { speaker: "駅员", japanese: "運転はしていますが、時間がかかります。", kana: "うんてんはしていますが、じかんがかかります。", translation: "还在运行，但会花时间。" },
+    { speaker: "乘客", japanese: "遅延証明書はどこでもらえますか。", kana: "ちえんしょうめいしょはどこでもらえますか。", translation: "延误证明在哪里可以拿？" },
+    { speaker: "駅员", japanese: "改札の横で配っています。", kana: "かいさつのよこでくばっています。", translation: "在检票口旁边发放。" },
+  ], ["天气", "雪", "交通", "延误"]),
+  makeDialogue("scenario-weather-laundry-drying", "雨季晾衣", "生活", "住户", "梅雨季确认洗衣、晾晒和除湿方式", [
+    { speaker: "住户", japanese: "明日は洗濯物を外に干してもいいですか。", kana: "あしたはせんたくものをそとにほしてもいいですか。", translation: "明天可以把衣服晾在外面吗？" },
+    { speaker: "邻居", japanese: "午前中は晴れですが、夕方から雨です。", kana: "ごぜんちゅうははれですが、ゆうがたからあめです。", translation: "上午晴，但傍晚开始下雨。" },
+    { speaker: "住户", japanese: "湿気が多いですね。", kana: "しっけがおおいですね。", translation: "湿气很重呢。" },
+    { speaker: "邻居", japanese: "部屋干しのほうが安心です。", kana: "へやぼしのほうがあんしんです。", translation: "室内晾更安心。" },
+    { speaker: "住户", japanese: "除湿機を使ってみます。", kana: "じょしつきをつかってみます。", translation: "我试着用除湿机。" },
+    { speaker: "邻居", japanese: "窓を少し開けておくといいですよ。", kana: "まどをすこしあけておくといいですよ。", translation: "窗户稍微开着会比较好。" },
+  ], ["天气", "生活", "洗衣", "梅雨"]),
+  makeDialogue("scenario-weather-typhoon-preparation", "台风前准备", "生活", "住户", "台风来临前向管理人确认阳台、自行车和停电准备", [
+    { speaker: "住户", japanese: "明日、台風が来るそうです。", kana: "あした、たいふうがくるそうです。", translation: "听说明天台风要来。" },
+    { speaker: "管理人", japanese: "ベランダの物を中に入れてください。", kana: "べらんだのものをなかにいれてください。", translation: "请把阳台上的东西拿进屋里。" },
+    { speaker: "住户", japanese: "自転車はどうすればいいですか。", kana: "じてんしゃはどうすればいいですか。", translation: "自行车该怎么办？" },
+    { speaker: "管理人", japanese: "倒れないように固定してください。", kana: "たおれないようにこていしてください。", translation: "请固定好，避免倒下。" },
+    { speaker: "住户", japanese: "停電に備えたほうがいいですか。", kana: "ていでんにそなえたほうがいいですか。", translation: "最好为停电做准备吗？" },
+    { speaker: "管理人", japanese: "懐中電灯と水を用意してください。", kana: "かいちゅうでんとうとみずをよういしてください。", translation: "请准备手电筒和水。" },
+  ], ["天气", "台风", "生活", "准备"]),
+  makeDialogue("scenario-weather-rainwear-shopping", "购买雨具外套", "购物", "客人", "下雨降温时在店里询问防水外套和试穿", [
+    { speaker: "客人", japanese: "雨の日に使える上着はありますか。", kana: "あめのひにつかえるうわぎはありますか。", translation: "有下雨天可以穿的外套吗？" },
+    { speaker: "店员", japanese: "こちらは防水です。", kana: "こちらはぼうすいです。", translation: "这件是防水的。" },
+    { speaker: "客人", japanese: "寒い日にも着られますか。", kana: "さむいひにもきられますか。", translation: "冷天也能穿吗？" },
+    { speaker: "店员", japanese: "中に薄いダウンを着ると暖かいです。", kana: "なかにうすいだうんをきるとあたたかいです。", translation: "里面穿薄羽绒会很暖和。" },
+    { speaker: "客人", japanese: "試着してもいいですか。", kana: "しちゃくしてもいいですか。", translation: "可以试穿吗？" },
+    { speaker: "店员", japanese: "はい、どうぞ。", kana: "はい、どうぞ。", translation: "可以，请。" },
+  ], ["天气", "购物", "雨具", "衣服"]),
+  makeDialogue("scenario-weather-rain-reservation-change", "大雨改预约", "生活", "客人", "大雨导致迟到，联系店家更改预约时间", [
+    { speaker: "客人", japanese: "大雨なので、予約時間を変更できますか。", kana: "おおあめなので、よやくじかんをへんこうできますか。", translation: "因为下大雨，可以更改预约时间吗？" },
+    { speaker: "店员", japanese: "何時に変更しますか。", kana: "なんじにへんこうしますか。", translation: "要改到几点？" },
+    { speaker: "客人", japanese: "一時間遅くできますか。", kana: "いちじかんおそくできますか。", translation: "可以晚一小时吗？" },
+    { speaker: "店员", japanese: "はい、午後七時に変更します。", kana: "はい、ごごしちじにへんこうします。", translation: "可以，改到晚上七点。" },
+    { speaker: "客人", japanese: "キャンセル料はかかりますか。", kana: "きゃんせるりょうはかかりますか。", translation: "会产生取消费吗？" },
+    { speaker: "店员", japanese: "今日はかかりません。", kana: "きょうはかかりません。", translation: "今天不会收。" },
+  ], ["天气", "预约", "大雨", "生活"]),
+  makeDialogue("scenario-weather-pollen-allergy", "花粉季不舒服", "生活", "李", "春天花粉多，和朋友确认症状、药和口罩", [
+    { speaker: "李", japanese: "最近、花粉が多いですね。", kana: "さいきん、かふんがおおいですね。", translation: "最近花粉很多呢。" },
+    { speaker: "友人", japanese: "目がかゆいですか。", kana: "めがかゆいですか。", translation: "眼睛痒吗？" },
+    { speaker: "李", japanese: "はい、鼻水も出ます。", kana: "はい、はなみずもでます。", translation: "是的，也流鼻水。" },
+    { speaker: "友人", japanese: "薬局で花粉症の薬を買ったほうがいいです。", kana: "やっきょくでかふんしょうのくすりをかったほうがいいです。", translation: "最好在药店买花粉症的药。" },
+    { speaker: "李", japanese: "マスクもしたほうがいいですか。", kana: "ますくもしたほうがいいですか。", translation: "也最好戴口罩吗？" },
+    { speaker: "友人", japanese: "はい、外に出る時は便利です。", kana: "はい、そとにでるときはべんりです。", translation: "是的，出门时很有用。" },
+  ], ["天气", "花粉", "身体", "春天"]),
+];
+
 const travelAccommodationDialogues: Dialogue[] = [
   makeDialogue("scenario-hotel-late-checkin", "深夜入住确认", "旅行", "客人", "晚上到达酒店，向前台确认预约、护照和早餐时间", [
     { speaker: "客人", japanese: "こんばんは。予約している李です。", kana: "こんばんは。よやくしているりです。", translation: "晚上好。我是预约了的李。" },
@@ -1386,6 +1452,7 @@ export const dialogues: Dialogue[] = [
   ...workProcedureDialogues,
   ...noticeCounterDialogues,
   ...convenienceStoreDialogues,
+  ...weatherDailyDialogues,
   ...travelAccommodationDialogues,
   ...safetyEmergencyDialogues,
 ].map((dialogue, index) => ({
