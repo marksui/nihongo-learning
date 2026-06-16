@@ -636,7 +636,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
 
   return (
     <div className="space-y-4">
-      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-3 backdrop-blur md:top-24">
+      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-3 backdrop-blur lg:top-4">
         <div className="mb-2 flex items-center justify-between gap-3">
           <div>
             <h1 className="section-title text-xl sm:text-3xl">{activeViewMeta.label}</h1>
@@ -674,8 +674,8 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
         </div>
       </section>
 
-      <article className="mx-auto w-full overflow-hidden rounded-lg border border-ink/10 bg-paper/95 px-2.5 py-5 shadow-card sm:max-w-6xl sm:px-7 sm:py-8">
-        <div className="space-y-9 sm:space-y-10">
+      <article className="mx-auto w-full overflow-hidden rounded-lg border border-ink/10 bg-paper/96 px-2.5 py-4 shadow-card sm:max-w-6xl sm:px-5 sm:py-6">
+        <div className="space-y-7 sm:space-y-8">
           {activeView === "basic" ? (
             <>
               <KanaPosterSection

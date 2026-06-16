@@ -21,8 +21,8 @@ const footerLinks: Array<{ label: string; page: PageKey }> = [
 
 const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
   return (
-    <footer className="border-t border-ink/8 bg-paper/62 px-3 pb-28 pt-5 text-ink backdrop-blur sm:px-4 lg:px-6 lg:pb-7">
-      <div className="mx-auto max-w-7xl space-y-3">
+    <footer className="border-t border-ink/8 bg-paper/62 px-3 pb-28 pt-5 text-ink backdrop-blur sm:px-5 lg:px-8 lg:pb-7 lg:pl-[17rem]">
+      <div className="mx-auto max-w-[92rem] space-y-3">
         <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/88 p-3 shadow-sm" aria-labelledby="footer-title">
           <div className="flex min-w-0 flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex min-w-0 items-center gap-2.5">

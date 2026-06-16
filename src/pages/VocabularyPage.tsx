@@ -81,7 +81,7 @@ const VocabularyPage = ({ onOpenExamVocabulary, onSpeak }: VocabularyPageProps) 
         ]}
       />
 
-      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[4.5rem] z-20 overflow-y-auto p-3 backdrop-blur sm:p-4 md:top-24">
+      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-3 backdrop-blur sm:p-4 lg:top-4">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <label className="relative block">
             <Search

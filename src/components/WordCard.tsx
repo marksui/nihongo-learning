@@ -48,21 +48,21 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
   return (
     <LearningCard
       interactive
-      className={`word-card-shell flex min-h-[15rem] flex-col justify-between p-3.5 sm:p-4 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
+      className={`word-card-shell flex min-h-[13.5rem] flex-col justify-between p-3 sm:p-3.5 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
     >
       <div>
         <FoodIllustration word={word} />
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <div className="mb-2 flex flex-wrap gap-2">
-              <p className="w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-bold text-ink/68">
+            <div className="mb-2 flex flex-wrap gap-1.5">
+              <p className="w-fit rounded-md bg-yuzu/24 px-2 py-0.5 text-xs font-bold text-ink/68">
                 {displayCategory}
               </p>
-              <p className={`w-fit rounded-md bg-sora/12 px-2 py-1 text-xs font-extrabold text-sora ${speaking ? "word-level-spark" : ""}`}>
+              <p className={`w-fit rounded-md bg-sora/12 px-2 py-0.5 text-xs font-extrabold text-sora ${speaking ? "word-level-spark" : ""}`}>
                 {jlptLevel}
               </p>
               <p
-                className={`study-state-badge inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
+                className={`study-state-badge inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-extrabold ${
                   studyState.completed
                     ? "mastery-pop bg-matcha/12 text-matcha"
                     : studyState.seen
@@ -74,7 +74,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
                 {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
               </p>
             </div>
-            <h3 className={`jp-display break-words text-2xl transition-colors sm:text-[1.85rem] ${wordActive ? "speak-text-glow text-matcha" : "text-ink"}`}>
+            <h3 className={`jp-display break-words text-[1.55rem] transition-colors sm:text-[1.72rem] ${wordActive ? "speak-text-glow text-matcha" : "text-ink"}`}>
               {word.japanese}
             </h3>
             <p className={`mt-2 text-sm text-ink/62 ${wordActive ? "reading-line-spark" : ""}`}>
@@ -92,10 +92,10 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
           <span className={`block h-full w-1/3 rounded-full bg-matcha/80 ${speaking ? "speak-bar" : ""}`} />
         </div>
 
-        <p className={`mt-3 text-lg font-extrabold text-sakura ${speaking ? "meaning-spark" : ""}`}>{word.meaning}</p>
+        <p className={`mt-2.5 text-base font-extrabold text-sakura ${speaking ? "meaning-spark" : ""}`}>{word.meaning}</p>
 
         <div
-          className={`mt-3 rounded-md border p-3 transition ${
+          className={`mt-2.5 rounded-md border p-2.5 transition ${
             sentenceActive ? "border-yuzu/45 bg-yuzu/10" : "border-sora/18 bg-sora/10"
           }`}
         >

@@ -4,18 +4,18 @@
 
 :root,
 html[data-theme="hidamari"] {
-  --color-ink: 29 34 38;
-  --color-rice: 248 245 236;
-  --color-paper: 255 254 250;
-  --color-sakura: 208 86 107;
-  --color-matcha: 50 122 84;
-  --color-sora: 63 130 174;
-  --color-yuzu: 222 169 61;
-  --color-sumire: 91 85 139;
-  --color-sky: 239 245 242;
-  --page-start: 251 249 243;
-  --page-end: 239 245 241;
-  --grid-line: 66 72 76;
+  --color-ink: 31 36 40;
+  --color-rice: 246 246 238;
+  --color-paper: 255 255 250;
+  --color-sakura: 218 91 112;
+  --color-matcha: 55 129 88;
+  --color-sora: 54 129 176;
+  --color-yuzu: 232 176 64;
+  --color-sumire: 105 99 154;
+  --color-sky: 238 244 240;
+  --page-start: 250 250 244;
+  --page-end: 238 243 238;
+  --grid-line: 52 60 64;
   color: rgb(var(--color-ink));
   background: rgb(var(--color-rice));
   font-synthesis: none;
@@ -81,10 +81,11 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 46%, rgb(var(--page-end)) 100%);
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    radial-gradient(circle at 12% 0%, rgb(var(--color-yuzu) / 0.12), transparent 26rem),
+    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 52%, rgb(var(--page-end)) 100%);
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.68;
   letter-spacing: 0;
 }
 
@@ -98,16 +99,16 @@ body::before {
     linear-gradient(90deg, rgb(var(--grid-line) / 0.014) 1px, transparent 1px),
     linear-gradient(180deg, rgb(var(--grid-line) / 0.011) 1px, transparent 1px);
   background-size: 56px 56px;
-  opacity: 0.2;
+  opacity: 0.13;
 }
 
 .font-display {
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0;
 }
 
 .font-japanese {
-  font-family: "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", "Noto Sans JP", "Microsoft YaHei UI", sans-serif;
+  font-family: "Yu Gothic UI", "Meiryo", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Microsoft YaHei UI", sans-serif;
   letter-spacing: 0;
   line-height: 1.34;
 }
@@ -150,17 +151,17 @@ select:focus-visible {
 
 .soft-surface {
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.86) inset,
-    0 8px 18px rgb(var(--color-ink) / 0.045);
+    0 1px 0 rgb(255 255 255 / 0.82) inset,
+    0 10px 24px rgb(var(--color-ink) / 0.05);
 }
 
 .calm-grid-card {
   position: relative;
   background:
-    linear-gradient(180deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.46));
+    linear-gradient(180deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.38));
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.86) inset,
-    0 10px 24px rgb(var(--color-ink) / 0.052);
+    0 12px 28px rgb(var(--color-ink) / 0.06);
 }
 
 .calm-grid-card::before {
@@ -273,18 +274,18 @@ select:focus-visible {
 }
 
 .app-panel {
-  border: 1px solid rgb(var(--color-ink) / 0.085);
+  border: 1px solid rgb(var(--color-ink) / 0.075);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.92);
+  background: rgb(var(--color-paper) / 0.96);
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.82) inset,
     0 8px 18px rgb(var(--color-ink) / 0.045);
 }
 
 .section-title {
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
   font-weight: 800;
-  line-height: 1.18;
+  line-height: 1.16;
   color: rgb(var(--color-ink));
 }
 
@@ -313,7 +314,7 @@ select:focus-visible {
 
 .comfortable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.75rem), 1fr));
   gap: 0.85rem;
   align-items: start;
 }

@@ -44,13 +44,13 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
   return (
     <LearningCard
       interactive
-      className={`flex min-h-[12rem] flex-col justify-between p-3.5 sm:p-4 ${activeTarget ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/25" : ""}`}
+      className={`flex min-h-[10.5rem] flex-col justify-between p-3 ${activeTarget ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/25" : ""}`}
     >
       <div>
-        <div className="mb-3 flex items-start justify-between gap-2.5">
+        <div className="mb-2.5 flex items-start justify-between gap-2.5">
           <div>
             <p
-              className={`mb-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
+              className={`mb-1.5 inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-extrabold ${
                 studyState.completed
                   ? "bg-matcha/12 text-matcha"
                   : studyState.seen
@@ -62,10 +62,10 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
               {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
             </p>
             <div className="flex items-end gap-2.5">
-              <span className={`jp-display text-[3rem] transition-colors sm:text-[3.25rem] ${kanaActive ? "text-matcha" : "text-ink"}`}>
+              <span className={`jp-display text-[2.7rem] transition-colors sm:text-[3rem] ${kanaActive ? "text-matcha" : "text-ink"}`}>
                 {item.hiragana}
               </span>
-              <span className={`jp-display text-[2.15rem] transition-colors sm:text-[2.35rem] ${kanaActive ? "text-sakura" : "text-sumire"}`}>
+              <span className={`jp-display text-[1.95rem] transition-colors sm:text-[2.2rem] ${kanaActive ? "text-sakura" : "text-sumire"}`}>
                 {item.katakana}
               </span>
             </div>
@@ -82,7 +82,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
         </div>
 
         <div
-          className={`rounded-md border p-3 transition ${
+          className={`rounded-md border p-2.5 transition ${
             exampleActive ? "border-matcha/40 bg-matcha/10" : "border-sora/18 bg-sora/10"
           }`}
         >
@@ -95,7 +95,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
               title="朗读例词"
             >
               <p className="text-xs font-bold text-ink/52">例词</p>
-              <p className={`mt-1 break-words font-japanese text-xl font-extrabold leading-snug transition-colors ${exampleActive ? "text-matcha" : "text-ink"}`}>
+              <p className={`mt-1 break-words font-japanese text-lg font-extrabold leading-snug transition-colors ${exampleActive ? "text-matcha" : "text-ink"}`}>
                 {item.example.word}
               </p>
               <p className="mt-1 break-words text-sm leading-5 text-ink/62">

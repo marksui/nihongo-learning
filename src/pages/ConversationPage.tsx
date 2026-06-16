@@ -132,8 +132,8 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
         </div>
       </section>
 
-      <section className="grid min-w-0 gap-4 lg:grid-cols-[20rem_minmax(0,1fr)]">
-        <aside className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper/95 p-3 shadow-card lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)]">
+      <section className="grid min-w-0 gap-4 lg:grid-cols-[19rem_minmax(0,1fr)]">
+        <aside className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper/95 p-3 shadow-card lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)]">
           <div className="flex items-center justify-between px-2 py-2">
             <div className="flex items-center gap-2 text-sm font-bold text-ink">
               <MessageCircle aria-hidden="true" className="text-matcha" size={18} />
@@ -144,7 +144,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
             </span>
           </div>
 
-          <div className="filter-scroll-row mt-2 grid max-h-[24rem] gap-2 overflow-y-auto pr-1 sm:grid-cols-2 lg:max-h-[calc(100vh-12rem)] lg:grid-cols-1">
+          <div className="filter-scroll-row mt-2 grid max-h-[24rem] gap-2 overflow-y-auto pr-1 sm:grid-cols-2 lg:max-h-[calc(100vh-6.5rem)] lg:grid-cols-1">
             {visibleDialogues.map((dialogue) => {
               const active = selectedDialogue?.id === dialogue.id;
               const partnerSpeakers = Array.from(
