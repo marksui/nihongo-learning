@@ -1183,12 +1183,80 @@ const noticeCounterDialogues: Dialogue[] = [
   ], ["出行", "车站", "行李", "告示"]),
 ];
 
+const safetyEmergencyDialogues: Dialogue[] = [
+  makeDialogue("scenario-earthquake-evacuation-route", "地震后避难路线", "紧急", "李", "地震后在设施里听从工作人员引导避难", [
+    { speaker: "广播", japanese: "ただいま地震が発生しました。落ち着いて行動してください。", kana: "ただいまじしんがはっせいしました。おちついてこうどうしてください。", translation: "刚刚发生地震。请冷静行动。" },
+    { speaker: "工作人员", japanese: "頭を守って、この避難経路を進んでください。", kana: "あたまをまもって、このひなんけいろをすすんでください。", translation: "请保护头部，沿这条避难路线前进。" },
+    { speaker: "李", japanese: "非常口はどちらですか。", kana: "ひじょうぐちはどちらですか。", translation: "紧急出口在哪边？" },
+    { speaker: "工作人员", japanese: "右の非常階段を使ってください。", kana: "みぎのひじょうかいだんをつかってください。", translation: "请使用右侧的紧急楼梯。" },
+    { speaker: "李", japanese: "外に出ても大丈夫ですか。", kana: "そとにでてもだいじょうぶですか。", translation: "可以到外面去吗？" },
+    { speaker: "工作人员", japanese: "まだ余震の可能性があります。案内があるまで待ってください。", kana: "まだよしんのかのうせいがあります。あんないがあるまでまってください。", translation: "还有余震的可能。请等候通知。" },
+  ], ["紧急", "地震", "避难", "告示"]),
+  makeDialogue("scenario-tsunami-warning-seaside", "海边听到海啸警报", "紧急", "游客", "在海边观光时听到海啸警报并确认高处避难", [
+    { speaker: "广播", japanese: "津波警報が出ています。海岸から離れてください。", kana: "つなみけいほうがでています。かいがんからはなれてください。", translation: "已发布海啸警报。请远离海岸。" },
+    { speaker: "游客", japanese: "どこへ避難すればいいですか。", kana: "どこへひなんすればいいですか。", translation: "应该去哪里避难？" },
+    { speaker: "工作人员", japanese: "あの坂を上って、高台へ行ってください。", kana: "あのさかをのぼって、たかだいへいってください。", translation: "请上那条坡，去高处。" },
+    { speaker: "游客", japanese: "荷物を取りに戻ってもいいですか。", kana: "にもつをとりにもどってもいいですか。", translation: "可以回去拿行李吗？" },
+    { speaker: "工作人员", japanese: "戻らないでください。命を優先してください。", kana: "もどらないでください。いのちをゆうせんしてください。", translation: "请不要返回。请优先保命。" },
+    { speaker: "游客", japanese: "分かりました。すぐ避難します。", kana: "わかりました。すぐひなんします。", translation: "明白了。我马上避难。" },
+  ], ["紧急", "海啸", "旅行", "广播"]),
+  makeDialogue("scenario-hotel-fire-alarm", "酒店火警", "紧急", "住客", "住酒店时火灾报警器响起，确认逃生方式", [
+    { speaker: "住客", japanese: "火災報知器が鳴っています。火事ですか。", kana: "かさいほうちきがなっています。かじですか。", translation: "火灾报警器在响。是失火了吗？" },
+    { speaker: "前台", japanese: "現在確認中です。エレベーターは使わないでください。", kana: "げんざいかくにんちゅうです。えれべーたーはつかわないでください。", translation: "正在确认中。请不要使用电梯。" },
+    { speaker: "住客", japanese: "煙が少し見えます。", kana: "けむりがすこしみえます。", translation: "我看到一点烟。" },
+    { speaker: "前台", japanese: "低い姿勢で、非常階段から降りてください。", kana: "ひくいしせいで、ひじょうかいだんからおりてください。", translation: "请压低身体，从紧急楼梯下去。" },
+    { speaker: "住客", japanese: "集合場所はどこですか。", kana: "しゅうごうばしょはどこですか。", translation: "集合地点在哪里？" },
+    { speaker: "前台", japanese: "ホテルの前の駐車場です。", kana: "ほてるのまえのちゅうしゃじょうです。", translation: "在酒店前面的停车场。" },
+  ], ["紧急", "酒店", "火灾", "旅行"]),
+  makeDialogue("scenario-ambulance-location-call", "电话叫救护车", "紧急", "李", "拨打急救电话时说明地址、症状和意识状态", [
+    { speaker: "接线员", japanese: "火事ですか、救急ですか。", kana: "かじですか、きゅうきゅうですか。", translation: "是火灾还是急救？" },
+    { speaker: "李", japanese: "救急です。友だちが倒れました。", kana: "きゅうきゅうです。ともだちがたおれました。", translation: "急救。朋友倒下了。" },
+    { speaker: "接线员", japanese: "住所を教えてください。", kana: "じゅうしょをおしえてください。", translation: "请告诉我地址。" },
+    { speaker: "李", japanese: "大阪市中央区一丁目二番三号、マンション三〇一です。", kana: "おおさかしちゅうおうくいっちょうめにばんさんごう、まんしょんさんまるいちです。", translation: "大阪市中央区一丁目二番三号，公寓 301。" },
+    { speaker: "接线员", japanese: "意識と呼吸はありますか。", kana: "いしきとこきゅうはありますか。", translation: "有意识和呼吸吗？" },
+    { speaker: "李", japanese: "呼吸はありますが、意識がありません。", kana: "こきゅうはありますが、いしきがありません。", translation: "有呼吸，但是没有意识。" },
+  ], ["紧急", "救护车", "电话", "身体"]),
+  makeDialogue("scenario-first-aid-station-injury", "救护站处理伤口", "紧急", "受伤者", "活动现场摔倒后到救护站请求处理", [
+    { speaker: "受伤者", japanese: "すみません、転んで足をけがしました。", kana: "すみません、ころんであしをけがしました。", translation: "不好意思，我摔倒了，脚受伤了。" },
+    { speaker: "救护人员", japanese: "こちらの救護所で手当てします。座ってください。", kana: "こちらのきゅうごじょでてあてします。すわってください。", translation: "在这边救护站处理。请坐下。" },
+    { speaker: "受伤者", japanese: "歩くと痛いです。", kana: "あるくといたいです。", translation: "走路会痛。" },
+    { speaker: "救护人员", japanese: "腫れていますね。骨折の可能性もあります。", kana: "はれていますね。こっせつのかのうせいもあります。", translation: "肿起来了。也有骨折的可能。" },
+    { speaker: "受伤者", japanese: "病院へ行ったほうがいいですか。", kana: "びょういんへいったほうがいいですか。", translation: "最好去医院吗？" },
+    { speaker: "救护人员", japanese: "はい。救急外来を案内します。", kana: "はい。きゅうきゅうがいらいをあんないします。", translation: "是的。我带您去急诊。" },
+  ], ["紧急", "救护站", "受伤", "医院"]),
+  makeDialogue("scenario-typhoon-train-suspension", "台风导致电车停运", "出行", "乘客", "台风天在车站确认停运、替代运输和延误证明", [
+    { speaker: "广播", japanese: "台風の影響で、電車は運転を見合わせています。", kana: "たいふうのえいきょうで、でんしゃはうんてんをみあわせています。", translation: "受台风影响，电车暂停运行。" },
+    { speaker: "乘客", japanese: "新大阪へ行きたいですが、どうすればいいですか。", kana: "しんおおさかへいきたいですが、どうすればいいですか。", translation: "我想去新大阪，该怎么办？" },
+    { speaker: "駅员", japanese: "地下鉄で振替輸送を行っています。", kana: "ちかてつでふりかえゆそうをおこなっています。", translation: "正在通过地铁进行替代运输。" },
+    { speaker: "乘客", japanese: "遅延証明書はもらえますか。", kana: "ちえんしょうめいしょはもらえますか。", translation: "可以拿延误证明吗？" },
+    { speaker: "駅员", japanese: "はい、改札横で配っています。", kana: "はい、かいさつよこでくばっています。", translation: "可以，在检票口旁边发放。" },
+    { speaker: "乘客", japanese: "ありがとうございます。案内表示を見て行きます。", kana: "ありがとうございます。あんないひょうじをみていきます。", translation: "谢谢。我看指示牌过去。" },
+  ], ["出行", "台风", "电车", "广播"]),
+  makeDialogue("scenario-power-water-outage", "停电停水求助", "生活", "住户", "公寓停电停水后联系管理公司确认恢复时间", [
+    { speaker: "住户", japanese: "部屋が停電しています。水も出ません。", kana: "へやがていでんしています。みずもでません。", translation: "房间停电了，水也不出来。" },
+    { speaker: "管理公司", japanese: "建物全体で停電と断水が起きています。", kana: "たてものぜんたいでていでんとだんすいがおきています。", translation: "整栋楼都发生了停电和停水。" },
+    { speaker: "住户", japanese: "復旧はいつごろですか。", kana: "ふっきゅうはいつごろですか。", translation: "大概什么时候恢复？" },
+    { speaker: "管理公司", japanese: "電気は一時間後、水は午後になる予定です。", kana: "でんきはいちじかんご、みずはごごになるよていです。", translation: "电力预计一小时后恢复，水预计下午恢复。" },
+    { speaker: "住户", japanese: "給水所はありますか。", kana: "きゅうすいじょはありますか。", translation: "有供水点吗？" },
+    { speaker: "管理公司", japanese: "一階の入口で飲料水を配っています。", kana: "いっかいのいりぐちでいんりょうすいをくばっています。", translation: "一楼入口正在发放饮用水。" },
+  ], ["生活", "停电", "断水", "灾害"]),
+  makeDialogue("scenario-lost-child-information-desk", "孩子走散求助", "紧急", "家长", "在商场和孩子走散后到服务台求助", [
+    { speaker: "家长", japanese: "すみません、子どもが迷子になりました。", kana: "すみません、こどもがまいごになりました。", translation: "不好意思，我的孩子走散了。" },
+    { speaker: "服务台", japanese: "お子さんの名前と年齢を教えてください。", kana: "おこさんのなまえとねんれいをおしえてください。", translation: "请告诉我孩子的名字和年龄。" },
+    { speaker: "家长", japanese: "名前は李明で、五歳です。", kana: "なまえはりめいで、ごさいです。", translation: "名字叫李明，五岁。" },
+    { speaker: "服务台", japanese: "服の色は何色ですか。", kana: "ふくのいろはなにいろですか。", translation: "衣服是什么颜色？" },
+    { speaker: "家长", japanese: "赤い上着と青いズボンです。", kana: "あかいうわぎとあおいずぼんです。", translation: "红色外套和蓝色裤子。" },
+    { speaker: "服务台", japanese: "館内放送をしますので、こちらでお待ちください。", kana: "かんないほうそうをしますので、こちらでおまちください。", translation: "我们会进行馆内广播，请在这里等候。" },
+  ], ["紧急", "迷子", "服务台", "家庭"]),
+];
+
 export const dialogues: Dialogue[] = [
   ...coreDialogues,
   ...expandedDialogues,
   ...additionalScenarioDialogues,
   ...workProcedureDialogues,
   ...noticeCounterDialogues,
+  ...safetyEmergencyDialogues,
 ].map((dialogue, index) => ({
   sortOrder: dialogue.sortOrder ?? index + 1,
   ...dialogue,
