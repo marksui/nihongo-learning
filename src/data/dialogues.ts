@@ -1035,7 +1035,93 @@ const additionalScenarioDialogues: Dialogue[] = [
   ], ["生活", "快递", "电话"]),
 ];
 
-export const dialogues: Dialogue[] = [...coreDialogues, ...expandedDialogues, ...additionalScenarioDialogues].map((dialogue, index) => ({
+const workProcedureDialogues: Dialogue[] = [
+  makeDialogue("scenario-job-interview-intro", "求职面试自我介绍", "工作", "应聘者", "面试开始时简短介绍经历和希望", [
+    { speaker: "面试官", japanese: "では、簡単に自己紹介をお願いします。", kana: "では、かんたんにじこしょうかいをおねがいします。", translation: "那么，请简单自我介绍一下。" },
+    { speaker: "应聘者", japanese: "李と申します。中国から参りました。", kana: "りともうします。ちゅうごくからまいりました。", translation: "我姓李，来自中国。" },
+    { speaker: "应聘者", japanese: "前の会社では接客を担当していました。", kana: "まえのかいしゃではせっきゃくをたんとうしていました。", translation: "之前的公司里我负责接待客户。" },
+    { speaker: "面试官", japanese: "日本語での対応はできますか。", kana: "にほんごでのたいおうはできますか。", translation: "可以用日语应对吗？" },
+    { speaker: "应聘者", japanese: "はい、日常会話と簡単な電話対応ができます。", kana: "はい、にちじょうかいわとかんたんなでんわたいおうができます。", translation: "可以，日常会话和简单电话应对都可以。" },
+    { speaker: "面试官", japanese: "分かりました。ありがとうございます。", kana: "わかりました。ありがとうございます。", translation: "明白了。谢谢。" },
+  ], ["工作", "面试", "自我介绍"]),
+  makeDialogue("scenario-resume-submission", "提交简历", "工作", "应聘者", "到公司前台提交简历并确认联系人", [
+    { speaker: "应聘者", japanese: "本日面接の予約をしている李です。", kana: "ほんじつめんせつのよやくをしているりです。", translation: "我是今天预约面试的李。" },
+    { speaker: "前台", japanese: "お待ちしておりました。履歴書をお預かりします。", kana: "おまちしておりました。りれきしょをおあずかりします。", translation: "我们正在等您。请把简历交给我。" },
+    { speaker: "应聘者", japanese: "こちらが履歴書と職務経歴書です。", kana: "こちらがりれきしょとしょくむけいれきしょです。", translation: "这是简历和工作经历书。" },
+    { speaker: "前台", japanese: "ありがとうございます。担当者を呼びますので、少々お待ちください。", kana: "ありがとうございます。たんとうしゃをよびますので、しょうしょうおまちください。", translation: "谢谢。我去叫负责人，请稍等。" },
+    { speaker: "应聘者", japanese: "はい、よろしくお願いいたします。", kana: "はい、よろしくおねがいいたします。", translation: "好的，麻烦您。" },
+  ], ["工作", "简历", "前台"]),
+  makeDialogue("scenario-first-day-onboarding", "入职报到", "工作", "新人", "入职第一天确认工位、制服和说明会", [
+    { speaker: "新人", japanese: "本日からお世話になります。李です。", kana: "ほんじつからおせわになります。りです。", translation: "从今天开始承蒙关照。我是李。" },
+    { speaker: "人事", japanese: "よろしくお願いします。まず書類を確認します。", kana: "よろしくおねがいします。まずしょるいをかくにんします。", translation: "请多关照。我们先确认文件。" },
+    { speaker: "新人", japanese: "在留カードと銀行口座のコピーを持ってきました。", kana: "ざいりゅうかーどとぎんこうこうざのこぴーをもってきました。", translation: "我带来了在留卡和银行账户复印件。" },
+    { speaker: "人事", japanese: "ありがとうございます。説明会は十時からです。", kana: "ありがとうございます。せつめいかいはじゅうじからです。", translation: "谢谢。说明会从十点开始。" },
+    { speaker: "新人", japanese: "制服はどこで受け取りますか。", kana: "せいふくはどこでうけとりますか。", translation: "制服在哪里领取？" },
+    { speaker: "人事", japanese: "説明会の後でお渡しします。", kana: "せつめいかいのあとでおわたしします。", translation: "说明会之后发给您。" },
+  ], ["工作", "入职", "手续"]),
+  makeDialogue("scenario-progress-report", "工作进度汇报", "工作", "社員", "向上司说明任务进度和剩余问题", [
+    { speaker: "上司", japanese: "資料作成の進み具合はどうですか。", kana: "しりょうさくせいのすすみぐあいはどうですか。", translation: "资料制作进度怎么样？" },
+    { speaker: "社員", japanese: "全体の七割ぐらい終わりました。", kana: "ぜんたいのななわりぐらいおわりました。", translation: "整体大概完成了七成。" },
+    { speaker: "上司", japanese: "残っている作業は何ですか。", kana: "のこっているさぎょうはなんですか。", translation: "剩下的工作是什么？" },
+    { speaker: "社員", japanese: "数字の確認とグラフの修正です。", kana: "すうじのかくにんとぐらふのしゅうせいです。", translation: "确认数字和修改图表。" },
+    { speaker: "上司", japanese: "今日中に共有できますか。", kana: "きょうじゅうにきょうゆうできますか。", translation: "今天之内可以共享吗？" },
+    { speaker: "社員", japanese: "はい、夕方までに送ります。", kana: "はい、ゆうがたまでにおくります。", translation: "可以，傍晚前发送。" },
+  ], ["工作", "汇报", "进度"]),
+  makeDialogue("scenario-asking-feedback", "请求反馈", "工作", "社員", "完成草稿后请同事帮忙确认表达", [
+    { speaker: "社員", japanese: "このメールの文面を確認していただけますか。", kana: "このめーるのぶんめんをかくにんしていただけますか。", translation: "可以帮我确认一下这封邮件的措辞吗？" },
+    { speaker: "同事", japanese: "もちろんです。少し見せてください。", kana: "もちろんです。すこしみせてください。", translation: "当然。给我看一下。" },
+    { speaker: "社員", japanese: "失礼な表現がないか心配です。", kana: "しつれいなひょうげんがないかしんぱいです。", translation: "我担心有没有不礼貌的表达。" },
+    { speaker: "同事", japanese: "ここは「確認してください」より「ご確認ください」が自然です。", kana: "ここは「かくにんしてください」より「ごかくにんください」がしぜんです。", translation: "这里比起“请确认”，用“请您确认”更自然。" },
+    { speaker: "社員", japanese: "なるほど。直してから送ります。", kana: "なるほど。なおしてからおくります。", translation: "原来如此。我改完再发送。" },
+  ], ["工作", "邮件", "表达"]),
+  makeDialogue("scenario-rental-contract-check", "确认租房合同", "生活", "租客", "签约前确认押金、更新费和入住日期", [
+    { speaker: "租客", japanese: "契約書について確認したいことがあります。", kana: "けいやくしょについてかくにんしたいことがあります。", translation: "关于合同我有想确认的地方。" },
+    { speaker: "中介", japanese: "はい、どの部分でしょうか。", kana: "はい、どのぶぶんでしょうか。", translation: "好的，是哪一部分？" },
+    { speaker: "租客", japanese: "敷金は退去の時に返りますか。", kana: "しききんはたいきょのときにかえりますか。", translation: "押金退房时会返还吗？" },
+    { speaker: "中介", japanese: "部屋の状態を確認してから精算します。", kana: "へやのじょうたいをかくにんしてからせいさんします。", translation: "确认房间状态后结算。" },
+    { speaker: "租客", japanese: "更新料は毎年必要ですか。", kana: "こうしんりょうはまいとしひつようですか。", translation: "更新费每年都需要吗？" },
+    { speaker: "中介", japanese: "二年ごとの更新時に必要です。", kana: "にねんごとのこうしんじにひつようです。", translation: "每两年更新时需要。" },
+  ], ["生活", "租房", "合同"]),
+  makeDialogue("scenario-utilities-setup", "开通水电煤", "生活", "住户", "搬家后电话申请开通生活服务", [
+    { speaker: "住户", japanese: "引っ越してきたので、ガスの開栓をお願いしたいです。", kana: "ひっこしてきたので、がすのかいせんをおねがいしたいです。", translation: "我刚搬来，想申请开通燃气。" },
+    { speaker: "客服", japanese: "ご住所をお願いします。", kana: "ごじゅうしょをおねがいします。", translation: "请告诉我地址。" },
+    { speaker: "住户", japanese: "大阪市中央区一丁目二番三号です。", kana: "おおさかしちゅうおうくいっちょうめにばんさんごうです。", translation: "大阪市中央区一丁目二番三号。" },
+    { speaker: "客服", japanese: "立ち会いが必要です。ご希望日はありますか。", kana: "たちあいがひつようです。ごきぼうびはありますか。", translation: "需要现场确认。您有希望日期吗？" },
+    { speaker: "住户", japanese: "土曜日の午前は空いていますか。", kana: "どようびのごぜんはあいていますか。", translation: "周六上午有空吗？" },
+    { speaker: "客服", japanese: "はい、十時から十二時で予約できます。", kana: "はい、じゅうじからじゅうにじでよやくできます。", translation: "可以，十点到十二点可以预约。" },
+  ], ["生活", "搬家", "水电煤"]),
+  makeDialogue("scenario-tax-certificate", "申请纳税证明", "生活", "居民", "在窗口申请学校或签证需要的证明", [
+    { speaker: "居民", japanese: "納税証明書を発行したいです。", kana: "のうぜいしょうめいしょをはっこうしたいです。", translation: "我想开具纳税证明。" },
+    { speaker: "职员", japanese: "何年度の証明書が必要ですか。", kana: "なんねんどのしょうめいしょがひつようですか。", translation: "需要哪一年度的证明？" },
+    { speaker: "居民", japanese: "今年度のものを一通お願いします。", kana: "こんねんどのものをいっつうおねがいします。", translation: "请给我今年度的一份。" },
+    { speaker: "职员", japanese: "本人確認書類を見せてください。", kana: "ほんにんかくにんしょるいをみせてください。", translation: "请出示本人确认文件。" },
+    { speaker: "居民", japanese: "在留カードでいいですか。", kana: "ざいりゅうかーどでいいですか。", translation: "在留卡可以吗？" },
+    { speaker: "职员", japanese: "はい。手数料は三百円です。", kana: "はい。てすうりょうはさんびゃくえんです。", translation: "可以。手续费是三百日元。" },
+  ], ["生活", "证明", "税务"]),
+  makeDialogue("scenario-health-insurance-change", "国民健康保险变更", "生活", "居民", "收入或住址变化后咨询保险手续", [
+    { speaker: "居民", japanese: "国民健康保険の変更手続きをしたいです。", kana: "こくみんけんこうほけんのへんこうてつづきをしたいです。", translation: "我想办理国民健康保险的变更手续。" },
+    { speaker: "职员", japanese: "住所の変更ですか、収入の変更ですか。", kana: "じゅうしょのへんこうですか、しゅうにゅうのへんこうですか。", translation: "是地址变更还是收入变更？" },
+    { speaker: "居民", japanese: "住所が変わりました。", kana: "じゅうしょがかわりました。", translation: "地址变了。" },
+    { speaker: "职员", japanese: "新しい住所が分かる書類はありますか。", kana: "あたらしいじゅうしょがわかるしょるいはありますか。", translation: "有能证明新地址的文件吗？" },
+    { speaker: "居民", japanese: "賃貸契約書を持っています。", kana: "ちんたいけいやくしょをもっています。", translation: "我带着租赁合同。" },
+    { speaker: "职员", japanese: "では、こちらの番号札を取ってお待ちください。", kana: "では、こちらのばんごうふだをとっておまちください。", translation: "那么，请取这边的号码牌等待。" },
+  ], ["生活", "保险", "手续"]),
+  makeDialogue("scenario-bank-address-update", "银行地址更新", "生活", "客人", "搬家后到银行更新账户地址", [
+    { speaker: "客人", japanese: "住所が変わったので、登録情報を変更したいです。", kana: "じゅうしょがかわったので、とうろくじょうほうをへんこうしたいです。", translation: "地址变了，所以想更改登记信息。" },
+    { speaker: "职员", japanese: "通帳とキャッシュカードをお持ちですか。", kana: "つうちょうときゃっしゅかーどをおもちですか。", translation: "您带存折和银行卡了吗？" },
+    { speaker: "客人", japanese: "はい、持っています。", kana: "はい、もっています。", translation: "带了。" },
+    { speaker: "职员", japanese: "新しい住所が確認できるものもお願いします。", kana: "あたらしいじゅうしょがかくにんできるものもおねがいします。", translation: "也请出示能确认新地址的材料。" },
+    { speaker: "客人", japanese: "住民票で大丈夫ですか。", kana: "じゅうみんひょうでだいじょうぶですか。", translation: "住民票可以吗？" },
+    { speaker: "职员", japanese: "はい、こちらの用紙に記入してください。", kana: "はい、こちらのようしにきにゅうしてください。", translation: "可以。请填写这张表。" },
+  ], ["生活", "银行", "地址"]),
+];
+
+export const dialogues: Dialogue[] = [
+  ...coreDialogues,
+  ...expandedDialogues,
+  ...additionalScenarioDialogues,
+  ...workProcedureDialogues,
+].map((dialogue, index) => ({
   sortOrder: dialogue.sortOrder ?? index + 1,
   ...dialogue,
 }));
