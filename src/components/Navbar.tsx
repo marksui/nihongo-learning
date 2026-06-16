@@ -36,7 +36,7 @@ const desktopItems: NavItem[] = [
   { page: "kana", label: "五十音", icon: Grid3X3 },
   { page: "numbers", label: "数字", icon: Hash },
   { page: "vocabulary", label: "单词", icon: BookOpen },
-  { page: "exam-vocabulary", label: "词库", icon: Trophy },
+  { page: "exam-vocabulary", label: "JLPT", icon: Trophy },
   { page: "grammar", label: "语法", icon: GraduationCap },
   { page: "conversation", label: "会话", icon: MessagesSquare },
   { page: "quickread", label: "速读", icon: Table2 },
@@ -72,25 +72,25 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-ink/8 bg-paper/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-2 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-40 border-b border-ink/8 bg-paper/88 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-2.5 sm:px-6 lg:px-8">
           <button
             type="button"
             onClick={() => navigate("home")}
             className="tap-surface group flex min-w-0 cursor-pointer items-center gap-2.5 rounded-lg px-1 py-1 text-left transition hover:text-matcha"
             aria-label="返回首页"
           >
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-matcha font-japanese text-base font-extrabold text-white shadow-sm transition group-hover:bg-ink">
-              日
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-matcha font-japanese text-xl font-extrabold text-white shadow-sm transition group-hover:bg-ink">
+              あ
             </span>
             <span className="min-w-0">
               <span className="block truncate text-lg font-extrabold leading-tight text-ink">中文学日语</span>
-              <span className="hidden truncate text-xs font-bold leading-tight text-ink/48 sm:block">点读学习</span>
+              <span className="hidden truncate text-xs font-bold leading-tight text-ink/50 sm:block">听读学习</span>
             </span>
           </button>
 
           <nav
-            className="hidden min-w-0 items-center gap-1 rounded-lg border border-ink/8 bg-rice/48 p-1 shadow-sm lg:flex"
+            className="hidden min-w-0 items-center gap-1 rounded-lg border border-ink/8 bg-rice/42 p-1 shadow-sm lg:flex"
             aria-label="桌面导航"
           >
             {desktopItems.map((item) => {
@@ -105,7 +105,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                   aria-current={active ? "page" : undefined}
                   className={`tap-surface relative flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-extrabold transition active:scale-95 ${
                     active
-                      ? "bg-ink text-white shadow-sm"
+                      ? "bg-matcha text-white shadow-sm"
                       : "text-ink/62 hover:bg-paper/90 hover:text-ink"
                   }`}
                 >
@@ -127,9 +127,9 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
 
       <div className="mobile-bottom-nav fixed bottom-0 left-0 right-0 z-50 bg-paper/97 px-2 pb-[max(env(safe-area-inset-bottom),0.55rem)] pt-2 shadow-soft backdrop-blur-xl lg:hidden">
         {moreOpen ? (
-          <div className="mb-2 max-h-[min(62vh,24rem)] overflow-y-auto rounded-lg border border-ink/10 bg-paper p-2 shadow-soft">
+          <div className="mb-2 max-h-[min(58vh,22rem)] overflow-y-auto rounded-lg border border-ink/10 bg-paper p-2 shadow-soft">
             <div className="mb-1 flex items-center justify-between px-1 py-1">
-              <p className="px-2 text-sm font-extrabold text-ink">更多入口</p>
+              <p className="px-2 text-sm font-extrabold text-ink">更多</p>
               <button
                 type="button"
                 onClick={() => setMoreOpen(false)}
@@ -151,8 +151,8 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                     onClick={() => navigate(item.page)}
                     className={`tap-surface grid min-h-16 cursor-pointer place-items-center rounded-lg border px-2 py-2 text-xs font-extrabold transition active:scale-95 ${
                       active
-                        ? "border-ink bg-ink text-white shadow-sm"
-                        : "border-ink/8 bg-rice/48 text-ink/68 hover:border-yuzu/35 hover:bg-yuzu/14 hover:text-ink"
+                        ? "border-matcha bg-matcha text-white shadow-sm"
+                        : "border-ink/8 bg-rice/44 text-ink/68 hover:border-yuzu/35 hover:bg-yuzu/14 hover:text-ink"
                     }`}
                   >
                     <Icon aria-hidden="true" size={20} />
@@ -175,10 +175,10 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                 type="button"
                 onClick={() => navigate(item.page)}
                 aria-current={active ? "page" : undefined}
-                className={`tap-surface grid min-h-[3.35rem] cursor-pointer place-items-center rounded-lg border px-1 py-1 text-[0.72rem] font-extrabold leading-tight transition active:scale-95 ${
+                className={`tap-surface grid min-h-[3.25rem] cursor-pointer place-items-center rounded-lg border px-1 py-1 text-[0.72rem] font-extrabold leading-tight transition active:scale-95 ${
                   active
                     ? "border-matcha bg-matcha text-white shadow-sm"
-                    : "border-transparent text-ink/58 hover:bg-rice hover:text-ink"
+                    : "border-transparent text-ink/60 hover:bg-rice hover:text-ink"
                 }`}
               >
                 <Icon aria-hidden="true" size={19} />
@@ -191,10 +191,10 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
             type="button"
             onClick={() => setMoreOpen((value) => !value)}
             aria-expanded={moreOpen}
-            className={`tap-surface grid min-h-[3.35rem] cursor-pointer place-items-center rounded-lg border px-1 py-1 text-[0.72rem] font-extrabold leading-tight transition active:scale-95 ${
+            className={`tap-surface grid min-h-[3.25rem] cursor-pointer place-items-center rounded-lg border px-1 py-1 text-[0.72rem] font-extrabold leading-tight transition active:scale-95 ${
               moreActive || moreOpen
                 ? "border-matcha bg-matcha text-white shadow-sm"
-                : "border-transparent text-ink/58 hover:bg-rice hover:text-ink"
+                : "border-transparent text-ink/60 hover:bg-rice hover:text-ink"
             }`}
           >
             {moreOpen ? <ChevronUp aria-hidden="true" size={19} /> : <MoreHorizontal aria-hidden="true" size={19} />}

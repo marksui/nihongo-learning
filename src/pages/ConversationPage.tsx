@@ -144,7 +144,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
             </span>
           </div>
 
-          <div className="filter-scroll-row -mx-1 mt-2 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:grid lg:max-h-[calc(100vh-12rem)] lg:overflow-y-auto lg:overflow-x-hidden lg:px-0 lg:pr-1">
+          <div className="filter-scroll-row mt-2 grid max-h-[24rem] gap-2 overflow-y-auto pr-1 sm:grid-cols-2 lg:max-h-[calc(100vh-12rem)] lg:grid-cols-1">
             {visibleDialogues.map((dialogue) => {
               const active = selectedDialogue?.id === dialogue.id;
               const partnerSpeakers = Array.from(
@@ -156,7 +156,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
                   key={dialogue.id}
                   type="button"
                   onClick={() => setSelectedDialogueId(dialogue.id)}
-                  className={`w-[15rem] shrink-0 cursor-pointer rounded-md border p-3 text-left transition lg:w-auto ${
+                  className={`w-full cursor-pointer rounded-md border p-3 text-left transition ${
                     active
                       ? "border-matcha bg-matcha/10 shadow-sm ring-2 ring-matcha/15"
                       : "border-ink/8 bg-rice/35 hover:border-yuzu/35 hover:bg-rice/70"

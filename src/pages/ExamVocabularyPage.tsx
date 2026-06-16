@@ -138,8 +138,8 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
   return (
     <div className="space-y-6">
       <PageHero
-        title="JLPT 备考词库"
-        description="按 N5 到 N1 分级看词，配合主题筛选和点读。适合从零基础慢慢扩到能力考常见词。"
+        title="JLPT 词库"
+        description="按 N5 到 N1 分级看词，配合主题筛选和点读。适合从零基础慢慢扩到常见能力考词汇。"
         stats={[
           { label: "总词量", value: examWords.length },
           { label: activeLevel, value: levelCounts[activeLevel] },
@@ -264,7 +264,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
           ))
         ) : (
           <div className="md:col-span-2 xl:col-span-3">
-            <EmptyState title="没有找到考试词" description="换一个日语、假名、romaji 或中文关键词再试。" />
+            <EmptyState title="没有找到词汇" description="换一个日语、假名、romaji 或中文关键词再试。" />
           </div>
         )}
       </section>

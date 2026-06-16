@@ -43,11 +43,12 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
   const sentenceActive = activeTarget === "sentence";
   const speaking = wordActive || sentenceActive;
   const jlptLevel = getVocabularyJlptLevel(word);
+  const displayCategory = word.category === "考试单词" ? "JLPT词" : word.category;
 
   return (
     <LearningCard
       interactive
-      className={`word-card-shell flex min-h-[15.5rem] flex-col justify-between p-3.5 sm:p-4 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
+      className={`word-card-shell flex min-h-[15rem] flex-col justify-between p-3.5 sm:p-4 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
     >
       <div>
         <FoodIllustration word={word} />
@@ -55,7 +56,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
           <div className="min-w-0">
             <div className="mb-2 flex flex-wrap gap-2">
               <p className="w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-bold text-ink/68">
-                {word.category}
+                {displayCategory}
               </p>
               <p className={`w-fit rounded-md bg-sora/12 px-2 py-1 text-xs font-extrabold text-sora ${speaking ? "word-level-spark" : ""}`}>
                 {jlptLevel}

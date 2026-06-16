@@ -108,7 +108,7 @@ const VocabularyPage = ({ onOpenExamVocabulary, onSpeak }: VocabularyPageProps) 
             onClick={onOpenExamVocabulary}
             className="flex min-h-10 cursor-pointer items-center gap-2 rounded-md border border-sumire/18 bg-sumire/8 px-3 py-2 text-sm font-extrabold text-sumire transition hover:bg-sumire hover:text-white active:scale-95"
           >
-            考试词汇
+            JLPT词库
             <Trophy aria-hidden="true" size={15} />
           </button>
           <button

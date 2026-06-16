@@ -1,23 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root,
 html[data-theme="hidamari"] {
-  --color-ink: 32 38 44;
-  --color-rice: 250 247 239;
+  --color-ink: 29 34 38;
+  --color-rice: 248 245 236;
   --color-paper: 255 254 250;
-  --color-sakura: 211 91 112;
-  --color-matcha: 54 126 89;
-  --color-sora: 64 139 184;
-  --color-yuzu: 232 181 65;
-  --color-sumire: 101 91 155;
-  --color-sky: 236 242 240;
-  --page-start: 253 251 246;
-  --page-end: 239 246 242;
-  --grid-line: 80 88 92;
+  --color-sakura: 208 86 107;
+  --color-matcha: 50 122 84;
+  --color-sora: 63 130 174;
+  --color-yuzu: 222 169 61;
+  --color-sumire: 91 85 139;
+  --color-sky: 239 245 242;
+  --page-start: 251 249 243;
+  --page-end: 239 245 241;
+  --grid-line: 66 72 76;
   color: rgb(var(--color-ink));
   background: rgb(var(--color-rice));
   font-synthesis: none;
@@ -29,8 +27,8 @@ html[data-theme="hidamari"] {
 }
 
 html[data-theme="matcha"] {
-  --color-ink: 31 48 38;
-  --color-rice: 237 244 229;
+  --color-ink: 30 46 38;
+  --color-rice: 239 246 233;
   --color-paper: 253 255 248;
   --color-sakura: 198 91 108;
   --color-matcha: 54 124 79;
@@ -44,8 +42,8 @@ html[data-theme="matcha"] {
 }
 
 html[data-theme="momo"] {
-  --color-ink: 55 43 38;
-  --color-rice: 255 241 232;
+  --color-ink: 50 39 36;
+  --color-rice: 255 243 235;
   --color-paper: 255 253 249;
   --color-sakura: 207 88 104;
   --color-matcha: 73 126 90;
@@ -59,8 +57,8 @@ html[data-theme="momo"] {
 }
 
 html[data-theme="washi"] {
-  --color-ink: 37 40 38;
-  --color-rice: 242 239 229;
+  --color-ink: 36 39 38;
+  --color-rice: 242 240 231;
   --color-paper: 253 251 244;
   --color-sakura: 181 96 105;
   --color-matcha: 72 113 84;
@@ -83,11 +81,10 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at 12% 0%, rgb(var(--color-yuzu) / 0.12), transparent 28rem),
-    linear-gradient(135deg, rgb(var(--page-start)) 0%, rgb(var(--page-end)) 66%, rgb(var(--color-sky) / 0.66) 100%);
-  font-family: "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 46%, rgb(var(--page-end)) 100%);
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16px;
-  line-height: 1.68;
+  line-height: 1.7;
   letter-spacing: 0;
 }
 
@@ -101,22 +98,22 @@ body::before {
     linear-gradient(90deg, rgb(var(--grid-line) / 0.014) 1px, transparent 1px),
     linear-gradient(180deg, rgb(var(--grid-line) / 0.011) 1px, transparent 1px);
   background-size: 56px 56px;
-  opacity: 0.28;
+  opacity: 0.2;
 }
 
 .font-display {
-  font-family: "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0;
 }
 
 .font-japanese {
-  font-family: "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Meiryo", "Microsoft YaHei UI", sans-serif;
+  font-family: "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", "Noto Sans JP", "Microsoft YaHei UI", sans-serif;
   letter-spacing: 0;
   line-height: 1.34;
 }
 
 .font-reading {
-  font-family: "Noto Sans JP", "Microsoft YaHei UI", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: "Yu Gothic UI", "Meiryo", "Noto Sans JP", "Microsoft YaHei UI", "Segoe UI", system-ui, -apple-system, sans-serif;
   letter-spacing: 0;
 }
 
@@ -153,17 +150,17 @@ select:focus-visible {
 
 .soft-surface {
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.96) inset,
-    0 10px 22px rgb(var(--color-ink) / 0.055);
+    0 1px 0 rgb(255 255 255 / 0.86) inset,
+    0 8px 18px rgb(var(--color-ink) / 0.045);
 }
 
 .calm-grid-card {
   position: relative;
   background:
-    linear-gradient(135deg, rgb(var(--color-paper) / 0.99), rgb(var(--color-sky) / 0.42));
+    linear-gradient(180deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.46));
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.96) inset,
-    0 14px 32px rgb(var(--color-ink) / 0.065);
+    0 1px 0 rgb(255 255 255 / 0.86) inset,
+    0 10px 24px rgb(var(--color-ink) / 0.052);
 }
 
 .calm-grid-card::before {
@@ -189,10 +186,10 @@ select:focus-visible {
 
 .app-card-hover:hover,
 .app-card-hover:focus-within {
-  border-color: rgb(var(--color-matcha) / 0.34);
+  border-color: rgb(var(--color-matcha) / 0.3);
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.96) inset,
-    0 13px 26px rgb(var(--color-ink) / 0.075);
+    0 1px 0 rgb(255 255 255 / 0.86) inset,
+    0 10px 22px rgb(var(--color-ink) / 0.065);
   transform: translateY(-1px);
 }
 
@@ -227,18 +224,18 @@ select:focus-visible {
 .sticky-tool-panel {
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.82) inset,
-    0 10px 24px rgb(var(--color-ink) / 0.07);
+    0 8px 20px rgb(var(--color-ink) / 0.055);
 }
 
 .mobile-bottom-nav {
-  right: 0.5rem;
-  bottom: 0.5rem;
-  left: 0.5rem;
-  width: min(calc(100% - 1rem), 42rem);
+  right: 0.6rem;
+  bottom: 0.6rem;
+  left: 0.6rem;
+  width: min(calc(100% - 1.2rem), 42rem);
   margin-inline: auto;
-  border: 1px solid rgb(var(--color-ink) / 0.1);
+  border: 1px solid rgb(var(--color-ink) / 0.095);
   border-radius: 0.75rem;
-  box-shadow: 0 14px 34px rgb(var(--color-ink) / 0.15);
+  box-shadow: 0 14px 30px rgb(var(--color-ink) / 0.14);
 }
 
 .quickread-card {
@@ -276,48 +273,48 @@ select:focus-visible {
 }
 
 .app-panel {
-  border: 1px solid rgb(var(--color-ink) / 0.09);
+  border: 1px solid rgb(var(--color-ink) / 0.085);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.94);
+  background: rgb(var(--color-paper) / 0.92);
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.92) inset,
-    0 10px 24px rgb(var(--color-ink) / 0.055);
+    0 1px 0 rgb(255 255 255 / 0.82) inset,
+    0 8px 18px rgb(var(--color-ink) / 0.045);
 }
 
 .section-title {
-  font-family: "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
   font-weight: 800;
   line-height: 1.18;
   color: rgb(var(--color-ink));
 }
 
 .jp-display {
-  font-family: "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Meiryo", "Microsoft YaHei UI", sans-serif;
+  font-family: "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", "Noto Sans JP", "Microsoft YaHei UI", sans-serif;
   font-weight: 800;
   letter-spacing: 0;
-  line-height: 1.12;
+  line-height: 1.14;
 }
 
 .sticky-learn-toolbar {
-  border: 1px solid rgb(var(--color-ink) / 0.09);
+  border: 1px solid rgb(var(--color-ink) / 0.085);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.96);
+  background: rgb(var(--color-paper) / 0.95);
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 10px 24px rgb(var(--color-ink) / 0.055);
+    0 1px 0 rgb(255 255 255 / 0.82) inset,
+    0 8px 20px rgb(var(--color-ink) / 0.045);
 }
 
 .readable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.5rem), 1fr));
-  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.25rem), 1fr));
+  gap: 0.75rem;
   align-items: start;
 }
 
 .comfortable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 0.85rem;
   align-items: start;
 }
 

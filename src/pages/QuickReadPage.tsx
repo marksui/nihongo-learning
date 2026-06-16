@@ -606,10 +606,11 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
 
   return (
     <div className="space-y-4">
-      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-2.5 backdrop-blur md:top-24 md:p-3">
+      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-3 backdrop-blur md:top-24">
         <div className="mb-2 flex items-center justify-between gap-3">
           <div>
             <h1 className="section-title text-xl sm:text-3xl">{activeViewMeta.label}</h1>
+            <p className="mt-0.5 text-sm font-semibold text-ink/58">{activeViewMeta.detail}</p>
           </div>
           <p className="shrink-0 rounded bg-rice px-2 py-1 text-xs font-bold text-ink/58 sm:text-sm">{activeViewMeta.count}</p>
         </div>
@@ -643,7 +644,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
         </div>
       </section>
 
-      <article className="mx-auto w-full overflow-hidden rounded-lg border border-ink/10 bg-paper/96 px-2.5 py-5 shadow-card sm:max-w-5xl sm:px-8 sm:py-8">
+      <article className="mx-auto w-full overflow-hidden rounded-lg border border-ink/10 bg-paper/95 px-2.5 py-5 shadow-card sm:max-w-6xl sm:px-7 sm:py-8">
         <div className="space-y-9 sm:space-y-10">
           {activeView === "basic" ? (
             <>

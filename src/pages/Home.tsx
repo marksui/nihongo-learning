@@ -119,7 +119,7 @@ const featureCards: FeatureCard[] = [
   {
     title: "JLPT词库",
     page: "exam-vocabulary",
-    description: "N5 到 N1 的补充词汇。",
+    description: "N5 到 N1 分级扩词。",
     metric: `${vocabulary.length} 个词`,
     accent: "bg-ink text-white",
     icon: Trophy,
@@ -245,8 +245,8 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     <div className="space-y-5 sm:space-y-6">
       <PageHero
         title="中文学日语"
-        eyebrow="零基础点读路线"
-        description="打开就能跟着听、跟着读。先从五十音和常用句开始，再慢慢扩到单词、语法和真实会话。"
+        eyebrow="零基础听读路线"
+        description="从五十音、数字和常用句开始，一点就能听；中文解释配日语原文、假名和 romaji，适合每天短时间跟读。"
         stats={[
           { label: "假名", value: kanaItems.length },
           { label: "词汇", value: vocabulary.length },
@@ -273,20 +273,20 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           </>
         }
         media={
-          <div className="overflow-hidden rounded-lg border border-ink/10 bg-paper p-1.5 shadow-sm">
-            <div className="relative h-[16rem] overflow-hidden rounded-lg sm:h-[20rem] lg:h-[22rem]">
+          <div className="overflow-hidden rounded-lg border border-ink/10 bg-paper p-1 shadow-sm">
+            <div className="relative h-[18rem] overflow-hidden rounded-lg sm:h-[22rem] lg:h-[24rem]">
               <img
                 src={homeStudyScene}
                 alt="大阪道顿堀河岸街景封面"
-                className="home-osaka-cover-image h-full w-full object-cover object-[center_48%]"
+                className="home-osaka-cover-image h-full w-full object-cover object-[center_52%]"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/64 via-ink/18 to-transparent" />
-              <div className="absolute inset-x-3 bottom-3 rounded-lg border border-paper/60 bg-paper/92 px-3 py-3 shadow-sm backdrop-blur">
-                <p className="font-japanese text-sm font-extrabold text-ink/55">Japan / 日本</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/68 via-ink/14 to-transparent" />
+              <div className="absolute inset-x-3 bottom-3 rounded-lg border border-paper/50 bg-paper/90 px-3 py-3 shadow-sm backdrop-blur">
+                <p className="font-japanese text-sm font-extrabold text-ink/56">Japan / 日本</p>
                 <div className="mt-1 flex flex-wrap items-end justify-between gap-2">
                   <p className="section-title text-2xl leading-none text-ink sm:text-3xl">Osaka 大阪</p>
-                  <p className="rounded-md bg-yuzu/22 px-2 py-1 text-xs font-extrabold text-ink/62">听读入门</p>
+                  <p className="rounded-md bg-yuzu/22 px-2 py-1 text-xs font-extrabold text-ink/64">听读入门</p>
                 </div>
               </div>
             </div>
@@ -299,7 +299,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="text-sm font-extrabold text-sakura">今日点读</p>
-              <h2 className="section-title text-2xl">听一遍，跟读一遍</h2>
+              <h2 className="section-title text-2xl">今天先听这些</h2>
             </div>
             <button
               type="button"
@@ -323,7 +323,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
             />
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {todayStats.tasks.map((task) => {
               const item = previewItems.find((preview) => preview.key === task.key);
               if (!item) {
@@ -336,7 +336,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
               return (
                 <div
                   key={task.key}
-                  className={`rounded-lg border p-3 transition ${
+                  className={`min-w-0 rounded-lg border p-3 transition ${
                     active
                       ? "border-yuzu/55 bg-yuzu/14 ring-2 ring-yuzu/20"
                       : task.completed
@@ -400,7 +400,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         <LearningCard className="p-4 sm:p-5">
           <div className="mb-4 flex items-end justify-between gap-3">
             <div>
-              <p className="text-sm font-extrabold text-sora">学习路径</p>
+              <p className="text-sm font-extrabold text-sora">学习地图</p>
               <h2 className="section-title text-2xl">从零开始的顺序</h2>
             </div>
             <span className="rounded-lg border border-ink/8 bg-rice/45 px-2.5 py-1 text-xs font-extrabold text-ink/58">
