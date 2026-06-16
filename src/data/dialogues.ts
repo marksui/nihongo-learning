@@ -1183,6 +1183,69 @@ const noticeCounterDialogues: Dialogue[] = [
   ], ["出行", "车站", "行李", "告示"]),
 ];
 
+const convenienceStoreDialogues: Dialogue[] = [
+  makeDialogue("scenario-konbini-bento-heating", "便利店便当加热", "生活", "客人", "买便当时确认是否加热、是否需要筷子和袋子", [
+    { speaker: "店员", japanese: "こちらのお弁当は温めますか。", kana: "こちらのおべんとうはあたためますか。", translation: "这个便当需要加热吗？" },
+    { speaker: "客人", japanese: "はい、お願いします。", kana: "はい、おねがいします。", translation: "是的，麻烦您。" },
+    { speaker: "店员", japanese: "お箸はお付けしますか。", kana: "おはしはおつけしますか。", translation: "需要附筷子吗？" },
+    { speaker: "客人", japanese: "一膳ください。袋は大丈夫です。", kana: "いちぜんください。ふくろはだいじょうぶです。", translation: "请给我一双筷子。袋子不用了。" },
+    { speaker: "店员", japanese: "少々お待ちください。", kana: "しょうしょうおまちください。", translation: "请稍等。" },
+  ], ["便利店", "便当", "加热", "购物"]),
+  makeDialogue("scenario-konbini-coffee-machine", "便利店咖啡机", "生活", "客人", "购买便利店咖啡后确认杯子和咖啡机按钮", [
+    { speaker: "客人", japanese: "ホットコーヒーのMサイズをください。", kana: "ほっとこーひーのえむさいずをください。", translation: "请给我一杯中杯热咖啡。" },
+    { speaker: "店员", japanese: "こちらのカップをお使いください。", kana: "こちらのかっぷをおつかいください。", translation: "请使用这个杯子。" },
+    { speaker: "客人", japanese: "機械のどのボタンを押しますか。", kana: "きかいのどのぼたんをおしますか。", translation: "机器要按哪个按钮？" },
+    { speaker: "店员", japanese: "左のホット、Mのボタンです。", kana: "ひだりのほっと、えむのぼたんです。", translation: "左边的热咖啡，中杯按钮。" },
+    { speaker: "客人", japanese: "分かりました。ありがとうございます。", kana: "わかりました。ありがとうございます。", translation: "明白了，谢谢。" },
+  ], ["便利店", "咖啡", "机器", "购物"]),
+  makeDialogue("scenario-konbini-utility-payment", "便利店缴费", "生活", "客人", "拿着缴费单到便利店支付水电费或账单", [
+    { speaker: "客人", japanese: "この払込票を支払いたいです。", kana: "このはらいこみひょうをしはらいたいです。", translation: "我想支付这张缴费单。" },
+    { speaker: "店员", japanese: "バーコードを読み取ります。", kana: "ばーこーどをよみとります。", translation: "我扫描一下条形码。" },
+    { speaker: "店员", japanese: "お支払いは現金のみです。", kana: "おしはらいはげんきんのみです。", translation: "付款只接受现金。" },
+    { speaker: "客人", japanese: "分かりました。これでお願いします。", kana: "わかりました。これでおねがいします。", translation: "明白了。用这些付款。" },
+    { speaker: "店员", japanese: "控えをお受け取りください。", kana: "ひかえをおうけとりください。", translation: "请收好回执。" },
+  ], ["便利店", "缴费", "账单", "现金"]),
+  makeDialogue("scenario-konbini-delivery-pickup", "便利店取快递", "生活", "客人", "在便利店取网购包裹并出示取件号码", [
+    { speaker: "客人", japanese: "荷物を受け取りたいです。", kana: "にもつをうけとりたいです。", translation: "我想取包裹。" },
+    { speaker: "店员", japanese: "受け取り番号を見せてください。", kana: "うけとりばんごうをみせてください。", translation: "请出示取件号码。" },
+    { speaker: "客人", japanese: "この画面です。", kana: "このがめんです。", translation: "是这个页面。" },
+    { speaker: "店员", japanese: "本人確認のため、お名前をお願いします。", kana: "ほんにんかくにんのため、おなまえをおねがいします。", translation: "为确认本人，请告诉我姓名。" },
+    { speaker: "客人", japanese: "李です。", kana: "りです。", translation: "我姓李。" },
+    { speaker: "店员", japanese: "こちらがお荷物です。", kana: "こちらがおにもつです。", translation: "这是您的包裹。" },
+  ], ["便利店", "快递", "取件", "网购"]),
+  makeDialogue("scenario-konbini-atm-withdrawal", "便利店 ATM 取钱", "生活", "客人", "在便利店询问 ATM、手续费和使用时间", [
+    { speaker: "客人", japanese: "ATMはどこにありますか。", kana: "えーてぃーえむはどこにありますか。", translation: "ATM 在哪里？" },
+    { speaker: "店员", japanese: "入口の右側にあります。", kana: "いりぐちのみぎがわにあります。", translation: "在入口右侧。" },
+    { speaker: "客人", japanese: "海外のカードは使えますか。", kana: "かいがいのかーどはつかえますか。", translation: "可以用海外的卡吗？" },
+    { speaker: "店员", japanese: "一部のカードは使えます。画面で確認してください。", kana: "いちぶのかーどはつかえます。がめんでかくにんしてください。", translation: "部分卡可以使用。请在屏幕上确认。" },
+    { speaker: "客人", japanese: "手数料はいくらですか。", kana: "てすうりょうはいくらですか。", translation: "手续费是多少？" },
+    { speaker: "店员", japanese: "時間帯によって違います。", kana: "じかんたいによってちがいます。", translation: "根据时间段不同。" },
+  ], ["便利店", "ATM", "取钱", "手续费"]),
+  makeDialogue("scenario-konbini-ticket-machine", "便利店买票", "生活", "客人", "在便利店用机器购买活动或交通票券", [
+    { speaker: "客人", japanese: "チケットを買いたいですが、機械の使い方が分かりません。", kana: "ちけっとをかいたいですが、きかいのつかいかたがわかりません。", translation: "我想买票，但不知道机器怎么用。" },
+    { speaker: "店员", japanese: "どのチケットですか。", kana: "どのちけっとですか。", translation: "是哪种票？" },
+    { speaker: "客人", japanese: "大阪行きの高速バスです。", kana: "おおさかいきのこうそくばすです。", translation: "去大阪的高速巴士。" },
+    { speaker: "店员", japanese: "こちらで日付と時間を選んでください。", kana: "こちらでひづけとじかんをえらんでください。", translation: "请在这里选择日期和时间。" },
+    { speaker: "客人", japanese: "支払いはレジでしますか。", kana: "しはらいはれじでしますか。", translation: "付款在收银台吗？" },
+    { speaker: "店员", japanese: "はい、申込券をレジへお持ちください。", kana: "はい、もうしこみけんをれじへおもちください。", translation: "是的，请把申请券拿到收银台。" },
+  ], ["便利店", "票券", "机器", "交通"]),
+  makeDialogue("scenario-konbini-lost-item", "便利店找遗失物", "生活", "客人", "离开便利店后发现东西可能忘在店里", [
+    { speaker: "客人", japanese: "すみません、さっきここで買い物をしました。", kana: "すみません、さっきここでかいものをしました。", translation: "不好意思，我刚才在这里买了东西。" },
+    { speaker: "店员", japanese: "どうされましたか。", kana: "どうされましたか。", translation: "请问怎么了？" },
+    { speaker: "客人", japanese: "黒い傘を忘れたかもしれません。", kana: "くろいかさをわすれたかもしれません。", translation: "我可能忘了一把黑伞。" },
+    { speaker: "店员", japanese: "少々お待ちください。確認します。", kana: "しょうしょうおまちください。かくにんします。", translation: "请稍等。我确认一下。" },
+    { speaker: "店员", japanese: "こちらの傘ですか。", kana: "こちらのかさですか。", translation: "是这把伞吗？" },
+    { speaker: "客人", japanese: "はい、それです。助かりました。", kana: "はい、それです。たすかりました。", translation: "是的，就是这把。太帮忙了。" },
+  ], ["便利店", "遗失物", "购物", "生活"]),
+  makeDialogue("scenario-konbini-prepaid-card", "购买充值卡", "生活", "客人", "在便利店购买预付卡并确认激活方式", [
+    { speaker: "客人", japanese: "このプリペイドカードを買いたいです。", kana: "このぷりぺいどかーどをかいたいです。", translation: "我想买这张预付卡。" },
+    { speaker: "店员", japanese: "金額は三千円でよろしいですか。", kana: "きんがくはさんぜんえんでよろしいですか。", translation: "金额三千日元可以吗？" },
+    { speaker: "客人", japanese: "はい。使う前に登録が必要ですか。", kana: "はい。つかうまえにとうろくがひつようですか。", translation: "可以。使用前需要注册吗？" },
+    { speaker: "店员", japanese: "裏の説明を読んで、コードを入力してください。", kana: "うらのせつめいをよんで、こーどをにゅうりょくしてください。", translation: "请读背面的说明，输入代码。" },
+    { speaker: "客人", japanese: "分かりました。", kana: "わかりました。", translation: "明白了。" },
+  ], ["便利店", "充值卡", "付款", "说明"]),
+];
+
 const travelAccommodationDialogues: Dialogue[] = [
   makeDialogue("scenario-hotel-late-checkin", "深夜入住确认", "旅行", "客人", "晚上到达酒店，向前台确认预约、护照和早餐时间", [
     { speaker: "客人", japanese: "こんばんは。予約している李です。", kana: "こんばんは。よやくしているりです。", translation: "晚上好。我是预约了的李。" },
@@ -1322,6 +1385,7 @@ export const dialogues: Dialogue[] = [
   ...additionalScenarioDialogues,
   ...workProcedureDialogues,
   ...noticeCounterDialogues,
+  ...convenienceStoreDialogues,
   ...travelAccommodationDialogues,
   ...safetyEmergencyDialogues,
 ].map((dialogue, index) => ({
