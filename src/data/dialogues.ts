@@ -608,6 +608,78 @@ const expandedDialogues: Dialogue[] = [
     { speaker: "李", japanese: "初期費用はいくらですか。", kana: "しょきひようはいくらですか。", translation: "初期费用是多少？" },
     { speaker: "中介", japanese: "全部で二十万円ぐらいです。", kana: "ぜんぶでにじゅうまんえんぐらいです。", translation: "总共大约二十万日元。" },
   ], ["住房", "合同", "生活"]),
+  makeDialogue("drugstore-eye-drops", "药妆店买药", "购物", "客人", "在药妆店询问眼药水和花粉症药", [
+    { speaker: "客人", japanese: "すみません、目薬はどこですか。", kana: "すみません、めぐすりはどこですか。", translation: "不好意思，眼药水在哪里？" },
+    { speaker: "店员", japanese: "二番の棚にあります。", kana: "にばんのたなにあります。", translation: "在二号货架。" },
+    { speaker: "客人", japanese: "花粉症の薬もありますか。", kana: "かふんしょうのくすりもありますか。", translation: "也有花粉症的药吗？" },
+    { speaker: "店员", japanese: "はい、こちらは眠くなりにくいタイプです。", kana: "はい、こちらはねむくなりにくいたいぷです。", translation: "有，这款是不太容易犯困的类型。" },
+  ], ["购物", "药妆", "身体"]),
+  makeDialogue("convenience-print", "便利店打印", "生活", "客人", "在便利店请店员帮忙使用复印机", [
+    { speaker: "客人", japanese: "このUSBから印刷したいです。", kana: "このゆーえすびーからいんさつしたいです。", translation: "我想从这个 U 盘打印。" },
+    { speaker: "店员", japanese: "コピー機でできます。", kana: "こぴーきでできます。", translation: "可以用复印机操作。" },
+    { speaker: "客人", japanese: "日本語の画面が少し難しいです。", kana: "にほんごのがめんがすこしむずかしいです。", translation: "日语界面有点难。" },
+    { speaker: "店员", japanese: "一緒に操作しますね。", kana: "いっしょにそうさしますね。", translation: "我来一起帮您操作。" },
+  ], ["便利店", "打印", "生活"]),
+  makeDialogue("station-transfer", "换乘确认", "出行", "李", "在车站确认去涩谷的换乘方式", [
+    { speaker: "李", japanese: "渋谷へ行きたいです。どこで乗り換えますか。", kana: "しぶやへいきたいです。どこでのりかえますか。", translation: "我想去涩谷。在哪里换乘？" },
+    { speaker: "駅员", japanese: "新宿で山手線に乗り換えてください。", kana: "しんじゅくでやまのてせんにのりかえてください。", translation: "请在新宿换乘山手线。" },
+    { speaker: "李", japanese: "何番線ですか。", kana: "なんばんせんですか。", translation: "是几号站台？" },
+    { speaker: "駅员", japanese: "五番線です。", kana: "ごばんせんです。", translation: "五号站台。" },
+  ], ["交通", "换乘", "电车"]),
+  makeDialogue("borrow-umbrella", "雨天借伞", "生活", "客人", "下雨时向店里询问是否能借伞", [
+    { speaker: "客人", japanese: "すみません、傘を借りられますか。", kana: "すみません、かさをかりられますか。", translation: "不好意思，可以借伞吗？" },
+    { speaker: "店员", japanese: "貸し出し用の傘があります。", kana: "かしだしようのかさがあります。", translation: "有可借用的伞。" },
+    { speaker: "客人", japanese: "いつ返せばいいですか。", kana: "いつかえせばいいですか。", translation: "什么时候还比较好？" },
+    { speaker: "店员", japanese: "今日中に返してください。", kana: "きょうじゅうにかえしてください。", translation: "请今天之内还回来。" },
+  ], ["天气", "生活", "借用"]),
+  makeDialogue("clinic-follow-up", "医院复诊", "紧急", "患者", "复诊时说明症状并领取药", [
+    { speaker: "患者", japanese: "先週来ました。今日は薬だけお願いできますか。", kana: "せんしゅうきました。きょうはくすりだけおねがいできますか。", translation: "我上周来过。今天可以只开药吗？" },
+    { speaker: "受付", japanese: "保険証をお願いします。", kana: "ほけんしょうをおねがいします。", translation: "请出示医保卡。" },
+    { speaker: "患者", japanese: "痛みは少し良くなりました。", kana: "いたみはすこしよくなりました。", translation: "疼痛稍微好一些了。" },
+    { speaker: "医者", japanese: "では、同じ薬を出します。", kana: "では、おなじくすりをだします。", translation: "那么，我开同样的药。" },
+  ], ["医院", "身体", "复诊"]),
+  makeDialogue("group-presentation", "分组发表", "校园", "学生", "和同学讨论小组发表主题", [
+    { speaker: "学生", japanese: "グループ発表のテーマを決めましょう。", kana: "ぐるーぷはっぴょうのてーまをきめましょう。", translation: "我们来决定小组发表的主题吧。" },
+    { speaker: "田中", japanese: "日本の交通はどうですか。", kana: "にほんのこうつうはどうですか。", translation: "日本交通这个主题怎么样？" },
+    { speaker: "学生", japanese: "いいですね。資料を集めます。", kana: "いいですね。しりょうをあつめます。", translation: "不错。我来收集资料。" },
+    { speaker: "田中", japanese: "私は写真を探します。", kana: "わたしはしゃしんをさがします。", translation: "我来找照片。" },
+  ], ["学校", "发表", "合作"]),
+  makeDialogue("part-time-job", "找兼职", "工作", "応募者", "在店里询问兼职招聘和排班", [
+    { speaker: "応募者", japanese: "アルバイトを探しています。", kana: "あるばいとをさがしています。", translation: "我在找兼职。" },
+    { speaker: "店長", japanese: "週に何日働けますか。", kana: "しゅうになんにちはたらけますか。", translation: "每周能工作几天？" },
+    { speaker: "応募者", japanese: "週三日働けます。", kana: "しゅうみっかはたらけます。", translation: "每周可以工作三天。" },
+    { speaker: "店長", japanese: "土曜日は入れますか。", kana: "どようびははいれますか。", translation: "星期六能排班吗？" },
+  ], ["工作", "兼职", "面试"]),
+  makeDialogue("beauty-reservation", "美容预约", "生活", "客人", "预约眉毛修剪时间", [
+    { speaker: "客人", japanese: "眉カットを予約したいです。", kana: "まゆかっとをよやくしたいです。", translation: "我想预约修眉。" },
+    { speaker: "店员", japanese: "ご希望の日はありますか。", kana: "ごきぼうのひはありますか。", translation: "有希望预约的日期吗？" },
+    { speaker: "客人", japanese: "土曜日の午後がいいです。", kana: "どようびのごごがいいです。", translation: "星期六下午比较好。" },
+    { speaker: "店员", japanese: "三時なら空いています。", kana: "さんじならあいています。", translation: "三点的话有空位。" },
+  ], ["生活", "预约", "美容"]),
+  makeDialogue("hotel-luggage-storage", "退房寄存行李", "旅行", "客人", "退房后在酒店前台寄存行李", [
+    { speaker: "客人", japanese: "チェックアウト後、荷物を預けられますか。", kana: "ちぇっくあうとご、にもつをあずけられますか。", translation: "退房后可以寄存行李吗？" },
+    { speaker: "前台", japanese: "はい、夕方までお預かりします。", kana: "はい、ゆうがたまでおあずかりします。", translation: "可以，我们可以保管到傍晚。" },
+    { speaker: "客人", japanese: "六時ごろ取りに来ます。", kana: "ろくじごろとりにきます。", translation: "我六点左右来取。" },
+    { speaker: "前台", japanese: "引換券をお持ちください。", kana: "ひきかえけんをおもちください。", translation: "请保管好领取券。" },
+  ], ["酒店", "行李", "旅行"]),
+  makeDialogue("cold-medicine", "买感冒药", "购物", "客人", "在药店说明嗓子痛并询问药", [
+    { speaker: "客人", japanese: "のどが痛いです。薬はありますか。", kana: "のどがいたいです。くすりはありますか。", translation: "嗓子痛。有药吗？" },
+    { speaker: "薬剤師", japanese: "熱はありますか。", kana: "ねつはありますか。", translation: "有发烧吗？" },
+    { speaker: "客人", japanese: "少しあります。", kana: "すこしあります。", translation: "有一点。" },
+    { speaker: "薬剤師", japanese: "この薬を食後に飲んでください。", kana: "このくすりをしょくごにのんでください。", translation: "请饭后服用这个药。" },
+  ], ["药店", "身体", "购物"]),
+  makeDialogue("lost-wallet-station", "车站失物", "出行", "李", "在车站询问丢失的钱包", [
+    { speaker: "李", japanese: "財布を落としました。", kana: "さいふをおとしました。", translation: "我丢了钱包。" },
+    { speaker: "駅员", japanese: "どこで落としましたか。", kana: "どこでおとしましたか。", translation: "在哪里丢的？" },
+    { speaker: "李", japanese: "電車の中だと思います。", kana: "でんしゃのなかだとおもいます。", translation: "我想是在电车里。" },
+    { speaker: "駅员", japanese: "落とし物センターに確認します。", kana: "おとしものせんたーにかくにんします。", translation: "我帮您向失物中心确认。" },
+  ], ["交通", "失物", "求助"]),
+  makeDialogue("taxi-destination", "出租车目的地", "出行", "客人", "坐出租车时说明目的地和路线", [
+    { speaker: "客人", japanese: "この住所までお願いします。", kana: "このじゅうしょまでおねがいします。", translation: "请到这个地址。" },
+    { speaker: "運転手", japanese: "高速道路を使いますか。", kana: "こうそくどうろをつかいますか。", translation: "要走高速吗？" },
+    { speaker: "客人", japanese: "急いでいるのでお願いします。", kana: "いそいでいるのでおねがいします。", translation: "我比较赶时间，麻烦走高速。" },
+    { speaker: "運転手", japanese: "分かりました。シートベルトをお願いします。", kana: "わかりました。しーとべるとをおねがいします。", translation: "明白了。请系好安全带。" },
+  ], ["出租车", "交通", "旅行"]),
 ];
 
 export const dialogues: Dialogue[] = [...coreDialogues, ...expandedDialogues].map((dialogue, index) => ({
