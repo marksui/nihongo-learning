@@ -73,7 +73,7 @@ const VocabularyPage = ({ onOpenExamVocabulary, onSpeak }: VocabularyPageProps) 
     <div className="space-y-6">
       <PageHero
         title="常用单词"
-        description="按真实场景积累日常词汇，包含日语、假名读法、分隔 romaji、中文意思、例句和中文翻译。食物、水果、蔬菜保留插图，适合边看边听。"
+        description="按真实场景找词。单词和例句都能点读，食物、水果、蔬菜配有插图。"
         stats={[
           { label: "分类", value: filterOptions.length - 1 },
           { label: "词卡", value: commonVocabulary.length },

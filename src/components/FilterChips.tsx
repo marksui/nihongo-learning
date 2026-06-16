@@ -33,10 +33,10 @@ const FilterChips = <T extends string>({
               type="button"
               onClick={() => onChange(option)}
               aria-pressed={selected}
-              className={`tap-surface flex max-w-[14rem] shrink-0 snap-start cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm font-extrabold shadow-sm transition active:scale-95 md:max-w-[16rem] ${
+              className={`tap-surface flex max-w-[14rem] shrink-0 snap-start cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm font-extrabold transition active:scale-95 md:max-w-[16rem] ${
                 selected
-                  ? "filter-chip-selected border-matcha bg-matcha text-white shadow-card"
-                  : "border-ink/8 bg-paper/86 text-ink/68 hover:border-yuzu/35 hover:bg-yuzu/12 hover:text-ink"
+                  ? "filter-chip-selected border-matcha bg-matcha text-white shadow-sm"
+                  : "border-ink/8 bg-rice/48 text-ink/68 hover:border-matcha/24 hover:bg-paper hover:text-ink"
               }`}
             >
               {Icon ? <Icon aria-hidden="true" size={15} /> : null}

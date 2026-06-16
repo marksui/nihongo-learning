@@ -504,7 +504,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
         <p className="mt-1 text-base font-semibold text-ink/72 sm:text-lg">{subtitle}</p>
       </div>
 
-      <div className="readable-kana-grid grid min-w-0 grid-cols-5 gap-1.5 min-[420px]:grid-cols-6 sm:gap-2 md:grid-cols-[repeat(11,minmax(0,1fr))]">
+      <div className="readable-kana-grid grid min-w-0 grid-cols-5 gap-2 min-[420px]:grid-cols-6 sm:grid-cols-8 md:grid-cols-[repeat(11,minmax(0,1fr))]">
         {kanaRows.flatMap((row, rowIndex) =>
           row.map((id, columnIndex) => {
             if (!id) {
@@ -532,15 +532,15 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 type="button"
                 onClick={() => onPlay(key, kana)}
                 aria-pressed={active}
-                className={`quickread-card tap-surface group grid aspect-square min-h-[4rem] min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center transition duration-200 active:scale-95 md:min-h-[4.65rem] ${
+                className={`quickread-card tap-surface group grid aspect-square min-h-[4.15rem] min-w-0 cursor-pointer place-items-center rounded-lg border px-1 py-1.5 text-center transition duration-200 active:scale-95 md:min-h-[4.65rem] ${
                   active
                     ? "border-yuzu/70 bg-yuzu/25 text-ink ring-2 ring-yuzu/30"
-                    : "border-ink/10 bg-paper/92 text-ink hover:border-yuzu/40 hover:bg-yuzu/10"
+                    : "border-ink/10 bg-paper/94 text-ink hover:border-matcha/32 hover:bg-matcha/8"
                 }`}
                 aria-label={`朗读 ${kana} ${getRomajiLabel(item)}`}
                 title={`朗读 ${kana}`}
               >
-                <span className="jp-display block min-w-0 text-[1.7rem] sm:text-3xl lg:text-[2.1rem]">
+                <span className="jp-display block min-w-0 text-[1.78rem] sm:text-3xl lg:text-[2.1rem]">
                   {kana}
                 </span>
                 <span
@@ -592,10 +592,10 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
               type="button"
               onClick={() => onPlay(key, item.audioText ?? item.kana.split(" / ")[0])}
               aria-pressed={active}
-              className={`quickread-card group flex min-w-0 cursor-pointer flex-col rounded-md border px-3 py-3 transition active:scale-[0.98] ${
+              className={`quickread-card group flex min-w-0 cursor-pointer flex-col rounded-lg border px-3 py-3 transition active:scale-[0.98] ${
                 active
                   ? "border-yuzu/70 bg-yuzu/24 ring-2 ring-yuzu/30"
-                  : "border-ink/10 bg-paper/92 hover:border-yuzu/40 hover:bg-yuzu/10"
+                  : "border-ink/10 bg-paper/94 hover:border-matcha/32 hover:bg-matcha/8"
               } ${phraseLike ? "min-h-0 text-left" : "min-h-32 text-center sm:min-h-36"}`}
               aria-label={`朗读 ${item.label} ${item.kana}`}
               title={`朗读 ${item.japanese}`}
@@ -661,7 +661,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
 
   return (
     <div className="space-y-4">
-      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-3 backdrop-blur lg:top-[5rem]">
+      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-3 backdrop-blur lg:top-[4.7rem]">
         <div className="mb-2 flex items-center justify-between gap-3">
           <div>
             <h1 className="section-title text-xl sm:text-3xl">{activeViewMeta.label}</h1>
@@ -683,7 +683,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
                   setActiveKey(null);
                 }}
                 aria-pressed={active}
-                className={`tap-surface w-[8.75rem] shrink-0 cursor-pointer snap-start rounded-md border px-3 py-2 text-left transition active:scale-[0.99] lg:w-auto ${
+                className={`tap-surface w-[8.75rem] shrink-0 cursor-pointer snap-start rounded-lg border px-3 py-2 text-left transition active:scale-[0.99] lg:w-auto ${
                   active
                     ? "border-matcha bg-matcha text-white shadow-sm"
                     : "border-ink/10 bg-rice/45 text-ink hover:border-matcha/25 hover:bg-rice/70"

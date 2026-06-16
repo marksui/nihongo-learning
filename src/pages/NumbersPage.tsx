@@ -120,7 +120,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
     <div className="space-y-6">
       <PageHero
         title="数字读法"
-        description="从 0 到复杂金额、日期、人数、楼层和电话编号都整理在一起。点击数字卡片或播放按钮，就能听到日语读法。"
+        description="数字、金额、日期、人数、楼层和电话都能直接点读。"
         stats={[
           { label: "分类", value: numberGroups.length },
           { label: "读法", value: numberExamples.length },
@@ -257,7 +257,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         </section>
       ) : null}
 
-      <section className="grid items-start gap-2.5 min-[560px]:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <section className="tool-card-grid">
         {filteredNumbers.length ? (
           filteredNumbers.map((item) => {
             const active = activeNumberId === item.id;
@@ -265,11 +265,11 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
             return (
               <LearningCard
                 key={item.id}
-                className={`overflow-hidden p-2.5 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
+                className={`overflow-hidden p-3 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
                 interactive
               >
                 <div className="mb-2 flex items-center justify-between gap-2">
-                  <p className="min-w-0 truncate rounded-md bg-yuzu/20 px-2 py-1 text-xs font-extrabold text-ink/62">
+                  <p className="min-w-0 truncate rounded-md bg-yuzu/18 px-2 py-1 text-xs font-extrabold text-ink/62">
                     {item.group}
                   </p>
                   <SpeakButton
@@ -291,12 +291,12 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                   }`}
                   title="点击日语读法朗读"
                 >
-                  <span className="grid min-w-0 grid-cols-[4rem_minmax(0,1fr)] items-center gap-2.5 sm:grid-cols-[4.4rem_minmax(0,1fr)]">
-                    <span className="grid min-h-[4rem] place-items-center break-words rounded-md border border-current/10 bg-paper/64 px-1.5 text-center font-sans text-[1.7rem] font-extrabold leading-none text-current sm:text-[1.85rem]">
+                  <span className="grid min-w-0 grid-cols-[4.2rem_minmax(0,1fr)] items-center gap-2.5">
+                    <span className="grid min-h-[4.2rem] place-items-center break-words rounded-md border border-current/10 bg-paper/70 px-1.5 text-center font-sans text-[1.8rem] font-extrabold leading-none text-current">
                       {item.display}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="jp-display block break-words text-[1.4rem] sm:text-[1.55rem]">
+                      <span className="jp-display block break-words text-[1.45rem]">
                         {item.japanese}
                       </span>
                       <span className="mt-1 block break-words text-sm font-bold leading-5 opacity-82">{item.kana}</span>
@@ -309,7 +309,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                       </span>
                     </span>
                   </span>
-                  <span className="mt-2 block break-words rounded-md bg-paper/70 px-2.5 py-1.5 text-sm font-extrabold leading-5 text-ink/70 group-hover:bg-white/16 group-hover:text-white">
+                  <span className="mt-2 block break-words rounded-md bg-paper/72 px-2.5 py-1.5 text-sm font-extrabold leading-5 text-ink/70 group-hover:bg-white/16 group-hover:text-white">
                     {item.meaning}
                   </span>
                 </button>

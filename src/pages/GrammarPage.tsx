@@ -10,7 +10,7 @@ interface GrammarPageProps {
   onSpeak: (text: string) => Promise<boolean>;
 }
 
-const grammarTopicOptions = ["全部", "助词", "动词", "形容词", "时间", "请求", "比较", "存在", "喜好", "可能", "规则", "手续", "通知", "安全", "灾害", "广播"] as const;
+const grammarTopicOptions = ["全部", "助词", "动词", "形容词", "时间", "请求", "比较", "存在", "喜好", "可能", "规则", "手续", "窗口", "期限", "材料", "证明", "通知", "安全", "灾害", "广播"] as const;
 
 type GrammarTopic = (typeof grammarTopicOptions)[number];
 
@@ -61,7 +61,7 @@ const GrammarPage = ({ onSpeak }: GrammarPageProps) => {
     <div className="space-y-6">
       <PageHero
         title="基础语法"
-        description="用中文解释日语句型，例句同时给出日语、假名读法、分隔 romaji 和中文翻译。点击句子可以逐句听发音，并标出中文母语者容易混淆的地方。"
+        description="中文解释句型，例句能点读，重点标出中文母语者容易混淆的地方。"
         stats={[
           { label: "课程", value: grammarLessons.length },
           { label: "例句", value: grammarLessons.reduce((sum, lesson) => sum + lesson.examples.length, 0) },

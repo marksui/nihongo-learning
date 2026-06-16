@@ -66,7 +66,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
     <div className="min-w-0 space-y-6">
       <PageHero
         title="日常会话"
-        description="用情景模式听真实对话。先选场景，再按“你说 / 对方说”对照跟读，也可以只听对方或只听我方，像现场轮流说话一样。"
+        description="先选场景，再按“你说 / 对方说”对照跟读。可以逐句、整段或只听一方。"
         stats={[
           { label: "情景", value: dialogues.length },
           { label: "模式", value: dialogueModes.length },

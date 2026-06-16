@@ -114,7 +114,7 @@ const App = () => {
   return (
     <div className="min-h-screen overflow-x-hidden text-ink">
       <Navbar currentPage={currentPage} onNavigate={navigate} />
-      <main className="mx-auto max-w-[96rem] px-3 pb-[calc(7.5rem+env(safe-area-inset-bottom))] pt-3 sm:px-5 sm:pt-5 lg:px-8 lg:pb-8">
+      <main className="mx-auto w-full max-w-[92rem] px-3 pb-[calc(7.5rem+env(safe-area-inset-bottom))] pt-3 sm:px-5 sm:pt-5 lg:px-7 lg:pb-8">
         {page}
       </main>
       <SiteFooter currentPage={currentPage} onNavigate={navigate} />

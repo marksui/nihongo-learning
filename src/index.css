@@ -4,18 +4,18 @@
 
 :root,
 html[data-theme="hidamari"] {
-  --color-ink: 38 39 38;
-  --color-rice: 247 244 234;
+  --color-ink: 31 36 34;
+  --color-rice: 248 244 232;
   --color-paper: 255 253 247;
-  --color-sakura: 210 88 105;
-  --color-matcha: 62 133 91;
-  --color-sora: 67 135 177;
-  --color-yuzu: 224 172 66;
-  --color-sumire: 101 94 145;
-  --color-sky: 239 242 234;
-  --page-start: 250 248 241;
-  --page-end: 238 242 232;
-  --grid-line: 80 87 78;
+  --color-sakura: 212 91 111;
+  --color-matcha: 48 133 96;
+  --color-sora: 47 126 178;
+  --color-yuzu: 230 180 75;
+  --color-sumire: 103 92 150;
+  --color-sky: 239 246 243;
+  --page-start: 252 249 240;
+  --page-end: 240 244 235;
+  --grid-line: 63 74 68;
   color: rgb(var(--color-ink));
   background: rgb(var(--color-rice));
   font-synthesis: none;
@@ -81,11 +81,12 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 50%, rgb(var(--page-end)) 100%);
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16.5px;
-  line-height: 1.66;
+    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 54%, rgb(var(--page-end)) 100%);
+  font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.68;
   letter-spacing: 0;
+  font-variant-east-asian: proportional-width;
 }
 
 body::before {
@@ -98,12 +99,12 @@ body::before {
     linear-gradient(90deg, rgb(var(--grid-line) / 0.022) 1px, transparent 1px),
     linear-gradient(180deg, rgb(var(--grid-line) / 0.018) 1px, transparent 1px);
   background-size: 48px 48px;
-  opacity: 0.36;
+  opacity: 0.22;
 }
 
 .font-display,
 .section-title {
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+  font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
   letter-spacing: 0;
 }
 
@@ -119,13 +120,13 @@ body::before {
 }
 
 .section-title {
-  font-weight: 850;
-  line-height: 1.18;
+  font-weight: 800;
+  line-height: 1.16;
   color: rgb(var(--color-ink));
 }
 
 .jp-display {
-  font-weight: 850;
+  font-weight: 800;
   line-height: 1.14;
 }
 
@@ -164,24 +165,24 @@ select:focus-visible {
 .app-panel,
 .sticky-learn-toolbar {
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.82) inset,
-    0 10px 24px rgb(var(--color-ink) / 0.055);
+    0 1px 0 rgb(255 255 255 / 0.88) inset,
+    0 10px 22px rgb(var(--color-ink) / 0.052);
 }
 
 .app-panel,
 .sticky-learn-toolbar {
-  border: 1px solid rgb(var(--color-ink) / 0.085);
+  border: 1px solid rgb(var(--color-ink) / 0.08);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.94);
+  background: rgb(var(--color-paper) / 0.96);
 }
 
 .calm-grid-card {
   position: relative;
   background:
-    linear-gradient(135deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.54));
+    linear-gradient(135deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.64));
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 16px 36px rgb(var(--color-ink) / 0.075);
+    0 1px 0 rgb(255 255 255 / 0.92) inset,
+    0 14px 30px rgb(var(--color-ink) / 0.07);
 }
 
 .calm-grid-card::before {
@@ -207,11 +208,11 @@ select:focus-visible {
 
 .app-card-hover:hover,
 .app-card-hover:focus-within {
-  border-color: rgb(var(--color-matcha) / 0.34);
+  border-color: rgb(var(--color-matcha) / 0.3);
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.88) inset,
-    0 14px 30px rgb(var(--color-ink) / 0.08);
-  transform: translateY(-2px);
+    0 12px 24px rgb(var(--color-ink) / 0.07);
+  transform: translateY(-1px);
 }
 
 .filter-scroll-row {
@@ -243,15 +244,15 @@ select:focus-visible {
 }
 
 .mobile-bottom-nav {
-  right: 0.5rem;
-  bottom: 0.65rem;
-  left: 0.5rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  left: 0.75rem;
   width: auto;
   max-width: none;
   box-sizing: border-box;
-  border: 1px solid rgb(var(--color-ink) / 0.095);
+  border: 1px solid rgb(var(--color-ink) / 0.09);
   border-radius: 0.75rem;
-  box-shadow: 0 16px 34px rgb(var(--color-ink) / 0.16);
+  box-shadow: 0 16px 34px rgb(var(--color-ink) / 0.14);
 }
 
 .quickread-card {
@@ -290,16 +291,37 @@ select:focus-visible {
 
 .readable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
+  gap: 0.8rem;
   align-items: start;
 }
 
 .comfortable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 0.85rem;
   align-items: start;
+}
+
+.tool-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.dense-learn-card {
+  min-width: 0;
+  border: 1px solid rgb(var(--color-ink) / 0.08);
+  border-radius: 0.75rem;
+  background: rgb(var(--color-paper) / 0.96);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.88) inset,
+    0 8px 18px rgb(var(--color-ink) / 0.048);
+}
+
+.screen-reader-friendly-scroll {
+  scroll-margin-top: 5.25rem;
 }
 
 .section-toolbar {
@@ -488,6 +510,15 @@ select:focus-visible {
   .mobile-bottom-nav {
     padding-left: max(0.625rem, env(safe-area-inset-left));
     padding-right: max(0.625rem, env(safe-area-inset-right));
+  }
+
+  .app-panel,
+  .sticky-learn-toolbar,
+  .dense-learn-card,
+  .soft-surface {
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.86) inset,
+      0 7px 16px rgb(var(--color-ink) / 0.052);
   }
 
   .app-card-hover:hover,

@@ -187,7 +187,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
   return (
     <div className="space-y-4 sm:space-y-5">
-      <section className="relative min-h-[23rem] overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-soft sm:min-h-[28rem] lg:min-h-[31rem]">
+      <section className="relative min-h-[24rem] overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-soft sm:min-h-[28rem] lg:min-h-[31rem]">
         <img
           src={homeStudyScene}
           alt="大阪道顿堀河岸街景封面"
@@ -197,14 +197,14 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-ink/6" />
         <div className="absolute inset-0 flex items-end">
           <div className="w-full p-4 sm:p-6 lg:p-8">
-            <p className="mb-3 inline-flex rounded-md border border-white/22 bg-white/14 px-3 py-1 text-xs font-extrabold text-white backdrop-blur">
-              零基础点读
+            <p className="mb-3 inline-flex rounded-md border border-white/22 bg-white/16 px-3 py-1 text-xs font-extrabold text-white backdrop-blur">
+              零基础中文路线
             </p>
-            <h1 className="break-words text-[2.25rem] font-extrabold leading-none text-white sm:text-[3.15rem] lg:text-[4rem]">
+            <h1 className="font-display break-words text-[2.2rem] font-extrabold leading-none text-white sm:text-[3.05rem] lg:text-[3.8rem]">
               中文学日语
             </h1>
-            <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-white/85 sm:text-lg">
-              打开就能跟着读：日语原文、假名、romaji 和中文意思放在同一张卡里。先听，再看，再开口。
+            <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-white/88 sm:text-lg">
+              打开就能跟读。日语、假名、romaji 和中文意思放在一起，先听，再看，再开口。
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">
@@ -246,7 +246,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         <div className="mb-3 flex items-end justify-between gap-3">
           <div>
             <p className="text-sm font-extrabold text-matcha">今日点读</p>
-            <h2 className="section-title text-2xl">先听 5 个</h2>
+          <h2 className="section-title text-2xl">先听 5 个</h2>
           </div>
           <button
             type="button"
@@ -310,7 +310,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           </div>
         </div>
 
-        <div className="readable-card-grid">
+        <div className="tool-card-grid">
           {featureCards.map((card) => {
             const Icon = card.icon;
 
