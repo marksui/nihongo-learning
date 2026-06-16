@@ -885,7 +885,94 @@ const expandedDialogues: Dialogue[] = [
   ], ["校园", "学习", "咨询"]),
 ];
 
-export const dialogues: Dialogue[] = [...coreDialogues, ...expandedDialogues].map((dialogue, index) => ({
+const additionalScenarioDialogues: Dialogue[] = [
+  makeDialogue("scenario-weekend-plan", "约周末见面", "社交", "李", "和朋友确认周末见面时间和地点", [
+    { speaker: "李", japanese: "今週末、時間がありますか。", kana: "こんしゅうまつ、じかんがありますか。", translation: "这个周末你有时间吗？" },
+    { speaker: "田中", japanese: "土曜日の午後なら大丈夫です。", kana: "どようびのごごならだいじょうぶです。", translation: "周六下午可以。" },
+    { speaker: "李", japanese: "じゃあ、三時に駅で会いませんか。", kana: "じゃあ、さんじにえきであいませんか。", translation: "那三点在车站见怎么样？" },
+    { speaker: "田中", japanese: "いいですね。駅の北口で待っています。", kana: "いいですね。えきのきたぐちでまっています。", translation: "不错。我在车站北口等你。" },
+    { speaker: "李", japanese: "分かりました。楽しみにしています。", kana: "わかりました。たのしみにしています。", translation: "明白了。我很期待。" },
+  ], ["社交", "时间", "约见面"]),
+  makeDialogue("scenario-hobby-chat", "聊兴趣爱好", "社交", "王", "和新朋友聊平时喜欢做什么", [
+    { speaker: "佐藤", japanese: "休みの日は何をしますか。", kana: "やすみのひはなにをしますか。", translation: "休息日你做什么？" },
+    { speaker: "王", japanese: "よくカフェで日本語を勉強します。", kana: "よくかふぇでにほんごをべんきょうします。", translation: "我常常在咖啡店学日语。" },
+    { speaker: "佐藤", japanese: "いいですね。音楽は好きですか。", kana: "いいですね。おんがくはすきですか。", translation: "很好啊。你喜欢音乐吗？" },
+    { speaker: "王", japanese: "はい、アニメの歌をよく聞きます。", kana: "はい、あにめのうたをよくききます。", translation: "喜欢，我常听动画歌。" },
+    { speaker: "佐藤", japanese: "今度、おすすめを教えてください。", kana: "こんど、おすすめをおしえてください。", translation: "下次请告诉我推荐的。" },
+  ], ["社交", "兴趣", "学习"]),
+  makeDialogue("scenario-restaurant-allergy", "餐厅说明过敏", "餐饮", "客人", "点餐前确认是否含有过敏食材", [
+    { speaker: "客人", japanese: "すみません、卵アレルギーがあります。", kana: "すみません、たまごあれるぎーがあります。", translation: "不好意思，我对鸡蛋过敏。" },
+    { speaker: "店员", japanese: "この料理には卵が入っています。", kana: "このりょうりにはたまごがはいっています。", translation: "这道菜里有鸡蛋。" },
+    { speaker: "客人", japanese: "卵を使っていない料理はありますか。", kana: "たまごをつかっていないりょうりはありますか。", translation: "有不使用鸡蛋的料理吗？" },
+    { speaker: "店员", japanese: "こちらの魚定食なら大丈夫です。", kana: "こちらのさかなていしょくならだいじょうぶです。", translation: "这份鱼套餐可以。" },
+    { speaker: "客人", japanese: "では、それをお願いします。", kana: "では、それをおねがいします。", translation: "那就请给我这个。" },
+  ], ["餐饮", "过敏", "点餐"]),
+  makeDialogue("scenario-cafe-seat", "咖啡店找座位", "餐饮", "客人", "在咖啡店询问是否可以学习和充电", [
+    { speaker: "客人", japanese: "一人ですが、席はありますか。", kana: "ひとりですが、せきはありますか。", translation: "我一个人，有座位吗？" },
+    { speaker: "店员", japanese: "窓側の席が空いています。", kana: "まどがわのせきがあいています。", translation: "靠窗的座位空着。" },
+    { speaker: "客人", japanese: "ここで勉強してもいいですか。", kana: "ここでべんきょうしてもいいですか。", translation: "可以在这里学习吗？" },
+    { speaker: "店员", japanese: "はい、大丈夫です。コンセントも使えます。", kana: "はい、だいじょうぶです。こんせんともつかえます。", translation: "可以。插座也能用。" },
+    { speaker: "客人", japanese: "ありがとうございます。ホットコーヒーをください。", kana: "ありがとうございます。ほっとこーひーをください。", translation: "谢谢。请给我热咖啡。" },
+  ], ["餐饮", "咖啡店", "学习"]),
+  makeDialogue("scenario-exchange-size", "换尺码", "购物", "客人", "买衣服时请求换大一号", [
+    { speaker: "客人", japanese: "すみません、もう少し大きいサイズはありますか。", kana: "すみません、もうすこしおおきいさいずはありますか。", translation: "不好意思，有大一点的尺寸吗？" },
+    { speaker: "店员", japanese: "Mサイズならあります。", kana: "えむさいずならあります。", translation: "M 码的话有。" },
+    { speaker: "客人", japanese: "試着してもいいですか。", kana: "しちゃくしてもいいですか。", translation: "可以试穿吗？" },
+    { speaker: "店员", japanese: "はい、試着室はこちらです。", kana: "はい、しちゃくしつはこちらです。", translation: "可以，试衣间在这里。" },
+    { speaker: "客人", japanese: "ちょうどいいです。これを買います。", kana: "ちょうどいいです。これをかいます。", translation: "刚刚好。我买这个。" },
+  ], ["购物", "衣服", "尺码"]),
+  makeDialogue("scenario-refund-counter", "退货咨询", "购物", "客人", "带着小票到柜台询问退货", [
+    { speaker: "客人", japanese: "この商品を返品したいです。", kana: "このしょうひんをへんぴんしたいです。", translation: "我想退这个商品。" },
+    { speaker: "店员", japanese: "レシートはありますか。", kana: "れしーとはありますか。", translation: "有小票吗？" },
+    { speaker: "客人", japanese: "はい、こちらです。", kana: "はい、こちらです。", translation: "有，在这里。" },
+    { speaker: "店员", japanese: "未使用なら返品できます。", kana: "みしようならへんぴんできます。", translation: "未使用的话可以退货。" },
+    { speaker: "客人", japanese: "分かりました。お願いします。", kana: "わかりました。おねがいします。", translation: "明白了。麻烦您。" },
+  ], ["购物", "退货", "收据"]),
+  makeDialogue("scenario-club-signup", "社团报名", "校园", "留学生", "在学校报名参加社团活动", [
+    { speaker: "留学生", japanese: "このサークルに入りたいです。", kana: "このさーくるにはいりたいです。", translation: "我想加入这个社团。" },
+    { speaker: "先辈", japanese: "日本語はどのくらい話せますか。", kana: "にほんごはどのくらいはなせますか。", translation: "你日语能说到什么程度？" },
+    { speaker: "留学生", japanese: "まだ少しですが、練習したいです。", kana: "まだすこしですが、れんしゅうしたいです。", translation: "还只会一点，但想练习。" },
+    { speaker: "先辈", japanese: "大丈夫です。水曜日に見学に来てください。", kana: "だいじょうぶです。すいようびにけんがくにきてください。", translation: "没问题。周三来参观吧。" },
+    { speaker: "留学生", japanese: "ありがとうございます。楽しみです。", kana: "ありがとうございます。たのしみです。", translation: "谢谢。我很期待。" },
+  ], ["校园", "社团", "交流"]),
+  makeDialogue("scenario-presentation-prep", "发表准备", "校园", "学生", "课堂发表前和同学确认分工", [
+    { speaker: "学生", japanese: "発表の順番を確認しましょう。", kana: "はっぴょうのじゅんばんをかくにんしましょう。", translation: "确认一下发表顺序吧。" },
+    { speaker: "同学", japanese: "最初に私がテーマを説明します。", kana: "さいしょにわたしがてーまをせつめいします。", translation: "首先我说明主题。" },
+    { speaker: "学生", japanese: "では、私は例を三つ話します。", kana: "では、わたしはれいをみっつはなします。", translation: "那我讲三个例子。" },
+    { speaker: "同学", japanese: "時間は五分ぐらいですね。", kana: "じかんはごふんぐらいですね。", translation: "时间大概五分钟吧。" },
+    { speaker: "学生", japanese: "はい、最後に質問を受けます。", kana: "はい、さいごにしつもんをうけます。", translation: "嗯，最后回答提问。" },
+  ], ["校园", "发表", "学习"]),
+  makeDialogue("scenario-meeting-agenda", "会议议程", "工作", "社員", "开会前确认议题和资料", [
+    { speaker: "社員", japanese: "今日の会議の議題を確認したいです。", kana: "きょうのかいぎのぎだいをかくにんしたいです。", translation: "我想确认今天会议的议题。" },
+    { speaker: "上司", japanese: "最初に売上を確認します。", kana: "さいしょにうりあげをかくにんします。", translation: "先确认销售额。" },
+    { speaker: "社員", japanese: "その後、新しい企画を説明しますか。", kana: "そのあと、あたらしいきかくをせつめいしますか。", translation: "之后说明新企划吗？" },
+    { speaker: "上司", japanese: "はい。資料を十部印刷してください。", kana: "はい。しりょうをじゅうぶいんさつしてください。", translation: "是的。请打印十份资料。" },
+    { speaker: "社員", japanese: "分かりました。すぐ準備します。", kana: "わかりました。すぐじゅんびします。", translation: "明白了。我马上准备。" },
+  ], ["工作", "会议", "资料"]),
+  makeDialogue("scenario-late-contact", "上班迟到联络", "工作", "社員", "电车晚点时给公司打电话说明", [
+    { speaker: "社員", japanese: "おはようございます。李です。", kana: "おはようございます。りです。", translation: "早上好。我是李。" },
+    { speaker: "上司", japanese: "おはようございます。どうしましたか。", kana: "おはようございます。どうしましたか。", translation: "早上好。怎么了？" },
+    { speaker: "社員", japanese: "電車が遅れていて、十五分ほど遅れます。", kana: "でんしゃがおくれていて、じゅうごふんほどおくれます。", translation: "电车晚点了，我会迟到十五分钟左右。" },
+    { speaker: "上司", japanese: "分かりました。気をつけて来てください。", kana: "わかりました。きをつけてきてください。", translation: "明白了。路上小心。" },
+    { speaker: "社員", japanese: "ご迷惑をおかけしてすみません。", kana: "ごめいわくをおかけしてすみません。", translation: "给您添麻烦了，很抱歉。" },
+  ], ["工作", "迟到", "交通"]),
+  makeDialogue("scenario-dentist-appointment", "预约牙科", "紧急", "患者", "牙疼时电话预约牙科", [
+    { speaker: "患者", japanese: "歯が痛いので、予約したいです。", kana: "はがいたいので、よやくしたいです。", translation: "因为牙疼，我想预约。" },
+    { speaker: "受付", japanese: "今日の午後四時なら空いています。", kana: "きょうのごごよじならあいています。", translation: "今天下午四点有空位。" },
+    { speaker: "患者", japanese: "その時間でお願いします。", kana: "そのじかんでおねがいします。", translation: "请安排那个时间。" },
+    { speaker: "受付", japanese: "初めてですか。保険証を持って来てください。", kana: "はじめてですか。ほけんしょうをもってきてください。", translation: "是第一次来吗？请带医保卡。" },
+    { speaker: "患者", japanese: "分かりました。よろしくお願いします。", kana: "わかりました。よろしくおねがいします。", translation: "明白了。麻烦您。" },
+  ], ["紧急", "牙科", "预约"]),
+  makeDialogue("scenario-luggage-storage", "寄存行李", "旅行", "游客", "退房后在车站寄存行李", [
+    { speaker: "游客", japanese: "荷物を預けたいです。", kana: "にもつをあずけたいです。", translation: "我想寄存行李。" },
+    { speaker: "职员", japanese: "大きさはどのくらいですか。", kana: "おおきさはどのくらいですか。", translation: "大小大概是多少？" },
+    { speaker: "游客", japanese: "このスーツケース一つです。", kana: "このすーつけーすひとつです。", translation: "是这个行李箱一个。" },
+    { speaker: "职员", japanese: "一日七百円です。", kana: "いちにちななひゃくえんです。", translation: "一天七百日元。" },
+    { speaker: "游客", japanese: "夕方六時ごろ取りに来ます。", kana: "ゆうがたろくじごろとりにきます。", translation: "傍晚六点左右来取。" },
+  ], ["旅行", "行李", "车站"]),
+];
+
+export const dialogues: Dialogue[] = [...coreDialogues, ...expandedDialogues, ...additionalScenarioDialogues].map((dialogue, index) => ({
   sortOrder: dialogue.sortOrder ?? index + 1,
   ...dialogue,
 }));
