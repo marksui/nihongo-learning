@@ -72,25 +72,24 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-ink/8 bg-paper/88 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-3 py-2.5 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-40 border-b border-ink/8 bg-paper/94 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-2 sm:px-6 lg:px-8">
           <button
             type="button"
             onClick={() => navigate("home")}
-            className="tap-surface group flex min-w-0 cursor-pointer items-center gap-2.5 rounded-lg px-1.5 py-1 text-left transition hover:text-matcha"
+            className="tap-surface group flex min-w-0 cursor-pointer items-center gap-2 rounded-lg px-1 py-1 text-left transition hover:text-matcha"
             aria-label="返回首页"
           >
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-matcha/18 bg-matcha/10 font-japanese text-lg font-extrabold text-matcha shadow-card transition group-hover:bg-matcha group-hover:text-white">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-matcha/18 bg-matcha/10 font-japanese text-base font-extrabold text-matcha shadow-card transition group-hover:bg-matcha group-hover:text-white">
               日
             </span>
             <span className="min-w-0">
               <span className="block truncate text-base font-extrabold leading-tight text-ink">中文学日语</span>
-              <span className="block truncate text-xs font-bold leading-tight text-ink/48">点读学习</span>
             </span>
           </button>
 
           <nav
-            className="hidden min-w-0 items-center gap-1 rounded-lg border border-ink/8 bg-rice/58 p-1 shadow-card lg:flex"
+            className="hidden min-w-0 items-center gap-1 rounded-lg border border-ink/8 bg-rice/48 p-1 shadow-card lg:flex"
             aria-label="桌面导航"
           >
             {desktopItems.map((item) => {
@@ -103,7 +102,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                   type="button"
                   onClick={() => navigate(item.page)}
                   aria-current={active ? "page" : undefined}
-                  className={`tap-surface relative flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-extrabold transition active:scale-95 lg:px-3 ${
+                  className={`tap-surface relative flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-extrabold transition active:scale-95 ${
                     active
                       ? "bg-paper text-matcha shadow-card"
                       : "text-ink/62 hover:bg-paper/72 hover:text-ink"

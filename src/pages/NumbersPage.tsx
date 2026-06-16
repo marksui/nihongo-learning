@@ -240,7 +240,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                       onClick={() => markNumberMastered(scene.id)}
                       disabled={status.completed}
                       aria-pressed={status.completed}
-                      className={`mt-2 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+                      className={`mt-2 flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
                         status.completed
                           ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
                           : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"
@@ -257,7 +257,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         </section>
       ) : null}
 
-      <section className="grid items-start gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section className="grid items-start gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {filteredNumbers.length ? (
           filteredNumbers.map((item) => {
             const active = activeNumberId === item.id;
@@ -266,7 +266,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
             return (
               <LearningCard
                 key={item.id}
-                className={`h-full overflow-hidden p-3 sm:p-4 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
+                className={`h-full overflow-hidden p-3 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
                 interactive
               >
                 <div className="flex items-start justify-between gap-3">
@@ -289,8 +289,8 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                       </p>
                     </div>
                     <div className="rounded-md border border-ink/6 bg-rice/42 px-3 py-2">
-                      <p className="break-words font-sans text-3xl font-extrabold leading-none text-ink sm:text-4xl">{item.display}</p>
-                      <p className="mt-1 min-w-0 break-words text-sm font-extrabold leading-5 text-ink/62 sm:text-base">{item.meaning}</p>
+                      <p className="break-words font-display text-[2.45rem] font-extrabold leading-none text-ink">{item.display}</p>
+                      <p className="mt-1 min-w-0 break-words text-sm font-extrabold leading-5 text-ink/62">{item.meaning}</p>
                     </div>
                   </div>
                   <SpeakButton
@@ -304,14 +304,14 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                 <button
                   type="button"
                   onClick={() => void playNumber(item.id, item.audioText ?? item.japanese)}
-                  className={`tap-surface group mt-3 w-full cursor-pointer rounded-md border px-3 py-3 text-left transition active:scale-[0.99] ${
+                  className={`tap-surface group mt-3 w-full cursor-pointer rounded-md border px-3 py-2.5 text-left transition active:scale-[0.99] ${
                     active
                       ? "border-matcha bg-matcha text-white"
                       : "border-yuzu/12 bg-rice/55 hover:border-matcha/30 hover:bg-matcha hover:text-white"
                   }`}
                   title="点击日语读法朗读"
                 >
-                  <span className="block break-words font-japanese text-[1.45rem] font-bold leading-tight sm:text-2xl">{item.japanese}</span>
+                  <span className="block break-words font-japanese text-[1.35rem] font-bold leading-tight sm:text-[1.45rem]">{item.japanese}</span>
                   <span className="mt-1.5 block break-words text-sm font-semibold leading-5 opacity-80">{item.kana}</span>
                   <span
                     className={`mt-1 block break-words font-reading text-sm font-extrabold ${

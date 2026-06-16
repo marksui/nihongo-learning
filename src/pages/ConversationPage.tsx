@@ -104,7 +104,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
                 setSelectedMode("全部");
                 setQuery(term);
               }}
-              className="min-h-10 rounded-md border border-ink/10 bg-rice/45 px-3 py-1.5 text-sm font-extrabold text-ink/70 transition hover:border-matcha/25 hover:bg-rice hover:text-ink"
+              className="tap-surface rounded-md border border-ink/10 bg-rice/45 px-3 py-1.5 text-sm font-extrabold text-ink/70 transition hover:border-matcha/25 hover:bg-rice hover:text-ink"
             >
               {term}
             </button>
@@ -113,7 +113,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="min-h-10 rounded-md border border-sakura/20 bg-sakura/8 px-3 py-1.5 text-sm font-extrabold text-sakura transition hover:bg-sakura/12"
+              className="tap-surface rounded-md border border-sakura/20 bg-sakura/8 px-3 py-1.5 text-sm font-extrabold text-sakura transition hover:bg-sakura/12"
             >
               清空
             </button>
@@ -144,7 +144,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
             </span>
           </div>
 
-          <div className="mt-2 grid max-h-96 gap-2 overflow-y-auto pr-1 lg:max-h-[calc(100vh-12rem)]">
+          <div className="filter-scroll-row -mx-1 mt-2 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:grid lg:max-h-[calc(100vh-12rem)] lg:overflow-y-auto lg:overflow-x-hidden lg:px-0 lg:pr-1">
             {visibleDialogues.map((dialogue) => {
               const active = selectedDialogue?.id === dialogue.id;
               const partnerSpeakers = Array.from(
@@ -156,7 +156,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
                   key={dialogue.id}
                   type="button"
                   onClick={() => setSelectedDialogueId(dialogue.id)}
-                  className={`min-w-0 cursor-pointer rounded-md border p-3 text-left transition ${
+                  className={`w-[15rem] shrink-0 cursor-pointer rounded-md border p-3 text-left transition lg:w-auto ${
                     active
                       ? "border-matcha bg-matcha/10 shadow-card ring-2 ring-matcha/15"
                       : "border-ink/8 bg-rice/35 hover:border-yuzu/35 hover:bg-rice/70"

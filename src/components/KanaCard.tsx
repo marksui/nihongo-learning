@@ -44,7 +44,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
   return (
       <LearningCard
         interactive
-      className={`flex min-h-[13.5rem] flex-col justify-between p-3.5 sm:min-h-56 sm:p-4 ${activeTarget ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/25" : ""}`}
+      className={`flex min-h-[12.5rem] flex-col justify-between p-3.5 sm:min-h-[13.75rem] sm:p-4 ${activeTarget ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/25" : ""}`}
     >
       <div>
           <div className="mb-3 flex items-start justify-between gap-2.5">
@@ -62,10 +62,10 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
               {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
             </p>
             <div className="flex items-baseline gap-2.5">
-              <span className={`font-japanese text-[2.9rem] font-bold leading-none transition-colors sm:text-5xl ${kanaActive ? "text-matcha" : "text-ink"}`}>
+              <span className={`font-japanese text-[2.75rem] font-bold leading-none transition-colors sm:text-[3rem] ${kanaActive ? "text-matcha" : "text-ink"}`}>
                 {item.hiragana}
               </span>
-              <span className={`font-japanese text-[2.25rem] font-bold leading-none transition-colors sm:text-4xl ${kanaActive ? "text-sakura" : "text-sumire"}`}>
+              <span className={`font-japanese text-[2.05rem] font-bold leading-none transition-colors sm:text-[2.35rem] ${kanaActive ? "text-sakura" : "text-sumire"}`}>
                 {item.katakana}
               </span>
             </div>
@@ -95,7 +95,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
               title="朗读例词"
             >
               <p className="text-xs font-bold text-ink/52">例词</p>
-              <p className={`mt-1 break-words font-japanese text-xl font-bold transition-colors sm:text-2xl ${exampleActive ? "text-matcha" : "text-ink"}`}>
+              <p className={`mt-1 break-words font-japanese text-xl font-bold transition-colors ${exampleActive ? "text-matcha" : "text-ink"}`}>
                 {item.example.word}
               </p>
               <p className="mt-1 break-words text-sm leading-5 text-ink/62">

@@ -153,7 +153,6 @@ const taskAccent: Record<TodayTaskKey, string> = {
 
 const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const [progress, setProgress] = useState(() => readLearningProgress());
-  const [activePreviewKey, setActivePreviewKey] = useState<TodayTaskKey>("kana");
   const [activeTaskKey, setActiveTaskKey] = useState<TodayTaskKey | null>(null);
   const targetLevel = progress.targetJlptLevel;
   const today = useMemo(() => getTodaySuggestion(new Date(), targetLevel), [targetLevel]);
@@ -238,8 +237,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     },
   ], [previewDialogue, previewGrammar, previewWord, today]);
 
-  const activePreview = previewItems.find((item) => item.key === activePreviewKey) ?? previewItems[0];
-  const ActivePreviewIcon = activePreview.icon;
   const nextFeature = featureCards.find((card) => card.page === nextPathStep?.page) ?? featureCards[0];
   const NextFeatureIcon = nextFeature.icon;
 
@@ -274,7 +271,8 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     <div className="space-y-6 sm:space-y-7">
       <PageHero
         title="中文学日语"
-        description="从假名、数字、单词到会话，打开就能点读。界面以中文解释，日语内容保留原文、假名和中文意思。"
+        eyebrow="零基础中文路线"
+        description="从五十音开始，跟着点读、例句和会话慢慢建立日语耳朵。"
         stats={[
           { label: "假名", value: kanaItems.length },
           { label: "词汇", value: vocabulary.length },
@@ -284,10 +282,10 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           <>
             <button
               type="button"
-              onClick={() => onNavigate(nextPathStep?.page ?? "kana")}
+              onClick={() => onNavigate("kana")}
               className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg bg-matcha px-4 py-2 font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-95"
             >
-              {nextPathStep ? `继续：${nextPathStep.title}` : "开始五十音"}
+              开始五十音
               <ArrowRight aria-hidden="true" size={18} />
             </button>
             <button
@@ -302,64 +300,19 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         }
         media={
           <div className="overflow-hidden rounded-lg border border-ink/8 bg-paper p-2.5 shadow-card sm:p-3">
-            <div className="relative h-[17.5rem] overflow-hidden rounded-lg sm:h-[28rem] lg:h-[28rem]">
+            <div className="relative h-[18rem] overflow-hidden rounded-lg sm:h-[23rem] lg:h-[22rem]">
               <img
                 src={homeStudyScene}
                 alt="大阪道顿堀河岸街景封面"
-                className="h-full w-full object-cover object-[center_42%]"
+                className="home-osaka-cover-image h-full w-full object-cover object-[center_45%]"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/54 via-ink/12 to-paper/8" />
-              <div className="absolute left-3 top-3 rounded-lg border border-paper/70 bg-paper/88 px-3 py-2 shadow-card backdrop-blur">
-                <p className="font-japanese text-sm font-extrabold text-ink/58">日本 / Osaka</p>
-                <p className="mt-0.5 font-display text-2xl font-extrabold leading-none text-ink">大阪</p>
-              </div>
-              <div className="absolute inset-x-3 bottom-3 rounded-lg border border-paper/70 bg-paper/94 p-3 shadow-card backdrop-blur">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex min-w-0 items-start gap-2.5">
-                    <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${activePreview.accent} shadow-card`}>
-                      <ActivePreviewIcon aria-hidden="true" size={19} />
-                    </span>
-                    <div className="min-w-0">
-                      <p className="text-xs font-extrabold text-ink/52">{activePreview.label} · {activePreview.title}</p>
-                      <p className="mt-0.5 break-words font-japanese text-xl font-extrabold leading-tight text-ink">
-                        {activePreview.japanese}
-                      </p>
-                      <p className="mt-1 break-words text-xs font-bold leading-5 text-ink/58">{activePreview.reading}</p>
-                    </div>
-                  </div>
-                  <SpeakButton
-                    active={activeTaskKey === activePreview.key}
-                    ariaLabel={`播放 ${activePreview.japanese}`}
-                    className="h-10 w-10"
-                    onClick={() => playPreview(activePreview)}
-                    title="播放预览"
-                    variant="light"
-                  />
-                </div>
-                <p className="mt-2 line-clamp-2 text-sm font-semibold leading-6 text-ink/70">{activePreview.meaning}</p>
-                <div className="mt-3 grid grid-cols-5 gap-1.5">
-                  {previewItems.map((item) => {
-                    const Icon = item.icon;
-                    const selected = item.key === activePreviewKey;
-
-                    return (
-                      <button
-                        key={item.key}
-                        type="button"
-                        onClick={() => setActivePreviewKey(item.key)}
-                        aria-pressed={selected}
-                        className={`tap-surface grid cursor-pointer place-items-center rounded-lg border px-1 py-1 text-xs font-extrabold transition active:scale-95 ${
-                          selected
-                            ? "border-matcha bg-matcha text-white shadow-card"
-                            : "border-ink/8 bg-rice/70 text-ink/58 hover:border-yuzu/35 hover:bg-yuzu/16 hover:text-ink"
-                        }`}
-                      >
-                        <Icon aria-hidden="true" size={15} />
-                        <span className="mt-0.5">{item.label}</span>
-                      </button>
-                    );
-                  })}
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/62 via-ink/16 to-paper/4" />
+              <div className="absolute inset-x-3 bottom-3 rounded-lg border border-paper/60 bg-paper/92 px-3 py-3 shadow-card backdrop-blur">
+                <p className="font-japanese text-sm font-extrabold text-ink/55">Japan / 日本</p>
+                <div className="mt-1 flex flex-wrap items-end justify-between gap-2">
+                  <p className="font-display text-3xl font-extrabold leading-none text-ink">Osaka 大阪</p>
+                  <p className="rounded-md bg-yuzu/20 px-2 py-1 text-xs font-extrabold text-ink/62">打开就能跟读</p>
                 </div>
               </div>
             </div>

@@ -164,11 +164,11 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             </div>
           </div>
 
-          <div className="flex min-w-0 flex-wrap gap-2 xl:justify-end">
+          <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:flex-wrap xl:justify-end">
             <button
               type="button"
               onClick={playNextLine}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-sumire px-3 py-2 text-sm font-bold text-white transition hover:bg-sumire/90 active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md bg-sumire px-3 py-2 text-sm font-bold text-white transition hover:bg-sumire/90 active:scale-95"
             >
               <ListMusic aria-hidden="true" size={18} />
               逐句
@@ -176,7 +176,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <button
               type="button"
               onClick={playAll}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-matcha px-3 py-2 text-sm font-bold text-white transition hover:bg-matcha/90 active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md bg-matcha px-3 py-2 text-sm font-bold text-white transition hover:bg-matcha/90 active:scale-95"
             >
               <Play aria-hidden="true" size={18} />
               整段
@@ -184,7 +184,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <button
               type="button"
               onClick={playPartnerLines}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-rice/45 px-3 py-2 text-sm font-bold text-ink transition hover:bg-yuzu/14 active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md border border-ink/10 bg-rice/45 px-3 py-2 text-sm font-bold text-ink transition hover:bg-yuzu/14 active:scale-95"
             >
               <Ear aria-hidden="true" size={18} />
               只听对方
@@ -192,7 +192,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <button
               type="button"
               onClick={playOwnLines}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-matcha/25 bg-matcha/10 px-3 py-2 text-sm font-bold text-matcha transition hover:bg-matcha hover:text-white active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md border border-matcha/25 bg-matcha/10 px-3 py-2 text-sm font-bold text-matcha transition hover:bg-matcha hover:text-white active:scale-95"
             >
               <Mic2 aria-hidden="true" size={18} />
               只听我方
@@ -200,7 +200,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <button
               type="button"
               onClick={stopPlayback}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-rice/45 px-3 py-2 text-sm font-bold text-ink transition hover:bg-yuzu/14 active:scale-95"
+              className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md border border-ink/10 bg-rice/45 px-3 py-2 text-sm font-bold text-ink transition hover:bg-yuzu/14 active:scale-95"
               aria-label="停止播放对话"
               title="停止"
             >
@@ -212,7 +212,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
               onClick={markMastered}
               disabled={studyState.completed}
               aria-pressed={studyState.completed}
-              className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm font-bold transition active:scale-95 ${
+              className={`flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-bold transition active:scale-95 ${
                 studyState.completed
                   ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
                   : "border-yuzu/30 bg-yuzu/14 text-ink hover:bg-yuzu/24"
