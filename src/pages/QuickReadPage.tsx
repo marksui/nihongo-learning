@@ -410,6 +410,36 @@ const quickPhraseSections: QuickReadSection[] = [
       { id: "smalltalk-next-time", label: "下次", japanese: "また今度お願いします", kana: "またこんどおねがいします", romaji: "mata kondo onegai shimasu", meaning: "下次再拜托 / 下次再约" },
     ],
   },
+  {
+    id: "notice-rules-phrases",
+    title: "NOTICE & RULES",
+    subtitle: "公共告示",
+    items: [
+      { id: "notice-no-entry", label: "禁止进入", japanese: "立入禁止です", kana: "たちいりきんしです", romaji: "tachiiri kinshi desu", meaning: "禁止进入" },
+      { id: "notice-no-smoking", label: "禁烟", japanese: "ここは禁煙です", kana: "ここはきんえんです", romaji: "koko wa kinen desu", meaning: "这里禁烟" },
+      { id: "notice-photo-ok", label: "可拍照", japanese: "写真撮影は可能です", kana: "しゃしんさつえいはかのうです", romaji: "shashin satsuei wa kanou desu", meaning: "可以拍照" },
+      { id: "notice-photo-no", label: "不可拍照", japanese: "写真撮影はご遠慮ください", kana: "しゃしんさつえいはごえんりょください", romaji: "shashin satsuei wa go enryo kudasai", meaning: "请勿拍照" },
+      { id: "notice-use-stairs", label: "走楼梯", japanese: "階段をご利用ください", kana: "かいだんをごりようください", romaji: "kaidan o goriyou kudasai", meaning: "请使用楼梯" },
+      { id: "notice-line-up", label: "排队", japanese: "こちらにお並びください", kana: "こちらにおならびください", romaji: "kochira ni onarabi kudasai", meaning: "请在这里排队" },
+      { id: "notice-temporary-closed", label: "临时休息", japanese: "本日は臨時休業です", kana: "ほんじつはりんじきゅうぎょうです", romaji: "honjitsu wa rinji kyuugyou desu", meaning: "今天临时休业" },
+      { id: "notice-pay-first", label: "先付款", japanese: "先にお支払いください", kana: "さきにおしはらいください", romaji: "saki ni oshiharai kudasai", meaning: "请先付款" },
+    ],
+  },
+  {
+    id: "counter-service-phrases",
+    title: "COUNTER SERVICE",
+    subtitle: "窗口手续",
+    items: [
+      { id: "counter-need-form", label: "要表格", japanese: "申請書をください", kana: "しんせいしょをください", romaji: "shinseisho o kudasai", meaning: "请给我申请表" },
+      { id: "counter-how-fill", label: "怎么填", japanese: "書き方を教えてください", kana: "かきかたをおしえてください", romaji: "kakikata o oshiete kudasai", meaning: "请告诉我填写方法" },
+      { id: "counter-where-sign", label: "哪里签名", japanese: "どこに署名しますか", kana: "どこにしょめいしますか", romaji: "doko ni shomei shimasu ka", meaning: "在哪里签名？" },
+      { id: "counter-need-docs", label: "需要材料", japanese: "必要な書類は何ですか", kana: "ひつようなしょるいはなんですか", romaji: "hitsuyou na shorui wa nan desu ka", meaning: "需要哪些材料？" },
+      { id: "counter-copy-ok", label: "复印件", japanese: "コピーでも大丈夫ですか", kana: "こぴーでもだいじょうぶですか", romaji: "kopii demo daijoubu desu ka", meaning: "复印件也可以吗？" },
+      { id: "counter-deadline", label: "截止", japanese: "いつまでに出せばいいですか", kana: "いつまでにだせばいいですか", romaji: "itsu made ni daseba ii desu ka", meaning: "要在什么时候前提交？" },
+      { id: "counter-fee", label: "手续费", japanese: "手数料はいくらですか", kana: "てすうりょうはいくらですか", romaji: "tesuuryou wa ikura desu ka", meaning: "手续费是多少？" },
+      { id: "counter-wait-number", label: "号码牌", japanese: "番号札を取って待ちます", kana: "ばんごうふだをとってまちます", romaji: "bangou fuda o totte machimasu", meaning: "取号码牌等待" },
+    ],
+  },
 ];
 
 const numberQuickReadSections = quickReadSections.filter((section) =>
@@ -425,7 +455,7 @@ const quickReadViews: QuickReadViewMeta[] = [
   { id: "extra", label: "浊音拗音", detail: "浊音、半浊音、拗音", count: `${kanaExtensionSections.length} 组` },
   { id: "numbers", label: "数字速读", detail: "数字和大数字", count: `${numberQuickReadSections.length} 组` },
   { id: "time", label: "日期时间", detail: "月份、日期、星期", count: `${timeQuickReadSections.length} 组` },
-  { id: "phrases", label: "常用短句", detail: "出行、点餐、求助", count: `${quickPhraseSections.reduce((total, section) => total + section.items.length, 0)} 句` },
+  { id: "phrases", label: "常用短句", detail: "出行、手续、告示", count: `${quickPhraseSections.reduce((total, section) => total + section.items.length, 0)} 句` },
 ];
 
 interface KanaPosterSectionProps {
