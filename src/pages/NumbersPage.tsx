@@ -257,7 +257,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         </section>
       ) : null}
 
-      <section className="grid items-start gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid items-start gap-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {filteredNumbers.length ? (
           filteredNumbers.map((item) => {
             const active = activeNumberId === item.id;
@@ -266,32 +266,26 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
             return (
               <LearningCard
                 key={item.id}
-                className={`h-full overflow-hidden p-3 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
+                className={`h-full overflow-hidden p-3 sm:p-4 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
                 interactive
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0 flex-1">
-                    <div className="mb-2 flex flex-wrap gap-2">
-                      <p className="w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-extrabold text-ink/66">
-                        {item.group}
-                      </p>
-                      <p
-                        className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
-                          status.completed
-                            ? "bg-matcha/12 text-matcha"
-                            : status.seen
-                              ? "bg-yuzu/18 text-ink/62"
-                              : "bg-rice text-ink/45"
-                        }`}
-                      >
-                        {status.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
-                        {status.completed ? "已掌握" : status.seen ? "已听过" : "未开始"}
-                      </p>
-                    </div>
-                    <div className="rounded-md border border-ink/6 bg-rice/42 px-3 py-2">
-                      <p className="break-words font-display text-[2.45rem] font-extrabold leading-none text-ink">{item.display}</p>
-                      <p className="mt-1 min-w-0 break-words text-sm font-extrabold leading-5 text-ink/62">{item.meaning}</p>
-                    </div>
+                <div className="mb-3 flex items-start justify-between gap-3">
+                  <div className="min-w-0 flex flex-wrap gap-2">
+                    <p className="w-fit rounded-md bg-yuzu/24 px-2 py-1 text-xs font-extrabold text-ink/66">
+                      {item.group}
+                    </p>
+                    <p
+                      className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
+                        status.completed
+                          ? "bg-matcha/12 text-matcha"
+                          : status.seen
+                            ? "bg-yuzu/18 text-ink/62"
+                            : "bg-rice text-ink/45"
+                      }`}
+                    >
+                      {status.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
+                      {status.completed ? "已掌握" : status.seen ? "已听过" : "未开始"}
+                    </p>
                   </div>
                   <SpeakButton
                     active={active}
@@ -304,21 +298,33 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                 <button
                   type="button"
                   onClick={() => void playNumber(item.id, item.audioText ?? item.japanese)}
-                  className={`tap-surface group mt-3 w-full cursor-pointer rounded-md border px-3 py-2.5 text-left transition active:scale-[0.99] ${
+                  className={`number-card-panel tap-surface group w-full cursor-pointer rounded-lg border p-3 text-left transition active:scale-[0.99] ${
                     active
                       ? "border-matcha bg-matcha text-white"
-                      : "border-yuzu/12 bg-rice/55 hover:border-matcha/30 hover:bg-matcha hover:text-white"
+                      : "border-ink/8 hover:border-matcha/30 hover:bg-matcha hover:text-white"
                   }`}
                   title="点击日语读法朗读"
                 >
-                  <span className="block break-words font-japanese text-[1.35rem] font-bold leading-tight sm:text-[1.45rem]">{item.japanese}</span>
-                  <span className="mt-1.5 block break-words text-sm font-semibold leading-5 opacity-80">{item.kana}</span>
-                  <span
-                    className={`mt-1 block break-words font-reading text-sm font-extrabold ${
-                      active ? "text-white" : "text-sakura group-hover:text-white"
-                    }`}
-                  >
-                    {formatRomajiReading(item.romaji)}
+                  <span className="flex min-w-0 items-start gap-3">
+                    <span className="min-w-[4.4rem] break-words font-sans text-[2.55rem] font-extrabold leading-none text-current sm:text-[2.75rem]">
+                      {item.display}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block break-words font-japanese text-[1.45rem] font-extrabold leading-tight sm:text-[1.6rem]">
+                        {item.japanese}
+                      </span>
+                      <span className="mt-1.5 block break-words text-sm font-semibold leading-5 opacity-80">{item.kana}</span>
+                      <span
+                        className={`mt-1 block break-words font-reading text-sm font-extrabold ${
+                          active ? "text-white" : "text-sakura group-hover:text-white"
+                        }`}
+                      >
+                        {formatRomajiReading(item.romaji)}
+                      </span>
+                    </span>
+                  </span>
+                  <span className="mt-3 block break-words rounded-md bg-paper/70 px-2.5 py-2 text-sm font-extrabold leading-5 text-ink/68 group-hover:bg-white/16 group-hover:text-white">
+                    {item.meaning}
                   </span>
                 </button>
 

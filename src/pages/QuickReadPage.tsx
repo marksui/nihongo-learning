@@ -389,7 +389,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
         <p className="mt-1 text-base font-semibold text-ink/72 sm:text-lg">{subtitle}</p>
       </div>
 
-      <div className="grid min-w-0 grid-cols-5 gap-2 min-[420px]:grid-cols-6 sm:grid-cols-[repeat(11,minmax(0,1fr))]">
+      <div className="readable-kana-grid grid min-w-0 grid-cols-5 gap-2 min-[420px]:grid-cols-6 md:grid-cols-[repeat(11,minmax(0,1fr))]">
         {kanaRows.flatMap((row, rowIndex) =>
           row.map((id, columnIndex) => {
             if (!id) {
@@ -397,7 +397,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 <div
                   key={`${script}-${rowIndex}-${columnIndex}-blank`}
                   aria-hidden="true"
-                  className="hidden min-h-14 min-w-0 sm:block sm:min-h-16"
+                  className="hidden min-w-0 md:block"
                 />
               );
             }
@@ -417,15 +417,15 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 type="button"
                 onClick={() => onPlay(key, kana)}
                 aria-pressed={active}
-                className={`quickread-card tap-surface group grid min-h-[4.25rem] min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center transition duration-200 active:scale-95 sm:min-h-16 sm:px-0.5 sm:py-1 ${
+                className={`quickread-card tap-surface group grid aspect-square min-h-[4.15rem] min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center transition duration-200 active:scale-95 md:min-h-[4.75rem] ${
                   active
                     ? "border-yuzu/70 bg-yuzu/25 text-ink ring-2 ring-yuzu/30"
-                    : "border-ink/10 bg-rice/40 text-ink hover:border-yuzu/40 hover:bg-yuzu/10"
+                    : "border-ink/10 bg-paper/92 text-ink hover:border-yuzu/40 hover:bg-yuzu/10"
                 }`}
                 aria-label={`朗读 ${kana} ${getRomajiLabel(item)}`}
                 title={`朗读 ${kana}`}
               >
-                <span className="block min-w-0 font-japanese text-[1.7rem] font-bold leading-none sm:text-3xl md:text-4xl">
+                <span className="block min-w-0 font-japanese text-[1.75rem] font-extrabold leading-none sm:text-3xl lg:text-[2.15rem]">
                   {kana}
                 </span>
                 <span
@@ -465,7 +465,7 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
       <div className={`grid min-w-0 gap-2.5 ${
         phraseLike
           ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3"
-          : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+          : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6"
       }`}>
         {section.items.map((item) => {
           const key = `${section.id}-${item.id}`;
@@ -480,7 +480,7 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
               className={`quickread-card group flex min-w-0 cursor-pointer flex-col rounded-md border px-3 py-3 transition active:scale-[0.98] ${
                 active
                   ? "border-yuzu/70 bg-yuzu/24 ring-2 ring-yuzu/30"
-                  : "border-ink/10 bg-rice/45 hover:border-yuzu/40 hover:bg-yuzu/10"
+                  : "border-ink/10 bg-paper/92 hover:border-yuzu/40 hover:bg-yuzu/10"
               } ${phraseLike ? "min-h-0 text-left" : "min-h-32 text-center sm:min-h-36"}`}
               aria-label={`朗读 ${item.label} ${item.kana}`}
               title={`朗读 ${item.japanese}`}

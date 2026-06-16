@@ -23,24 +23,24 @@ const PageHero = ({
   title,
 }: PageHeroProps) => {
   return (
-    <section className="calm-grid-card overflow-hidden rounded-lg border border-ink/8 p-4 sm:p-5 lg:p-6">
-      <div className={`relative z-10 grid min-w-0 gap-5 ${media ? "lg:grid-cols-[minmax(0,0.88fr)_minmax(320px,0.82fr)] lg:items-stretch" : ""}`}>
-        <div className={`flex min-w-0 flex-col gap-4 md:flex-row md:items-end md:justify-between ${media ? "lg:flex-col lg:items-start lg:justify-start" : ""}`}>
+    <section className="calm-grid-card overflow-hidden rounded-lg border border-ink/10 p-4 sm:p-5 lg:p-6">
+      <div className={`relative z-10 grid min-w-0 gap-5 ${media ? "lg:grid-cols-[minmax(0,0.88fr)_minmax(320px,0.74fr)] lg:items-stretch" : ""}`}>
+        <div className={`flex min-w-0 flex-col gap-4 ${media ? "lg:justify-center" : "md:flex-row md:items-end md:justify-between"}`}>
           <div className="min-w-0">
             {eyebrow ? (
-              <p className="mb-2 text-sm font-extrabold text-matcha">{eyebrow}</p>
+              <p className="mb-3 inline-flex rounded-md border border-sakura/18 bg-sakura/8 px-2.5 py-1 text-xs font-extrabold text-sakura">{eyebrow}</p>
             ) : null}
-            <h1 className="break-words font-display text-[2rem] font-extrabold leading-tight text-ink sm:text-4xl lg:text-[2.55rem]">{title}</h1>
-            <p className="mt-2 max-w-3xl text-[0.98rem] leading-7 text-ink/70 sm:mt-3 sm:text-base">{description}</p>
-            {actions ? <div className="mt-4 flex flex-wrap gap-2.5">{actions}</div> : null}
+            <h1 className="break-words font-display text-[2rem] font-extrabold leading-[1.12] text-ink sm:text-4xl lg:text-[2.7rem]">{title}</h1>
+            <p className="mt-3 max-w-3xl text-[1rem] leading-8 text-ink/72">{description}</p>
+            {actions ? <div className="mt-5 flex flex-wrap gap-2.5">{actions}</div> : null}
           </div>
 
           {stats?.length ? (
-            <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(5.6rem,1fr))] gap-2 md:w-auto md:max-w-sm md:grid-cols-3 lg:max-w-none">
+            <div className="grid w-full grid-cols-3 gap-2 md:w-auto md:min-w-[17rem] lg:w-full lg:max-w-xl">
               {stats.map((stat, index) => (
                 <div
                   key={stat.label}
-                  className={`min-w-0 rounded-lg border px-3 py-2 text-left ${
+                  className={`min-w-0 rounded-lg border px-3 py-2.5 text-left ${
                     index % 3 === 0
                       ? "border-yuzu/22 bg-yuzu/9"
                       : index % 3 === 1
@@ -48,7 +48,7 @@ const PageHero = ({
                         : "border-sakura/14 bg-sakura/6"
                   }`}
                 >
-                  <p className="break-words text-base font-extrabold leading-tight text-ink">{stat.value}</p>
+                  <p className="break-words text-lg font-extrabold leading-tight text-ink">{stat.value}</p>
                   <p className="mt-0.5 break-words text-xs font-bold leading-tight text-ink/58">{stat.label}</p>
                 </div>
               ))}

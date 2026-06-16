@@ -3,15 +3,13 @@ import {
   ArrowRight,
   BookOpen,
   CheckCircle2,
-  Ear,
   GraduationCap,
   Grid3X3,
   Hash,
-  MessageCircle,
   MessagesSquare,
-  RotateCcw,
+  Play,
+  Sparkles,
   Table2,
-  Target,
   Trophy,
 } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -24,7 +22,7 @@ import homeStudyScene from "../assets/home-study-scene.jpg";
 import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
-import { getTodaySuggestion, learningGoals, learningMilestones, learningPathSteps } from "../data/learningPath";
+import { getTodaySuggestion, learningPathSteps } from "../data/learningPath";
 import { numberExamples } from "../data/numbers";
 import {
   getVocabularyJlptLevel,
@@ -39,7 +37,6 @@ import {
   recordSeenContent,
   setTargetJlptLevel,
   type TodayTaskKey,
-  type TodayTaskProgress,
 } from "../utils/progress";
 
 interface HomeProps {
@@ -70,17 +67,11 @@ interface PreviewItem {
   accent: string;
 }
 
-const goalIcons: Record<string, LucideIcon> = {
-  read: Ear,
-  listen: Target,
-  speak: MessageCircle,
-};
-
 const featureCards: FeatureCard[] = [
   {
-    title: "五十音图",
+    title: "五十音",
     page: "kana",
-    description: "假名、罗马音、例词一起点读。",
+    description: "假名、例词、读音一起学。",
     metric: `${kanaItems.length} 个假名`,
     accent: "bg-matcha text-white",
     icon: Grid3X3,
@@ -88,23 +79,23 @@ const featureCards: FeatureCard[] = [
   {
     title: "数字读法",
     page: "numbers",
-    description: "金额、日期、时间和复杂数字。",
-    metric: `${numberExamples.length} 条读法`,
+    description: "价格、日期、时间和复杂数字。",
+    metric: `${numberExamples.length} 条`,
     accent: "bg-yuzu text-ink",
     icon: Hash,
   },
   {
     title: "常用单词",
     page: "vocabulary",
-    description: "按问候、食物、交通等场景找词。",
-    metric: `${vocabulary.filter((word) => word.category !== "考试单词").length} 个日常词`,
+    description: "按真实生活分类查词。",
+    metric: `${vocabulary.filter((word) => word.category !== "考试单词").length} 个`,
     accent: "bg-sakura text-white",
     icon: BookOpen,
   },
   {
     title: "基础语法",
     page: "grammar",
-    description: "中文讲句型，例句可听读音。",
+    description: "中文解释，例句可点读。",
     metric: `${grammarLessons.length} 课`,
     accent: "bg-sumire text-white",
     icon: GraduationCap,
@@ -112,16 +103,16 @@ const featureCards: FeatureCard[] = [
   {
     title: "日常会话",
     page: "conversation",
-    description: "你说 / 对方说，适合跟读。",
-    metric: `${dialogues.length} 个场景`,
+    description: "你说 / 对方说，对照跟读。",
+    metric: `${dialogues.length} 个情景`,
     accent: "bg-sora text-white",
     icon: MessagesSquare,
   },
   {
     title: "假名速读",
     page: "quickread",
-    description: "快捷点读表，按文字直接听。",
-    metric: "多张速读表",
+    description: "一整页快捷点读。",
+    metric: "速查表",
     accent: "bg-matcha text-white",
     icon: Table2,
   },
@@ -130,18 +121,10 @@ const featureCards: FeatureCard[] = [
     page: "exam-vocabulary",
     description: "N5 到 N1 的补充词汇。",
     metric: `${vocabulary.length} 个词`,
-    accent: "bg-sumire text-white",
+    accent: "bg-ink text-white",
     icon: Trophy,
   },
 ];
-
-const taskLabels: Record<TodayTaskKey, string> = {
-  kana: "假名",
-  words: "单词",
-  grammar: "句型",
-  number: "数字",
-  dialogue: "会话",
-};
 
 const taskAccent: Record<TodayTaskKey, string> = {
   kana: "bg-matcha text-white",
@@ -159,9 +142,11 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const todayStats = getTodayTaskStats(progress, today);
   const previewWord = today.words[0] ?? vocabulary[0];
   const previewGrammar = today.grammar.examples[0];
-  const previewDialogue = today.dialogue.lines.find((line) => line.speaker === today.dialogue.practiceSpeaker) ?? today.dialogue.lines[0];
+  const previewDialogue =
+    today.dialogue.lines.find((line) => line.speaker === today.dialogue.practiceSpeaker) ?? today.dialogue.lines[0];
   const viewedPages = new Set(progress.viewedPages);
   const nextPathStep = learningPathSteps.find((step) => !viewedPages.has(step.page)) ?? learningPathSteps[0];
+
   const targetLevelCounts = useMemo(() => {
     return jlptVocabularyLevels.reduce<Record<JlptVocabularyLevel, number>>((counts, level) => {
       counts[level] = vocabulary.filter((word) => getVocabularyJlptLevel(word) === level).length;
@@ -177,7 +162,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       page: "kana",
       japanese: today.kanaPreview,
       reading: today.kanaPreview,
-      meaning: "先把今天这一组读顺。",
+      meaning: "把今天这一组读顺。",
       speakText: today.kanaPreview.replace(/\s+/g, "、"),
       contentIds: [`kana:${today.kanaGroup}`],
       icon: Grid3X3,
@@ -187,7 +172,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       key: "words",
       label: "单词",
       title: previewWord?.japanese ?? "日本語",
-      page: "exam-vocabulary",
+      page: previewWord?.category === "考试单词" ? "exam-vocabulary" : "vocabulary",
       japanese: previewWord?.japanese ?? "日本語",
       reading: previewWord?.kana ?? "にほんご",
       meaning: previewWord?.meaning ?? "日语",
@@ -237,9 +222,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     },
   ], [previewDialogue, previewGrammar, previewWord, today]);
 
-  const nextFeature = featureCards.find((card) => card.page === nextPathStep?.page) ?? featureCards[0];
-  const NextFeatureIcon = nextFeature.icon;
-
   const playPreview = async (item: PreviewItem) => {
     setActiveTaskKey(item.key);
     setProgress(recordSeenContent(item.contentIds));
@@ -247,19 +229,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
     window.setTimeout(() => {
       setActiveTaskKey((current) => (current === item.key ? null : current));
-    }, ok ? 360 : 900);
-  };
-
-  const playTask = (task: TodayTaskProgress) => {
-    const item = previewItems.find((preview) => preview.key === task.key);
-
-    if (item) {
-      void playPreview(item);
-    }
-  };
-
-  const chooseTargetLevel = (level: JlptVocabularyLevel) => {
-    setProgress(setTargetJlptLevel(level));
+    }, ok ? 420 : 900);
   };
 
   const completeToday = () => {
@@ -267,12 +237,16 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
     setProgress(markTodaySuggestionDone(contentIds));
   };
 
+  const chooseTargetLevel = (level: JlptVocabularyLevel) => {
+    setProgress(setTargetJlptLevel(level));
+  };
+
   return (
     <div className="space-y-6 sm:space-y-7">
       <PageHero
         title="中文学日语"
-        eyebrow="零基础中文路线"
-        description="从五十音开始，跟着点读、例句和会话慢慢建立日语耳朵。"
+        eyebrow="零基础点读路线"
+        description="打开就能跟着听、跟着读。先从五十音和常用句开始，再慢慢扩到单词、语法和真实会话。"
         stats={[
           { label: "假名", value: kanaItems.length },
           { label: "词汇", value: vocabulary.length },
@@ -282,37 +256,37 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           <>
             <button
               type="button"
+              onClick={() => onNavigate("quickread")}
+              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg bg-matcha px-4 py-2.5 font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-95"
+            >
+              直接点读
+              <Play aria-hidden="true" size={18} />
+            </button>
+            <button
+              type="button"
               onClick={() => onNavigate("kana")}
-              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg bg-matcha px-4 py-2 font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-95"
+              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg border border-ink/10 bg-paper px-4 py-2.5 font-extrabold text-ink shadow-sm transition hover:border-sora/30 hover:bg-sora/10 active:scale-95"
             >
               开始五十音
               <ArrowRight aria-hidden="true" size={18} />
             </button>
-            <button
-              type="button"
-              onClick={() => onNavigate("conversation")}
-              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg border border-ink/10 bg-paper px-4 py-2 font-extrabold text-ink shadow-sm transition hover:border-sora/30 hover:bg-sora/10 active:scale-95"
-            >
-              进入会话
-              <MessagesSquare aria-hidden="true" size={18} />
-            </button>
           </>
         }
         media={
-          <div className="overflow-hidden rounded-lg border border-ink/8 bg-paper p-2.5 shadow-card sm:p-3">
-            <div className="relative h-[18rem] overflow-hidden rounded-lg sm:h-[23rem] lg:h-[22rem]">
+          <div className="overflow-hidden rounded-lg border border-ink/10 bg-paper p-2 shadow-card">
+            <div className="relative h-[19rem] overflow-hidden rounded-lg sm:h-[23rem] lg:h-[24rem]">
               <img
                 src={homeStudyScene}
                 alt="大阪道顿堀河岸街景封面"
-                className="home-osaka-cover-image h-full w-full object-cover object-[center_45%]"
+                className="home-osaka-cover-image h-full w-full object-cover object-[center_48%]"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/62 via-ink/16 to-paper/4" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/64 via-ink/18 to-transparent" />
               <div className="absolute inset-x-3 bottom-3 rounded-lg border border-paper/60 bg-paper/92 px-3 py-3 shadow-card backdrop-blur">
                 <p className="font-japanese text-sm font-extrabold text-ink/55">Japan / 日本</p>
                 <div className="mt-1 flex flex-wrap items-end justify-between gap-2">
                   <p className="font-display text-3xl font-extrabold leading-none text-ink">Osaka 大阪</p>
-                  <p className="rounded-md bg-yuzu/20 px-2 py-1 text-xs font-extrabold text-ink/62">打开就能跟读</p>
+                  <p className="rounded-md bg-yuzu/22 px-2 py-1 text-xs font-extrabold text-ink/62">听读入门</p>
                 </div>
               </div>
             </div>
@@ -320,22 +294,28 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         }
       />
 
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1.08fr)_minmax(20rem,0.92fr)]">
+      <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <LearningCard className="p-4 sm:p-5">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <p className="text-sm font-extrabold text-sakura">今日建议</p>
-              <h2 className="mt-1 font-display text-2xl font-extrabold leading-tight text-ink sm:text-3xl">
-                听一轮，读一轮
-              </h2>
+              <p className="text-sm font-extrabold text-sakura">今日点读</p>
+              <h2 className="font-display text-2xl font-extrabold leading-tight text-ink">听一遍，跟读一遍</h2>
             </div>
-            <div className="rounded-lg border border-matcha/18 bg-matcha/8 px-3 py-2 text-left sm:text-right">
-              <p className="text-xs font-bold text-ink/52">完成度</p>
-              <p className="text-xl font-extrabold text-matcha">{todayStats.percent}%</p>
-            </div>
+            <button
+              type="button"
+              onClick={completeToday}
+              disabled={todayStats.percent === 100}
+              className={`tap-surface rounded-lg border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+                todayStats.percent === 100
+                  ? "cursor-default border-matcha/25 bg-matcha/10 text-matcha"
+                  : "cursor-pointer border-yuzu/30 bg-yuzu/16 text-ink hover:bg-yuzu/26"
+              }`}
+            >
+              {todayStats.percent === 100 ? "已完成" : "标记完成"}
+            </button>
           </div>
 
-          <div className="mt-4 h-2 overflow-hidden rounded-full bg-rice">
+          <div className="mb-4 h-2 overflow-hidden rounded-full bg-rice">
             <span
               className="block h-full rounded-full bg-matcha transition-all duration-500"
               style={{ width: `${todayStats.percent}%` }}
@@ -343,7 +323,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
             />
           </div>
 
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
             {todayStats.tasks.map((task) => {
               const item = previewItems.find((preview) => preview.key === task.key);
               if (!item) {
@@ -357,40 +337,36 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                 <div
                   key={task.key}
                   className={`rounded-lg border p-3 transition ${
-                    task.completed
-                      ? "border-matcha/25 bg-matcha/8"
-                      : active
-                        ? "border-yuzu/45 bg-yuzu/12 ring-2 ring-yuzu/20"
-                        : "border-ink/8 bg-rice/42"
+                    active
+                      ? "border-yuzu/55 bg-yuzu/14 ring-2 ring-yuzu/20"
+                      : task.completed
+                        ? "border-matcha/25 bg-matcha/8"
+                        : "border-ink/8 bg-rice/38"
                   }`}
                 >
-                  <div className="flex items-start gap-3">
-                    <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${taskAccent[task.key]} shadow-card`}>
-                      <Icon aria-hidden="true" size={18} />
+                  <div className="flex items-center justify-between gap-2">
+                    <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${item.accent}`}>
+                      <Icon aria-hidden="true" size={17} />
                     </span>
-                    <button
-                      type="button"
-                      onClick={() => onNavigate(item.page)}
-                      className="min-w-0 flex-1 cursor-pointer text-left"
-                    >
-                      <span className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-extrabold text-ink/52">{taskLabels[task.key]}</span>
-                        {task.completed ? (
-                          <span className="inline-flex items-center gap-1 rounded-md bg-matcha/12 px-1.5 py-0.5 text-[0.68rem] font-extrabold text-matcha">
-                            <CheckCircle2 aria-hidden="true" size={13} />
-                            已完成
-                          </span>
-                        ) : null}
-                      </span>
-                      <span className="mt-1 block truncate text-base font-extrabold text-ink">{item.title}</span>
-                      <span className="mt-1 line-clamp-2 text-sm leading-5 text-ink/64">{item.meaning}</span>
-                    </button>
+                    {task.completed ? <CheckCircle2 aria-hidden="true" className="text-matcha" size={18} /> : null}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate(item.page)}
+                    className="mt-3 block w-full cursor-pointer text-left"
+                  >
+                    <span className="text-xs font-extrabold text-ink/48">{item.label}</span>
+                    <span className="mt-1 block truncate font-japanese text-lg font-extrabold text-ink">{item.japanese}</span>
+                    <span className="mt-1 line-clamp-2 text-sm leading-5 text-ink/64">{item.meaning}</span>
+                  </button>
+                  <div className="mt-3 flex items-center justify-between gap-2">
+                    <span className="min-w-0 truncate text-xs font-bold text-ink/45">{item.reading}</span>
                     <SpeakButton
                       active={active}
-                      ariaLabel={`预听 ${item.title}`}
+                      ariaLabel={`播放 ${item.title}`}
                       className="h-10 w-10"
-                      onClick={() => playTask(task)}
-                      title="预听"
+                      onClick={() => playPreview(item)}
+                      title="点读"
                       variant="light"
                     />
                   </div>
@@ -398,118 +374,42 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
               );
             })}
           </div>
+        </LearningCard>
 
+        <LearningCard className="p-4 sm:p-5">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-sm font-extrabold text-matcha">下一步</p>
+              <h2 className="mt-1 text-2xl font-extrabold leading-tight text-ink">{nextPathStep?.title}</h2>
+              <p className="mt-2 text-sm leading-6 text-ink/66">{nextPathStep?.description}</p>
+            </div>
+            <Sparkles aria-hidden="true" className="shrink-0 text-yuzu" size={22} />
+          </div>
           <button
             type="button"
-            onClick={completeToday}
-            disabled={todayStats.percent === 100}
-            aria-pressed={todayStats.percent === 100}
-            className={`mt-4 flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
-              todayStats.percent === 100
-                ? "cursor-default border-matcha/25 bg-matcha/10 text-matcha"
-                : "border-yuzu/30 bg-yuzu/16 text-ink hover:bg-yuzu/26"
-            }`}
+            onClick={() => onNavigate(nextPathStep?.page ?? "kana")}
+            className="tap-surface mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-matcha px-3 py-2 text-sm font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-[0.99]"
           >
-            <CheckCircle2 aria-hidden="true" size={17} />
-            {todayStats.percent === 100 ? "今天已经完成" : "标记今日完成"}
+            继续学习
+            <ArrowRight aria-hidden="true" size={16} />
           </button>
         </LearningCard>
-
-        <div className="grid gap-4">
-          <LearningCard className="p-4 sm:p-5">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-sm font-extrabold text-matcha">下一步</p>
-                <h2 className="mt-1 font-display text-2xl font-extrabold leading-tight text-ink">{nextPathStep?.title}</h2>
-                <p className="mt-2 text-sm leading-6 text-ink/66">{nextPathStep?.description}</p>
-              </div>
-              <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-lg ${nextFeature.accent} shadow-card`}>
-                <NextFeatureIcon aria-hidden="true" size={20} />
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => onNavigate(nextPathStep?.page ?? "kana")}
-              className="tap-surface mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-matcha px-3 py-2 text-sm font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-[0.99]"
-            >
-              继续学习
-              <ArrowRight aria-hidden="true" size={16} />
-            </button>
-          </LearningCard>
-
-          <LearningCard className="p-4 sm:p-5">
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <div>
-                <p className="text-sm font-extrabold text-sumire">词汇目标</p>
-                <h2 className="mt-1 text-lg font-extrabold text-ink">{targetLevel}</h2>
-              </div>
-              <button
-                type="button"
-                onClick={() => onNavigate("exam-vocabulary")}
-                className="tap-surface flex cursor-pointer items-center gap-1.5 rounded-lg border border-ink/10 bg-rice/45 px-3 py-1.5 text-sm font-extrabold text-ink/68 transition hover:border-sumire/30 hover:bg-sumire/8 hover:text-ink"
-              >
-                词库
-                <ArrowRight aria-hidden="true" size={15} />
-              </button>
-            </div>
-            <JlptLevelSelector
-              active={targetLevel}
-              counts={targetLevelCounts}
-              levels={jlptVocabularyLevels}
-              onChange={chooseTargetLevel}
-              size="compact"
-            />
-          </LearningCard>
-        </div>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <LearningCard className="p-4 sm:p-5">
-          <div className="flex items-center justify-between gap-3">
+          <div className="mb-4 flex items-end justify-between gap-3">
             <div>
-              <p className="text-sm font-extrabold text-sora">三个月目标</p>
-              <h2 className="mt-1 font-display text-2xl font-extrabold text-ink">能听、能读、能开口</h2>
-            </div>
-            <RotateCcw aria-hidden="true" className="shrink-0 text-sora" size={22} />
-          </div>
-          <div className="mt-4 grid gap-3">
-            {learningGoals.map((goal) => {
-              const Icon = goalIcons[goal.id] ?? Target;
-
-              return (
-                <button
-                  key={goal.id}
-                  type="button"
-                  onClick={() => onNavigate(goal.page)}
-                  className="flex min-h-20 cursor-pointer items-start gap-3 rounded-lg border border-ink/8 bg-rice/42 p-3 text-left transition hover:border-matcha/25 hover:bg-rice active:scale-[0.99]"
-                >
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-paper text-matcha shadow-sm">
-                    <Icon aria-hidden="true" size={18} />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-base font-extrabold text-ink">{goal.title}</span>
-                    <span className="mt-1 block text-sm leading-6 text-ink/64">{goal.description}</span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </LearningCard>
-
-        <LearningCard className="p-4 sm:p-5">
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <div>
-              <p className="text-sm font-extrabold text-sakura">学习地图</p>
-              <h2 className="mt-1 font-display text-2xl font-extrabold text-ink">从零开始的顺序</h2>
+              <p className="text-sm font-extrabold text-sora">学习路径</p>
+              <h2 className="font-display text-2xl font-extrabold text-ink">从零开始的顺序</h2>
             </div>
             <span className="rounded-lg border border-ink/8 bg-rice/45 px-2.5 py-1 text-xs font-extrabold text-ink/58">
               {learningPathSteps.filter((step) => viewedPages.has(step.page)).length}/{learningPathSteps.length}
             </span>
           </div>
-          <div className="grid gap-2 sm:grid-cols-2">
+          <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
             {learningPathSteps.map((step, index) => {
               const done = viewedPages.has(step.page);
-              const milestone = learningMilestones.find((item) => item.id === step.milestoneId);
 
               return (
                 <button
@@ -529,30 +429,48 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                   </span>
                   <span className="min-w-0">
                     <span className="block text-sm font-extrabold text-ink">{step.title}</span>
-                    <span className="mt-1 block text-xs leading-5 text-ink/62">{step.description}</span>
-                    {milestone ? (
-                      <span className="mt-2 inline-flex rounded-md bg-yuzu/18 px-2 py-0.5 text-[0.68rem] font-extrabold text-ink/58">
-                        {milestone.label}
-                      </span>
-                    ) : null}
+                    <span className="mt-1 line-clamp-2 text-xs leading-5 text-ink/62">{step.description}</span>
                   </span>
                 </button>
               );
             })}
           </div>
         </LearningCard>
+
+        <LearningCard className="p-4 sm:p-5">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <div>
+              <p className="text-sm font-extrabold text-sumire">词汇目标</p>
+              <h2 className="mt-1 text-lg font-extrabold text-ink">{targetLevel}</h2>
+            </div>
+            <button
+              type="button"
+              onClick={() => onNavigate("exam-vocabulary")}
+              className="tap-surface rounded-lg border border-ink/10 bg-rice/45 px-3 py-1.5 text-sm font-extrabold text-ink/68 transition hover:border-sumire/30 hover:bg-sumire/8 hover:text-ink"
+            >
+              词库
+            </button>
+          </div>
+          <JlptLevelSelector
+            active={targetLevel}
+            counts={targetLevelCounts}
+            levels={jlptVocabularyLevels}
+            onChange={chooseTargetLevel}
+            size="compact"
+          />
+        </LearningCard>
       </section>
 
       <section>
-        <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-4 flex items-end justify-between gap-3">
           <div>
             <p className="text-sm font-extrabold text-matcha">快速入口</p>
-            <h2 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">选一个开始</h2>
+            <h2 className="font-display text-2xl font-extrabold text-ink">想学什么就点什么</h2>
           </div>
         </div>
 
-        <div className="learning-grid grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {featureCards.map((card, index) => {
+        <div className="learning-grid grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {featureCards.map((card) => {
             const Icon = card.icon;
 
             return (
@@ -566,10 +484,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                     <Icon aria-hidden="true" size={21} />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="flex items-start justify-between gap-3">
-                      <span className="text-lg font-extrabold text-ink">{card.title}</span>
-                      <span className="rounded-md bg-rice px-1.5 py-0.5 text-xs font-bold text-ink/50">{index + 1}</span>
-                    </span>
+                    <span className="text-lg font-extrabold text-ink">{card.title}</span>
                     <span className="mt-2 block text-sm leading-6 text-ink/68">{card.description}</span>
                     <span className="mt-3 flex items-center justify-between gap-3 text-xs font-extrabold text-ink/55">
                       <span className="truncate">{card.metric}</span>
