@@ -23,20 +23,20 @@ const PageHero = ({
   title,
 }: PageHeroProps) => {
   return (
-    <section className="calm-grid-card overflow-hidden rounded-lg border border-ink/10 p-4 sm:p-5 lg:p-6">
-      <div className={`relative z-10 grid min-w-0 gap-5 ${media ? "lg:grid-cols-[minmax(0,0.88fr)_minmax(320px,0.74fr)] lg:items-stretch" : ""}`}>
+    <section className="calm-grid-card overflow-hidden rounded-lg border border-ink/9 p-4 sm:p-5 lg:p-6">
+      <div className={`relative z-10 grid min-w-0 gap-5 ${media ? "lg:grid-cols-[minmax(0,0.92fr)_minmax(300px,0.68fr)] lg:items-stretch" : ""}`}>
         <div className={`flex min-w-0 flex-col gap-4 ${media ? "lg:justify-center" : "md:flex-row md:items-end md:justify-between"}`}>
           <div className="min-w-0">
             {eyebrow ? (
               <p className="mb-3 inline-flex rounded-md border border-sakura/18 bg-sakura/8 px-2.5 py-1 text-xs font-extrabold text-sakura">{eyebrow}</p>
             ) : null}
-            <h1 className="break-words font-display text-[2rem] font-extrabold leading-[1.12] text-ink sm:text-4xl lg:text-[2.7rem]">{title}</h1>
-            <p className="mt-3 max-w-3xl text-[1rem] leading-8 text-ink/72">{description}</p>
+            <h1 className="section-title break-words text-[2rem] sm:text-4xl lg:text-[2.65rem]">{title}</h1>
+            <p className="mt-3 max-w-3xl text-[1rem] font-medium leading-8 text-ink/70">{description}</p>
             {actions ? <div className="mt-5 flex flex-wrap gap-2.5">{actions}</div> : null}
           </div>
 
           {stats?.length ? (
-            <div className="grid w-full grid-cols-3 gap-2 md:w-auto md:min-w-[17rem] lg:w-full lg:max-w-xl">
+            <div className="grid w-full grid-cols-3 gap-2 md:w-auto md:min-w-[16rem] lg:w-full lg:max-w-lg">
               {stats.map((stat, index) => (
                 <div
                   key={stat.label}

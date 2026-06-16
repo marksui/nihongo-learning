@@ -47,7 +47,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
   return (
     <LearningCard
       interactive
-      className={`word-card-shell flex min-h-[16.5rem] flex-col justify-between p-3.5 sm:min-h-[19rem] sm:p-4 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
+      className={`word-card-shell flex min-h-[15.5rem] flex-col justify-between p-3.5 sm:p-4 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
     >
       <div>
         <FoodIllustration word={word} />
@@ -73,7 +73,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
                 {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
               </p>
             </div>
-            <h3 className={`break-words font-japanese text-2xl font-bold transition-colors sm:text-[1.75rem] ${wordActive ? "speak-text-glow text-matcha" : "text-ink"}`}>
+            <h3 className={`jp-display break-words text-2xl transition-colors sm:text-[1.85rem] ${wordActive ? "speak-text-glow text-matcha" : "text-ink"}`}>
               {word.japanese}
             </h3>
             <p className={`mt-2 text-sm text-ink/62 ${wordActive ? "reading-line-spark" : ""}`}>
@@ -91,7 +91,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
           <span className={`block h-full w-1/3 rounded-full bg-matcha/80 ${speaking ? "speak-bar" : ""}`} />
         </div>
 
-        <p className={`mt-4 text-lg font-bold text-sakura ${speaking ? "meaning-spark" : ""}`}>{word.meaning}</p>
+        <p className={`mt-3 text-lg font-extrabold text-sakura ${speaking ? "meaning-spark" : ""}`}>{word.meaning}</p>
 
         <div
           className={`mt-3 rounded-md border p-3 transition ${

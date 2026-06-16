@@ -6,18 +6,18 @@
 
 :root,
 html[data-theme="hidamari"] {
-  --color-ink: 34 38 43;
-  --color-rice: 249 246 237;
-  --color-paper: 255 253 247;
-  --color-sakura: 220 98 119;
-  --color-matcha: 47 132 93;
-  --color-sora: 55 137 189;
-  --color-yuzu: 236 187 74;
-  --color-sumire: 107 97 168;
-  --color-sky: 233 241 242;
-  --page-start: 252 249 241;
-  --page-end: 239 244 238;
-  --grid-line: 74 82 88;
+  --color-ink: 32 38 44;
+  --color-rice: 250 247 239;
+  --color-paper: 255 254 250;
+  --color-sakura: 211 91 112;
+  --color-matcha: 54 126 89;
+  --color-sora: 64 139 184;
+  --color-yuzu: 232 181 65;
+  --color-sumire: 101 91 155;
+  --color-sky: 236 242 240;
+  --page-start: 253 251 246;
+  --page-end: 239 246 242;
+  --grid-line: 80 88 92;
   color: rgb(var(--color-ink));
   background: rgb(var(--color-rice));
   font-synthesis: none;
@@ -83,10 +83,11 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(135deg, rgb(var(--page-start)) 0%, rgb(var(--page-end)) 62%, rgb(var(--color-sky) / 0.72) 100%);
+    radial-gradient(circle at 12% 0%, rgb(var(--color-yuzu) / 0.12), transparent 28rem),
+    linear-gradient(135deg, rgb(var(--page-start)) 0%, rgb(var(--page-end)) 66%, rgb(var(--color-sky) / 0.66) 100%);
   font-family: "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16px;
-  line-height: 1.62;
+  line-height: 1.68;
   letter-spacing: 0;
 }
 
@@ -97,10 +98,10 @@ body::before {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(90deg, rgb(var(--grid-line) / 0.018) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(var(--grid-line) / 0.014) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.36;
+    linear-gradient(90deg, rgb(var(--grid-line) / 0.014) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--grid-line) / 0.011) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.28;
 }
 
 .font-display {
@@ -136,7 +137,7 @@ button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid rgb(var(--color-sora) / 0.34);
+  outline: 3px solid rgb(var(--color-sora) / 0.36);
   outline-offset: 2px;
 }
 
@@ -152,17 +153,17 @@ select:focus-visible {
 
 .soft-surface {
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 12px 26px rgb(var(--color-ink) / 0.07);
+    0 1px 0 rgb(255 255 255 / 0.96) inset,
+    0 10px 22px rgb(var(--color-ink) / 0.055);
 }
 
 .calm-grid-card {
   position: relative;
   background:
-    linear-gradient(135deg, rgb(var(--color-paper) / 0.99), rgb(var(--color-sky) / 0.52));
+    linear-gradient(135deg, rgb(var(--color-paper) / 0.99), rgb(var(--color-sky) / 0.42));
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 20px 42px rgb(var(--color-ink) / 0.08);
+    0 1px 0 rgb(255 255 255 / 0.96) inset,
+    0 14px 32px rgb(var(--color-ink) / 0.065);
 }
 
 .calm-grid-card::before {
@@ -171,9 +172,9 @@ select:focus-visible {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(90deg, rgb(var(--color-ink) / 0.018) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(var(--color-ink) / 0.014) 1px, transparent 1px);
-  background-size: 30px 30px;
+    linear-gradient(90deg, rgb(var(--color-ink) / 0.012) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--color-ink) / 0.01) 1px, transparent 1px);
+  background-size: 34px 34px;
   -webkit-mask-image: linear-gradient(135deg, black 0%, transparent 72%);
   mask-image: linear-gradient(135deg, black 0%, transparent 72%);
 }
@@ -190,9 +191,9 @@ select:focus-visible {
 .app-card-hover:focus-within {
   border-color: rgb(var(--color-matcha) / 0.34);
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 16px 32px rgb(var(--color-ink) / 0.09);
-  transform: translateY(-2px);
+    0 1px 0 rgb(255 255 255 / 0.96) inset,
+    0 13px 26px rgb(var(--color-ink) / 0.075);
+  transform: translateY(-1px);
 }
 
 .filter-scroll-row {
@@ -237,7 +238,7 @@ select:focus-visible {
   margin-inline: auto;
   border: 1px solid rgb(var(--color-ink) / 0.1);
   border-radius: 0.75rem;
-  box-shadow: 0 18px 42px rgb(var(--color-ink) / 0.18);
+  box-shadow: 0 14px 34px rgb(var(--color-ink) / 0.15);
 }
 
 .quickread-card {
@@ -271,7 +272,53 @@ select:focus-visible {
 
 .number-card-panel {
   background:
-    linear-gradient(180deg, rgb(var(--color-paper) / 0.96), rgb(var(--color-rice) / 0.72));
+    linear-gradient(180deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-rice) / 0.54));
+}
+
+.app-panel {
+  border: 1px solid rgb(var(--color-ink) / 0.09);
+  border-radius: 0.75rem;
+  background: rgb(var(--color-paper) / 0.94);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.92) inset,
+    0 10px 24px rgb(var(--color-ink) / 0.055);
+}
+
+.section-title {
+  font-family: "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  font-weight: 800;
+  line-height: 1.18;
+  color: rgb(var(--color-ink));
+}
+
+.jp-display {
+  font-family: "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Meiryo", "Microsoft YaHei UI", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.sticky-learn-toolbar {
+  border: 1px solid rgb(var(--color-ink) / 0.09);
+  border-radius: 0.75rem;
+  background: rgb(var(--color-paper) / 0.96);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 10px 24px rgb(var(--color-ink) / 0.055);
+}
+
+.readable-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.5rem), 1fr));
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.comfortable-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  gap: 1rem;
+  align-items: start;
 }
 
 .section-toolbar {
@@ -460,6 +507,11 @@ select:focus-visible {
   .mobile-bottom-nav {
     padding-left: max(0.625rem, env(safe-area-inset-left));
     padding-right: max(0.625rem, env(safe-area-inset-right));
+  }
+
+  .app-card-hover:hover,
+  .app-card-hover:focus-within {
+    transform: none;
   }
 }
 

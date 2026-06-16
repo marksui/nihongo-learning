@@ -69,7 +69,7 @@ const GrammarPage = ({ onSpeak }: GrammarPageProps) => {
         ]}
       />
 
-      <section className="rounded-lg border border-ink/10 bg-paper p-4 shadow-card">
+      <section className="sticky-learn-toolbar p-3 sm:p-4">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <label className="relative block">
             <Search

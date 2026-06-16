@@ -8,7 +8,7 @@ interface KanaPageProps {
 
 const KanaPage = ({ onSpeak }: KanaPageProps) => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <PageHero
         title="五十音图"
         description="每张卡同时显示平假名、片假名、罗马音和例词。点击播放按钮就能听发音。"
@@ -24,10 +24,10 @@ const KanaPage = ({ onSpeak }: KanaPageProps) => {
         const note = kanaGroupNotes[group];
 
         return (
-          <section key={group} className="space-y-4">
-            <div className="rounded-lg border border-ink/10 bg-paper px-4 py-3 shadow-card">
+          <section key={group} className="space-y-3">
+            <div className="app-panel px-4 py-3">
               <div className="flex items-center gap-3">
-                <h2 className="font-display text-2xl font-extrabold text-ink">{group}</h2>
+                <h2 className="section-title text-2xl">{group}</h2>
                 <div className="h-px flex-1 bg-yuzu/28" />
               </div>
               {note ? (
@@ -49,7 +49,7 @@ const KanaPage = ({ onSpeak }: KanaPageProps) => {
                 </div>
               ) : null}
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+            <div className="readable-card-grid">
               {groupItems.map((item) => (
                 <KanaCard key={item.id} item={item} onSpeak={onSpeak} />
               ))}

@@ -114,7 +114,7 @@ const App = () => {
   return (
     <div className="min-h-screen overflow-x-hidden text-ink">
       <Navbar currentPage={currentPage} onNavigate={navigate} />
-      <main className="mx-auto max-w-7xl px-3 pb-[calc(7.5rem+env(safe-area-inset-bottom))] pt-4 sm:px-6 sm:pt-5 lg:px-8 lg:py-8">{page}</main>
+      <main className="mx-auto max-w-7xl px-3 pb-[calc(7.5rem+env(safe-area-inset-bottom))] pt-4 sm:px-6 sm:pt-5 lg:px-8 lg:py-7">{page}</main>
       <SiteFooter currentPage={currentPage} onNavigate={navigate} />
 
       {speechWarning ? (

@@ -33,7 +33,7 @@ const ThemeSwitcher = () => {
   }, [themeId]);
 
   return (
-    <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/88 p-3 shadow-card" aria-labelledby="theme-title">
+    <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/88 p-3 shadow-sm" aria-labelledby="theme-title">
       <div className="mb-3 flex min-w-0 items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-sora/10 text-sora">
@@ -63,7 +63,7 @@ const ThemeSwitcher = () => {
               aria-pressed={active}
               className={`tap-surface flex min-w-0 cursor-pointer items-center justify-between gap-2 rounded-lg border px-2.5 py-1.5 text-left transition active:scale-[0.99] ${
                 active
-                  ? "border-matcha bg-matcha text-white shadow-card"
+                  ? "border-matcha bg-matcha text-white shadow-sm"
                   : "border-ink/10 bg-rice/35 text-ink hover:border-matcha/25 hover:bg-rice/65"
               }`}
             >

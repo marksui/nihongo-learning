@@ -442,14 +442,14 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
       <div className="text-center">
         <h1
           id={`${script}-title`}
-          className="text-3xl font-extrabold leading-none text-ink sm:text-5xl"
+          className="section-title text-3xl leading-none sm:text-5xl"
         >
           {title}
         </h1>
         <p className="mt-1 text-base font-semibold text-ink/72 sm:text-lg">{subtitle}</p>
       </div>
 
-      <div className="readable-kana-grid grid min-w-0 grid-cols-5 gap-2 min-[420px]:grid-cols-6 md:grid-cols-[repeat(11,minmax(0,1fr))]">
+      <div className="readable-kana-grid grid min-w-0 grid-cols-5 gap-1.5 min-[420px]:grid-cols-6 sm:gap-2 md:grid-cols-[repeat(11,minmax(0,1fr))]">
         {kanaRows.flatMap((row, rowIndex) =>
           row.map((id, columnIndex) => {
             if (!id) {
@@ -477,7 +477,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 type="button"
                 onClick={() => onPlay(key, kana)}
                 aria-pressed={active}
-                className={`quickread-card tap-surface group grid aspect-square min-h-[4.15rem] min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center transition duration-200 active:scale-95 md:min-h-[4.75rem] ${
+                className={`quickread-card tap-surface group grid aspect-square min-h-[4rem] min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center transition duration-200 active:scale-95 md:min-h-[4.65rem] ${
                   active
                     ? "border-yuzu/70 bg-yuzu/25 text-ink ring-2 ring-yuzu/30"
                     : "border-ink/10 bg-paper/92 text-ink hover:border-yuzu/40 hover:bg-yuzu/10"
@@ -485,7 +485,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 aria-label={`朗读 ${kana} ${getRomajiLabel(item)}`}
                 title={`朗读 ${kana}`}
               >
-                <span className="block min-w-0 font-japanese text-[1.75rem] font-extrabold leading-none sm:text-3xl lg:text-[2.15rem]">
+                <span className="jp-display block min-w-0 text-[1.7rem] sm:text-3xl lg:text-[2.1rem]">
                   {kana}
                 </span>
                 <span
@@ -516,7 +516,7 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
   return (
     <section aria-labelledby={`${section.id}-title`} className="space-y-4">
       <div className="text-center">
-        <h2 id={`${section.id}-title`} className="text-2xl font-extrabold leading-none text-ink sm:text-4xl">
+        <h2 id={`${section.id}-title`} className="section-title text-2xl leading-none sm:text-4xl">
           {section.title}
         </h2>
         <p className="mt-1 text-sm font-semibold text-ink/68 sm:text-base">{section.subtitle}</p>
@@ -553,7 +553,7 @@ const QuickReadTableSection = ({ activeKey, section, onPlay }: QuickReadTableSec
                   size={16}
                 />
               </span>
-              <span className={`mt-2 flex items-center break-words font-japanese font-bold leading-tight ${
+              <span className={`mt-2 flex items-center break-words font-japanese font-extrabold leading-tight ${
                 phraseLike ? "min-h-0 justify-start text-[1.35rem] sm:text-2xl" : "min-h-12 justify-center text-2xl sm:text-3xl"
               } ${active ? "text-matcha" : "text-ink"}`}>
                 {item.japanese}
@@ -606,10 +606,10 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
 
   return (
     <div className="space-y-4">
-      <section className="compact-sticky-panel sticky top-[3.85rem] z-20 overflow-y-auto rounded-lg border border-ink/10 bg-paper/95 p-2.5 shadow-card backdrop-blur md:top-24 md:p-3">
+      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[3.85rem] z-20 overflow-y-auto p-2.5 backdrop-blur md:top-24 md:p-3">
         <div className="mb-2 flex items-center justify-between gap-3">
           <div>
-            <h1 className="font-display text-xl font-extrabold text-ink sm:text-3xl">{activeViewMeta.label}</h1>
+            <h1 className="section-title text-xl sm:text-3xl">{activeViewMeta.label}</h1>
           </div>
           <p className="shrink-0 rounded bg-rice px-2 py-1 text-xs font-bold text-ink/58 sm:text-sm">{activeViewMeta.count}</p>
         </div>
@@ -629,7 +629,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
                 aria-pressed={active}
                 className={`tap-surface w-[8.75rem] shrink-0 cursor-pointer snap-start rounded-md border px-3 py-2 text-left transition active:scale-[0.99] lg:w-auto ${
                   active
-                    ? "border-matcha bg-matcha text-white shadow-card"
+                    ? "border-matcha bg-matcha text-white shadow-sm"
                     : "border-ink/10 bg-rice/45 text-ink hover:border-matcha/25 hover:bg-rice/70"
                 }`}
               >
@@ -643,7 +643,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
         </div>
       </section>
 
-      <article className="mx-auto w-full overflow-hidden rounded-lg border border-ink/10 bg-paper/96 px-2.5 py-6 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
+      <article className="mx-auto w-full overflow-hidden rounded-lg border border-ink/10 bg-paper/96 px-2.5 py-5 shadow-card sm:max-w-5xl sm:px-8 sm:py-8">
         <div className="space-y-9 sm:space-y-10">
           {activeView === "basic" ? (
             <>

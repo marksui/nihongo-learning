@@ -136,7 +136,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
   const filterSignature = `${activeLevel}-${activeTopic}-${query.trim()}-${filteredWords.length}`;
 
   return (
-    <div className="space-y-7">
+    <div className="space-y-6">
       <PageHero
         title="JLPT 备考词库"
         description="按 N5 到 N1 分级看词，配合主题筛选和点读。适合从零基础慢慢扩到能力考常见词。"
@@ -148,7 +148,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
       />
 
       <section
-        className={`exam-filter-panel compact-sticky-panel sticky top-[4.5rem] z-20 overflow-y-auto rounded-lg border border-ink/10 bg-paper p-3 shadow-card backdrop-blur sm:p-4 md:top-24 ${
+        className={`exam-filter-panel compact-sticky-panel sticky-learn-toolbar sticky top-[4.5rem] z-20 overflow-y-auto p-3 backdrop-blur sm:p-4 md:top-24 ${
           hasActiveFilters ? "exam-filter-panel-active" : ""
         }`}
       >
@@ -251,7 +251,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
         })}
       </section>
 
-      <section key={filterSignature} className="exam-result-shell grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section key={filterSignature} className="exam-result-shell comfortable-card-grid">
         {filteredWords.length ? (
           filteredWords.map((word, index) => (
             <div

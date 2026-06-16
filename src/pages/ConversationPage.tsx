@@ -74,7 +74,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
         ]}
       />
 
-      <section className="rounded-lg border border-ink/10 bg-paper p-4 shadow-card">
+      <section className="sticky-learn-toolbar p-3 sm:p-4">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <label className="relative block">
             <Search
@@ -132,8 +132,8 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
         </div>
       </section>
 
-      <section className="grid min-w-0 gap-5 lg:grid-cols-[21rem_minmax(0,1fr)]">
-        <aside className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper p-3 shadow-card lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)]">
+      <section className="grid min-w-0 gap-4 lg:grid-cols-[20rem_minmax(0,1fr)]">
+        <aside className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper/95 p-3 shadow-card lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)]">
           <div className="flex items-center justify-between px-2 py-2">
             <div className="flex items-center gap-2 text-sm font-bold text-ink">
               <MessageCircle aria-hidden="true" className="text-matcha" size={18} />
@@ -158,7 +158,7 @@ const ConversationPage = ({ onSpeak }: ConversationPageProps) => {
                   onClick={() => setSelectedDialogueId(dialogue.id)}
                   className={`w-[15rem] shrink-0 cursor-pointer rounded-md border p-3 text-left transition lg:w-auto ${
                     active
-                      ? "border-matcha bg-matcha/10 shadow-card ring-2 ring-matcha/15"
+                      ? "border-matcha bg-matcha/10 shadow-sm ring-2 ring-matcha/15"
                       : "border-ink/8 bg-rice/35 hover:border-yuzu/35 hover:bg-rice/70"
                   }`}
                 >

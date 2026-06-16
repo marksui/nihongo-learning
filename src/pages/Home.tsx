@@ -242,7 +242,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   };
 
   return (
-    <div className="space-y-6 sm:space-y-7">
+    <div className="space-y-5 sm:space-y-6">
       <PageHero
         title="中文学日语"
         eyebrow="零基础点读路线"
@@ -257,7 +257,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
             <button
               type="button"
               onClick={() => onNavigate("quickread")}
-              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg bg-matcha px-4 py-2.5 font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-95"
+              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg bg-matcha px-4 py-2.5 font-extrabold text-white shadow-sm transition hover:bg-matcha/90 active:scale-95"
             >
               直接点读
               <Play aria-hidden="true" size={18} />
@@ -273,8 +273,8 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           </>
         }
         media={
-          <div className="overflow-hidden rounded-lg border border-ink/10 bg-paper p-2 shadow-card">
-            <div className="relative h-[19rem] overflow-hidden rounded-lg sm:h-[23rem] lg:h-[24rem]">
+          <div className="overflow-hidden rounded-lg border border-ink/10 bg-paper p-1.5 shadow-sm">
+            <div className="relative h-[16rem] overflow-hidden rounded-lg sm:h-[20rem] lg:h-[22rem]">
               <img
                 src={homeStudyScene}
                 alt="大阪道顿堀河岸街景封面"
@@ -282,10 +282,10 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                 loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/64 via-ink/18 to-transparent" />
-              <div className="absolute inset-x-3 bottom-3 rounded-lg border border-paper/60 bg-paper/92 px-3 py-3 shadow-card backdrop-blur">
+              <div className="absolute inset-x-3 bottom-3 rounded-lg border border-paper/60 bg-paper/92 px-3 py-3 shadow-sm backdrop-blur">
                 <p className="font-japanese text-sm font-extrabold text-ink/55">Japan / 日本</p>
                 <div className="mt-1 flex flex-wrap items-end justify-between gap-2">
-                  <p className="font-display text-3xl font-extrabold leading-none text-ink">Osaka 大阪</p>
+                  <p className="section-title text-2xl leading-none text-ink sm:text-3xl">Osaka 大阪</p>
                   <p className="rounded-md bg-yuzu/22 px-2 py-1 text-xs font-extrabold text-ink/62">听读入门</p>
                 </div>
               </div>
@@ -294,12 +294,12 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         }
       />
 
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      <section className="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_20rem]">
         <LearningCard className="p-4 sm:p-5">
           <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="text-sm font-extrabold text-sakura">今日点读</p>
-              <h2 className="font-display text-2xl font-extrabold leading-tight text-ink">听一遍，跟读一遍</h2>
+              <h2 className="section-title text-2xl">听一遍，跟读一遍</h2>
             </div>
             <button
               type="button"
@@ -323,7 +323,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
             />
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {todayStats.tasks.map((task) => {
               const item = previewItems.find((preview) => preview.key === task.key);
               if (!item) {
@@ -356,7 +356,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                     className="mt-3 block w-full cursor-pointer text-left"
                   >
                     <span className="text-xs font-extrabold text-ink/48">{item.label}</span>
-                    <span className="mt-1 block truncate font-japanese text-lg font-extrabold text-ink">{item.japanese}</span>
+                    <span className="mt-1 block break-words font-japanese text-lg font-extrabold leading-snug text-ink">{item.japanese}</span>
                     <span className="mt-1 line-clamp-2 text-sm leading-5 text-ink/64">{item.meaning}</span>
                   </button>
                   <div className="mt-3 flex items-center justify-between gap-2">
@@ -388,7 +388,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           <button
             type="button"
             onClick={() => onNavigate(nextPathStep?.page ?? "kana")}
-            className="tap-surface mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-matcha px-3 py-2 text-sm font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-[0.99]"
+            className="tap-surface mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-matcha px-3 py-2 text-sm font-extrabold text-white shadow-sm transition hover:bg-matcha/90 active:scale-[0.99]"
           >
             继续学习
             <ArrowRight aria-hidden="true" size={16} />
@@ -396,18 +396,18 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         </LearningCard>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      <section className="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_20rem]">
         <LearningCard className="p-4 sm:p-5">
           <div className="mb-4 flex items-end justify-between gap-3">
             <div>
               <p className="text-sm font-extrabold text-sora">学习路径</p>
-              <h2 className="font-display text-2xl font-extrabold text-ink">从零开始的顺序</h2>
+              <h2 className="section-title text-2xl">从零开始的顺序</h2>
             </div>
             <span className="rounded-lg border border-ink/8 bg-rice/45 px-2.5 py-1 text-xs font-extrabold text-ink/58">
               {learningPathSteps.filter((step) => viewedPages.has(step.page)).length}/{learningPathSteps.length}
             </span>
           </div>
-          <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {learningPathSteps.map((step, index) => {
               const done = viewedPages.has(step.page);
 
@@ -465,11 +465,11 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         <div className="mb-4 flex items-end justify-between gap-3">
           <div>
             <p className="text-sm font-extrabold text-matcha">快速入口</p>
-            <h2 className="font-display text-2xl font-extrabold text-ink">想学什么就点什么</h2>
+            <h2 className="section-title text-2xl">想学什么就点什么</h2>
           </div>
         </div>
 
-        <div className="learning-grid grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="readable-card-grid">
           {featureCards.map((card) => {
             const Icon = card.icon;
 

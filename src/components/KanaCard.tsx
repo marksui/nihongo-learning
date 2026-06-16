@@ -42,12 +42,12 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
   const exampleActive = activeTarget === "example";
 
   return (
-      <LearningCard
-        interactive
-      className={`flex min-h-[12.5rem] flex-col justify-between p-3.5 sm:min-h-[13.75rem] sm:p-4 ${activeTarget ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/25" : ""}`}
+    <LearningCard
+      interactive
+      className={`flex min-h-[12rem] flex-col justify-between p-3.5 sm:p-4 ${activeTarget ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/25" : ""}`}
     >
       <div>
-          <div className="mb-3 flex items-start justify-between gap-2.5">
+        <div className="mb-3 flex items-start justify-between gap-2.5">
           <div>
             <p
               className={`mb-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
@@ -61,11 +61,11 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
               {studyState.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
               {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
             </p>
-            <div className="flex items-baseline gap-2.5">
-              <span className={`font-japanese text-[2.75rem] font-bold leading-none transition-colors sm:text-[3rem] ${kanaActive ? "text-matcha" : "text-ink"}`}>
+            <div className="flex items-end gap-2.5">
+              <span className={`jp-display text-[3rem] transition-colors sm:text-[3.25rem] ${kanaActive ? "text-matcha" : "text-ink"}`}>
                 {item.hiragana}
               </span>
-              <span className={`font-japanese text-[2.05rem] font-bold leading-none transition-colors sm:text-[2.35rem] ${kanaActive ? "text-sakura" : "text-sumire"}`}>
+              <span className={`jp-display text-[2.15rem] transition-colors sm:text-[2.35rem] ${kanaActive ? "text-sakura" : "text-sumire"}`}>
                 {item.katakana}
               </span>
             </div>
@@ -95,7 +95,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
               title="朗读例词"
             >
               <p className="text-xs font-bold text-ink/52">例词</p>
-              <p className={`mt-1 break-words font-japanese text-xl font-bold transition-colors ${exampleActive ? "text-matcha" : "text-ink"}`}>
+              <p className={`mt-1 break-words font-japanese text-xl font-extrabold leading-snug transition-colors ${exampleActive ? "text-matcha" : "text-ink"}`}>
                 {item.example.word}
               </p>
               <p className="mt-1 break-words text-sm leading-5 text-ink/62">
@@ -114,7 +114,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="min-w-0 text-sm font-semibold text-ink/76">中文：{item.example.meaning}</p>
         <button
           type="button"

@@ -117,7 +117,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
   };
 
   return (
-    <div className="space-y-7">
+    <div className="space-y-6">
       <PageHero
         title="数字读法"
         description="从 0 到复杂金额、日期、人数、楼层和电话编号都整理在一起。点击数字卡片或播放按钮，就能听到日语读法。"
@@ -128,7 +128,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         ]}
       />
 
-      <section className="compact-sticky-panel sticky top-[4.5rem] z-20 overflow-y-auto rounded-lg border border-ink/10 bg-paper/94 p-3 shadow-card backdrop-blur sm:p-4 md:top-24">
+      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[4.5rem] z-20 overflow-y-auto p-3 backdrop-blur sm:p-4 md:top-24">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <label className="relative block">
             <Search
@@ -257,7 +257,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         </section>
       ) : null}
 
-      <section className="grid items-start gap-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <section className="readable-card-grid items-start">
         {filteredNumbers.length ? (
           filteredNumbers.map((item) => {
             const active = activeNumberId === item.id;
@@ -266,7 +266,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
             return (
               <LearningCard
                 key={item.id}
-                className={`h-full overflow-hidden p-3 sm:p-4 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
+                className={`overflow-hidden p-3.5 sm:p-4 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
                 interactive
               >
                 <div className="mb-3 flex items-start justify-between gap-3">
@@ -305,15 +305,15 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                   }`}
                   title="点击日语读法朗读"
                 >
-                  <span className="flex min-w-0 items-start gap-3">
-                    <span className="min-w-[4.4rem] break-words font-sans text-[2.55rem] font-extrabold leading-none text-current sm:text-[2.75rem]">
+                  <span className="grid min-w-0 gap-3 sm:grid-cols-[5.3rem_minmax(0,1fr)] sm:items-center">
+                    <span className="grid min-h-[4.4rem] place-items-center break-words rounded-md border border-current/10 bg-paper/50 px-2 text-center font-sans text-[2.25rem] font-extrabold leading-none text-current sm:text-[2.45rem]">
                       {item.display}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block break-words font-japanese text-[1.45rem] font-extrabold leading-tight sm:text-[1.6rem]">
+                      <span className="jp-display block break-words text-[1.8rem] sm:text-[2rem]">
                         {item.japanese}
                       </span>
-                      <span className="mt-1.5 block break-words text-sm font-semibold leading-5 opacity-80">{item.kana}</span>
+                      <span className="mt-2 block break-words text-sm font-semibold leading-5 opacity-80">{item.kana}</span>
                       <span
                         className={`mt-1 block break-words font-reading text-sm font-extrabold ${
                           active ? "text-white" : "text-sakura group-hover:text-white"

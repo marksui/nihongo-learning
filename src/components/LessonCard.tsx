@@ -52,7 +52,7 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
 
   return (
     <LearningCard className="overflow-hidden bg-paper/96">
-      <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.38fr)] lg:items-start">
+      <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.36fr)] lg:items-start">
         <div className="min-w-0 lg:pt-1">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-sumire/10 text-sumire">
@@ -74,14 +74,14 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
               <span className="rounded-md bg-rice/70 px-2.5 py-1 text-xs font-extrabold text-ink/52">{lesson.level}</span>
             ) : null}
           </div>
-          <h2 className="break-words font-display text-3xl font-extrabold leading-tight text-ink">{lesson.title}</h2>
+          <h2 className="section-title break-words text-2xl sm:text-3xl">{lesson.title}</h2>
           <p className="mt-3 max-w-4xl text-sm leading-7 text-ink/70">{lesson.explanation}</p>
         </div>
 
         <div className="rounded-md border border-matcha/18 bg-matcha/8 p-3 text-ink">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <p className="break-words font-japanese text-2xl font-extrabold leading-tight">{lesson.pattern}</p>
+              <p className="jp-display break-words text-2xl">{lesson.pattern}</p>
               <div className="mt-2">
                 <AnimatedReading
                   kana={lesson.patternKana}
@@ -116,7 +116,7 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
       </div>
 
       <div className="border-t border-ink/8 bg-rice/25 px-4 py-4 sm:px-5">
-        <div className="grid gap-px overflow-hidden rounded-md border border-ink/8 bg-ink/8 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-3">
           {lesson.examples.map((example, index) => {
             const readingKey = `example-${index}`;
             const active = activeReadingKey === readingKey;
@@ -124,8 +124,8 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
             return (
               <div
                 key={example.japanese}
-                className={`min-w-0 p-4 transition duration-300 ${
-                  active ? "bg-yuzu/15 ring-2 ring-inset ring-yuzu/30" : "bg-paper/92"
+                className={`min-w-0 rounded-md border p-4 transition duration-300 ${
+                  active ? "border-yuzu/40 bg-yuzu/15 ring-2 ring-inset ring-yuzu/30" : "border-ink/8 bg-paper/92"
                 }`}
               >
                 <div className="flex items-start justify-between gap-3">

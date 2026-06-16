@@ -124,8 +124,8 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
   };
 
   return (
-    <article className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper shadow-card">
-      <div className="border-b border-ink/10 bg-paper p-5">
+    <article className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper/96 shadow-card">
+      <div className="border-b border-ink/10 bg-paper p-4 sm:p-5">
         <div className="flex min-w-0 flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
@@ -144,7 +144,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
                 {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
               </span>
             </div>
-            <h2 className="mt-2 break-words font-display text-3xl font-extrabold text-ink">{dialogue.title}</h2>
+            <h2 className="section-title mt-2 break-words text-2xl sm:text-3xl">{dialogue.title}</h2>
 
             <div className="mt-4 grid min-w-0 gap-2 sm:grid-cols-2">
               <div className="flex min-w-0 items-center gap-3 rounded-md bg-matcha/10 px-3 py-2">
@@ -225,7 +225,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
         </div>
       </div>
 
-      <div className="relative bg-rice/55 p-4 sm:p-5">
+      <div className="relative bg-rice/45 p-3 sm:p-5">
         <div className="absolute left-1/2 top-5 hidden h-[calc(100%-2.5rem)] w-px -translate-x-1/2 bg-black/8 md:block" />
         <div className="space-y-4">
           {dialogue.lines.map((line, index) => {
@@ -238,7 +238,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
                 className={`relative flex ${practiceLine ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`w-full rounded-lg border p-4 shadow-sm transition duration-300 md:max-w-[76%] ${
+                  className={`w-full rounded-lg border p-3.5 shadow-sm transition duration-300 md:max-w-[76%] ${
                     active
                       ? "scale-[1.01] border-yuzu bg-paper shadow-soft ring-2 ring-yuzu/30"
                       : practiceLine

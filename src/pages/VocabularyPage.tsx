@@ -70,7 +70,7 @@ const VocabularyPage = ({ onOpenExamVocabulary, onSpeak }: VocabularyPageProps) 
   }, [category, commonVocabulary, query]);
 
   return (
-    <div className="space-y-7">
+    <div className="space-y-6">
       <PageHero
         title="常用单词"
         description="按真实场景积累日常词汇，包含日语、假名读法、分隔 romaji、中文意思、例句和中文翻译。食物、水果、蔬菜保留插图，适合边看边听。"
@@ -81,7 +81,7 @@ const VocabularyPage = ({ onOpenExamVocabulary, onSpeak }: VocabularyPageProps) 
         ]}
       />
 
-      <section className="compact-sticky-panel sticky top-[4.5rem] z-20 overflow-y-auto rounded-lg border border-ink/10 bg-paper p-3 shadow-card backdrop-blur sm:p-4 md:top-24">
+      <section className="compact-sticky-panel sticky-learn-toolbar sticky top-[4.5rem] z-20 overflow-y-auto p-3 backdrop-blur sm:p-4 md:top-24">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <label className="relative block">
             <Search
@@ -133,7 +133,7 @@ const VocabularyPage = ({ onOpenExamVocabulary, onSpeak }: VocabularyPageProps) 
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section className="comfortable-card-grid">
         {filteredWords.length ? (
           filteredWords.map((word) => <WordCard key={word.id} word={word} onSpeak={onSpeak} />)
         ) : (

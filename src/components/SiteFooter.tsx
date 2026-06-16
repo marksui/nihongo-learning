@@ -23,11 +23,11 @@ const footerLinks: Array<{ label: string; page: PageKey }> = [
 const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
   return (
     <footer className="border-t border-ink/8 bg-paper/58 px-3 pb-28 pt-5 text-ink backdrop-blur sm:px-4 lg:px-6 lg:pb-7">
-      <div className="mx-auto grid max-w-7xl gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,0.36fr)]">
-        <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/88 p-3 shadow-card" aria-labelledby="footer-title">
+      <div className="mx-auto grid max-w-7xl gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,0.34fr)]">
+        <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/88 p-3 shadow-sm" aria-labelledby="footer-title">
           <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex min-w-0 items-center gap-2.5">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-matcha text-sm font-extrabold text-white shadow-card">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-matcha text-sm font-extrabold text-white shadow-sm">
                 日
               </span>
               <div className="min-w-0">
