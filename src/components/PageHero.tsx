@@ -21,17 +21,17 @@ const PageHero = ({
   title,
 }: PageHeroProps) => {
   return (
-    <section className="rounded-lg border border-ink/8 bg-paper/92 p-3 shadow-card sm:p-5">
-      <div className={`grid gap-5 ${media ? "lg:grid-cols-[minmax(0,0.92fr)_minmax(320px,0.78fr)] lg:items-stretch" : ""}`}>
+    <section className="calm-grid-card overflow-hidden rounded-lg border border-ink/8 p-4 shadow-card sm:p-5">
+      <div className={`grid min-w-0 gap-5 ${media ? "lg:grid-cols-[minmax(0,0.92fr)_minmax(300px,0.78fr)] lg:items-stretch" : ""}`}>
         <div className={`flex min-w-0 flex-col gap-4 md:flex-row md:items-end md:justify-between ${media ? "lg:flex-col lg:items-start lg:justify-start" : ""}`}>
           <div className="min-w-0">
-            <h1 className="break-words font-display text-3xl font-extrabold leading-tight text-ink sm:text-4xl">{title}</h1>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-ink/72 sm:text-base">{description}</p>
+            <h1 className="break-words font-display text-[2rem] font-extrabold leading-tight text-ink sm:text-4xl">{title}</h1>
+            <p className="mt-2 max-w-3xl text-[0.95rem] leading-7 text-ink/72 sm:mt-3 sm:text-base">{description}</p>
             {actions ? <div className="mt-4 flex flex-wrap gap-2">{actions}</div> : null}
           </div>
 
           {stats?.length ? (
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:flex md:max-w-xs md:flex-wrap md:justify-end lg:max-w-none lg:justify-start">
+            <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(5.75rem,1fr))] gap-2 md:w-auto md:max-w-sm md:grid-cols-3 lg:max-w-none">
               {stats.map((stat, index) => (
                 <div
                   key={stat.label}
@@ -43,8 +43,8 @@ const PageHero = ({
                         : "border-sakura/14 bg-sakura/6"
                   }`}
                 >
-                  <p className="truncate text-base font-extrabold text-ink">{stat.value}</p>
-                  <p className="truncate text-xs font-bold text-ink/58">{stat.label}</p>
+                  <p className="break-words text-base font-extrabold leading-tight text-ink">{stat.value}</p>
+                  <p className="mt-0.5 break-words text-xs font-bold leading-tight text-ink/58">{stat.label}</p>
                 </div>
               ))}
             </div>

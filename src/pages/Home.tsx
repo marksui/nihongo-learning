@@ -411,7 +411,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
             <button
               type="button"
               onClick={() => onNavigate(continuePage)}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md bg-matcha px-4 py-2 font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-95"
+              className="tap-surface flex cursor-pointer items-center gap-2 rounded-md bg-matcha px-4 py-2 font-extrabold text-white shadow-card transition hover:bg-matcha/90 active:scale-95"
             >
               {continueCta}
               <ArrowRight aria-hidden="true" size={18} />
@@ -428,8 +428,8 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           </>
         }
         media={
-          <div className="home-osaka-cover overflow-hidden rounded-lg border border-sora/18 bg-paper p-3 shadow-card sm:p-4">
-            <div className="home-osaka-cover-inner relative aspect-[9/13] min-h-[23rem] overflow-hidden rounded-md sm:aspect-[4/5] sm:min-h-[26rem] lg:h-full lg:min-h-[34rem]">
+          <div className="home-osaka-cover overflow-hidden rounded-lg border border-sora/18 bg-paper p-2.5 shadow-card sm:p-4">
+            <div className="home-osaka-cover-inner relative aspect-[9/13] min-h-[20rem] overflow-hidden rounded-md sm:aspect-[4/5] sm:min-h-[26rem] lg:h-full lg:min-h-[34rem]">
               <img
                 src={homeStudyScene}
                 alt="大阪道顿堀河岸街景封面"
@@ -474,7 +474,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                         key={item.key}
                         type="button"
                         onClick={() => setActiveHeroPreviewKey(item.key)}
-                        className={`grid min-h-10 cursor-pointer place-items-center rounded-md border text-xs font-extrabold transition active:scale-95 ${
+                        className={`tap-surface grid cursor-pointer place-items-center rounded-md border text-xs font-extrabold transition active:scale-95 ${
                           selected
                             ? "border-matcha bg-matcha text-white shadow-card"
                             : "border-ink/8 bg-rice/70 text-ink/58 hover:border-yuzu/35 hover:bg-yuzu/18 hover:text-ink"

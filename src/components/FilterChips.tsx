@@ -20,7 +20,7 @@ const FilterChips = <T extends string>({
   return (
     <div className="min-w-0">
       <div
-        className="filter-scroll-row flex gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible"
+        className="filter-scroll-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0"
         aria-label={label ?? "筛选"}
         role="group"
       >
@@ -33,14 +33,14 @@ const FilterChips = <T extends string>({
               type="button"
               onClick={() => onChange(option)}
               aria-pressed={selected}
-              className={`flex min-h-11 max-w-[16rem] shrink-0 snap-start touch-manipulation cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-95 ${
+              className={`tap-surface flex max-w-[14rem] shrink-0 snap-start cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-95 md:max-w-[16rem] ${
                 selected
                   ? "filter-chip-selected border-matcha bg-matcha text-white shadow-card"
                   : "border-ink/10 bg-paper text-ink/70 hover:border-yuzu/35 hover:bg-yuzu/12 hover:text-ink"
               }`}
             >
               {Icon ? <Icon aria-hidden="true" size={15} /> : null}
-              <span className="truncate">{option}</span>
+              <span className="truncate whitespace-nowrap">{option}</span>
               {counts?.[option] !== undefined ? (
                 <span
                   className={`rounded px-1.5 py-0.5 text-xs ${

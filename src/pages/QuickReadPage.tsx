@@ -329,7 +329,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
         <p className="mt-1 text-base font-semibold text-ink/72 sm:text-lg">{subtitle}</p>
       </div>
 
-      <div className="grid min-w-0 grid-cols-5 gap-1.5 min-[390px]:grid-cols-6 sm:grid-cols-[repeat(11,minmax(0,1fr))] sm:gap-2">
+      <div className="grid min-w-0 grid-cols-5 gap-2 min-[420px]:grid-cols-6 sm:grid-cols-[repeat(11,minmax(0,1fr))]">
         {kanaRows.flatMap((row, rowIndex) =>
           row.map((id, columnIndex) => {
             if (!id) {
@@ -357,7 +357,7 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 type="button"
                 onClick={() => onPlay(key, kana)}
                 aria-pressed={active}
-                className={`quickread-card group grid min-h-16 min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center transition duration-200 active:scale-95 sm:min-h-16 sm:px-0.5 sm:py-1 ${
+                className={`quickread-card tap-surface group grid min-h-[4.25rem] min-w-0 cursor-pointer place-items-center rounded-md border px-1 py-1.5 text-center transition duration-200 active:scale-95 sm:min-h-16 sm:px-0.5 sm:py-1 ${
                   active
                     ? "border-yuzu/70 bg-yuzu/25 text-ink ring-2 ring-yuzu/30"
                     : "border-ink/10 bg-rice/40 text-ink hover:border-yuzu/40 hover:bg-yuzu/10"
@@ -365,11 +365,11 @@ const KanaPosterSection = ({ activeKey, script, subtitle, title, onPlay }: KanaP
                 aria-label={`朗读 ${kana} ${getRomajiLabel(item)}`}
                 title={`朗读 ${kana}`}
               >
-                <span className="block min-w-0 font-japanese text-2xl font-bold leading-none sm:text-3xl md:text-4xl">
+                <span className="block min-w-0 font-japanese text-[1.7rem] font-bold leading-none sm:text-3xl md:text-4xl">
                   {kana}
                 </span>
                 <span
-                  className={`mt-1 block min-w-0 font-reading text-[0.62rem] font-extrabold leading-none sm:text-sm ${
+                  className={`mt-1 block min-w-0 font-reading text-[0.68rem] font-extrabold leading-none sm:text-sm ${
                     active ? "text-matcha" : "text-ink/58 group-hover:text-matcha"
                   }`}
                 >
@@ -494,7 +494,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
           <p className="shrink-0 rounded bg-rice px-2 py-1 text-xs font-bold text-ink/58 sm:text-sm">{activeViewMeta.count}</p>
         </div>
 
-        <div className="filter-scroll-row flex gap-2 overflow-x-auto pb-1 lg:grid lg:grid-cols-5 lg:overflow-visible lg:pb-0">
+        <div className="filter-scroll-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0 lg:pb-0">
           {quickReadViews.map((view) => {
             const active = activeView === view.id;
 
@@ -507,7 +507,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
                   setActiveKey(null);
                 }}
                 aria-pressed={active}
-                className={`min-h-12 w-[8.75rem] shrink-0 cursor-pointer snap-start rounded-md border px-3 py-2 text-left transition active:scale-[0.99] lg:w-auto ${
+                className={`tap-surface w-[8.75rem] shrink-0 cursor-pointer snap-start rounded-md border px-3 py-2 text-left transition active:scale-[0.99] lg:w-auto ${
                   active
                     ? "border-matcha bg-matcha text-white shadow-card"
                     : "border-ink/10 bg-rice/45 text-ink hover:border-matcha/25 hover:bg-rice/70"
@@ -523,7 +523,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
         </div>
       </section>
 
-      <article className="mx-auto w-full overflow-hidden rounded-lg border border-ink/10 bg-paper px-2.5 py-6 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
+      <article className="mx-auto w-full overflow-hidden rounded-lg border border-ink/10 bg-paper/96 px-2.5 py-6 shadow-card sm:max-w-5xl sm:px-8 sm:py-9">
         <div className="space-y-9 sm:space-y-10">
           {activeView === "basic" ? (
             <>

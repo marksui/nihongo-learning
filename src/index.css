@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -26,6 +26,10 @@ html[data-theme="hidamari"] {
   -moz-osx-font-smoothing: grayscale;
   scroll-padding-top: 5rem;
   scroll-padding-bottom: calc(7rem + env(safe-area-inset-bottom));
+}
+
+html {
+  overflow-x: hidden;
 }
 
 html[data-theme="matcha"] {
@@ -77,15 +81,17 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: rgb(var(--color-rice));
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+  background:
+    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--page-end)) 100%);
+  font-family: "Noto Sans SC", "Noto Sans JP", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0;
 }
 
 .font-display {
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Noto Sans SC", "Noto Sans JP", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0;
 }
 
@@ -96,7 +102,7 @@ body {
 }
 
 .font-reading {
-  font-family: "Noto Sans JP", "Microsoft YaHei UI", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: "Noto Sans JP", "Noto Sans SC", "Microsoft YaHei UI", "Segoe UI", system-ui, -apple-system, sans-serif;
   letter-spacing: 0;
 }
 
@@ -230,11 +236,12 @@ select:focus-visible {
 }
 
 .soft-surface {
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.72) inset, 0 10px 26px rgb(var(--color-ink) / 0.06);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.78) inset, 0 10px 24px rgb(var(--color-ink) / 0.055);
 }
 
 .compact-sticky-panel {
-  max-height: min(42vh, 18rem);
+  max-height: none;
+  position: static !important;
 }
 
 .quickread-card {
@@ -243,6 +250,16 @@ select:focus-visible {
 
 .quickread-card[aria-pressed="true"] {
   box-shadow: 0 1px 0 rgb(255 255 255 / 0.74) inset, 0 10px 24px rgb(var(--color-yuzu) / 0.16);
+}
+
+.tap-surface {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+.calm-grid-card {
+  background:
+    linear-gradient(180deg, rgb(var(--color-paper) / 0.96), rgb(var(--color-rice) / 0.34));
 }
 
 .reading-token {
@@ -1012,5 +1029,32 @@ select:focus-visible {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .compact-sticky-panel {
+    max-height: min(42vh, 18rem);
+    position: sticky !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body::before {
+    background-size: 42px 42px;
+    opacity: 0.16;
+  }
+
+  .filter-scroll-row {
+    scrollbar-width: none;
+  }
+
+  .filter-scroll-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-bottom-nav {
+    padding-left: max(0.625rem, env(safe-area-inset-left));
+    padding-right: max(0.625rem, env(safe-area-inset-right));
   }
 }
