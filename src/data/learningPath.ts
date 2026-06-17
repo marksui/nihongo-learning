@@ -68,7 +68,7 @@ export const learningGoals: LearningGoal[] = [
     tone: "sora",
     page: "quickread",
     level: "基础",
-    tags: ["听力", "对照", "复习"],
+    tags: ["听力", "对照", "点读"],
     sortOrder: 2,
   },
   {
@@ -128,7 +128,7 @@ export const learningPathSteps: LearningPathStep[] = [
   { id: "path-vocabulary", page: "vocabulary", title: "单词", description: "按真实场景积累词汇。", goalId: "listen", milestoneId: "month-2", level: "基础", tags: ["词汇", "场景"], sortOrder: 3 },
   { id: "path-grammar", page: "grammar", title: "语法", description: "用短句掌握基础句型。", goalId: "listen", milestoneId: "month-2", level: "基础", tags: ["句型"], sortOrder: 4 },
   { id: "path-conversation", page: "conversation", title: "会话", description: "跟着情景一句一句说。", goalId: "speak", milestoneId: "month-3", level: "基础", tags: ["会话", "跟读"], sortOrder: 5 },
-  { id: "path-quickread", page: "quickread", title: "速读", description: "用点读表快速复习。", goalId: "read", milestoneId: "month-3", level: "入门", tags: ["复习", "点读"], sortOrder: 6 },
+  { id: "path-quickread", page: "quickread", title: "速读", description: "用点读表快速热身。", goalId: "read", milestoneId: "month-3", level: "入门", tags: ["点读", "热身"], sortOrder: 6 },
 ];
 
 const getDayIndex = (date = new Date()) => {

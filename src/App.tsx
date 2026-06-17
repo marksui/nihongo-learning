@@ -10,6 +10,7 @@ import KanaPage from "./pages/KanaPage";
 import NumbersPage from "./pages/NumbersPage";
 import QuickReadPage from "./pages/QuickReadPage";
 import VocabularyPage from "./pages/VocabularyPage";
+import { themeStorageKey } from "./data/themes";
 import {
   pauseJapanese,
   resumeJapanese,
@@ -33,11 +34,72 @@ const getPageFromHash = (): PageKey => {
   return pages.includes(hash) ? hash : "home";
 };
 
+const legacyRecordHints = [
+  "listened",
+  "heard",
+  "played",
+  "speech",
+  "listen",
+  "speak",
+  "progress",
+  "history",
+  "recent",
+  "last",
+  "visited",
+  "viewed",
+  "seen",
+  "completed",
+  "已听",
+  "听过",
+  "已读",
+  "看过",
+];
+
+const clearLegacyListeningRecords = () => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    const keysToRemove: string[] = [];
+
+    for (let index = 0; index < window.localStorage.length; index += 1) {
+      const key = window.localStorage.key(index);
+
+      if (!key || key === themeStorageKey) {
+        continue;
+      }
+
+      const normalizedKey = key.toLowerCase();
+      const belongsToThisApp =
+        normalizedKey.includes("nihongo") ||
+        normalizedKey.includes("japanese") ||
+        key.includes("日语") ||
+        key.includes("假名");
+      const looksLikeLearningRecord = legacyRecordHints.some((hint) =>
+        normalizedKey.includes(hint.toLowerCase()),
+      );
+
+      if (belongsToThisApp && looksLikeLearningRecord) {
+        keysToRemove.push(key);
+      }
+    }
+
+    keysToRemove.forEach((key) => window.localStorage.removeItem(key));
+  } catch {
+    // Old listening records are optional cleanup; the app should keep working without storage access.
+  }
+};
+
 const App = () => {
   const [currentPage, setCurrentPage] = useState<PageKey>(getPageFromHash);
   const [speechWarning, setSpeechWarning] = useState<string | null>(null);
   const [speechActive, setSpeechActive] = useState(false);
   const [speechPaused, setSpeechPaused] = useState(false);
+
+  useEffect(() => {
+    clearLegacyListeningRecords();
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => setCurrentPage(getPageFromHash());
