@@ -4,7 +4,6 @@ import { jlptVocabularyLevels, type JlptVocabularyLevel } from "../data/vocabula
 
 export interface LearningProgress {
   viewedPages: PageKey[];
-  recentReads: string[];
   dailyDoneDates: string[];
   seenContentIds: string[];
   completedContentIds: string[];
@@ -40,7 +39,6 @@ const progressStorageKey = "nihongo-learning-progress";
 
 const emptyProgress = (): LearningProgress => ({
   viewedPages: [],
-  recentReads: [],
   dailyDoneDates: [],
   seenContentIds: [],
   completedContentIds: [],
@@ -96,7 +94,6 @@ export const readLearningProgress = (): LearningProgress => {
     const parsed = JSON.parse(raw) as Partial<LearningProgress>;
     return {
       viewedPages: Array.isArray(parsed.viewedPages) ? parsed.viewedPages.filter(Boolean) as PageKey[] : [],
-      recentReads: Array.isArray(parsed.recentReads) ? parsed.recentReads.filter(Boolean).slice(0, 12) : [],
       dailyDoneDates: Array.isArray(parsed.dailyDoneDates) ? parsed.dailyDoneDates.filter(Boolean).slice(0, 60) : [],
       seenContentIds: Array.isArray(parsed.seenContentIds) ? parsed.seenContentIds.filter(Boolean).slice(0, 500) : [],
       completedContentIds: Array.isArray(parsed.completedContentIds)
@@ -187,28 +184,7 @@ export const markTodaySuggestionDone = (contentIds: string[] = [], date = new Da
   const nextProgress = {
     ...progress,
     dailyDoneDates: Array.from(new Set([dateKey, ...progress.dailyDoneDates])).slice(0, 60),
-    seenContentIds: Array.from(new Set([...ids, ...progress.seenContentIds])).slice(0, 500),
     completedContentIds: Array.from(new Set([...ids, ...progress.completedContentIds])).slice(0, 500),
-    lastStudiedAtByContentId: touchContentIds(progress.lastStudiedAtByContentId, ids, timestamp),
-    updatedAt: timestamp,
-  };
-
-  writeLearningProgress(nextProgress);
-  return nextProgress;
-};
-
-export const recordSeenContent = (contentIds: string | string[]) => {
-  const ids = normalizeContentIds(contentIds);
-  const progress = readLearningProgress();
-
-  if (!ids.length) {
-    return progress;
-  }
-
-  const timestamp = new Date().toISOString();
-  const nextProgress = {
-    ...progress,
-    seenContentIds: Array.from(new Set([...ids, ...progress.seenContentIds])).slice(0, 500),
     lastStudiedAtByContentId: touchContentIds(progress.lastStudiedAtByContentId, ids, timestamp),
     updatedAt: timestamp,
   };
@@ -240,7 +216,6 @@ export const markContentCompleted = (contentIds: string | string[]) => {
   const timestamp = new Date().toISOString();
   const nextProgress = {
     ...progress,
-    seenContentIds: Array.from(new Set([...ids, ...progress.seenContentIds])).slice(0, 500),
     completedContentIds: Array.from(new Set([...ids, ...progress.completedContentIds])).slice(0, 500),
     lastStudiedAtByContentId: touchContentIds(progress.lastStudiedAtByContentId, ids, timestamp),
     updatedAt: timestamp,
@@ -309,20 +284,6 @@ export const recordPageVisit = (page: PageKey) => {
   writeLearningProgress({
     ...progress,
     viewedPages: Array.from(new Set([page, ...progress.viewedPages])).slice(0, 12),
-    updatedAt: new Date().toISOString(),
-  });
-};
-
-export const recordRecentRead = (text: string) => {
-  const value = text.trim();
-  if (!value) {
-    return;
-  }
-
-  const progress = readLearningProgress();
-  writeLearningProgress({
-    ...progress,
-    recentReads: Array.from(new Set([value, ...progress.recentReads])).slice(0, 12),
     updatedAt: new Date().toISOString(),
   });
 };

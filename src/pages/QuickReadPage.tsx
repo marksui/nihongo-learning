@@ -1,7 +1,6 @@
 import { Volume2 } from "lucide-react";
 import { useRef, useState } from "react";
 import { kanaItems, type KanaItem } from "../data/kana";
-import { recordSeenContent } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 
 interface QuickReadPageProps {
@@ -692,7 +691,6 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
     const runId = playRunRef.current + 1;
     playRunRef.current = runId;
     setActiveKey(key);
-    recordSeenContent(`quickread:${key}`);
 
     const ok = await onSpeak(text);
     window.setTimeout(

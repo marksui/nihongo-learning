@@ -16,7 +16,7 @@ import {
   speakJapanese,
   stopJapanese,
 } from "./utils/speech";
-import { recordPageVisit, recordRecentRead } from "./utils/progress";
+import { recordPageVisit } from "./utils/progress";
 
 const pages: PageKey[] = [
   "home",
@@ -60,7 +60,6 @@ const App = () => {
     setSpeechWarning(null);
     setSpeechActive(true);
     setSpeechPaused(false);
-    recordRecentRead(text);
 
     const result = await speakJapanese(text);
 

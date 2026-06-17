@@ -1,10 +1,10 @@
-import { AlertTriangle, BookOpenCheck, CheckCircle2, Clock3 } from "lucide-react";
+import { AlertTriangle, BookOpenCheck, CheckCircle2 } from "lucide-react";
 import { useRef, useState } from "react";
 import AnimatedReading from "./AnimatedReading";
 import LearningCard from "./LearningCard";
 import SpeakButton from "./SpeakButton";
 import type { GrammarLesson } from "../data/grammar";
-import { isContentCompleted, markContentCompleted, readLearningProgress, recordSeenContent } from "../utils/progress";
+import { isContentCompleted, markContentCompleted, readLearningProgress } from "../utils/progress";
 
 interface LessonCardProps {
   lesson: GrammarLesson;
@@ -19,7 +19,6 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
     const progress = readLearningProgress();
 
     return {
-      seen: progress.seenContentIds.includes(contentId),
       completed: isContentCompleted(progress, contentId),
     };
   });
@@ -29,8 +28,6 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
     const runId = readingRunRef.current + 1;
     readingRunRef.current = runId;
     setActiveReadingKey(key);
-    recordSeenContent(contentId);
-    setStudyState((current) => ({ ...current, seen: true }));
 
     const ok = await onSpeak(text);
     window.setTimeout(
@@ -45,10 +42,8 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
 
   const markMastered = () => {
     markContentCompleted(contentId);
-    setStudyState({ seen: true, completed: true });
+    setStudyState({ completed: true });
   };
-  const StatusIcon = studyState.completed ? CheckCircle2 : Clock3;
-  const statusLabel = studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始";
 
   return (
     <LearningCard className="overflow-hidden bg-paper/96">
@@ -58,18 +53,12 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-sumire/10 text-sumire">
               <BookOpenCheck aria-hidden="true" size={18} />
             </span>
-            <span
-              className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-extrabold ${
-                studyState.completed
-                  ? "bg-matcha/12 text-matcha"
-                  : studyState.seen
-                    ? "bg-yuzu/18 text-ink/62"
-                    : "bg-ink/5 text-ink/50"
-              }`}
-            >
-              <StatusIcon aria-hidden="true" size={14} />
-              {statusLabel}
-            </span>
+            {studyState.completed ? (
+              <span className="inline-flex items-center gap-1.5 rounded-md bg-matcha/12 px-2.5 py-1 text-xs font-extrabold text-matcha">
+                <CheckCircle2 aria-hidden="true" size={14} />
+                已掌握
+              </span>
+            ) : null}
             {lesson.level ? (
               <span className="rounded-md bg-rice/70 px-2.5 py-1 text-xs font-extrabold text-ink/52">{lesson.level}</span>
             ) : null}

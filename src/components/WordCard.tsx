@@ -1,7 +1,7 @@
-import { CheckCircle2, Clock3, MessageCircle } from "lucide-react";
+import { CheckCircle2, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { getVocabularyJlptLevel, type VocabularyItem } from "../data/vocabulary";
-import { isContentCompleted, markContentCompleted, readLearningProgress, recordSeenContent } from "../utils/progress";
+import { isContentCompleted, markContentCompleted, readLearningProgress } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 import FoodIllustration from "./FoodIllustration";
 import LearningCard from "./LearningCard";
@@ -19,15 +19,12 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
     const progress = readLearningProgress();
 
     return {
-      seen: progress.seenContentIds.includes(contentId),
       completed: isContentCompleted(progress, contentId),
     };
   });
 
   const play = async (target: "word" | "sentence", text: string) => {
     setActiveTarget(target);
-    recordSeenContent(contentId);
-    setStudyState((current) => ({ ...current, seen: true }));
     const ok = await onSpeak(text);
     window.setTimeout(() => {
       setActiveTarget((current) => (current === target ? null : current));
@@ -36,7 +33,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
 
   const markMastered = () => {
     markContentCompleted(contentId);
-    setStudyState({ seen: true, completed: true });
+    setStudyState({ completed: true });
   };
 
   const wordActive = activeTarget === "word";
@@ -61,18 +58,12 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
               <p className={`w-fit rounded-md bg-sora/12 px-2 py-0.5 text-xs font-extrabold text-sora ${speaking ? "word-level-spark" : ""}`}>
                 {jlptLevel}
               </p>
-              <p
-                className={`study-state-badge inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-extrabold ${
-                  studyState.completed
-                    ? "mastery-pop bg-matcha/12 text-matcha"
-                    : studyState.seen
-                      ? "seen-pop bg-yuzu/18 text-ink/62"
-                      : "bg-rice text-ink/45"
-                }`}
-              >
-                {studyState.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
-                {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
-              </p>
+              {studyState.completed ? (
+                <p className="mastery-pop study-state-badge inline-flex items-center gap-1 rounded-md bg-matcha/12 px-2 py-0.5 text-xs font-extrabold text-matcha">
+                  <CheckCircle2 aria-hidden="true" size={14} />
+                  已掌握
+                </p>
+              ) : null}
             </div>
             <h3 className={`jp-display break-words text-[1.5rem] transition-colors sm:text-[1.68rem] ${wordActive ? "speak-text-glow text-matcha" : "text-ink"}`}>
               {word.japanese}

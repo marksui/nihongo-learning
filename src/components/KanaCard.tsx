@@ -1,7 +1,7 @@
-import { CheckCircle2, Clock3 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import type { KanaItem } from "../data/kana";
-import { isContentCompleted, markContentCompleted, readLearningProgress, recordSeenContent } from "../utils/progress";
+import { isContentCompleted, markContentCompleted, readLearningProgress } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 import LearningCard from "./LearningCard";
 import SpeakButton from "./SpeakButton";
@@ -18,15 +18,12 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
     const progress = readLearningProgress();
 
     return {
-      seen: progress.seenContentIds.includes(contentId),
       completed: isContentCompleted(progress, contentId),
     };
   });
 
   const play = async (target: "kana" | "example", text: string) => {
     setActiveTarget(target);
-    recordSeenContent([contentId, `kana:${item.group}`]);
-    setStudyState((current) => ({ ...current, seen: true }));
     const ok = await onSpeak(text);
     window.setTimeout(() => {
       setActiveTarget((current) => (current === target ? null : current));
@@ -35,7 +32,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
 
   const markMastered = () => {
     markContentCompleted(contentId);
-    setStudyState({ seen: true, completed: true });
+    setStudyState({ completed: true });
   };
 
   const kanaActive = activeTarget === "kana";
@@ -49,18 +46,12 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
       <div>
         <div className="mb-2.5 flex items-start justify-between gap-2">
           <div>
-            <p
-              className={`mb-1 inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[0.7rem] font-extrabold ${
-                studyState.completed
-                  ? "bg-matcha/12 text-matcha"
-                  : studyState.seen
-                    ? "bg-yuzu/18 text-ink/62"
-                    : "bg-rice text-ink/45"
-              }`}
-            >
-              {studyState.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
-              {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
-            </p>
+            {studyState.completed ? (
+              <p className="mb-1 inline-flex items-center gap-1 rounded-md bg-matcha/12 px-1.5 py-0.5 text-[0.7rem] font-extrabold text-matcha">
+                <CheckCircle2 aria-hidden="true" size={14} />
+                已掌握
+              </p>
+            ) : null}
             <div className="flex items-end gap-2">
               <span className={`jp-display text-[2.45rem] transition-colors sm:text-[2.7rem] ${kanaActive ? "text-matcha" : "text-ink"}`}>
                 {item.hiragana}

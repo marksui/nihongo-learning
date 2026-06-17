@@ -1,4 +1,4 @@
-import { CheckCircle2, Clock3, Search, Sparkles } from "lucide-react";
+import { CheckCircle2, Search, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import EmptyState from "../components/EmptyState";
 import FilterChips from "../components/FilterChips";
@@ -6,7 +6,7 @@ import LearningCard from "../components/LearningCard";
 import PageHero from "../components/PageHero";
 import SpeakButton from "../components/SpeakButton";
 import { numberExamples, numberGroups, numberSceneExamples, type NumberGroup } from "../data/numbers";
-import { isContentCompleted, markContentCompleted, readLearningProgress, recordSeenContent } from "../utils/progress";
+import { isContentCompleted, markContentCompleted, readLearningProgress } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 
 interface NumbersPageProps {
@@ -85,7 +85,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
 
   const playNumber = async (id: string, text: string) => {
     setActiveNumberId(id);
-    setLearningProgress(recordSeenContent(`number:${id}`));
     const ok = await onSpeak(text);
 
     window.setTimeout(() => {
@@ -95,7 +94,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
 
   const playScene = async (id: string, text: string) => {
     setActiveSceneId(id);
-    setLearningProgress(recordSeenContent(`number:${id}`));
     const ok = await onSpeak(text);
 
     window.setTimeout(() => {
@@ -111,7 +109,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
     const contentId = `number:${id}`;
 
     return {
-      seen: learningProgress.seenContentIds.includes(contentId),
       completed: isContentCompleted(learningProgress, contentId),
     };
   };
@@ -269,18 +266,12 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                         <p className="mb-2 w-fit rounded-md bg-rice px-2 py-1 text-xs font-extrabold text-ink/58">
                           {scene.group}
                         </p>
-                        <p
-                          className={`mb-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
-                            status.completed
-                              ? "bg-matcha/12 text-matcha"
-                              : status.seen
-                                ? "bg-yuzu/18 text-ink/62"
-                                : "bg-paper text-ink/45"
-                          }`}
-                        >
-                          {status.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
-                          {status.completed ? "已掌握" : status.seen ? "已听过" : "未开始"}
-                        </p>
+                        {status.completed ? (
+                          <p className="mb-2 inline-flex items-center gap-1 rounded-md bg-matcha/12 px-2 py-1 text-xs font-extrabold text-matcha">
+                            <CheckCircle2 aria-hidden="true" size={14} />
+                            已掌握
+                          </p>
+                        ) : null}
                         <h3 className="text-base font-extrabold text-ink">{scene.title}</h3>
                         <p className="mt-1 text-sm leading-5 text-ink/60">{scene.situation}</p>
                       </div>

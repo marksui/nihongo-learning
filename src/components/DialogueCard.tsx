@@ -1,6 +1,5 @@
 import {
   CheckCircle2,
-  Clock3,
   Ear,
   ListMusic,
   Mic2,
@@ -11,7 +10,7 @@ import {
 } from "lucide-react";
 import { useRef, useState } from "react";
 import type { Dialogue } from "../data/dialogues";
-import { isContentCompleted, markContentCompleted, readLearningProgress, recordSeenContent } from "../utils/progress";
+import { isContentCompleted, markContentCompleted, readLearningProgress } from "../utils/progress";
 import { stopJapanese } from "../utils/speech";
 import SpeakButton from "./SpeakButton";
 
@@ -29,7 +28,6 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
     const progress = readLearningProgress();
 
     return {
-      seen: progress.seenContentIds.includes(contentId),
       completed: isContentCompleted(progress, contentId),
     };
   });
@@ -44,8 +42,6 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
     setActiveLine(index);
 
     const line = dialogue.lines[index];
-    recordSeenContent(contentId);
-    setStudyState((current) => ({ ...current, seen: true }));
     const ok = await onSpeak(line.audioText ?? line.japanese);
 
     if (!cancelledRef.current) {
@@ -69,8 +65,6 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
 
     cancelledRef.current = false;
     setIsPlayingSequence(true);
-    recordSeenContent(contentId);
-    setStudyState((current) => ({ ...current, seen: true }));
 
     for (const index of indexes) {
       if (cancelledRef.current) {
@@ -120,7 +114,7 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
 
   const markMastered = () => {
     markContentCompleted(contentId);
-    setStudyState({ seen: true, completed: true });
+    setStudyState({ completed: true });
   };
 
   return (
@@ -131,18 +125,12 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-md bg-sakura/10 px-2 py-1 text-xs font-bold text-sakura">{dialogue.mode}</span>
               <span className="text-sm font-bold text-matcha">{dialogue.situation}</span>
-              <span
-                className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-extrabold ${
-                  studyState.completed
-                    ? "bg-matcha/12 text-matcha"
-                    : studyState.seen
-                      ? "bg-yuzu/18 text-ink/62"
-                      : "bg-rice text-ink/45"
-                }`}
-              >
-                {studyState.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
-                {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
-              </span>
+              {studyState.completed ? (
+                <span className="inline-flex items-center gap-1 rounded-md bg-matcha/12 px-2 py-1 text-xs font-extrabold text-matcha">
+                  <CheckCircle2 aria-hidden="true" size={14} />
+                  已掌握
+                </span>
+              ) : null}
             </div>
             <h2 className="section-title mt-2 break-words text-2xl sm:text-3xl">{dialogue.title}</h2>
 

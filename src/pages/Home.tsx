@@ -21,7 +21,7 @@ import { kanaItems } from "../data/kana";
 import { getTodaySuggestion } from "../data/learningPath";
 import { numberExamples } from "../data/numbers";
 import { vocabulary } from "../data/vocabulary";
-import { readLearningProgress, recordSeenContent, type TodayTaskKey } from "../utils/progress";
+import { readLearningProgress, type TodayTaskKey } from "../utils/progress";
 
 interface HomeProps {
   onNavigate: (page: PageKey) => void;
@@ -177,7 +177,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
   const playPreview = async (item: PreviewItem) => {
     setActiveTaskKey(item.key);
-    recordSeenContent(item.contentIds);
     const ok = await onSpeak(item.speakText);
 
     window.setTimeout(() => {
