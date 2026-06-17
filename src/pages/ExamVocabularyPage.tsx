@@ -17,7 +17,21 @@ type VocabularyWord = (typeof vocabulary)[number];
 
 const allTopicsLabel = "全部主题";
 const reservedTopicLabels = new Set<string>(["JLPT", "考试单词", ...jlptVocabularyLevels]);
-const coreJlptLevels: readonly JlptVocabularyLevel[] = ["N5", "N4", "N3"];
+const coreJlptLevels = jlptVocabularyLevels;
+
+const getLevelIndex = (level: JlptVocabularyLevel) => jlptVocabularyLevels.indexOf(level);
+
+const levelIncludesWord = (targetLevel: JlptVocabularyLevel, wordLevel: JlptVocabularyLevel) =>
+  getLevelIndex(wordLevel) <= getLevelIndex(targetLevel);
+
+const getIncludedLevelText = (level: JlptVocabularyLevel) => {
+  const includedLevels = jlptVocabularyLevels
+    .filter((candidate) => levelIncludesWord(level, candidate))
+    .slice()
+    .reverse();
+
+  return includedLevels.length === 1 ? "只含 N5" : `含 ${includedLevels.join(" / ")}`;
+};
 
 const getWordTopics = (word: VocabularyWord) => {
   const topics = [word.category, ...(word.tags ?? [])].filter((topic) => {
@@ -66,7 +80,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
     return [...byKey.values()].sort((first, second) => (first.sortOrder ?? 0) - (second.sortOrder ?? 0));
   }, []);
 
-  const levelCounts = useMemo(
+  const exactLevelCounts = useMemo(
     () =>
       jlptVocabularyLevels.reduce<Record<JlptVocabularyLevel, number>>((counts, level) => {
         counts[level] = examWords.filter((word) => getVocabularyJlptLevel(word) === level).length;
@@ -74,6 +88,16 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
       }, {} as Record<JlptVocabularyLevel, number>),
     [examWords],
   );
+
+  const levelCounts = useMemo(
+    () =>
+      jlptVocabularyLevels.reduce<Record<JlptVocabularyLevel, number>>((counts, level) => {
+        counts[level] = examWords.filter((word) => levelIncludesWord(level, getVocabularyJlptLevel(word))).length;
+        return counts;
+      }, {} as Record<JlptVocabularyLevel, number>),
+    [examWords],
+  );
+
   const coreLevelMaxCount = Math.max(...coreJlptLevels.map((level) => levelCounts[level] ?? 0), 1);
   const coreLevelCoverage = coreJlptLevels.map((level) => ({
     level,
@@ -82,7 +106,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
   }));
 
   const selectedLevelWords = useMemo(
-    () => examWords.filter((word) => getVocabularyJlptLevel(word) === activeLevel),
+    () => examWords.filter((word) => levelIncludesWord(activeLevel, getVocabularyJlptLevel(word))),
     [activeLevel, examWords],
   );
 
@@ -139,10 +163,10 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
     <div className="space-y-6">
       <PageHero
         title="JLPT 词库"
-        description="按 N5 到 N1 分级看词，配合主题筛选和点读。适合从零基础慢慢扩到常见能力考词汇。"
+        description="按目标等级累计看词。选择 N2 会包含 N2 / N3 / N4 / N5，选择 N1 会包含全部等级。"
         stats={[
           { label: "总词量", value: examWords.length },
-          { label: activeLevel, value: levelCounts[activeLevel] },
+          { label: `${activeLevel} 累计`, value: selectedLevelWords.length },
           { label: activeTopic === allTopicsLabel ? "当前" : activeTopic, value: filteredWords.length },
         ]}
       />
@@ -180,6 +204,10 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
               </p>
             </div>
 
+            <p className="mt-2 rounded-md border border-matcha/15 bg-matcha/8 px-3 py-2 text-sm font-bold leading-6 text-ink/62">
+              当前：{activeLevel} 累计词库，{getIncludedLevelText(activeLevel)}。本级新增 {exactLevelCounts[activeLevel]} 个词。
+            </p>
+
             <div className="mt-3">
               <FilterChips
                 active={activeTopic}
@@ -214,7 +242,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
         </div>
       </section>
 
-      <section className="grid gap-3 md:grid-cols-3" aria-label="N5 N4 N3 词库覆盖概览">
+      <section className="grid gap-3 md:grid-cols-3 xl:grid-cols-5" aria-label="JLPT 累计词库概览">
         {coreLevelCoverage.map((item, index) => {
           const selected = activeLevel === item.level;
 
@@ -234,7 +262,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
               <div className="flex items-center justify-between gap-3">
                 <span className="text-sm font-extrabold text-ink">{item.level}</span>
                 <span className={`rounded-md px-2 py-1 text-xs font-extrabold ${selected ? "exam-coverage-count-pop bg-matcha text-white" : "bg-rice text-ink/58"}`}>
-                  {item.count} 词
+                  累计 {item.count}
                 </span>
               </div>
               <div className="mt-3 h-2 overflow-hidden rounded-full bg-rice">
@@ -244,7 +272,10 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
                 />
               </div>
               <p className="mt-2 text-xs font-bold text-ink/52">
-                {selected ? "正在查看这个等级" : "点击切换到这个等级"}
+                {selected ? "正在查看累计词库" : `点击查看 ${getIncludedLevelText(item.level)}`}
+              </p>
+              <p className="mt-1 text-xs font-bold text-ink/42">
+                本级 {exactLevelCounts[item.level]} 词
               </p>
             </button>
           );
