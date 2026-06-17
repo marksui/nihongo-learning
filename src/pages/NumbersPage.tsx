@@ -1,4 +1,4 @@
-import { CheckCircle2, Search, Sparkles } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import EmptyState from "../components/EmptyState";
 import FilterChips from "../components/FilterChips";
@@ -6,7 +6,6 @@ import LearningCard from "../components/LearningCard";
 import PageHero from "../components/PageHero";
 import SpeakButton from "../components/SpeakButton";
 import { numberExamples, numberGroups, numberSceneExamples, type NumberGroup } from "../data/numbers";
-import { isContentCompleted, markContentCompleted, readLearningProgress } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 
 interface NumbersPageProps {
@@ -20,7 +19,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
   const [group, setGroup] = useState<NumberFilter>("全部");
   const [activeNumberId, setActiveNumberId] = useState<string | null>(null);
   const [activeSceneId, setActiveSceneId] = useState<string | null>(null);
-  const [learningProgress, setLearningProgress] = useState(() => readLearningProgress());
 
   const filterOptions = useMemo(() => ["全部", ...numberGroups] as NumberFilter[], []);
 
@@ -99,18 +97,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
     window.setTimeout(() => {
       setActiveSceneId((current) => (current === id ? null : current));
     }, ok ? 360 : 900);
-  };
-
-  const markNumberMastered = (id: string) => {
-    setLearningProgress(markContentCompleted(`number:${id}`));
-  };
-
-  const getNumberStatus = (id: string) => {
-    const contentId = `number:${id}`;
-
-    return {
-      completed: isContentCompleted(learningProgress, contentId),
-    };
   };
 
   const numberCardsSection = (
@@ -252,7 +238,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {filteredScenes.map((scene) => {
               const active = activeSceneId === scene.id;
-              const status = getNumberStatus(scene.id);
 
               return (
                 <LearningCard
@@ -266,12 +251,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                         <p className="mb-2 w-fit rounded-md bg-rice px-2 py-1 text-xs font-extrabold text-ink/58">
                           {scene.group}
                         </p>
-                        {status.completed ? (
-                          <p className="mb-2 inline-flex items-center gap-1 rounded-md bg-matcha/12 px-2 py-1 text-xs font-extrabold text-matcha">
-                            <CheckCircle2 aria-hidden="true" size={14} />
-                            已掌握
-                          </p>
-                        ) : null}
                         <h3 className="text-base font-extrabold text-ink">{scene.title}</h3>
                         <p className="mt-1 text-sm leading-5 text-ink/60">{scene.situation}</p>
                       </div>
@@ -308,20 +287,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                     </button>
 
                     <p className="mt-2 text-sm font-semibold leading-6 text-ink/70">中文：{scene.meaning}</p>
-                    <button
-                      type="button"
-                      onClick={() => markNumberMastered(scene.id)}
-                      disabled={status.completed}
-                      aria-pressed={status.completed}
-                      className={`mt-2 flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
-                        status.completed
-                          ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
-                          : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"
-                      }`}
-                    >
-                      <CheckCircle2 aria-hidden="true" size={16} />
-                      {status.completed ? "已掌握" : "标记掌握"}
-                    </button>
                   </div>
                 </LearningCard>
               );

@@ -4,7 +4,6 @@ import AnimatedReading from "./AnimatedReading";
 import LearningCard from "./LearningCard";
 import SpeakButton from "./SpeakButton";
 import type { GrammarLesson } from "../data/grammar";
-import { isContentCompleted, markContentCompleted, readLearningProgress } from "../utils/progress";
 
 interface LessonCardProps {
   lesson: GrammarLesson;
@@ -12,16 +11,8 @@ interface LessonCardProps {
 }
 
 const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
-  const contentId = `grammar:${lesson.id}`;
   const sampleSentence = lesson.examples[0]?.japanese ?? lesson.pattern;
   const [activeReadingKey, setActiveReadingKey] = useState<string | null>(null);
-  const [studyState, setStudyState] = useState(() => {
-    const progress = readLearningProgress();
-
-    return {
-      completed: isContentCompleted(progress, contentId),
-    };
-  });
   const readingRunRef = useRef(0);
 
   const speakWithReading = async (key: string, text: string) => {
@@ -40,11 +31,6 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
     );
   };
 
-  const markMastered = () => {
-    markContentCompleted(contentId);
-    setStudyState({ completed: true });
-  };
-
   return (
     <LearningCard className="overflow-hidden bg-paper/96">
       <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.36fr)] lg:items-start">
@@ -53,12 +39,6 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-sumire/10 text-sumire">
               <BookOpenCheck aria-hidden="true" size={18} />
             </span>
-            {studyState.completed ? (
-              <span className="inline-flex items-center gap-1.5 rounded-md bg-matcha/12 px-2.5 py-1 text-xs font-extrabold text-matcha">
-                <CheckCircle2 aria-hidden="true" size={14} />
-                已掌握
-              </span>
-            ) : null}
             {lesson.level ? (
               <span className="rounded-md bg-rice/70 px-2.5 py-1 text-xs font-extrabold text-ink/52">{lesson.level}</span>
             ) : null}
@@ -87,20 +67,6 @@ const LessonCard = ({ lesson, onSpeak }: LessonCardProps) => {
               variant="soft"
             />
           </div>
-          <button
-            type="button"
-            onClick={markMastered}
-            disabled={studyState.completed}
-            aria-pressed={studyState.completed}
-            className={`mt-4 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
-              studyState.completed
-                ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
-                : "border-yuzu/30 bg-yuzu/16 text-ink/70 hover:bg-yuzu/25 hover:text-ink"
-            }`}
-          >
-            <CheckCircle2 aria-hidden="true" size={16} />
-            {studyState.completed ? "已掌握" : "标记掌握"}
-          </button>
         </div>
       </div>
 

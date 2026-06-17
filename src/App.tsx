@@ -16,7 +16,6 @@ import {
   speakJapanese,
   stopJapanese,
 } from "./utils/speech";
-import { recordPageVisit } from "./utils/progress";
 
 const pages: PageKey[] = [
   "home",
@@ -45,10 +44,6 @@ const App = () => {
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
-
-  useEffect(() => {
-    recordPageVisit(currentPage);
-  }, [currentPage]);
 
   const navigate = useCallback((page: PageKey) => {
     setCurrentPage(page);

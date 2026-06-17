@@ -1,7 +1,6 @@
-import { CheckCircle2, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { getVocabularyJlptLevel, type VocabularyItem } from "../data/vocabulary";
-import { isContentCompleted, markContentCompleted, readLearningProgress } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 import FoodIllustration from "./FoodIllustration";
 import LearningCard from "./LearningCard";
@@ -13,15 +12,7 @@ interface WordCardProps {
 }
 
 const WordCard = ({ word, onSpeak }: WordCardProps) => {
-  const contentId = `word:${word.id}`;
   const [activeTarget, setActiveTarget] = useState<"word" | "sentence" | null>(null);
-  const [studyState, setStudyState] = useState(() => {
-    const progress = readLearningProgress();
-
-    return {
-      completed: isContentCompleted(progress, contentId),
-    };
-  });
 
   const play = async (target: "word" | "sentence", text: string) => {
     setActiveTarget(target);
@@ -29,11 +20,6 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
     window.setTimeout(() => {
       setActiveTarget((current) => (current === target ? null : current));
     }, ok ? 760 : 1100);
-  };
-
-  const markMastered = () => {
-    markContentCompleted(contentId);
-    setStudyState({ completed: true });
   };
 
   const wordActive = activeTarget === "word";
@@ -45,7 +31,7 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
   return (
     <LearningCard
       interactive
-      className={`word-card-shell flex min-h-[13rem] flex-col justify-between p-3 sm:p-3.5 ${studyState.completed ? "word-card-mastered" : ""} ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
+      className={`word-card-shell flex min-h-[13rem] flex-col justify-between p-3 sm:p-3.5 ${speaking ? "speak-card border-yuzu/55 ring-2 ring-yuzu/20" : ""}`}
     >
       <div>
         <FoodIllustration word={word} />
@@ -58,12 +44,6 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
               <p className={`w-fit rounded-md bg-sora/12 px-2 py-0.5 text-xs font-extrabold text-sora ${speaking ? "word-level-spark" : ""}`}>
                 {jlptLevel}
               </p>
-              {studyState.completed ? (
-                <p className="mastery-pop study-state-badge inline-flex items-center gap-1 rounded-md bg-matcha/12 px-2 py-0.5 text-xs font-extrabold text-matcha">
-                  <CheckCircle2 aria-hidden="true" size={14} />
-                  已掌握
-                </p>
-              ) : null}
             </div>
             <h3 className={`jp-display break-words text-[1.5rem] transition-colors sm:text-[1.68rem] ${wordActive ? "speak-text-glow text-matcha" : "text-ink"}`}>
               {word.japanese}
@@ -110,20 +90,6 @@ const WordCard = ({ word, onSpeak }: WordCardProps) => {
           </div>
           <p className={`mt-3 text-sm text-ink/70 ${sentenceActive ? "translation-spark" : ""}`}>{word.translation}</p>
         </div>
-        <button
-          type="button"
-          onClick={markMastered}
-          disabled={studyState.completed}
-          aria-pressed={studyState.completed}
-          className={`mt-3 flex min-h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-1.5 text-sm font-extrabold transition active:scale-[0.99] ${
-            studyState.completed
-              ? "mastered-action-pop cursor-default border-matcha/20 bg-matcha/10 text-matcha"
-              : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"
-          }`}
-        >
-          <CheckCircle2 aria-hidden="true" size={16} />
-          {studyState.completed ? "已掌握" : "标记掌握"}
-        </button>
       </div>
     </LearningCard>
   );

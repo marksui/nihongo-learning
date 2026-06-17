@@ -1,5 +1,4 @@
 import {
-  CheckCircle2,
   Ear,
   ListMusic,
   Mic2,
@@ -10,7 +9,6 @@ import {
 } from "lucide-react";
 import { useRef, useState } from "react";
 import type { Dialogue } from "../data/dialogues";
-import { isContentCompleted, markContentCompleted, readLearningProgress } from "../utils/progress";
 import { stopJapanese } from "../utils/speech";
 import SpeakButton from "./SpeakButton";
 
@@ -20,17 +18,9 @@ interface DialogueCardProps {
 }
 
 const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
-  const contentId = `dialogue:${dialogue.id}`;
   const [activeLine, setActiveLine] = useState<number | null>(null);
   const [nextLine, setNextLine] = useState(0);
   const [isPlayingSequence, setIsPlayingSequence] = useState(false);
-  const [studyState, setStudyState] = useState(() => {
-    const progress = readLearningProgress();
-
-    return {
-      completed: isContentCompleted(progress, contentId),
-    };
-  });
   const cancelledRef = useRef(false);
 
   const partnerSpeakers = Array.from(
@@ -112,11 +102,6 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
     setIsPlayingSequence(false);
   };
 
-  const markMastered = () => {
-    markContentCompleted(contentId);
-    setStudyState({ completed: true });
-  };
-
   return (
     <article className="min-w-0 overflow-hidden rounded-lg border border-ink/10 bg-paper/96 shadow-card">
       <div className="border-b border-ink/10 bg-paper p-4 sm:p-5">
@@ -125,12 +110,6 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-md bg-sakura/10 px-2 py-1 text-xs font-bold text-sakura">{dialogue.mode}</span>
               <span className="text-sm font-bold text-matcha">{dialogue.situation}</span>
-              {studyState.completed ? (
-                <span className="inline-flex items-center gap-1 rounded-md bg-matcha/12 px-2 py-1 text-xs font-extrabold text-matcha">
-                  <CheckCircle2 aria-hidden="true" size={14} />
-                  已掌握
-                </span>
-              ) : null}
             </div>
             <h2 className="section-title mt-2 break-words text-2xl sm:text-3xl">{dialogue.title}</h2>
 
@@ -194,20 +173,6 @@ const DialogueCard = ({ dialogue, onSpeak }: DialogueCardProps) => {
             >
               <Square aria-hidden="true" size={18} />
               停止
-            </button>
-            <button
-              type="button"
-              onClick={markMastered}
-              disabled={studyState.completed}
-              aria-pressed={studyState.completed}
-              className={`flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-bold transition active:scale-95 ${
-                studyState.completed
-                  ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
-                  : "border-yuzu/30 bg-yuzu/14 text-ink hover:bg-yuzu/24"
-              }`}
-            >
-              <CheckCircle2 aria-hidden="true" size={18} />
-              {studyState.completed ? "已掌握" : "标记掌握"}
             </button>
           </div>
         </div>

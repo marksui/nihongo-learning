@@ -21,7 +21,7 @@ import { kanaItems } from "../data/kana";
 import { getTodaySuggestion } from "../data/learningPath";
 import { numberExamples } from "../data/numbers";
 import { vocabulary } from "../data/vocabulary";
-import { readLearningProgress, type TodayTaskKey } from "../utils/progress";
+import { readLearningProgress } from "../utils/progress";
 
 interface HomeProps {
   onNavigate: (page: PageKey) => void;
@@ -45,9 +45,10 @@ interface PreviewItem {
   reading: string;
   meaning: string;
   speakText: string;
-  contentIds: string[];
   icon: LucideIcon;
 }
+
+type TodayTaskKey = "kana" | "words" | "grammar" | "number" | "dialogue";
 
 const featureCards: FeatureCard[] = [
   {
@@ -126,7 +127,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       reading: today.kanaPreview,
       meaning: "先把这一组读顺。",
       speakText: today.kanaPreview.replace(/\s+/g, "、"),
-      contentIds: [`kana:${today.kanaGroup}`],
       icon: Grid3X3,
     },
     {
@@ -137,7 +137,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       reading: previewWord?.kana ?? "にほんご",
       meaning: previewWord?.meaning ?? "日语",
       speakText: previewWord?.audioText ?? previewWord?.japanese ?? "日本語",
-      contentIds: today.words.map((word) => `word:${word.id}`),
       icon: BookOpen,
     },
     {
@@ -148,7 +147,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       reading: previewGrammar?.kana ?? today.grammar.patternKana,
       meaning: previewGrammar?.translation ?? today.grammar.explanation,
       speakText: previewGrammar?.japanese ?? today.grammar.audioText ?? today.grammar.pattern,
-      contentIds: [`grammar:${today.grammar.id}`],
       icon: GraduationCap,
     },
     {
@@ -159,7 +157,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       reading: today.numberScene.kana,
       meaning: today.numberScene.meaning,
       speakText: today.numberScene.audioText ?? today.numberScene.japanese,
-      contentIds: [`number:${today.numberScene.id}`],
       icon: Hash,
     },
     {
@@ -170,7 +167,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       reading: previewDialogue?.kana ?? today.dialogue.situation,
       meaning: previewDialogue?.translation ?? today.dialogue.situation,
       speakText: previewDialogue?.audioText ?? previewDialogue?.japanese ?? today.dialogue.title,
-      contentIds: [`dialogue:${today.dialogue.id}`],
       icon: MessagesSquare,
     },
   ], [previewDialogue, previewGrammar, previewWord, today]);
