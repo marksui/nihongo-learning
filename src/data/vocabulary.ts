@@ -1988,6 +1988,33 @@ const everydayCoreVocabulary: VocabularyItem[] = [
   makeVocabulary("everyday-expression-mondaiarimasen", "表达", "問題ありません", "もんだいありません", "mondai arimasen", "没有问题", "この時間で問題ありません。", "このじかんでもんだいありません。", "这个时间没有问题。", ["表达", "工作"]),
 ];
 
+const technologyDailyVocabulary: VocabularyItem[] = [
+  makeVocabulary("tech-sumaho", "科技", "スマホ", "すまほ", "sumaho", "智能手机", "スマホを充電します。", "すまほをじゅうでんします。", "给智能手机充电。", ["科技", "手机", "生活"]),
+  makeVocabulary("tech-keitai-denwa", "科技", "携帯電話", "けいたいでんわ", "keitai denwa", "手机 / 移动电话", "携帯電話をなくしました。", "けいたいでんわをなくしました。", "手机丢了。", ["科技", "手机", "安全"]),
+  makeVocabulary("tech-juudenki", "科技", "充電器", "じゅうでんき", "juudenki", "充电器", "充電器を借りられますか。", "じゅうでんきをかりられますか。", "可以借充电器吗？", ["科技", "手机", "生活"]),
+  makeVocabulary("tech-juuden-suru", "科技", "充電する", "じゅうでんする", "juuden suru", "充电", "ここで充電してもいいですか。", "ここでじゅうでんしてもいいですか。", "可以在这里充电吗？", ["科技", "动词", "生活"]),
+  makeVocabulary("tech-dengen", "科技", "電源", "でんげん", "dengen", "电源", "電源が入りません。", "でんげんがはいりません。", "电源打不开。", ["科技", "设备"]),
+  makeVocabulary("tech-wifi", "科技", "Wi-Fi", "わいふぁい", "waifai", "Wi-Fi / 无线网络", "Wi-Fiにつながりません。", "わいふぁいにつながりません。", "连不上 Wi-Fi。", ["科技", "网络", "生活"]),
+  makeVocabulary("tech-denpa", "科技", "電波", "でんぱ", "denpa", "信号", "ここは電波が弱いです。", "ここはでんぱがよわいです。", "这里信号弱。", ["科技", "网络"]),
+  makeVocabulary("tech-kengai", "科技", "圏外", "けんがい", "kengai", "无信号 / 服务区外", "山の中では圏外でした。", "やまのなかではけんがいでした。", "在山里没有信号。", ["科技", "网络", "旅行"]),
+  makeVocabulary("tech-tsuushinryou", "科技", "通信量", "つうしんりょう", "tsuushinryou", "流量 / 通信量", "今月の通信量を確認します。", "こんげつのつうしんりょうをかくにんします。", "确认这个月的流量。", ["科技", "网络", "数字"]),
+  makeVocabulary("tech-sokudo-seigen", "科技", "速度制限", "そくどせいげん", "sokudo seigen", "限速", "速度制限がかかりました。", "そくどせいげんがかかりました。", "被限速了。", ["科技", "网络", "手机"]),
+  makeVocabulary("tech-apuri", "科技", "アプリ", "あぷり", "apuri", "应用程序 / App", "このアプリを使います。", "このあぷりをつかいます。", "使用这个 App。", ["科技", "手机"]),
+  makeVocabulary("tech-daunroodo", "科技", "ダウンロード", "だうんろーど", "daunroodo", "下载", "地図をダウンロードします。", "ちずをだうんろーどします。", "下载地图。", ["科技", "手机", "旅行"]),
+  makeVocabulary("tech-pasuwaado", "科技", "パスワード", "ぱすわーど", "pasuwaado", "密码", "パスワードを忘れました。", "ぱすわーどをわすれました。", "忘记密码了。", ["科技", "账号"]),
+  makeVocabulary("tech-roguin", "科技", "ログイン", "ろぐいん", "roguin", "登录", "ログインできません。", "ろぐいんできません。", "无法登录。", ["科技", "账号"]),
+  makeVocabulary("tech-touroku", "科技", "登録", "とうろく", "touroku", "注册 / 登记", "メールアドレスを登録します。", "めーるあどれすをとうろくします。", "注册邮箱地址。", ["科技", "账号", "手续"]),
+  makeVocabulary("tech-ninshou", "科技", "認証", "にんしょう", "ninshou", "认证 / 验证", "本人認証が必要です。", "ほんにんにんしょうがひつようです。", "需要本人认证。", ["科技", "账号", "手续"]),
+  makeVocabulary("tech-kakunin-code", "科技", "確認コード", "かくにんこーど", "kakunin koodo", "验证码", "確認コードを入力してください。", "かくにんこーどをにゅうりょくしてください。", "请输入验证码。", ["科技", "账号", "手机"]),
+  makeVocabulary("tech-daily-tsuuchi", "科技", "通知", "つうち", "tsuuchi", "通知", "通知をオンにします。", "つうちをおんにします。", "打开通知。", ["科技", "手机"]),
+  makeVocabulary("tech-daily-settei", "科技", "設定", "せってい", "settei", "设置", "言語の設定を変えます。", "げんごのせっていをかえます。", "更改语言设置。", ["科技", "手机", "生活"]),
+  makeVocabulary("tech-daily-kensaku", "科技", "検索", "けんさく", "kensaku", "搜索", "駅の名前を検索します。", "えきのなまえをけんさくします。", "搜索车站名。", ["科技", "旅行", "生活"]),
+  makeVocabulary("tech-daily-hozon", "科技", "保存", "ほぞん", "hozon", "保存", "写真を保存しました。", "しゃしんをほぞんしました。", "保存了照片。", ["科技", "手机"]),
+  makeVocabulary("tech-daily-kyouyuu", "科技", "共有", "きょうゆう", "kyouyuu", "分享 / 共享", "リンクを共有します。", "りんくをきょうゆうします。", "分享链接。", ["科技", "手机", "表达"]),
+  makeVocabulary("tech-shuuri", "科技", "修理", "しゅうり", "shuuri", "维修", "スマホを修理に出します。", "すまほをしゅうりにだします。", "把手机送去维修。", ["科技", "手机", "手续"]),
+  makeVocabulary("tech-hoshou", "科技", "保証", "ほしょう", "hoshou", "保修 / 保证", "保証期間を確認します。", "ほしょうきかんをかくにんします。", "确认保修期限。", ["科技", "手机", "手续"]),
+];
+
 const n5ExamVocabulary: VocabularyItem[] = [
   makeExamTerm("exam-n5-watashi", "N5", "私", "わたし", "watashi", "我", ["人物"]),
   makeExamTerm("exam-n5-anata", "N5", "あなた", "あなた", "anata", "你", ["人物"]),
@@ -5512,6 +5539,7 @@ export const vocabulary: VocabularyItem[] = [
   ...travelAccommodationVocabulary,
   ...safetyEmergencyVocabulary,
   ...everydayCoreVocabulary,
+  ...technologyDailyVocabulary,
   ...n3Vocabulary,
   ...examVocabulary,
 ].map((word, index) => ({
