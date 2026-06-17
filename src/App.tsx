@@ -28,8 +28,6 @@ const pages: PageKey[] = [
   "quickread",
 ];
 
-const legacyLearningProgressStorageKeys = ["nihongo-learning-progress"];
-
 const getPageFromHash = (): PageKey => {
   const hash = window.location.hash.replace("#", "") as PageKey;
   return pages.includes(hash) ? hash : "home";
@@ -45,14 +43,6 @@ const App = () => {
     const handleHashChange = () => setCurrentPage(getPageFromHash());
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
-
-  useEffect(() => {
-    try {
-      legacyLearningProgressStorageKeys.forEach((key) => window.localStorage?.removeItem(key));
-    } catch {
-      // Ignore storage errors in restricted browser modes.
-    }
   }, []);
 
   const navigate = useCallback((page: PageKey) => {
