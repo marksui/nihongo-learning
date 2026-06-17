@@ -1579,6 +1579,73 @@ const safetyEmergencyDialogues: Dialogue[] = [
   ], ["紧急", "迷子", "服务台", "家庭"]),
 ];
 
+const bankPostPhoneDialogues: Dialogue[] = [
+  makeDialogue("scenario-bank-overseas-remittance", "银行海外汇款", "生活", "客人", "在银行窗口办理海外汇款并确认手续费", [
+    { speaker: "客人", japanese: "海外送金をしたいです。", kana: "かいがいそうきんをしたいです。", translation: "我想办理海外汇款。" },
+    { speaker: "銀行員", japanese: "送金先の国と金額を教えてください。", kana: "そうきんさきのくにときんがくをおしえてください。", translation: "请告诉我汇款国家和金额。" },
+    { speaker: "客人", japanese: "中国へ十万円送りたいです。", kana: "ちゅうごくへじゅうまんえんおくりたいです。", translation: "想往中国汇十万日元。" },
+    { speaker: "銀行員", japanese: "本人確認書類とマイナンバーが必要です。", kana: "ほんにんかくにんしょるいとまいなんばーがひつようです。", translation: "需要身份证明文件和个人编号。" },
+    { speaker: "客人", japanese: "手数料はいくらですか。", kana: "てすうりょうはいくらですか。", translation: "手续费是多少？" },
+    { speaker: "銀行員", japanese: "今日のレートで確認します。", kana: "きょうのれーとでかくにんします。", translation: "我按今天的汇率确认。" },
+  ], ["生活", "银行", "海外送金", "费用"]),
+  makeDialogue("scenario-bank-atm-statement", "ATM余额和明细", "生活", "客人", "在银行询问 ATM 查询余额、打印明细和存折记账", [
+    { speaker: "客人", japanese: "ATMで残高照会をしたいです。", kana: "えーてぃーえむでざんだかしょうかいをしたいです。", translation: "我想在 ATM 查询余额。" },
+    { speaker: "銀行員", japanese: "キャッシュカードを入れて、暗証番号を入力してください。", kana: "きゃっしゅかーどをいれて、あんしょうばんごうをにゅうりょくしてください。", translation: "请插入银行卡并输入密码。" },
+    { speaker: "客人", japanese: "利用明細も印刷できますか。", kana: "りようめいさいもいんさつできますか。", translation: "使用明细也能打印吗？" },
+    { speaker: "銀行員", japanese: "はい、明細ボタンを押してください。", kana: "はい、めいさいぼたんをおしてください。", translation: "可以，请按明细按钮。" },
+    { speaker: "客人", japanese: "通帳の記帳もできますか。", kana: "つうちょうのきちょうもできますか。", translation: "存折也可以补登吗？" },
+    { speaker: "銀行員", japanese: "こちらの機械で記帳できます。", kana: "こちらのきかいできちょうできます。", translation: "可以用这台机器补登。" },
+  ], ["生活", "银行", "ATM", "明细"]),
+  makeDialogue("scenario-post-international-parcel", "邮局寄国际包裹", "生活", "客人", "在邮局寄国际小包并确认航空便、船便和海关申报", [
+    { speaker: "客人", japanese: "中国へ国際小包を送りたいです。", kana: "ちゅうごくへこくさいこづつみをおくりたいです。", translation: "我想往中国寄国际包裹。" },
+    { speaker: "职员", japanese: "航空便と船便があります。", kana: "こうくうびんとふなびんがあります。", translation: "有航空件和海运件。" },
+    { speaker: "客人", japanese: "航空便は何日ぐらいですか。", kana: "こうくうびんはなんにちぐらいですか。", translation: "航空件大约几天？" },
+    { speaker: "职员", japanese: "一週間から十日ぐらいです。", kana: "いっしゅうかんからとおかぐらいです。", translation: "大约一周到十天。" },
+    { speaker: "客人", japanese: "税関告知書も書きますか。", kana: "ぜいかんこくちしょもかきますか。", translation: "也要填写海关申报单吗？" },
+    { speaker: "职员", japanese: "はい、内容品と金額を書いてください。", kana: "はい、ないようひんときんがくをかいてください。", translation: "是的，请填写内装物品和金额。" },
+  ], ["生活", "邮局", "国际", "包裹"]),
+  makeDialogue("scenario-post-office-pickup", "邮局领取包裹", "生活", "住户", "收到不在票后到邮局领取包裹", [
+    { speaker: "住户", japanese: "不在票が入っていました。", kana: "ふざいひょうがはいっていました。", translation: "信箱里有不在通知单。" },
+    { speaker: "职员", japanese: "追跡番号はありますか。", kana: "ついせきばんごうはありますか。", translation: "有追踪号码吗？" },
+    { speaker: "住户", japanese: "はい、この番号です。", kana: "はい、このばんごうです。", translation: "有，是这个号码。" },
+    { speaker: "职员", japanese: "本人確認書類を見せてください。", kana: "ほんにんかくにんしょるいをみせてください。", translation: "请出示身份证明文件。" },
+    { speaker: "住户", japanese: "今日受け取れますか。", kana: "きょううけとれますか。", translation: "今天能领取吗？" },
+    { speaker: "职员", japanese: "はい、こちらにサインしてください。", kana: "はい、こちらにさいんしてください。", translation: "可以，请在这里签名。" },
+  ], ["生活", "邮局", "领取", "快递"]),
+  makeDialogue("scenario-mobile-esim-activation", "eSIM开通", "生活", "客人", "在手机店确认 eSIM 开通流程和使用时间", [
+    { speaker: "客人", japanese: "eSIMを開通したいです。", kana: "いーしむをかいつうしたいです。", translation: "我想开通 eSIM。" },
+    { speaker: "店员", japanese: "本人確認が終わったらメールが届きます。", kana: "ほんにんかくにんがおわったらめーるがとどきます。", translation: "实名确认完成后会收到邮件。" },
+    { speaker: "客人", japanese: "QRコードを読み取ればいいですか。", kana: "きゅーあーるこーどをよみとればいいですか。", translation: "读取 QR 码就可以了吗？" },
+    { speaker: "店员", japanese: "はい、Wi-Fiにつないでから読み取ってください。", kana: "はい、わいふぁいにつないでからよみとってください。", translation: "是的，请连上 Wi-Fi 后读取。" },
+    { speaker: "客人", japanese: "どのくらいで使えますか。", kana: "どのくらいでつかえますか。", translation: "多久可以使用？" },
+    { speaker: "店员", japanese: "だいたい十分ぐらいです。", kana: "だいたいじゅっぷんぐらいです。", translation: "大约十分钟。" },
+  ], ["生活", "手机", "eSIM", "开通"]),
+  makeDialogue("scenario-mobile-carrier-transfer", "手机转运营商", "生活", "客人", "从其他运营商转入并确认套餐和热点共享", [
+    { speaker: "客人", japanese: "他社から乗り換えたいです。", kana: "たしゃからのりかえたいです。", translation: "我想从其他运营商转入。" },
+    { speaker: "店员", japanese: "MNP予約番号はありますか。", kana: "えむえぬぴーよやくばんごうはありますか。", translation: "有 MNP 转号预约号码吗？" },
+    { speaker: "客人", japanese: "はい、ここにあります。", kana: "はい、ここにあります。", translation: "有，在这里。" },
+    { speaker: "店员", japanese: "月額料金とデータ容量を確認します。", kana: "げつがくりょうきんとでーたようりょうをかくにんします。", translation: "我确认月费和数据容量。" },
+    { speaker: "客人", japanese: "テザリングは使えますか。", kana: "てざりんぐはつかえますか。", translation: "可以用热点共享吗？" },
+    { speaker: "店员", japanese: "このプランなら無料で使えます。", kana: "このぷらんならむりょうでつかえます。", translation: "这个套餐可以免费使用。" },
+  ], ["生活", "手机", "套餐", "网络"]),
+  makeDialogue("scenario-mobile-data-topup", "追加手机流量", "生活", "客人", "流量用完后在手机店追加数据并确认限速解除", [
+    { speaker: "客人", japanese: "今月の通信量を使い切りました。", kana: "こんげつのつうしんりょうをつかいきりました。", translation: "这个月的流量用完了。" },
+    { speaker: "店员", japanese: "データ追加ができます。", kana: "でーたついかができます。", translation: "可以追加流量。" },
+    { speaker: "客人", japanese: "一ギガ追加するといくらですか。", kana: "いちぎがついかするといくらですか。", translation: "追加 1GB 多少钱？" },
+    { speaker: "店员", japanese: "五百円です。", kana: "ごひゃくえんです。", translation: "五百日元。" },
+    { speaker: "客人", japanese: "速度制限はすぐ解除されますか。", kana: "そくどせいげんはすぐかいじょされますか。", translation: "限速会马上解除吗？" },
+    { speaker: "店员", japanese: "手続き後、数分で解除されます。", kana: "てつづきご、すうふんでかいじょされます。", translation: "办理后几分钟内解除。" },
+  ], ["生活", "手机", "流量", "网络"]),
+  makeDialogue("scenario-phone-repair-warranty", "手机维修保修", "生活", "客人", "手机屏幕碎裂后确认维修保修和代替机", [
+    { speaker: "客人", japanese: "スマホの画面が割れました。", kana: "すまほのがめんがわれました。", translation: "手机屏幕碎了。" },
+    { speaker: "店员", japanese: "修理保証に入っていますか。", kana: "しゅうりほしょうにはいっていますか。", translation: "您加入维修保修了吗？" },
+    { speaker: "客人", japanese: "たぶん入っています。", kana: "たぶんはいっています。", translation: "应该加入了。" },
+    { speaker: "店员", japanese: "契約者の名前を確認します。", kana: "けいやくしゃのなまえをかくにんします。", translation: "我确认签约人的姓名。" },
+    { speaker: "客人", japanese: "代替機はありますか。", kana: "だいたいきはありますか。", translation: "有备用机吗？" },
+    { speaker: "店员", japanese: "在庫があればお貸しできます。", kana: "ざいこがあればおかしできます。", translation: "如果有库存，可以借给您。" },
+  ], ["生活", "手机", "维修", "保修"]),
+];
+
 export const dialogues: Dialogue[] = [
   ...coreDialogues,
   ...expandedDialogues,
@@ -1591,6 +1658,7 @@ export const dialogues: Dialogue[] = [
   ...travelAccommodationDialogues,
   ...healthClinicDialogues,
   ...safetyEmergencyDialogues,
+  ...bankPostPhoneDialogues,
 ].map((dialogue, index) => ({
   sortOrder: dialogue.sortOrder ?? index + 1,
   ...dialogue,
