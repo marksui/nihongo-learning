@@ -412,18 +412,6 @@ textarea:focus-visible {
   box-shadow: 0 10px 22px rgb(var(--color-ink) / 0.06);
 }
 
-.word-card-mastered::after {
-  position: absolute;
-  right: 1rem;
-  bottom: 0;
-  left: 1rem;
-  height: 3px;
-  border-radius: 999px 999px 0 0;
-  pointer-events: none;
-  content: "";
-  background: linear-gradient(90deg, rgb(var(--color-matcha) / 0.14), rgb(var(--color-matcha) / 0.58), rgb(var(--color-yuzu) / 0.34));
-}
-
 .home-osaka-cover-image {
   filter: saturate(1.03) contrast(1.03);
 }
@@ -462,8 +450,6 @@ textarea:focus-visible {
 .meaning-spark,
 .translation-spark,
 .reading-line-spark,
-.mastery-pop,
-.mastered-action-pop,
 .result-count-pop,
 .filter-count-focus,
 .exam-search-icon-active,
@@ -481,7 +467,6 @@ textarea:focus-visible {
   display: none;
 }
 
-.level-progress-spark,
 .exam-coverage-bar {
   transform-origin: left center;
   animation: progress-in 0.46s ease-out both;

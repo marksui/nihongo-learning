@@ -10,21 +10,17 @@ import {
   Table2,
   Trophy,
 } from "lucide-react";
-import { useMemo, useState } from "react";
 import LearningCard from "../components/LearningCard";
 import type { PageKey } from "../components/Navbar";
-import SpeakButton from "../components/SpeakButton";
 import homeStudyScene from "../assets/home-study-scene.jpg";
 import { dialogues } from "../data/dialogues";
 import { grammarLessons } from "../data/grammar";
 import { kanaItems } from "../data/kana";
-import { getTodaySuggestion } from "../data/learningPath";
 import { numberExamples } from "../data/numbers";
 import { vocabulary } from "../data/vocabulary";
 
 interface HomeProps {
   onNavigate: (page: PageKey) => void;
-  onSpeak: (text: string) => Promise<boolean>;
 }
 
 interface FeatureCard {
@@ -35,19 +31,6 @@ interface FeatureCard {
   accent: string;
   icon: LucideIcon;
 }
-
-interface PreviewItem {
-  key: TodayTaskKey;
-  label: string;
-  page: PageKey;
-  japanese: string;
-  reading: string;
-  meaning: string;
-  speakText: string;
-  icon: LucideIcon;
-}
-
-type TodayTaskKey = "kana" | "words" | "grammar" | "number" | "dialogue";
 
 const featureCards: FeatureCard[] = [
   {
@@ -108,76 +91,7 @@ const featureCards: FeatureCard[] = [
   },
 ];
 
-const Home = ({ onNavigate, onSpeak }: HomeProps) => {
-  const [activeTaskKey, setActiveTaskKey] = useState<TodayTaskKey | null>(null);
-  const today = useMemo(() => getTodaySuggestion(new Date(), "N5"), []);
-  const previewWord = today.words[0] ?? vocabulary[0];
-  const previewGrammar = today.grammar.examples[0];
-  const previewDialogue =
-    today.dialogue.lines.find((line) => line.speaker === today.dialogue.practiceSpeaker) ?? today.dialogue.lines[0];
-
-  const previewItems = useMemo<PreviewItem[]>(() => [
-    {
-      key: "kana",
-      label: "假名",
-      page: "kana",
-      japanese: today.kanaPreview,
-      reading: today.kanaPreview,
-      meaning: "先把这一组读顺。",
-      speakText: today.kanaPreview.replace(/\s+/g, "、"),
-      icon: Grid3X3,
-    },
-    {
-      key: "words",
-      label: "单词",
-      page: previewWord?.category === "考试单词" ? "exam-vocabulary" : "vocabulary",
-      japanese: previewWord?.japanese ?? "日本語",
-      reading: previewWord?.kana ?? "にほんご",
-      meaning: previewWord?.meaning ?? "日语",
-      speakText: previewWord?.audioText ?? previewWord?.japanese ?? "日本語",
-      icon: BookOpen,
-    },
-    {
-      key: "grammar",
-      label: "句型",
-      page: "grammar",
-      japanese: previewGrammar?.japanese ?? today.grammar.pattern,
-      reading: previewGrammar?.kana ?? today.grammar.patternKana,
-      meaning: previewGrammar?.translation ?? today.grammar.explanation,
-      speakText: previewGrammar?.japanese ?? today.grammar.audioText ?? today.grammar.pattern,
-      icon: GraduationCap,
-    },
-    {
-      key: "number",
-      label: "数字",
-      page: "numbers",
-      japanese: today.numberScene.japanese,
-      reading: today.numberScene.kana,
-      meaning: today.numberScene.meaning,
-      speakText: today.numberScene.audioText ?? today.numberScene.japanese,
-      icon: Hash,
-    },
-    {
-      key: "dialogue",
-      label: "会话",
-      page: "conversation",
-      japanese: previewDialogue?.japanese ?? today.dialogue.title,
-      reading: previewDialogue?.kana ?? today.dialogue.situation,
-      meaning: previewDialogue?.translation ?? today.dialogue.situation,
-      speakText: previewDialogue?.audioText ?? previewDialogue?.japanese ?? today.dialogue.title,
-      icon: MessagesSquare,
-    },
-  ], [previewDialogue, previewGrammar, previewWord, today]);
-
-  const playPreview = async (item: PreviewItem) => {
-    setActiveTaskKey(item.key);
-    const ok = await onSpeak(item.speakText);
-
-    window.setTimeout(() => {
-      setActiveTaskKey((current) => (current === item.key ? null : current));
-    }, ok ? 420 : 900);
-  };
-
+const Home = ({ onNavigate }: HomeProps) => {
   return (
     <div className="space-y-5 sm:space-y-6">
       <section className="grid overflow-hidden rounded-lg border border-ink/9 bg-paper/94 shadow-card lg:grid-cols-[minmax(22rem,0.92fr)_minmax(0,1.08fr)]">
@@ -237,66 +151,6 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           </div>
         </div>
       </section>
-
-      <LearningCard className="p-3 sm:p-4">
-        <div className="mb-3 flex items-end justify-between gap-3">
-          <div>
-            <p className="text-sm font-extrabold text-matcha">今日点读</p>
-            <h2 className="section-title text-2xl">先按这 5 个</h2>
-          </div>
-          <button
-            type="button"
-            onClick={() => onNavigate("quickread")}
-            className="tap-surface rounded-lg border border-ink/10 bg-rice/50 px-3 py-2 text-sm font-extrabold text-ink/68 transition hover:border-matcha/25 hover:bg-matcha/8 hover:text-ink"
-          >
-            快捷表
-          </button>
-        </div>
-
-        <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-5">
-          {previewItems.map((item) => {
-            const Icon = item.icon;
-            const active = activeTaskKey === item.key;
-
-            return (
-              <div
-                key={item.key}
-                className={`min-w-0 rounded-lg border p-3 transition ${
-                  active
-                    ? "border-yuzu/55 bg-yuzu/14 ring-2 ring-yuzu/20"
-                    : "border-ink/8 bg-paper/72"
-                }`}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <button
-                    type="button"
-                    onClick={() => onNavigate(item.page)}
-                    className="min-w-0 cursor-pointer text-left"
-                  >
-                    <span className="mb-2 inline-flex items-center gap-1.5 rounded-md bg-rice/70 px-2 py-1 text-xs font-extrabold text-ink/55">
-                      <Icon aria-hidden="true" size={14} />
-                      {item.label}
-                    </span>
-                    <span className="block break-words font-japanese text-[1.35rem] font-extrabold leading-snug text-ink">
-                      {item.japanese}
-                    </span>
-                  </button>
-                  <SpeakButton
-                    active={active}
-                    ariaLabel={`播放 ${item.label}`}
-                    className="h-10 w-10"
-                    onClick={() => playPreview(item)}
-                    title="点读"
-                    variant="light"
-                  />
-                </div>
-                <p className="mt-2 break-words text-sm font-bold leading-5 text-ink/56">{item.reading}</p>
-                <p className="mt-1 line-clamp-2 text-sm leading-5 text-ink/68">{item.meaning}</p>
-              </div>
-            );
-          })}
-        </div>
-      </LearningCard>
 
       <section>
         <div className="mb-3 flex items-end justify-between gap-3">

@@ -41,14 +41,6 @@ const JlptLevelSelector = ({
               <span className={`mt-0.5 block text-[0.68rem] font-bold leading-tight ${selected ? "level-count-pop text-white/78" : "text-ink/48"}`}>
                 {compact ? counts[level] : `${counts[level]} 词`}
               </span>
-              <span
-                aria-hidden="true"
-                className={`mx-auto mt-1 block h-1 w-8 overflow-hidden rounded-full ${
-                  selected ? "bg-white/20" : "bg-ink/8"
-                }`}
-              >
-                <span className={`block h-full rounded-full ${selected ? "level-progress-spark bg-yuzu" : "bg-ink/12"}`} />
-              </span>
             </button>
           );
         })}
