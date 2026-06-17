@@ -4,18 +4,18 @@
 
 :root,
 html[data-theme="hidamari"] {
-  --color-ink: 31 38 44;
-  --color-rice: 246 244 234;
-  --color-paper: 255 253 247;
-  --color-sakura: 205 84 103;
-  --color-matcha: 63 132 95;
-  --color-sora: 69 129 171;
-  --color-yuzu: 226 178 76;
-  --color-sumire: 101 94 145;
-  --color-sky: 236 244 242;
-  --page-start: 250 248 239;
-  --page-end: 239 241 231;
-  --grid-line: 54 67 72;
+  --color-ink: 30 39 42;
+  --color-rice: 246 244 232;
+  --color-paper: 255 253 246;
+  --color-sakura: 208 88 108;
+  --color-matcha: 54 129 92;
+  --color-sora: 59 126 170;
+  --color-yuzu: 224 176 72;
+  --color-sumire: 94 92 145;
+  --color-sky: 235 242 238;
+  --page-start: 250 247 235;
+  --page-end: 239 244 233;
+  --grid-line: 46 64 62;
   color: rgb(var(--color-ink));
   background: rgb(var(--color-rice));
   font-synthesis: none;
@@ -27,42 +27,42 @@ html[data-theme="hidamari"] {
 }
 
 html[data-theme="matcha"] {
-  --color-ink: 27 44 38;
-  --color-rice: 240 247 237;
+  --color-ink: 27 43 38;
+  --color-rice: 241 248 238;
   --color-paper: 255 254 248;
-  --color-sakura: 190 85 101;
-  --color-matcha: 53 126 83;
-  --color-sora: 62 127 155;
-  --color-yuzu: 214 166 70;
-  --color-sumire: 85 96 138;
-  --color-sky: 228 240 226;
+  --color-sakura: 194 86 103;
+  --color-matcha: 47 124 82;
+  --color-sora: 58 126 154;
+  --color-yuzu: 215 166 67;
+  --color-sumire: 84 96 137;
+  --color-sky: 229 240 226;
   --page-start: 249 252 244;
-  --page-end: 229 239 226;
-  --grid-line: 74 97 76;
+  --page-end: 230 240 226;
+  --grid-line: 72 98 80;
 }
 
 html[data-theme="momo"] {
   --color-ink: 45 39 41;
-  --color-rice: 255 246 240;
+  --color-rice: 255 247 241;
   --color-paper: 255 253 249;
-  --color-sakura: 205 82 103;
-  --color-matcha: 70 125 92;
-  --color-sora: 72 126 165;
+  --color-sakura: 204 82 101;
+  --color-matcha: 67 124 92;
+  --color-sora: 68 124 164;
   --color-yuzu: 220 164 76;
-  --color-sumire: 111 91 138;
-  --color-sky: 248 235 230;
-  --page-start: 255 249 244;
-  --page-end: 250 232 224;
-  --grid-line: 111 84 73;
+  --color-sumire: 108 91 138;
+  --color-sky: 248 236 230;
+  --page-start: 255 250 245;
+  --page-end: 250 234 227;
+  --grid-line: 108 84 76;
 }
 
 html[data-theme="washi"] {
-  --color-ink: 38 42 40;
+  --color-ink: 37 42 40;
   --color-rice: 244 242 233;
   --color-paper: 255 253 246;
   --color-sakura: 183 91 104;
-  --color-matcha: 70 114 84;
-  --color-sora: 70 116 147;
+  --color-matcha: 67 113 84;
+  --color-sora: 68 115 146;
   --color-yuzu: 191 150 68;
   --color-sumire: 91 91 122;
   --color-sky: 232 229 218;
@@ -81,11 +81,11 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 52%, rgb(var(--page-end)) 100%);
+    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 42%, rgb(var(--page-end)) 100%);
   color: rgb(var(--color-ink));
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16.5px;
-  line-height: 1.72;
+  font-family: "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.68;
   letter-spacing: 0;
   font-variant-east-asian: proportional-width;
 }
@@ -97,21 +97,21 @@ body::before {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(90deg, rgb(var(--grid-line) / 0.026) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(var(--grid-line) / 0.02) 1px, transparent 1px);
-  background-size: 56px 56px;
-  opacity: 0.22;
+    linear-gradient(90deg, rgb(var(--grid-line) / 0.022) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--grid-line) / 0.018) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.45;
 }
 
 .font-display,
 .section-title {
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+  font-family: "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
   letter-spacing: 0;
 }
 
 .font-japanese,
 .jp-display {
-  font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Microsoft YaHei UI", sans-serif;
+  font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "PingFang SC", "Microsoft YaHei UI", sans-serif;
   letter-spacing: 0;
 }
 
@@ -121,14 +121,14 @@ body::before {
 }
 
 .section-title {
-  font-weight: 850;
-  line-height: 1.16;
+  font-weight: 800;
+  line-height: 1.18;
   color: rgb(var(--color-ink));
 }
 
 .jp-display {
   font-weight: 800;
-  line-height: 1.14;
+  line-height: 1.12;
 }
 
 button,
@@ -153,7 +153,7 @@ select:focus-visible {
 }
 
 ::selection {
-  background: rgb(var(--color-yuzu) / 0.34);
+  background: rgb(var(--color-yuzu) / 0.32);
 }
 
 .tap-surface {
@@ -164,26 +164,28 @@ select:focus-visible {
 
 .app-page-shell {
   min-height: 100vh;
-  background:
-    linear-gradient(90deg, rgb(var(--color-paper) / 0.34), transparent 42rem),
-    transparent;
 }
 
 .soft-surface,
 .app-panel,
 .sticky-learn-toolbar,
-.nav-surface {
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.86) inset,
-    0 10px 28px rgb(var(--color-ink) / 0.055);
+.nav-surface,
+.dense-learn-card {
+  box-shadow: 0 10px 26px rgb(var(--color-ink) / 0.055);
 }
 
 .app-panel,
 .sticky-learn-toolbar,
-.nav-surface {
+.nav-surface,
+.dense-learn-card {
   border: 1px solid rgb(var(--color-ink) / 0.08);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.93);
+  background: rgb(var(--color-paper) / 0.94);
+}
+
+.soft-surface {
+  border: 1px solid rgb(var(--color-ink) / 0.08);
+  background: rgb(var(--color-paper) / 0.96);
 }
 
 .calm-grid-card {
@@ -191,11 +193,8 @@ select:focus-visible {
   overflow: hidden;
   border: 1px solid rgb(var(--color-ink) / 0.08);
   border-radius: 0.75rem;
-  background:
-    linear-gradient(135deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.62));
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 14px 34px rgb(var(--color-ink) / 0.06);
+  background: rgb(var(--color-paper) / 0.96);
+  box-shadow: 0 12px 28px rgb(var(--color-ink) / 0.055);
 }
 
 .calm-grid-card::before {
@@ -207,8 +206,8 @@ select:focus-visible {
     linear-gradient(90deg, rgb(var(--color-ink) / 0.018) 1px, transparent 1px),
     linear-gradient(180deg, rgb(var(--color-ink) / 0.014) 1px, transparent 1px);
   background-size: 44px 44px;
-  -webkit-mask-image: linear-gradient(135deg, black 0%, transparent 72%);
-  mask-image: linear-gradient(135deg, black 0%, transparent 72%);
+  -webkit-mask-image: linear-gradient(135deg, black 0%, transparent 76%);
+  mask-image: linear-gradient(135deg, black 0%, transparent 76%);
 }
 
 .app-card-hover {
@@ -221,10 +220,8 @@ select:focus-visible {
 
 .app-card-hover:hover,
 .app-card-hover:focus-within {
-  border-color: rgb(var(--color-matcha) / 0.28);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 16px 32px rgb(var(--color-ink) / 0.07);
+  border-color: rgb(var(--color-matcha) / 0.32);
+  box-shadow: 0 14px 28px rgb(var(--color-ink) / 0.075);
   transform: translateY(-1px);
 }
 
@@ -239,6 +236,7 @@ select:focus-visible {
 
 .filter-scroll-row::-webkit-scrollbar {
   height: 0.42rem;
+  width: 0.42rem;
 }
 
 .filter-scroll-row::-webkit-scrollbar-track {
@@ -263,24 +261,18 @@ select:focus-visible {
   width: auto;
   max-width: none;
   box-sizing: border-box;
-  border: 1px solid rgb(var(--color-ink) / 0.08);
+  border: 1px solid rgb(var(--color-ink) / 0.09);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.97);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 18px 46px rgb(var(--color-ink) / 0.16);
+  background: rgb(var(--color-paper) / 0.98);
+  box-shadow: 0 18px 42px rgb(var(--color-ink) / 0.16);
 }
 
 .quickread-card {
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.84) inset,
-    0 8px 20px rgb(var(--color-ink) / 0.05);
+  box-shadow: 0 6px 14px rgb(var(--color-ink) / 0.045);
 }
 
 .quickread-card[aria-pressed="true"] {
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.8) inset,
-    0 12px 26px rgb(var(--color-yuzu) / 0.2);
+  box-shadow: 0 12px 24px rgb(var(--color-yuzu) / 0.2);
 }
 
 .learning-grid {
@@ -298,42 +290,32 @@ select:focus-visible {
 }
 
 .readable-kana-grid {
-  grid-auto-rows: minmax(4.8rem, auto);
+  grid-auto-rows: minmax(4.6rem, auto);
 }
 
 .number-card-panel {
-  background: rgb(var(--color-paper) / 0.92);
+  background: rgb(var(--color-paper) / 0.94);
 }
 
 .readable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-  gap: 1rem;
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 0.85rem;
+  align-items: stretch;
 }
 
 .comfortable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-  gap: 1rem;
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 0.9rem;
+  align-items: stretch;
 }
 
 .tool-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 0.9rem;
   align-items: stretch;
-}
-
-.dense-learn-card {
-  min-width: 0;
-  border: 1px solid rgb(var(--color-ink) / 0.08);
-  border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.96);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 8px 18px rgb(var(--color-ink) / 0.04);
 }
 
 .control-surface {
@@ -344,14 +326,14 @@ select:focus-visible {
 .input-surface {
   border: 1px solid rgb(var(--color-ink) / 0.1);
   background: rgb(var(--color-paper) / 0.96);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.86) inset;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.75);
 }
 
 .input-surface:focus {
   border-color: rgb(var(--color-sora) / 0.5);
   box-shadow:
     0 0 0 3px rgb(var(--color-sora) / 0.14),
-    0 1px 0 rgb(255 255 255 / 0.86) inset;
+    inset 0 1px 0 rgb(255 255 255 / 0.75);
 }
 
 .app-kicker {
@@ -364,7 +346,7 @@ select:focus-visible {
   padding: 0.28rem 0.58rem;
   color: rgb(var(--color-matcha));
   font-size: 0.76rem;
-  font-weight: 850;
+  font-weight: 800;
 }
 
 .number-glyph {
@@ -378,9 +360,7 @@ select:focus-visible {
 }
 
 .section-toolbar {
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 14px 32px rgb(var(--color-ink) / 0.08);
+  box-shadow: 0 12px 26px rgb(var(--color-ink) / 0.075);
 }
 
 .word-card-mastered::after {
@@ -396,11 +376,11 @@ select:focus-visible {
 }
 
 .home-osaka-cover-image {
-  filter: saturate(1.02) contrast(1.01);
+  filter: saturate(1.04) contrast(1.02);
 }
 
 .speak-card {
-  animation: speak-card-lift 0.46s ease both;
+  animation: speak-card-lift 0.42s ease both;
 }
 
 .speak-text-glow {
@@ -442,7 +422,7 @@ select:focus-visible {
 .exam-coverage-count-pop,
 .level-count-pop,
 .filter-chip-count-pop {
-  animation: subtle-pop 0.28s ease-out both;
+  animation: subtle-pop 0.24s ease-out both;
 }
 
 .filter-chip-selected::after,
@@ -456,12 +436,12 @@ select:focus-visible {
 .level-progress-spark,
 .exam-coverage-bar {
   transform-origin: left center;
-  animation: progress-in 0.52s ease-out both;
+  animation: progress-in 0.46s ease-out both;
 }
 
 @keyframes subtle-pop {
   0% {
-    opacity: 0.86;
+    opacity: 0.9;
     transform: translateY(0.04rem);
   }
 
@@ -488,7 +468,7 @@ select:focus-visible {
   }
 
   34% {
-    background: rgb(var(--color-yuzu) / 0.36);
+    background: rgb(var(--color-yuzu) / 0.32);
     transform: translateY(-0.08rem);
   }
 
@@ -504,7 +484,7 @@ select:focus-visible {
   }
 
   48% {
-    transform: translateY(-0.12rem);
+    transform: translateY(-0.1rem);
   }
 
   100% {
@@ -520,7 +500,7 @@ select:focus-visible {
   }
 
   50% {
-    transform: scale(1.035);
+    transform: scale(1.03);
     box-shadow: 0 0 0 7px rgb(var(--color-yuzu) / 0);
   }
 }
@@ -545,11 +525,12 @@ select:focus-visible {
 @media (max-width: 767px) {
   body {
     font-size: 16px;
+    line-height: 1.64;
   }
 
   body::before {
-    background-size: 44px 44px;
-    opacity: 0.18;
+    background-size: 54px 54px;
+    opacity: 0.34;
   }
 
   .filter-scroll-row {
@@ -570,9 +551,7 @@ select:focus-visible {
   .dense-learn-card,
   .soft-surface,
   .nav-surface {
-    box-shadow:
-      0 1px 0 rgb(255 255 255 / 0.86) inset,
-      0 7px 18px rgb(var(--color-ink) / 0.052);
+    box-shadow: 0 7px 18px rgb(var(--color-ink) / 0.052);
   }
 
   .app-card-hover:hover,

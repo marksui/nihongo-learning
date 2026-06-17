@@ -21,11 +21,12 @@ export default {
       },
       fontFamily: {
         sans: [
+          '"PingFang SC"',
           '"Microsoft YaHei UI"',
           '"Microsoft YaHei"',
-          '"PingFang SC"',
           '"Hiragino Sans GB"',
           '"Noto Sans SC"',
+          '"Source Han Sans SC"',
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -33,11 +34,12 @@ export default {
           "sans-serif",
         ],
         display: [
+          '"PingFang SC"',
           '"Microsoft YaHei UI"',
           '"Microsoft YaHei"',
-          '"PingFang SC"',
           '"Hiragino Sans GB"',
           '"Noto Sans SC"',
+          '"Source Han Sans SC"',
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",

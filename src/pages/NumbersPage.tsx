@@ -116,6 +116,86 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
     };
   };
 
+  const numberCardsSection = (
+    <section className="space-y-3">
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 className="font-display text-2xl font-extrabold text-ink">数字表</h2>
+          <p className="text-sm font-semibold text-ink/58">点数字、日语或按钮都能朗读。</p>
+        </div>
+        <p className="text-sm font-bold text-ink/58">{filteredNumbers.length} 条读法</p>
+      </div>
+
+      <div className="tool-card-grid">
+        {filteredNumbers.length ? (
+          filteredNumbers.map((item) => {
+            const active = activeNumberId === item.id;
+
+            return (
+              <LearningCard
+                key={item.id}
+                className={`overflow-hidden p-3 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
+                interactive
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={() => void playNumber(item.id, item.audioText ?? item.japanese)}
+                    className="group flex min-w-0 flex-1 cursor-pointer items-start gap-3 rounded-lg text-left transition active:scale-[0.99]"
+                    title="点击日语读法朗读"
+                  >
+                    <span
+                      className={`number-glyph grid h-16 w-16 shrink-0 place-items-center rounded-lg border px-1 text-center text-[1.55rem] font-extrabold leading-none transition sm:h-[4.6rem] sm:w-[4.6rem] sm:text-[1.75rem] ${
+                        active
+                          ? "border-matcha bg-matcha text-white"
+                          : "border-ink/10 bg-rice/62 text-ink group-hover:border-matcha/30 group-hover:bg-matcha/8"
+                      }`}
+                    >
+                      {item.display}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="mb-1.5 inline-flex rounded-md bg-yuzu/16 px-2 py-0.5 text-xs font-extrabold text-ink/58">
+                        {item.group}
+                      </span>
+                      <span className={`jp-display block break-words text-[1.65rem] ${active ? "text-matcha" : "text-ink"}`}>
+                        {item.japanese}
+                      </span>
+                      <span className="mt-1 block break-words text-[0.95rem] font-bold leading-6 text-ink/62">{item.kana}</span>
+                      <span className="mt-0.5 block break-words font-reading text-[0.95rem] font-extrabold leading-6 text-sakura">
+                        {formatRomajiReading(item.romaji)}
+                      </span>
+                    </span>
+                  </button>
+                  <SpeakButton
+                    active={active}
+                    ariaLabel={`朗读 ${item.japanese}`}
+                    className="h-10 w-10"
+                    onClick={() => playNumber(item.id, item.audioText ?? item.japanese)}
+                    title="朗读"
+                  />
+                </div>
+
+                <p className="mt-3 break-words rounded-md border border-ink/8 bg-paper/70 px-3 py-2 text-sm font-extrabold leading-6 text-ink/70">
+                  {item.meaning}
+                </p>
+
+                {item.note ? (
+                  <p className="mt-2 rounded-md border border-sakura/18 bg-sakura/7 px-2.5 py-1.5 text-sm font-semibold leading-6 text-ink/66">
+                    {item.note}
+                  </p>
+                ) : null}
+              </LearningCard>
+            );
+          })
+        ) : (
+          <div className="lg:col-span-2">
+            <EmptyState title="没有找到数字读法" description="换一个数字、假名或中文关键词试试。" />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+
   return (
     <div className="space-y-6">
       <PageHero
@@ -160,6 +240,8 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
           />
         </div>
       </section>
+
+      {numberCardsSection}
 
       {filteredScenes.length ? (
         <section className="space-y-3">
@@ -257,73 +339,6 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
         </section>
       ) : null}
 
-      <section className="tool-card-grid">
-        {filteredNumbers.length ? (
-          filteredNumbers.map((item) => {
-            const active = activeNumberId === item.id;
-
-            return (
-              <LearningCard
-                key={item.id}
-                className={`overflow-hidden p-3 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
-                interactive
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <button
-                    type="button"
-                    onClick={() => void playNumber(item.id, item.audioText ?? item.japanese)}
-                    className="group flex min-w-0 flex-1 cursor-pointer items-start gap-3 rounded-lg text-left transition active:scale-[0.99]"
-                    title="点击日语读法朗读"
-                  >
-                    <span
-                      className={`number-glyph grid h-16 w-16 shrink-0 place-items-center rounded-lg border px-1 text-center text-[1.55rem] font-extrabold leading-none transition sm:h-[4.6rem] sm:w-[4.6rem] sm:text-[1.75rem] ${
-                        active
-                          ? "border-matcha bg-matcha text-white"
-                          : "border-ink/10 bg-rice/62 text-ink group-hover:border-matcha/30 group-hover:bg-matcha/8"
-                      }`}
-                    >
-                      {item.display}
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="mb-1.5 inline-flex rounded-md bg-yuzu/16 px-2 py-0.5 text-xs font-extrabold text-ink/58">
-                        {item.group}
-                      </span>
-                      <span className={`jp-display block break-words text-[1.65rem] ${active ? "text-matcha" : "text-ink"}`}>
-                        {item.japanese}
-                      </span>
-                      <span className="mt-1 block break-words text-[0.95rem] font-bold leading-6 text-ink/62">{item.kana}</span>
-                      <span className="mt-0.5 block break-words font-reading text-[0.95rem] font-extrabold leading-6 text-sakura">
-                        {formatRomajiReading(item.romaji)}
-                      </span>
-                    </span>
-                  </button>
-                  <SpeakButton
-                    active={active}
-                    ariaLabel={`朗读 ${item.japanese}`}
-                    className="h-10 w-10"
-                    onClick={() => playNumber(item.id, item.audioText ?? item.japanese)}
-                    title="朗读"
-                  />
-                </div>
-
-                <p className="mt-3 break-words rounded-md border border-ink/8 bg-paper/70 px-3 py-2 text-sm font-extrabold leading-6 text-ink/70">
-                  {item.meaning}
-                </p>
-
-                {item.note ? (
-                  <p className="mt-2 rounded-md border border-sakura/18 bg-sakura/7 px-2.5 py-1.5 text-sm font-semibold leading-6 text-ink/66">
-                    {item.note}
-                  </p>
-                ) : null}
-              </LearningCard>
-            );
-          })
-        ) : (
-          <div className="lg:col-span-2">
-            <EmptyState title="没有找到数字读法" description="换一个数字、假名或中文关键词试试。" />
-          </div>
-        )}
-      </section>
     </div>
   );
 };
