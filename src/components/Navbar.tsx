@@ -34,12 +34,12 @@ interface NavItem {
 const navItems: NavItem[] = [
   { page: "home", label: "首页", icon: Home },
   { page: "kana", label: "五十音", shortLabel: "假名", icon: Grid3X3 },
+  { page: "quickread", label: "假名速读", shortLabel: "速读", icon: Table2 },
   { page: "numbers", label: "数字读法", shortLabel: "数字", icon: Hash },
   { page: "vocabulary", label: "常用单词", shortLabel: "单词", icon: BookOpen },
-  { page: "exam-vocabulary", label: "JLPT词库", shortLabel: "JLPT", icon: Trophy },
   { page: "grammar", label: "基础语法", shortLabel: "语法", icon: GraduationCap },
   { page: "conversation", label: "日常会话", shortLabel: "会话", icon: MessagesSquare },
-  { page: "quickread", label: "假名速读", shortLabel: "速读", icon: Table2 },
+  { page: "exam-vocabulary", label: "JLPT词库", shortLabel: "JLPT", icon: Trophy },
 ];
 
 const mobilePrimaryItems = navItems.filter((item) =>
@@ -47,7 +47,7 @@ const mobilePrimaryItems = navItems.filter((item) =>
 );
 
 const moreItems = navItems.filter((item) =>
-  ["numbers", "exam-vocabulary", "grammar", "quickread"].includes(item.page),
+  ["quickread", "numbers", "grammar", "exam-vocabulary"].includes(item.page),
 );
 
 interface NavbarProps {
@@ -65,7 +65,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
     onNavigate(page);
   };
 
-  const renderDesktopButton = (item: NavItem) => {
+  const renderNavButton = (item: NavItem) => {
     const Icon = item.icon;
     const active = currentPage === item.page;
 
@@ -75,13 +75,13 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
         type="button"
         onClick={() => navigate(item.page)}
         aria-current={active ? "page" : undefined}
-        className={`tap-surface flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg px-3 py-2 text-[0.9rem] font-bold transition active:scale-[0.98] ${
+        className={`tap-surface flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg px-3 py-2 text-[0.9rem] font-extrabold transition active:scale-[0.98] ${
           active
-            ? "bg-matcha text-white shadow-sm"
-            : "text-ink/64 hover:bg-rice hover:text-ink"
+            ? "bg-ink text-white shadow-sm"
+            : "text-ink/62 hover:bg-rice/70 hover:text-ink"
         }`}
       >
-        <Icon aria-hidden="true" size={17} strokeWidth={2.2} />
+        <Icon aria-hidden="true" size={17} strokeWidth={2.25} />
         <span className="whitespace-nowrap">{item.label}</span>
       </button>
     );
@@ -89,30 +89,30 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 hidden border-b border-ink/7 bg-paper/88 backdrop-blur-xl lg:block">
+      <header className="sticky top-0 z-40 hidden border-b border-ink/8 bg-paper/90 backdrop-blur-xl lg:block">
         <div className="mx-auto flex max-w-[84rem] items-center gap-4 px-8 py-3">
           <button
             type="button"
             onClick={() => navigate("home")}
-            className="tap-surface flex min-w-[10rem] cursor-pointer items-center gap-3 rounded-lg text-left"
+            className="tap-surface flex min-w-[11rem] cursor-pointer items-center gap-3 rounded-lg text-left"
             aria-label="返回首页"
           >
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-ink font-japanese text-xl font-extrabold text-white shadow-sm">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-matcha font-japanese text-xl font-extrabold text-white shadow-sm">
               あ
             </span>
             <span className="min-w-0">
               <span className="block truncate text-base font-extrabold leading-tight text-ink">中文学日语</span>
-              <span className="block truncate text-xs font-bold text-ink/50">{currentItem.label}</span>
+              <span className="block truncate text-xs font-bold text-ink/48">听、读、跟说</span>
             </span>
           </button>
 
           <nav className="nav-surface filter-scroll-row flex min-w-0 flex-1 items-center gap-1 overflow-x-auto p-1" aria-label="桌面导航">
-            {navItems.map(renderDesktopButton)}
+            {navItems.map(renderNavButton)}
           </nav>
         </div>
       </header>
 
-      <header className="sticky top-0 z-30 border-b border-ink/7 bg-paper/92 px-3 py-2 backdrop-blur-xl lg:hidden">
+      <header className="sticky top-0 z-30 border-b border-ink/8 bg-paper/94 px-3 py-2 backdrop-blur-xl lg:hidden">
         <div className="mx-auto flex min-w-0 max-w-3xl items-center justify-between gap-3">
           <button
             type="button"
@@ -120,23 +120,20 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
             className="tap-surface flex min-w-0 cursor-pointer items-center gap-2 rounded-lg text-left"
             aria-label="返回首页"
           >
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-ink font-japanese text-xl font-extrabold text-white shadow-sm">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-matcha font-japanese text-xl font-extrabold text-white shadow-sm">
               あ
             </span>
             <span className="min-w-0">
               <span className="block truncate text-base font-extrabold leading-tight text-ink">中文学日语</span>
-              <span className="block truncate text-xs font-bold text-ink/50">{currentItem.label}</span>
+              <span className="block truncate text-xs font-bold text-ink/48">{currentItem.label}</span>
             </span>
           </button>
-          <span className="shrink-0 rounded-lg border border-ink/8 bg-rice/60 px-3 py-2 text-xs font-extrabold text-ink/58">
-            点读
-          </span>
         </div>
       </header>
 
       {moreOpen ? (
         <div
-          className="fixed inset-0 z-40 bg-ink/16 backdrop-blur-[2px] lg:hidden"
+          className="fixed inset-0 z-40 bg-ink/14 backdrop-blur-[2px] lg:hidden"
           onClick={() => setMoreOpen(false)}
         />
       ) : null}
@@ -145,7 +142,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
         {moreOpen ? (
           <div className="mb-2 rounded-lg border border-ink/10 bg-paper p-2 shadow-soft">
             <div className="mb-1 flex items-center justify-between px-1 py-1">
-              <p className="px-2 text-sm font-extrabold text-ink">更多</p>
+              <p className="px-2 text-sm font-extrabold text-ink">更多入口</p>
               <button
                 type="button"
                 onClick={() => setMoreOpen(false)}
@@ -167,8 +164,8 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                     onClick={() => navigate(item.page)}
                     className={`tap-surface flex min-h-14 cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-left text-sm font-extrabold transition active:scale-95 ${
                       active
-                        ? "border-matcha bg-matcha text-white shadow-sm"
-                        : "border-ink/8 bg-rice/46 text-ink/70 hover:border-matcha/25 hover:bg-rice hover:text-ink"
+                        ? "border-ink bg-ink text-white shadow-sm"
+                        : "border-ink/8 bg-rice/45 text-ink/70 hover:border-matcha/25 hover:bg-rice hover:text-ink"
                     }`}
                   >
                     <Icon aria-hidden="true" size={19} />
@@ -193,7 +190,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
                 aria-current={active ? "page" : undefined}
                 className={`tap-surface grid min-h-[3.25rem] cursor-pointer place-items-center rounded-lg px-1 py-1 text-[0.72rem] font-extrabold leading-tight transition active:scale-95 ${
                   active
-                    ? "bg-matcha text-white shadow-sm"
+                    ? "bg-ink text-white shadow-sm"
                     : "text-ink/58 hover:bg-rice hover:text-ink"
                 }`}
               >
@@ -209,7 +206,7 @@ const Navbar = ({ currentPage, onNavigate }: NavbarProps) => {
             aria-expanded={moreOpen}
             className={`tap-surface grid min-h-[3.25rem] cursor-pointer place-items-center rounded-lg px-1 py-1 text-[0.72rem] font-extrabold leading-tight transition active:scale-95 ${
               moreActive || moreOpen
-                ? "bg-matcha text-white shadow-sm"
+                ? "bg-ink text-white shadow-sm"
                 : "text-ink/58 hover:bg-rice hover:text-ink"
             }`}
           >

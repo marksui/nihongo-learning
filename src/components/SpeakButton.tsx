@@ -19,9 +19,9 @@ interface SpeakButtonProps {
 
 const variantClasses = {
   solid: "bg-matcha text-white shadow-sm hover:bg-matcha/90",
-  soft: "border border-matcha/25 bg-matcha/10 text-matcha hover:bg-matcha hover:text-white",
-  light: "border border-ink/10 bg-paper/92 text-matcha shadow-sm hover:border-matcha/28 hover:bg-matcha hover:text-white",
-  dark: "bg-white/12 text-white hover:bg-white/22",
+  soft: "border border-matcha/24 bg-matcha/9 text-matcha hover:bg-matcha hover:text-white",
+  light: "border border-ink/10 bg-paper/96 text-matcha shadow-sm hover:border-matcha/30 hover:bg-matcha hover:text-white",
+  dark: "border border-white/18 bg-white/12 text-white hover:bg-white/22",
 };
 
 const SpeakButton = ({
@@ -60,7 +60,7 @@ const SpeakButton = ({
       onClick={handleClick}
       className={`tap-surface cursor-pointer items-center justify-center gap-2 rounded-lg text-sm font-extrabold transition duration-200 active:scale-95 ${
         iconOnly ? "grid h-11 w-11 shrink-0 place-items-center" : "flex min-h-11 px-3 py-2"
-      } ${variantClasses[variant]} ${speaking ? "speak-button-active ring-2 ring-yuzu/40" : ""} ${className}`}
+      } ${variantClasses[variant]} ${speaking ? "speak-button-active ring-2 ring-yuzu/38" : ""} ${className}`}
       aria-label={ariaLabel}
       title={title}
     >

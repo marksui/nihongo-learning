@@ -25,10 +25,10 @@ const KanaPage = ({ onSpeak }: KanaPageProps) => {
 
         return (
           <section key={group} className="space-y-3">
-            <div className="app-panel px-4 py-3">
+            <div className="rounded-lg border border-ink/8 bg-paper/70 px-4 py-3">
               <div className="flex items-center gap-3">
-                <h2 className="section-title text-2xl">{group}</h2>
-                <div className="h-px flex-1 bg-yuzu/28" />
+                <h2 className="section-title text-xl sm:text-2xl">{group}</h2>
+                <div className="h-px flex-1 bg-ink/8" />
               </div>
               {note ? (
                 <div className="mt-3 grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">

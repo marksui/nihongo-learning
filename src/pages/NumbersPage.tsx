@@ -134,7 +134,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
             return (
               <LearningCard
                 key={item.id}
-                className={`overflow-hidden p-3 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
+                className={`number-card-panel overflow-hidden p-3 ${active ? "border-yuzu/70 bg-yuzu/10 ring-2 ring-yuzu/30" : ""}`}
                 interactive
               >
                 <div className="flex items-start justify-between gap-3">
@@ -145,7 +145,7 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                     title="点击日语读法朗读"
                   >
                     <span
-                      className={`number-glyph grid h-16 w-16 shrink-0 place-items-center rounded-lg border px-1 text-center text-[1.55rem] font-extrabold leading-none transition sm:h-[4.6rem] sm:w-[4.6rem] sm:text-[1.75rem] ${
+                      className={`number-glyph grid h-14 w-14 shrink-0 place-items-center rounded-lg border px-1 text-center text-[1.45rem] font-extrabold leading-none transition sm:h-[4.25rem] sm:w-[4.25rem] sm:text-[1.65rem] ${
                         active
                           ? "border-matcha bg-matcha text-white"
                           : "border-ink/10 bg-rice/62 text-ink group-hover:border-matcha/30 group-hover:bg-matcha/8"
@@ -154,10 +154,10 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                       {item.display}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="mb-1.5 inline-flex rounded-md bg-yuzu/16 px-2 py-0.5 text-xs font-extrabold text-ink/58">
+                      <span className="mb-1 inline-flex rounded-md bg-yuzu/14 px-2 py-0.5 text-xs font-extrabold text-ink/56">
                         {item.group}
                       </span>
-                      <span className={`jp-display block break-words text-[1.65rem] ${active ? "text-matcha" : "text-ink"}`}>
+                      <span className={`jp-display block break-words text-[1.55rem] ${active ? "text-matcha" : "text-ink"}`}>
                         {item.japanese}
                       </span>
                       <span className="mt-1 block break-words text-[0.95rem] font-bold leading-6 text-ink/62">{item.kana}</span>
@@ -175,12 +175,12 @@ const NumbersPage = ({ onSpeak }: NumbersPageProps) => {
                   />
                 </div>
 
-                <p className="mt-3 break-words rounded-md border border-ink/8 bg-paper/70 px-3 py-2 text-sm font-extrabold leading-6 text-ink/70">
+                <p className="mt-3 break-words rounded-lg border border-ink/8 bg-paper/70 px-3 py-2 text-sm font-extrabold leading-6 text-ink/70">
                   {item.meaning}
                 </p>
 
                 {item.note ? (
-                  <p className="mt-2 rounded-md border border-sakura/18 bg-sakura/7 px-2.5 py-1.5 text-sm font-semibold leading-6 text-ink/66">
+                  <p className="mt-2 rounded-lg border border-sakura/18 bg-sakura/7 px-2.5 py-1.5 text-sm font-semibold leading-6 text-ink/66">
                     {item.note}
                   </p>
                 ) : null}

@@ -53,15 +53,15 @@ const featureCards: FeatureCard[] = [
   {
     title: "五十音",
     page: "kana",
-    description: "先把假名听熟，看见就能读。",
-    metric: `${kanaItems.length} 个假名`,
+    description: "平假名、片假名、例词一起听。",
+    metric: `${kanaItems.length} 个`,
     accent: "bg-matcha text-white",
     icon: Grid3X3,
   },
   {
     title: "假名速读",
     page: "quickread",
-    description: "一整页点读表，打开就能跟读。",
+    description: "整页点读表，适合每天开口热身。",
     metric: "快捷表",
     accent: "bg-sora text-white",
     icon: Table2,
@@ -77,7 +77,7 @@ const featureCards: FeatureCard[] = [
   {
     title: "常用单词",
     page: "vocabulary",
-    description: "按生活场景找词，每张卡都能读。",
+    description: "按生活场景查词，单词和例句都能读。",
     metric: `${vocabulary.filter((word) => word.category !== "考试单词").length} 个`,
     accent: "bg-sakura text-white",
     icon: BookOpen,
@@ -85,7 +85,7 @@ const featureCards: FeatureCard[] = [
   {
     title: "基础语法",
     page: "grammar",
-    description: "中文解释、句型、例句一起看。",
+    description: "中文解释句型，例句带读音。",
     metric: `${grammarLessons.length} 课`,
     accent: "bg-sumire text-white",
     icon: GraduationCap,
@@ -94,15 +94,15 @@ const featureCards: FeatureCard[] = [
     title: "日常会话",
     page: "conversation",
     description: "你说 / 对方说，对照练开口。",
-    metric: `${dialogues.length} 个情景`,
+    metric: `${dialogues.length} 个`,
     accent: "bg-matcha text-white",
     icon: MessagesSquare,
   },
   {
     title: "JLPT词库",
     page: "exam-vocabulary",
-    description: "按级别长期积累高频词。",
-    metric: `${vocabulary.length} 个词`,
+    description: "按 N5 到 N1 慢慢扩词。",
+    metric: `${vocabulary.length} 个`,
     accent: "bg-ink text-white",
     icon: Trophy,
   },
@@ -124,7 +124,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       page: "kana",
       japanese: today.kanaPreview,
       reading: today.kanaPreview,
-      meaning: "今天先读顺这一组。",
+      meaning: "先把这一组读顺。",
       speakText: today.kanaPreview.replace(/\s+/g, "、"),
       contentIds: [`kana:${today.kanaGroup}`],
       icon: Grid3X3,
@@ -187,57 +187,60 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
   return (
     <div className="space-y-5 sm:space-y-6">
-      <section className="relative min-h-[22rem] overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-soft sm:min-h-[27rem] lg:min-h-[30rem]">
-        <img
-          src={homeStudyScene}
-          alt="大阪道顿堀河岸街景封面"
-          className="home-osaka-cover-image absolute inset-0 h-full w-full object-cover object-[center_50%]"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/88 via-ink/42 to-ink/10" />
-        <div className="absolute inset-0 flex items-end">
-          <div className="w-full p-4 sm:p-6 lg:p-8">
-            <p className="mb-3 inline-flex rounded-lg border border-white/22 bg-white/14 px-3 py-1 text-xs font-extrabold text-white backdrop-blur">
-              打开就能跟读
-            </p>
-            <h1 className="font-display max-w-3xl break-words text-[2.35rem] font-extrabold leading-none text-white sm:text-[3.25rem] lg:text-[4rem]">
-              中文学日语
-            </h1>
-            <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-white/90 sm:text-lg">
-              假名、单词、句型和会话放在一起。点一下听发音，看一眼读音，再跟着说。
-            </p>
+      <section className="grid overflow-hidden rounded-lg border border-ink/9 bg-paper/94 shadow-card lg:grid-cols-[minmax(22rem,0.92fr)_minmax(0,1.08fr)]">
+        <div className="relative min-h-[15rem] overflow-hidden bg-ink sm:min-h-[19rem] lg:min-h-[26rem]">
+          <img
+            src={homeStudyScene}
+            alt="大阪道顿堀河岸街景封面"
+            className="home-osaka-cover-image absolute inset-0 h-full w-full object-cover object-[center_50%]"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/58 via-ink/12 to-transparent" />
+          <div className="absolute bottom-3 left-3 rounded-lg border border-white/18 bg-white/18 px-3 py-2 text-white backdrop-blur">
+            <p className="font-reading text-xs font-bold italic leading-none">Osaka</p>
+            <p className="mt-0.5 text-sm font-extrabold leading-none">大阪</p>
+          </div>
+        </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={() => onNavigate("quickread")}
-                className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg bg-matcha px-4 py-2.5 font-extrabold text-white shadow-sm transition hover:bg-matcha/90 active:scale-95"
-              >
-                直接点读
-                <Play aria-hidden="true" size={18} />
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate("conversation")}
-                className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg border border-white/22 bg-white/90 px-4 py-2.5 font-extrabold text-ink shadow-sm transition hover:bg-white active:scale-95"
-              >
-                进入会话
-                <ArrowRight aria-hidden="true" size={18} />
-              </button>
-            </div>
+        <div className="flex min-w-0 flex-col justify-center p-4 sm:p-6 lg:p-8">
+          <p className="app-kicker w-fit">零基础点读路线</p>
+          <h1 className="section-title mt-3 break-words text-[2.35rem] leading-none sm:text-[3rem] lg:text-[3.55rem]">
+            中文学日语
+          </h1>
+          <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-ink/66 sm:text-lg">
+            先听假名，再读词和句子。每个页面都可以直接点读，适合每天打开练几分钟。
+          </p>
 
-            <div className="mt-5 grid w-full max-w-md grid-cols-3 gap-2">
-              {[
-                { label: "假名", value: kanaItems.length },
-                { label: "词汇", value: vocabulary.length },
-                { label: "会话", value: dialogues.length },
-              ].map((stat) => (
-                <div key={stat.label} className="rounded-md border border-white/18 bg-white/16 px-3 py-2 text-white backdrop-blur">
-                  <p className="text-xl font-extrabold leading-none">{stat.value}</p>
-                  <p className="mt-1 text-xs font-bold text-white/78">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => onNavigate("quickread")}
+              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg bg-matcha px-4 py-2.5 font-extrabold text-white shadow-sm transition hover:bg-matcha/90 active:scale-95"
+            >
+              直接点读
+              <Play aria-hidden="true" size={18} />
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate("conversation")}
+              className="tap-surface flex cursor-pointer items-center gap-2 rounded-lg border border-ink/10 bg-rice/58 px-4 py-2.5 font-extrabold text-ink shadow-sm transition hover:bg-rice active:scale-95"
+            >
+              进入会话
+              <ArrowRight aria-hidden="true" size={18} />
+            </button>
+          </div>
+
+          <div className="mt-5 grid max-w-md grid-cols-3 gap-2">
+            {[
+              { label: "假名", value: kanaItems.length },
+              { label: "词汇", value: vocabulary.length },
+              { label: "会话", value: dialogues.length },
+            ].map((stat) => (
+              <div key={stat.label} className="rounded-lg border border-ink/8 bg-rice/45 px-3 py-2">
+                <p className="number-glyph text-xl font-extrabold leading-none text-ink">{stat.value}</p>
+                <p className="mt-1 text-xs font-bold text-ink/52">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -245,8 +248,8 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
       <LearningCard className="p-3 sm:p-4">
         <div className="mb-3 flex items-end justify-between gap-3">
           <div>
-            <p className="text-sm font-extrabold text-matcha">今日跟读</p>
-            <h2 className="section-title text-2xl">先读这 5 个</h2>
+            <p className="text-sm font-extrabold text-matcha">今日点读</p>
+            <h2 className="section-title text-2xl">先按这 5 个</h2>
           </div>
           <button
             type="button"
@@ -257,7 +260,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           </button>
         </div>
 
-        <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-5">
           {previewItems.map((item) => {
             const Icon = item.icon;
             const active = activeTaskKey === item.key;
@@ -268,7 +271,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                 className={`min-w-0 rounded-lg border p-3 transition ${
                   active
                     ? "border-yuzu/55 bg-yuzu/14 ring-2 ring-yuzu/20"
-                    : "border-ink/8 bg-paper/70"
+                    : "border-ink/8 bg-paper/72"
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -306,7 +309,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         <div className="mb-3 flex items-end justify-between gap-3">
           <div>
             <p className="text-sm font-extrabold text-sora">学习入口</p>
-            <h2 className="section-title text-2xl">选择一个页面开始</h2>
+            <h2 className="section-title text-2xl">按页面开始</h2>
           </div>
         </div>
 
@@ -319,14 +322,14 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                 <button
                   type="button"
                   onClick={() => onNavigate(card.page)}
-                  className="flex min-h-32 w-full cursor-pointer items-start gap-3 p-4 text-left"
+                  className="flex min-h-28 w-full cursor-pointer items-start gap-3 p-4 text-left"
                 >
                   <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${card.accent} shadow-card`}>
                     <Icon aria-hidden="true" size={20} />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="text-lg font-extrabold text-ink">{card.title}</span>
-                    <span className="mt-1.5 block text-[0.95rem] leading-6 text-ink/66">{card.description}</span>
+                    <span className="mt-1.5 block text-[0.95rem] leading-6 text-ink/64">{card.description}</span>
                     <span className="mt-3 flex items-center justify-between gap-3 text-xs font-extrabold text-ink/52">
                       <span className="truncate">{card.metric}</span>
                       <ArrowRight className="shrink-0 transition group-hover:translate-x-0.5" size={16} />

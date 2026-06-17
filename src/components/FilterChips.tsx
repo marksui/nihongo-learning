@@ -20,7 +20,7 @@ const FilterChips = <T extends string>({
   return (
     <div className="min-w-0">
       <div
-        className="filter-scroll-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0"
+        className="filter-scroll-row -mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0"
         aria-label={label ?? "筛选"}
         role="group"
       >
@@ -36,7 +36,7 @@ const FilterChips = <T extends string>({
               className={`tap-surface flex max-w-[14rem] shrink-0 snap-start cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm font-extrabold transition active:scale-95 md:max-w-[16rem] ${
                 selected
                   ? "filter-chip-selected border-ink bg-ink text-white shadow-sm"
-                  : "border-ink/8 bg-paper/70 text-ink/64 hover:border-sora/26 hover:bg-rice/70 hover:text-ink"
+                  : "border-ink/8 bg-paper/76 text-ink/62 hover:border-matcha/24 hover:bg-rice/70 hover:text-ink"
               }`}
             >
               {Icon ? <Icon aria-hidden="true" size={15} /> : null}
@@ -44,7 +44,7 @@ const FilterChips = <T extends string>({
               {counts?.[option] !== undefined ? (
                 <span
                   className={`rounded px-1.5 py-0.5 text-xs ${
-                    selected ? "filter-chip-count-pop bg-white/16" : "bg-rice text-ink/58"
+                    selected ? "filter-chip-count-pop bg-white/16 text-white/82" : "bg-rice/70 text-ink/52"
                   }`}
                 >
                   {counts[option]}

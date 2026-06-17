@@ -44,13 +44,13 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
   return (
     <LearningCard
       interactive
-      className={`flex min-h-[10.5rem] flex-col justify-between p-3 ${activeTarget ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/25" : ""}`}
+      className={`flex min-h-[9.75rem] flex-col justify-between p-3 ${activeTarget ? "border-yuzu/65 bg-yuzu/8 ring-2 ring-yuzu/24" : ""}`}
     >
       <div>
-        <div className="mb-2.5 flex items-start justify-between gap-2.5">
+        <div className="mb-2.5 flex items-start justify-between gap-2">
           <div>
             <p
-              className={`mb-1.5 inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-extrabold ${
+              className={`mb-1 inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[0.7rem] font-extrabold ${
                 studyState.completed
                   ? "bg-matcha/12 text-matcha"
                   : studyState.seen
@@ -61,11 +61,11 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
               {studyState.completed ? <CheckCircle2 aria-hidden="true" size={14} /> : <Clock3 aria-hidden="true" size={14} />}
               {studyState.completed ? "已掌握" : studyState.seen ? "已听过" : "未开始"}
             </p>
-            <div className="flex items-end gap-2.5">
-              <span className={`jp-display text-[2.7rem] transition-colors sm:text-[3rem] ${kanaActive ? "text-matcha" : "text-ink"}`}>
+            <div className="flex items-end gap-2">
+              <span className={`jp-display text-[2.45rem] transition-colors sm:text-[2.7rem] ${kanaActive ? "text-matcha" : "text-ink"}`}>
                 {item.hiragana}
               </span>
-              <span className={`jp-display text-[1.95rem] transition-colors sm:text-[2.2rem] ${kanaActive ? "text-sakura" : "text-sumire"}`}>
+              <span className={`jp-display text-[1.75rem] transition-colors sm:text-[2rem] ${kanaActive ? "text-sakura" : "text-sumire"}`}>
                 {item.katakana}
               </span>
             </div>
@@ -77,12 +77,13 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
             active={kanaActive}
             onClick={() => play("kana", item.audioText ?? item.hiragana)}
             ariaLabel={`播放 ${item.hiragana} 的日语发音`}
+            className="h-10 w-10"
             title="播放发音"
           />
         </div>
 
         <div
-          className={`rounded-md border p-2.5 transition ${
+          className={`rounded-lg border p-2.5 transition ${
             exampleActive ? "border-matcha/40 bg-matcha/10" : "border-sora/18 bg-sora/10"
           }`}
         >
@@ -95,7 +96,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
               title="朗读例词"
             >
               <p className="text-xs font-bold text-ink/52">例词</p>
-              <p className={`mt-1 break-words font-japanese text-lg font-extrabold leading-snug transition-colors ${exampleActive ? "text-matcha" : "text-ink"}`}>
+              <p className={`mt-1 break-words font-japanese text-[1.05rem] font-extrabold leading-snug transition-colors ${exampleActive ? "text-matcha" : "text-ink"}`}>
                 {item.example.word}
               </p>
               <p className="mt-1 break-words text-sm leading-5 text-ink/62">
@@ -121,7 +122,7 @@ const KanaCard = ({ item, onSpeak }: KanaCardProps) => {
           onClick={markMastered}
           disabled={studyState.completed}
           aria-pressed={studyState.completed}
-          className={`flex min-h-11 shrink-0 touch-manipulation cursor-pointer items-center justify-center gap-1.5 rounded-md border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
+          className={`flex min-h-10 shrink-0 touch-manipulation cursor-pointer items-center justify-center gap-1.5 rounded-md border px-2.5 py-1.5 text-sm font-extrabold transition active:scale-[0.99] ${
             studyState.completed
               ? "cursor-default border-matcha/20 bg-matcha/10 text-matcha"
               : "border-yuzu/28 bg-yuzu/14 text-ink/68 hover:bg-yuzu/24 hover:text-ink"

@@ -66,9 +66,9 @@ export default {
         ],
       },
       boxShadow: {
-        soft: "0 12px 28px rgba(34, 38, 34, 0.08)",
-        card: "0 8px 18px rgba(34, 38, 34, 0.06)",
-        pop: "0 8px 0 rgba(34, 38, 34, 0.035), 0 14px 24px rgba(34, 38, 34, 0.07)",
+        soft: "0 12px 24px rgba(34, 38, 34, 0.065)",
+        card: "0 8px 18px rgba(34, 38, 34, 0.045)",
+        pop: "0 8px 0 rgba(34, 38, 34, 0.025), 0 14px 24px rgba(34, 38, 34, 0.055)",
       },
       opacity: {
         2: "0.02",

@@ -33,13 +33,13 @@ const ThemeSwitcher = () => {
   }, [themeId]);
 
   return (
-    <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/78 p-3 shadow-card" aria-labelledby="theme-title">
+    <section className="min-w-0 rounded-lg border border-ink/8 bg-paper/78 p-3" aria-labelledby="theme-title">
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2">
-          <Palette aria-hidden="true" className="shrink-0 text-sora" size={18} />
+          <Palette aria-hidden="true" className="shrink-0 text-matcha" size={18} />
           <div className="min-w-0">
             <h2 id="theme-title" className="truncate text-sm font-extrabold text-ink">
-              主题
+              主题颜色
             </h2>
             <p className="truncate text-xs font-bold text-ink/48">{activeTheme.name}</p>
           </div>
@@ -51,7 +51,7 @@ const ThemeSwitcher = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-2" aria-label="主题颜色" role="group">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2" aria-label="主题颜色" role="group">
         {themes.map((theme) => {
           const active = theme.id === themeId;
 
@@ -63,8 +63,8 @@ const ThemeSwitcher = () => {
               aria-pressed={active}
               className={`tap-surface flex min-w-0 cursor-pointer items-center justify-between gap-2 rounded-lg border px-2.5 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
                 active
-                  ? "border-matcha bg-matcha text-white shadow-sm"
-                  : "border-ink/10 bg-paper/60 text-ink/66 hover:border-sora/25 hover:bg-rice hover:text-ink"
+                  ? "border-ink bg-ink text-white shadow-sm"
+                  : "border-ink/10 bg-rice/45 text-ink/66 hover:border-matcha/25 hover:bg-rice hover:text-ink"
               }`}
             >
               <span className="flex min-w-0 items-center gap-2">
