@@ -15,7 +15,7 @@ const KanaPage = ({ onSpeak }: KanaPageProps) => {
         stats={[
           { label: "行", value: kanaGroups.length },
           { label: "假名", value: kanaItems.length },
-          { label: "点读", value: "可听" },
+          { label: "发音", value: "日语" },
         ]}
       />
 
