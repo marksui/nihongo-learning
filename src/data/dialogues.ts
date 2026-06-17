@@ -1445,6 +1445,73 @@ const travelAccommodationDialogues: Dialogue[] = [
   ], ["旅行", "酒店", "退房", "收据"]),
 ];
 
+const healthClinicDialogues: Dialogue[] = [
+  makeDialogue("scenario-clinic-first-visit-form", "诊所初诊问诊票", "紧急", "患者", "第一次去诊所，向前台确认初诊、保险证和问诊票", [
+    { speaker: "患者", japanese: "初診ですが、診てもらえますか。", kana: "しょしんですが、みてもらえますか。", translation: "我是第一次来，可以看诊吗？" },
+    { speaker: "受付", japanese: "はい。保険証と在留カードをお願いします。", kana: "はい。ほけんしょうとざいりゅうかーどをおねがいします。", translation: "可以。请出示保险证和在留卡。" },
+    { speaker: "患者", japanese: "予約なしでも大丈夫ですか。", kana: "よやくなしでもだいじょうぶですか。", translation: "没有预约也可以吗？" },
+    { speaker: "受付", japanese: "少しお待ちいただきますが、大丈夫です。", kana: "すこしおまちいただきますが、だいじょうぶです。", translation: "需要稍等一会儿，但可以。" },
+    { speaker: "患者", japanese: "問診票の書き方が分かりません。", kana: "もんしんひょうのかきかたがわかりません。", translation: "我不知道问诊表怎么填。" },
+    { speaker: "受付", japanese: "分からないところは空欄で大丈夫です。", kana: "わからないところはくうらんでだいじょうぶです。", translation: "不懂的地方空着也没关系。" },
+  ], ["紧急", "身体", "医院", "初诊", "挂号"]),
+  makeDialogue("scenario-clinic-describe-symptoms", "向医生说明症状", "紧急", "患者", "看诊时说明发烧、头痛和症状持续时间", [
+    { speaker: "医師", japanese: "今日はどうされましたか。", kana: "きょうはどうされましたか。", translation: "今天怎么了？" },
+    { speaker: "患者", japanese: "昨日から熱があって、頭も痛いです。", kana: "きのうからねつがあって、あたまもいたいです。", translation: "从昨天开始发烧，头也痛。" },
+    { speaker: "医師", japanese: "咳やのどの痛みはありますか。", kana: "せきやのどのいたみはありますか。", translation: "有咳嗽或嗓子痛吗？" },
+    { speaker: "患者", japanese: "のどが少し痛くて、寒気もします。", kana: "のどがすこしいたくて、さむけもします。", translation: "嗓子有点痛，也发冷。" },
+    { speaker: "医師", japanese: "薬のアレルギーはありますか。", kana: "くすりのあれるぎーはありますか。", translation: "有药物过敏吗？" },
+    { speaker: "患者", japanese: "いいえ、特にありません。", kana: "いいえ、とくにありません。", translation: "没有，没什么特别的。" },
+  ], ["紧急", "身体", "医院", "症状", "发烧"]),
+  makeDialogue("scenario-clinic-test-result", "确认检查结果", "紧急", "患者", "做完检查后听医生说明结果和下一步处理", [
+    { speaker: "医師", japanese: "検査結果が出ました。大きな問題はありません。", kana: "けんさけっかがでました。おおきなもんだいはありません。", translation: "检查结果出来了。没有大问题。" },
+    { speaker: "患者", japanese: "入院する必要はありますか。", kana: "にゅういんするひつようはありますか。", translation: "需要住院吗？" },
+    { speaker: "医師", japanese: "いいえ、薬を飲んで様子を見ましょう。", kana: "いいえ、くすりをのんでようすをみましょう。", translation: "不需要，先吃药观察一下。" },
+    { speaker: "患者", japanese: "仕事に行っても大丈夫ですか。", kana: "しごとにいってもだいじょうぶですか。", translation: "可以去上班吗？" },
+    { speaker: "医師", japanese: "今日は休んで、明日も熱があれば連絡してください。", kana: "きょうはやすんで、あしたもねつがあればれんらくしてください。", translation: "今天休息，如果明天还有发烧请联系。" },
+    { speaker: "患者", japanese: "分かりました。ありがとうございます。", kana: "わかりました。ありがとうございます。", translation: "明白了。谢谢。" },
+  ], ["紧急", "身体", "医院", "检查", "结果"]),
+  makeDialogue("scenario-pharmacy-medicine-instructions", "确认服药方法", "生活", "患者", "在药局领取药时确认饭前饭后、次数和副作用", [
+    { speaker: "药剂师", japanese: "こちらが三日分のお薬です。", kana: "こちらがみっかぶんのおくすりです。", translation: "这是三天份的药。" },
+    { speaker: "患者", japanese: "一日に何回飲みますか。", kana: "いちにちになんかいのみますか。", translation: "一天吃几次？" },
+    { speaker: "药剂师", japanese: "一日三回、食後に飲んでください。", kana: "いちにちさんかい、しょくごにのんでください。", translation: "一天三次，请饭后服用。" },
+    { speaker: "患者", japanese: "眠くなる薬ですか。", kana: "ねむくなるくすりですか。", translation: "这是会犯困的药吗？" },
+    { speaker: "药剂师", japanese: "少し眠くなることがあります。運転は控えてください。", kana: "すこしねむくなることがあります。うんてんはひかえてください。", translation: "可能会有点犯困。请避免开车。" },
+    { speaker: "患者", japanese: "分かりました。お薬手帳も出します。", kana: "わかりました。おくすりてちょうもだします。", translation: "明白了。我也出示用药手册。" },
+  ], ["生活", "身体", "药局", "服药", "副作用"]),
+  makeDialogue("scenario-dental-appointment-pain", "预约牙科牙痛", "生活", "患者", "打电话预约牙科，说明牙痛和希望的时间", [
+    { speaker: "患者", japanese: "歯が痛いので、予約を取りたいです。", kana: "はがいたいので、よやくをとりたいです。", translation: "因为牙痛，我想预约。" },
+    { speaker: "受付", japanese: "いつから痛みますか。", kana: "いつからいたみますか。", translation: "从什么时候开始痛？" },
+    { speaker: "患者", japanese: "昨日の夜からです。冷たいものがしみます。", kana: "きのうのよるからです。つめたいものがしみます。", translation: "从昨晚开始。冷的东西会刺激疼。" },
+    { speaker: "受付", japanese: "今日の午後四時はいかがですか。", kana: "きょうのごごよじはいかがですか。", translation: "今天下午四点可以吗？" },
+    { speaker: "患者", japanese: "大丈夫です。保険証を持って行きます。", kana: "だいじょうぶです。ほけんしょうをもっていきます。", translation: "可以。我会带保险证过去。" },
+    { speaker: "受付", japanese: "では、四時にお待ちしています。", kana: "では、よじにおまちしています。", translation: "那么四点恭候您。" },
+  ], ["生活", "身体", "牙科", "预约", "疼痛"]),
+  makeDialogue("scenario-eye-clinic-contact-lens", "眼科隐形眼镜不适", "生活", "患者", "眼睛发红疼痛，向眼科医生说明隐形眼镜使用情况", [
+    { speaker: "医師", japanese: "目が赤いですね。コンタクトを使っていますか。", kana: "めがあかいですね。こんたくとをつかっていますか。", translation: "眼睛很红呢。使用隐形眼镜吗？" },
+    { speaker: "患者", japanese: "はい。昨日から右目が痛いです。", kana: "はい。きのうからみぎめがいたいです。", translation: "是的。从昨天开始右眼痛。" },
+    { speaker: "医師", japanese: "今日はコンタクトを外していますか。", kana: "きょうはこんたくとをはずしていますか。", translation: "今天把隐形眼镜摘了吗？" },
+    { speaker: "患者", japanese: "はい、眼鏡で来ました。", kana: "はい、めがねできました。", translation: "是的，我戴眼镜来的。" },
+    { speaker: "医師", japanese: "しばらく目薬を使って、コンタクトは休んでください。", kana: "しばらくめぐすりをつかって、こんたくとはやすんでください。", translation: "请暂时使用眼药水，先不要戴隐形眼镜。" },
+    { speaker: "患者", japanese: "何日ぐらい休めばいいですか。", kana: "なんにちぐらいやすめばいいですか。", translation: "大概要停戴几天？" },
+  ], ["生活", "身体", "眼科", "隐形眼镜", "眼药水"]),
+  makeDialogue("scenario-dermatology-rash-allergy", "皮肤科过敏湿疹", "生活", "患者", "皮肤发痒起疹，向皮肤科确认过敏和软膏用法", [
+    { speaker: "患者", japanese: "腕に湿疹が出て、かゆいです。", kana: "うでにしっしんがでて、かゆいです。", translation: "胳膊起了湿疹，很痒。" },
+    { speaker: "医師", japanese: "新しい食べ物や薬を使いましたか。", kana: "あたらしいたべものやくすりをつかいましたか。", translation: "吃了新的食物或用了新的药吗？" },
+    { speaker: "患者", japanese: "昨日、新しい化粧品を使いました。", kana: "きのう、あたらしいけしょうひんをつかいました。", translation: "昨天用了新的化妆品。" },
+    { speaker: "医師", japanese: "アレルギーの可能性があります。軟膏を出します。", kana: "あれるぎーのかのうせいがあります。なんこうをだします。", translation: "有过敏的可能。我给你开软膏。" },
+    { speaker: "患者", japanese: "一日に何回塗りますか。", kana: "いちにちになんかいぬりますか。", translation: "一天涂几次？" },
+    { speaker: "医師", japanese: "朝と夜、薄く塗ってください。", kana: "あさとよる、うすくぬってください。", translation: "早晚薄薄涂一层。" },
+  ], ["生活", "身体", "皮肤科", "过敏", "软膏"]),
+  makeDialogue("scenario-medical-certificate-company", "开诊断书给公司", "工作", "患者", "因身体不适需要向公司提交诊断书", [
+    { speaker: "患者", japanese: "会社に提出する診断書が必要です。", kana: "かいしゃにていしゅつするしんだんしょがひつようです。", translation: "我需要提交给公司的诊断书。" },
+    { speaker: "受付", japanese: "診断書の発行には時間と料金がかかります。", kana: "しんだんしょのはっこうにはじかんとりょうきんがかかります。", translation: "开诊断书需要时间和费用。" },
+    { speaker: "患者", japanese: "今日受け取れますか。", kana: "きょううけとれますか。", translation: "今天能拿到吗？" },
+    { speaker: "受付", japanese: "先生の確認後、夕方にお渡しできます。", kana: "せんせいのかくにんご、ゆうがたにおわたしできます。", translation: "医生确认后，傍晚可以交给您。" },
+    { speaker: "患者", japanese: "料金はいくらですか。", kana: "りょうきんはいくらですか。", translation: "费用是多少？" },
+    { speaker: "受付", japanese: "三千三百円です。", kana: "さんぜんさんびゃくえんです。", translation: "三千三百日元。" },
+  ], ["工作", "身体", "医院", "诊断书", "公司"]),
+];
+
 const safetyEmergencyDialogues: Dialogue[] = [
   makeDialogue("scenario-earthquake-evacuation-route", "地震后避难路线", "紧急", "李", "地震后在设施里听从工作人员引导避难", [
     { speaker: "广播", japanese: "ただいま地震が発生しました。落ち着いて行動してください。", kana: "ただいまじしんがはっせいしました。おちついてこうどうしてください。", translation: "刚刚发生地震。请冷静行动。" },
@@ -1522,6 +1589,7 @@ export const dialogues: Dialogue[] = [
   ...convenienceStoreDialogues,
   ...weatherDailyDialogues,
   ...travelAccommodationDialogues,
+  ...healthClinicDialogues,
   ...safetyEmergencyDialogues,
 ].map((dialogue, index) => ({
   sortOrder: dialogue.sortOrder ?? index + 1,
