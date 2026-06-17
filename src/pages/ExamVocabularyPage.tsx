@@ -6,7 +6,6 @@ import JlptLevelSelector from "../components/JlptLevelSelector";
 import PageHero from "../components/PageHero";
 import WordCard from "../components/WordCard";
 import { getVocabularyJlptLevel, jlptVocabularyLevels, vocabulary, type JlptVocabularyLevel } from "../data/vocabulary";
-import { readLearningProgress, setTargetJlptLevel } from "../utils/progress";
 import { formatRomajiReading } from "../utils/romaji";
 
 interface ExamVocabularyPageProps {
@@ -62,7 +61,7 @@ const wordMatchesQuery = (word: VocabularyWord, normalizedQuery: string) =>
 
 const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
   const [query, setQuery] = useState("");
-  const [activeLevel, setActiveLevel] = useState<JlptVocabularyLevel>(() => readLearningProgress().targetJlptLevel);
+  const [activeLevel, setActiveLevel] = useState<JlptVocabularyLevel>("N5");
   const [activeTopic, setActiveTopic] = useState(allTopicsLabel);
 
   const examWords = useMemo(() => {
@@ -148,7 +147,6 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
 
   const chooseLevel = (level: JlptVocabularyLevel) => {
     setActiveLevel(level);
-    setTargetJlptLevel(level);
   };
 
   const resetFilters = () => {

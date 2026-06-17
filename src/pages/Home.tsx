@@ -21,7 +21,6 @@ import { kanaItems } from "../data/kana";
 import { getTodaySuggestion } from "../data/learningPath";
 import { numberExamples } from "../data/numbers";
 import { vocabulary } from "../data/vocabulary";
-import { readLearningProgress } from "../utils/progress";
 
 interface HomeProps {
   onNavigate: (page: PageKey) => void;
@@ -111,8 +110,7 @@ const featureCards: FeatureCard[] = [
 
 const Home = ({ onNavigate, onSpeak }: HomeProps) => {
   const [activeTaskKey, setActiveTaskKey] = useState<TodayTaskKey | null>(null);
-  const progress = useMemo(() => readLearningProgress(), []);
-  const today = useMemo(() => getTodaySuggestion(new Date(), progress.targetJlptLevel), [progress.targetJlptLevel]);
+  const today = useMemo(() => getTodaySuggestion(new Date(), "N5"), []);
   const previewWord = today.words[0] ?? vocabulary[0];
   const previewGrammar = today.grammar.examples[0];
   const previewDialogue =
