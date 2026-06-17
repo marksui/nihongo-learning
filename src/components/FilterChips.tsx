@@ -35,7 +35,7 @@ const FilterChips = <T extends string>({
               aria-pressed={selected}
               className={`tap-surface flex max-w-[14rem] shrink-0 snap-start cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm font-extrabold transition active:scale-95 md:max-w-[16rem] ${
                 selected
-                  ? "filter-chip-selected border-matcha bg-matcha text-white shadow-sm"
+                  ? "filter-chip-selected border-ink bg-ink text-white shadow-sm"
                   : "border-ink/8 bg-paper/70 text-ink/64 hover:border-sora/26 hover:bg-rice/70 hover:text-ink"
               }`}
             >

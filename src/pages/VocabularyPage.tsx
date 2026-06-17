@@ -106,7 +106,7 @@ const VocabularyPage = ({ onOpenExamVocabulary, onSpeak }: VocabularyPageProps) 
           <button
             type="button"
             onClick={onOpenExamVocabulary}
-            className="flex min-h-10 cursor-pointer items-center gap-2 rounded-md border border-sumire/18 bg-sumire/8 px-3 py-2 text-sm font-extrabold text-sumire transition hover:bg-sumire hover:text-white active:scale-95"
+            className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-sumire/18 bg-sumire/8 px-3 py-2 text-sm font-extrabold text-sumire transition hover:bg-sumire hover:text-white active:scale-95"
           >
             JLPT词库
             <Trophy aria-hidden="true" size={15} />
@@ -114,7 +114,7 @@ const VocabularyPage = ({ onOpenExamVocabulary, onSpeak }: VocabularyPageProps) 
           <button
             type="button"
             onClick={clearFilters}
-            className="flex min-h-10 cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-paper px-3 py-2 text-sm font-extrabold text-ink/62 transition hover:border-sakura/25 hover:bg-sakura/8 hover:text-ink active:scale-95"
+            className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-ink/10 bg-paper px-3 py-2 text-sm font-extrabold text-ink/62 transition hover:border-sakura/25 hover:bg-sakura/8 hover:text-ink active:scale-95"
           >
             清除筛选
             <RotateCcw aria-hidden="true" size={15} />

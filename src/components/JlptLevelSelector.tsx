@@ -33,7 +33,7 @@ const JlptLevelSelector = ({
                 compact ? "py-1.5" : "min-h-14 py-2 sm:min-h-16"
               } ${
                 selected
-                  ? "level-chip-active border-sumire bg-sumire text-white shadow-card"
+                  ? "level-chip-active border-ink bg-ink text-white shadow-card"
                   : "border-ink/8 bg-rice/58 text-ink/68 hover:border-yuzu/35 hover:bg-yuzu/16 hover:text-ink"
               }`}
             >

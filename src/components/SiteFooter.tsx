@@ -17,23 +17,24 @@ const footerLinks: Array<{ label: string; page: PageKey }> = [
   { label: "语法", page: "grammar" },
   { label: "会话", page: "conversation" },
   { label: "速读", page: "quickread" },
+  { label: "JLPT", page: "exam-vocabulary" },
 ];
 
 const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
   return (
-    <footer className="mt-6 border-t border-ink/7 bg-paper/64 px-3 pb-28 pt-4 text-ink backdrop-blur sm:px-5 lg:px-8 lg:pb-7">
-      <div className="mx-auto grid max-w-[90rem] gap-3 xl:grid-cols-[minmax(0,1fr)_22rem]">
-        <section className="nav-surface min-w-0 rounded-lg p-3" aria-labelledby="footer-title">
+    <footer className="mt-6 border-t border-ink/7 bg-paper/62 px-3 pb-28 pt-4 text-ink backdrop-blur sm:px-5 lg:px-8 lg:pb-7">
+      <div className="mx-auto grid max-w-[88rem] gap-4 rounded-lg border border-ink/8 bg-paper/78 p-3 shadow-card lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.46fr)] lg:p-4">
+        <section className="min-w-0" aria-labelledby="footer-title">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex min-w-0 items-center gap-2.5">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-ink font-japanese text-xl font-extrabold text-white shadow-sm">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-matcha font-japanese text-xl font-extrabold text-white shadow-sm">
                 あ
               </span>
               <div className="min-w-0">
                 <h2 id="footer-title" className="truncate text-base font-extrabold text-ink">
                   中文学日语
                 </h2>
-                <p className="truncate text-xs font-bold text-ink/52">点读、跟读、开口</p>
+                <p className="truncate text-xs font-bold text-ink/52">听、读、跟说</p>
               </div>
             </div>
 
@@ -61,7 +62,7 @@ const SiteFooter = ({ currentPage, onNavigate }: SiteFooterProps) => {
                   onClick={() => onNavigate(item.page)}
                   className={`tap-surface shrink-0 cursor-pointer rounded-lg border px-3 py-2 text-sm font-extrabold transition active:scale-[0.99] ${
                     active
-                      ? "border-matcha bg-matcha text-white"
+                      ? "border-ink bg-ink text-white"
                       : "border-ink/10 bg-paper/60 text-ink/68 hover:border-sora/25 hover:bg-rice hover:text-ink"
                   }`}
                 >

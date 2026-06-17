@@ -187,24 +187,24 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
 
   return (
     <div className="space-y-5 sm:space-y-6">
-      <section className="relative min-h-[23rem] overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-soft sm:min-h-[29rem] lg:min-h-[32rem]">
+      <section className="relative min-h-[22rem] overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-soft sm:min-h-[27rem] lg:min-h-[30rem]">
         <img
           src={homeStudyScene}
           alt="大阪道顿堀河岸街景封面"
-          className="home-osaka-cover-image absolute inset-0 h-full w-full object-cover object-[center_52%]"
+          className="home-osaka-cover-image absolute inset-0 h-full w-full object-cover object-[center_50%]"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/84 via-ink/35 to-ink/4" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/88 via-ink/42 to-ink/10" />
         <div className="absolute inset-0 flex items-end">
           <div className="w-full p-4 sm:p-6 lg:p-8">
-            <p className="mb-3 inline-flex rounded-md border border-white/24 bg-white/16 px-3 py-1 text-xs font-extrabold text-white backdrop-blur">
-              零基础中文路线
+            <p className="mb-3 inline-flex rounded-lg border border-white/22 bg-white/14 px-3 py-1 text-xs font-extrabold text-white backdrop-blur">
+              打开就能跟读
             </p>
             <h1 className="font-display max-w-3xl break-words text-[2.35rem] font-extrabold leading-none text-white sm:text-[3.25rem] lg:text-[4rem]">
               中文学日语
             </h1>
             <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-white/90 sm:text-lg">
-              日语、假名、romaji 和中文意思放在一起。先听，再看，最后跟着说。
+              假名、单词、句型和会话放在一起。点一下听发音，看一眼读音，再跟着说。
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">
@@ -246,7 +246,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
         <div className="mb-3 flex items-end justify-between gap-3">
           <div>
             <p className="text-sm font-extrabold text-matcha">今日跟读</p>
-            <h2 className="section-title text-2xl">先点这 5 个</h2>
+            <h2 className="section-title text-2xl">先读这 5 个</h2>
           </div>
           <button
             type="button"
@@ -257,7 +257,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
           </button>
         </div>
 
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {previewItems.map((item) => {
             const Icon = item.icon;
             const active = activeTaskKey === item.key;
@@ -281,7 +281,7 @@ const Home = ({ onNavigate, onSpeak }: HomeProps) => {
                       <Icon aria-hidden="true" size={14} />
                       {item.label}
                     </span>
-                    <span className="block break-words font-japanese text-xl font-extrabold leading-snug text-ink">
+                    <span className="block break-words font-japanese text-[1.35rem] font-extrabold leading-snug text-ink">
                       {item.japanese}
                     </span>
                   </button>

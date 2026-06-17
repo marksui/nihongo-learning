@@ -22,13 +22,13 @@ const AnimatedReading = ({ kana, romaji, active = false, variant = "light" }: An
   return (
     <div className="space-y-1" data-active={active}>
       <p
-        className={`break-words text-xs font-semibold transition-colors duration-300 ${kanaClass}`}
+        className={`break-words text-sm font-semibold leading-6 transition-colors duration-300 ${kanaClass}`}
         data-active={active}
       >
         {kana}
       </p>
       <p
-        className={`break-words font-reading text-xs font-semibold transition-colors duration-300 ${romajiClass}`}
+        className={`break-words font-reading text-sm font-semibold leading-6 transition-colors duration-300 ${romajiClass}`}
         data-active={active}
         aria-label={formattedRomaji}
       >

@@ -700,7 +700,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
           <p className="shrink-0 rounded bg-rice px-2 py-1 text-xs font-bold text-ink/58 sm:text-sm">{activeViewMeta.count}</p>
         </div>
 
-        <div className="filter-scroll-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0 lg:pb-0">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {quickReadViews.map((view) => {
             const active = activeView === view.id;
 
@@ -713,7 +713,7 @@ const QuickReadPage = ({ onSpeak }: QuickReadPageProps) => {
                   setActiveKey(null);
                 }}
                 aria-pressed={active}
-                className={`tap-surface w-[8.75rem] shrink-0 cursor-pointer snap-start rounded-lg border px-3 py-2 text-left transition active:scale-[0.99] lg:w-auto ${
+                className={`tap-surface w-full cursor-pointer rounded-lg border px-3 py-2 text-left transition active:scale-[0.99] ${
                   active
                     ? "border-matcha bg-matcha text-white shadow-sm"
                     : "border-ink/10 bg-rice/45 text-ink hover:border-matcha/25 hover:bg-rice/70"

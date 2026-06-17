@@ -4,70 +4,70 @@
 
 :root,
 html[data-theme="hidamari"] {
-  --color-ink: 27 39 42;
-  --color-rice: 242 247 240;
+  --color-ink: 31 38 44;
+  --color-rice: 246 244 234;
   --color-paper: 255 253 247;
-  --color-sakura: 213 88 112;
-  --color-matcha: 46 128 91;
-  --color-sora: 50 119 164;
-  --color-yuzu: 232 177 72;
-  --color-sumire: 93 87 143;
-  --color-sky: 232 242 241;
-  --page-start: 247 251 247;
-  --page-end: 235 242 238;
-  --grid-line: 48 76 72;
+  --color-sakura: 205 84 103;
+  --color-matcha: 63 132 95;
+  --color-sora: 69 129 171;
+  --color-yuzu: 226 178 76;
+  --color-sumire: 101 94 145;
+  --color-sky: 236 244 242;
+  --page-start: 250 248 239;
+  --page-end: 239 241 231;
+  --grid-line: 54 67 72;
   color: rgb(var(--color-ink));
   background: rgb(var(--color-rice));
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 5.25rem;
   scroll-padding-bottom: calc(7rem + env(safe-area-inset-bottom));
 }
 
 html[data-theme="matcha"] {
-  --color-ink: 29 47 40;
-  --color-rice: 239 248 238;
-  --color-paper: 254 255 250;
-  --color-sakura: 199 84 102;
-  --color-matcha: 51 126 83;
-  --color-sora: 62 129 158;
-  --color-yuzu: 216 166 70;
-  --color-sumire: 86 96 143;
-  --color-sky: 226 239 227;
-  --page-start: 248 253 244;
-  --page-end: 226 240 225;
-  --grid-line: 78 103 76;
+  --color-ink: 27 44 38;
+  --color-rice: 240 247 237;
+  --color-paper: 255 254 248;
+  --color-sakura: 190 85 101;
+  --color-matcha: 53 126 83;
+  --color-sora: 62 127 155;
+  --color-yuzu: 214 166 70;
+  --color-sumire: 85 96 138;
+  --color-sky: 228 240 226;
+  --page-start: 249 252 244;
+  --page-end: 229 239 226;
+  --grid-line: 74 97 76;
 }
 
 html[data-theme="momo"] {
-  --color-ink: 47 39 40;
-  --color-rice: 255 246 241;
+  --color-ink: 45 39 41;
+  --color-rice: 255 246 240;
   --color-paper: 255 253 249;
   --color-sakura: 205 82 103;
-  --color-matcha: 68 124 91;
-  --color-sora: 73 128 169;
-  --color-yuzu: 222 165 76;
-  --color-sumire: 112 90 137;
-  --color-sky: 246 235 229;
+  --color-matcha: 70 125 92;
+  --color-sora: 72 126 165;
+  --color-yuzu: 220 164 76;
+  --color-sumire: 111 91 138;
+  --color-sky: 248 235 230;
   --page-start: 255 249 244;
-  --page-end: 249 231 221;
+  --page-end: 250 232 224;
   --grid-line: 111 84 73;
 }
 
 html[data-theme="washi"] {
   --color-ink: 38 42 40;
-  --color-rice: 243 241 232;
-  --color-paper: 254 252 245;
+  --color-rice: 244 242 233;
+  --color-paper: 255 253 246;
   --color-sakura: 183 91 104;
   --color-matcha: 70 114 84;
   --color-sora: 70 116 147;
   --color-yuzu: 191 150 68;
   --color-sumire: 91 91 122;
-  --color-sky: 230 228 218;
+  --color-sky: 232 229 218;
   --page-start: 250 248 240;
-  --page-end: 234 232 220;
+  --page-end: 235 232 221;
   --grid-line: 88 86 78;
 }
 
@@ -81,10 +81,9 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at 12% 0%, rgb(var(--color-sora) / 0.08), transparent 22rem),
-    radial-gradient(circle at 100% 8%, rgb(var(--color-yuzu) / 0.12), transparent 20rem),
-    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 48%, rgb(var(--page-end)) 100%);
-  font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    linear-gradient(180deg, rgb(var(--page-start)) 0%, rgb(var(--color-rice)) 52%, rgb(var(--page-end)) 100%);
+  color: rgb(var(--color-ink));
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16.5px;
   line-height: 1.72;
   letter-spacing: 0;
@@ -98,15 +97,15 @@ body::before {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(90deg, rgb(var(--grid-line) / 0.022) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(var(--grid-line) / 0.018) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.16;
+    linear-gradient(90deg, rgb(var(--grid-line) / 0.026) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(var(--grid-line) / 0.02) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.22;
 }
 
 .font-display,
 .section-title {
-  font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
   letter-spacing: 0;
 }
 
@@ -117,13 +116,13 @@ body::before {
 }
 
 .font-reading {
-  font-family: "Yu Gothic UI", "Meiryo", "Noto Sans JP", "Microsoft YaHei UI", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", "Noto Sans JP", "Microsoft YaHei UI", system-ui, -apple-system, sans-serif;
   letter-spacing: 0;
 }
 
 .section-title {
-  font-weight: 800;
-  line-height: 1.18;
+  font-weight: 850;
+  line-height: 1.16;
   color: rgb(var(--color-ink));
 }
 
@@ -149,8 +148,8 @@ button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid rgb(var(--color-sora) / 0.36);
-  outline-offset: 2px;
+  outline: 3px solid rgb(var(--color-sora) / 0.34);
+  outline-offset: 3px;
 }
 
 ::selection {
@@ -163,28 +162,40 @@ select:focus-visible {
   touch-action: manipulation;
 }
 
+.app-page-shell {
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgb(var(--color-paper) / 0.34), transparent 42rem),
+    transparent;
+}
+
 .soft-surface,
 .app-panel,
-.sticky-learn-toolbar {
+.sticky-learn-toolbar,
+.nav-surface {
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.94) inset,
-    0 10px 22px rgb(var(--color-ink) / 0.045);
+    0 1px 0 rgb(255 255 255 / 0.86) inset,
+    0 10px 28px rgb(var(--color-ink) / 0.055);
 }
 
 .app-panel,
-.sticky-learn-toolbar {
-  border: 1px solid rgb(var(--color-ink) / 0.075);
+.sticky-learn-toolbar,
+.nav-surface {
+  border: 1px solid rgb(var(--color-ink) / 0.08);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.94);
+  background: rgb(var(--color-paper) / 0.93);
 }
 
 .calm-grid-card {
   position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(var(--color-ink) / 0.08);
+  border-radius: 0.75rem;
   background:
-    linear-gradient(135deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.72));
+    linear-gradient(135deg, rgb(var(--color-paper) / 0.98), rgb(var(--color-sky) / 0.62));
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.94) inset,
-    0 18px 38px rgb(var(--color-ink) / 0.055);
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 14px 34px rgb(var(--color-ink) / 0.06);
 }
 
 .calm-grid-card::before {
@@ -195,9 +206,9 @@ select:focus-visible {
   background-image:
     linear-gradient(90deg, rgb(var(--color-ink) / 0.018) 1px, transparent 1px),
     linear-gradient(180deg, rgb(var(--color-ink) / 0.014) 1px, transparent 1px);
-  background-size: 40px 40px;
-  -webkit-mask-image: linear-gradient(135deg, black 0%, transparent 76%);
-  mask-image: linear-gradient(135deg, black 0%, transparent 76%);
+  background-size: 44px 44px;
+  -webkit-mask-image: linear-gradient(135deg, black 0%, transparent 72%);
+  mask-image: linear-gradient(135deg, black 0%, transparent 72%);
 }
 
 .app-card-hover {
@@ -210,10 +221,10 @@ select:focus-visible {
 
 .app-card-hover:hover,
 .app-card-hover:focus-within {
-  border-color: rgb(var(--color-sora) / 0.28);
+  border-color: rgb(var(--color-matcha) / 0.28);
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 14px 26px rgb(var(--color-ink) / 0.06);
+    0 16px 32px rgb(var(--color-ink) / 0.07);
   transform: translateY(-1px);
 }
 
@@ -246,27 +257,30 @@ select:focus-visible {
 }
 
 .mobile-bottom-nav {
-  right: 0.65rem;
-  bottom: 0.65rem;
-  left: 0.65rem;
+  right: 0.55rem;
+  bottom: 0.55rem;
+  left: 0.55rem;
   width: auto;
   max-width: none;
   box-sizing: border-box;
   border: 1px solid rgb(var(--color-ink) / 0.08);
   border-radius: 0.75rem;
-  box-shadow: 0 18px 42px rgb(var(--color-ink) / 0.15);
+  background: rgb(var(--color-paper) / 0.97);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 18px 46px rgb(var(--color-ink) / 0.16);
 }
 
 .quickread-card {
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.82) inset,
-    0 8px 18px rgb(var(--color-ink) / 0.055);
+    0 1px 0 rgb(255 255 255 / 0.84) inset,
+    0 8px 20px rgb(var(--color-ink) / 0.05);
 }
 
 .quickread-card[aria-pressed="true"] {
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.74) inset,
-    0 12px 24px rgb(var(--color-yuzu) / 0.18);
+    0 1px 0 rgb(255 255 255 / 0.8) inset,
+    0 12px 26px rgb(var(--color-yuzu) / 0.2);
 }
 
 .learning-grid {
@@ -284,31 +298,31 @@ select:focus-visible {
 }
 
 .readable-kana-grid {
-  grid-auto-rows: minmax(4.35rem, auto);
+  grid-auto-rows: minmax(4.8rem, auto);
 }
 
 .number-card-panel {
-  background: rgb(var(--color-paper) / 0.9);
+  background: rgb(var(--color-paper) / 0.92);
 }
 
 .readable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14.5rem), 1fr));
-  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
   align-items: start;
 }
 
 .comfortable-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-  gap: 0.95rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1rem;
   align-items: start;
 }
 
 .tool-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
   align-items: stretch;
 }
 
@@ -316,40 +330,25 @@ select:focus-visible {
   min-width: 0;
   border: 1px solid rgb(var(--color-ink) / 0.08);
   border-radius: 0.75rem;
-  background: rgb(var(--color-paper) / 0.95);
+  background: rgb(var(--color-paper) / 0.96);
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 8px 18px rgb(var(--color-ink) / 0.042);
-}
-
-.app-page-shell {
-  min-height: 100vh;
-  background:
-    linear-gradient(90deg, rgb(var(--color-paper) / 0.52), transparent 32rem),
-    transparent;
-}
-
-.nav-surface {
-  border: 1px solid rgb(var(--color-ink) / 0.075);
-  background: rgb(var(--color-paper) / 0.9);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.9) inset,
-    0 12px 28px rgb(var(--color-ink) / 0.06);
+    0 8px 18px rgb(var(--color-ink) / 0.04);
 }
 
 .control-surface {
   border: 1px solid rgb(var(--color-ink) / 0.09);
-  background: rgb(var(--color-paper) / 0.92);
+  background: rgb(var(--color-paper) / 0.94);
 }
 
 .input-surface {
   border: 1px solid rgb(var(--color-ink) / 0.1);
-  background: rgb(var(--color-paper) / 0.92);
+  background: rgb(var(--color-paper) / 0.96);
   box-shadow: 0 1px 0 rgb(255 255 255 / 0.86) inset;
 }
 
 .input-surface:focus {
-  border-color: rgb(var(--color-sora) / 0.48);
+  border-color: rgb(var(--color-sora) / 0.5);
   box-shadow:
     0 0 0 3px rgb(var(--color-sora) / 0.14),
     0 1px 0 rgb(255 255 255 / 0.86) inset;
@@ -360,12 +359,12 @@ select:focus-visible {
   align-items: center;
   gap: 0.35rem;
   border-radius: 0.45rem;
-  border: 1px solid rgb(var(--color-matcha) / 0.16);
-  background: rgb(var(--color-matcha) / 0.08);
+  border: 1px solid rgb(var(--color-matcha) / 0.18);
+  background: rgb(var(--color-matcha) / 0.09);
   padding: 0.28rem 0.58rem;
   color: rgb(var(--color-matcha));
   font-size: 0.76rem;
-  font-weight: 800;
+  font-weight: 850;
 }
 
 .number-glyph {
@@ -393,7 +392,7 @@ select:focus-visible {
   border-radius: 999px 999px 0 0;
   pointer-events: none;
   content: "";
-  background: linear-gradient(90deg, rgb(var(--color-matcha) / 0.12), rgb(var(--color-matcha) / 0.6), rgb(var(--color-yuzu) / 0.34));
+  background: linear-gradient(90deg, rgb(var(--color-matcha) / 0.12), rgb(var(--color-matcha) / 0.62), rgb(var(--color-yuzu) / 0.36));
 }
 
 .home-osaka-cover-image {
@@ -536,9 +535,9 @@ select:focus-visible {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .compact-sticky-panel {
-    max-height: min(45vh, 20rem);
+    max-height: min(48vh, 22rem);
     position: sticky !important;
   }
 }
@@ -549,8 +548,8 @@ select:focus-visible {
   }
 
   body::before {
-    background-size: 42px 42px;
-    opacity: 0.22;
+    background-size: 44px 44px;
+    opacity: 0.18;
   }
 
   .filter-scroll-row {
@@ -562,17 +561,18 @@ select:focus-visible {
   }
 
   .mobile-bottom-nav {
-    padding-left: max(0.625rem, env(safe-area-inset-left));
-    padding-right: max(0.625rem, env(safe-area-inset-right));
+    padding-left: max(0.55rem, env(safe-area-inset-left));
+    padding-right: max(0.55rem, env(safe-area-inset-right));
   }
 
   .app-panel,
   .sticky-learn-toolbar,
   .dense-learn-card,
-  .soft-surface {
+  .soft-surface,
+  .nav-surface {
     box-shadow:
       0 1px 0 rgb(255 255 255 / 0.86) inset,
-      0 7px 16px rgb(var(--color-ink) / 0.052);
+      0 7px 18px rgb(var(--color-ink) / 0.052);
   }
 
   .app-card-hover:hover,
