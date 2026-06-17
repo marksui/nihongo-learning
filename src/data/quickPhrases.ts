@@ -4,6 +4,8 @@ export const quickPhraseCategories = [
   "餐厅点餐",
   "购物付款",
   "酒店住宿",
+  "银行邮局",
+  "手机网络",
   "紧急求助",
   "课堂学习",
 ] as const;
@@ -56,6 +58,24 @@ export const quickPhrases: QuickPhrase[] = [
   { id: "wifi", category: "酒店住宿", japanese: "Wi-Fiのパスワードは何ですか", kana: "わいふぁいのぱすわーどはなんですか", romaji: "waifai no pasuwaado wa nan desu ka", meaning: "Wi-Fi 密码是什么？" },
   { id: "checkout", category: "酒店住宿", japanese: "チェックアウトは何時ですか", kana: "ちぇっくあうとはなんじですか", romaji: "chekkuauto wa nanji desu ka", meaning: "几点退房？" },
   { id: "room-key", category: "酒店住宿", japanese: "部屋の鍵をください", kana: "へやのかぎをください", romaji: "heya no kagi o kudasai", meaning: "请给我房间钥匙。" },
+
+  { id: "post-send-china", category: "银行邮局", japanese: "中国まで送りたいです", kana: "ちゅうごくまでおくりたいです", romaji: "chuugoku made okuritai desu", meaning: "我想寄到中国。" },
+  { id: "post-airmail", category: "银行邮局", japanese: "航空便でお願いします", kana: "こうくうびんでおねがいします", romaji: "koukuubin de onegai shimasu", meaning: "请用航空件。" },
+  { id: "post-tracking", category: "银行邮局", japanese: "追跡番号はありますか", kana: "ついせきばんごうはありますか", romaji: "tsuiseki bangou wa arimasu ka", meaning: "有追踪号码吗？" },
+  { id: "post-fragile", category: "银行邮局", japanese: "割れ物が入っています", kana: "われものがはいっています", romaji: "waremono ga haitte imasu", meaning: "里面有易碎物品。" },
+  { id: "bank-open-account", category: "银行邮局", japanese: "口座を開設したいです", kana: "こうざをかいせつしたいです", romaji: "kouza o kaisetsu shitai desu", meaning: "我想开设账户。" },
+  { id: "bank-withdraw-cash", category: "银行邮局", japanese: "現金を下ろしたいです", kana: "げんきんをおろしたいです", romaji: "genkin o oroshitai desu", meaning: "我想取现金。" },
+  { id: "bank-transfer-money", category: "银行邮局", japanese: "振込をしたいです", kana: "ふりこみをしたいです", romaji: "furikomi o shitai desu", meaning: "我想转账 / 汇款。" },
+  { id: "bank-address-change", category: "银行邮局", japanese: "住所変更をお願いします", kana: "じゅうしょへんこうをおねがいします", romaji: "juusho henkou o onegai shimasu", meaning: "请帮我办理地址变更。" },
+
+  { id: "phone-buy-sim", category: "手机网络", japanese: "SIMカードを買いたいです", kana: "しむかーどをかいたいです", romaji: "shimu kaado o kaitai desu", meaning: "我想买 SIM 卡。" },
+  { id: "phone-cheap-plan", category: "手机网络", japanese: "一番安いプランはどれですか", kana: "いちばんやすいぷらんはどれですか", romaji: "ichiban yasui puran wa dore desu ka", meaning: "最便宜的套餐是哪一个？" },
+  { id: "phone-data-size", category: "手机网络", japanese: "データ容量はどのくらいですか", kana: "でーたようりょうはどのくらいですか", romaji: "deeta youryou wa dono kurai desu ka", meaning: "数据流量有多少？" },
+  { id: "phone-cancel-plan", category: "手机网络", japanese: "契約を解約したいです", kana: "けいやくをかいやくしたいです", romaji: "keiyaku o kaiyaku shitai desu", meaning: "我想解除合约。" },
+  { id: "internet-wifi-trouble", category: "手机网络", japanese: "Wi-Fiにつながりません", kana: "わいふぁいにつながりません", romaji: "waifai ni tsunagarimasen", meaning: "连不上 Wi-Fi。" },
+  { id: "internet-password-again", category: "手机网络", japanese: "パスワードをもう一度教えてください", kana: "ぱすわーどをもういちどおしえてください", romaji: "pasuwaado o mou ichido oshiete kudasai", meaning: "请再告诉我一次密码。" },
+  { id: "phone-borrow-charger", category: "手机网络", japanese: "充電器を借りられますか", kana: "じゅうでんきをかりられますか", romaji: "juudenki o kariraremasu ka", meaning: "可以借充电器吗？" },
+  { id: "phone-screen-broken", category: "手机网络", japanese: "スマホの画面が割れました", kana: "すまほのがめんがわれました", romaji: "sumaho no gamen ga waremashita", meaning: "手机屏幕碎了。" },
 
   { id: "help", category: "紧急求助", japanese: "助けてください", kana: "たすけてください", romaji: "tasukete kudasai", meaning: "请帮帮我。" },
   { id: "lost", category: "紧急求助", japanese: "道に迷いました", kana: "みちにまよいました", romaji: "michi ni mayoimashita", meaning: "我迷路了。" },
