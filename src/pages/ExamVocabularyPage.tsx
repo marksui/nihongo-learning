@@ -161,10 +161,10 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
     <div className="space-y-6">
       <PageHero
         title="JLPT 词库"
-        description="按目标等级累计看词。选择 N2 会包含 N2 / N3 / N4 / N5，选择 N1 会包含全部等级。"
+        description="按目标等级看词。选择 N2 会包含 N2 / N3 / N4 / N5，选择 N1 会包含全部等级。"
         stats={[
           { label: "总词量", value: examWords.length },
-          { label: `${activeLevel} 累计`, value: selectedLevelWords.length },
+          { label: `${activeLevel} 包含`, value: selectedLevelWords.length },
           { label: activeTopic === allTopicsLabel ? "当前" : activeTopic, value: filteredWords.length },
         ]}
       />
@@ -203,7 +203,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
             </div>
 
             <p className="mt-2 rounded-md border border-matcha/15 bg-matcha/8 px-3 py-2 text-sm font-bold leading-6 text-ink/62">
-              当前：{activeLevel} 累计词库，{getIncludedLevelText(activeLevel)}。本级新增 {exactLevelCounts[activeLevel]} 个词。
+              当前：{activeLevel} 词库范围，{getIncludedLevelText(activeLevel)}。本级新增 {exactLevelCounts[activeLevel]} 个词。
             </p>
 
             <div className="mt-3">
@@ -240,7 +240,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
         </div>
       </section>
 
-      <section className="grid gap-3 md:grid-cols-3 xl:grid-cols-5" aria-label="JLPT 累计词库概览">
+      <section className="grid gap-3 md:grid-cols-3 xl:grid-cols-5" aria-label="JLPT 词库等级概览">
         {coreLevelCoverage.map((item, index) => {
           const selected = activeLevel === item.level;
 
@@ -260,7 +260,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
               <div className="flex items-center justify-between gap-3">
                 <span className="text-sm font-extrabold text-ink">{item.level}</span>
                 <span className={`rounded-md px-2 py-1 text-xs font-extrabold ${selected ? "exam-coverage-count-pop bg-matcha text-white" : "bg-rice text-ink/58"}`}>
-                  累计 {item.count}
+                  包含 {item.count}
                 </span>
               </div>
               <div className="mt-3 h-2 overflow-hidden rounded-full bg-rice">
@@ -270,7 +270,7 @@ const ExamVocabularyPage = ({ onSpeak }: ExamVocabularyPageProps) => {
                 />
               </div>
               <p className="mt-2 text-xs font-bold text-ink/52">
-                {selected ? "正在查看累计词库" : `点击查看 ${getIncludedLevelText(item.level)}`}
+                {selected ? "当前等级范围" : `点击查看 ${getIncludedLevelText(item.level)}`}
               </p>
               <p className="mt-1 text-xs font-bold text-ink/42">
                 本级 {exactLevelCounts[item.level]} 词
