@@ -16,6 +16,7 @@ import {
   speakJapanese,
   stopJapanese,
 } from "./utils/speech";
+import { clearLegacyListeningMarks } from "./utils/storage";
 
 const pages: PageKey[] = [
   "home",
@@ -38,6 +39,10 @@ const App = () => {
   const [speechWarning, setSpeechWarning] = useState<string | null>(null);
   const [speechActive, setSpeechActive] = useState(false);
   const [speechPaused, setSpeechPaused] = useState(false);
+
+  useEffect(() => {
+    clearLegacyListeningMarks();
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => setCurrentPage(getPageFromHash());
