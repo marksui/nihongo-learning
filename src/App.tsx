@@ -10,7 +10,6 @@ import KanaPage from "./pages/KanaPage";
 import NumbersPage from "./pages/NumbersPage";
 import QuickReadPage from "./pages/QuickReadPage";
 import VocabularyPage from "./pages/VocabularyPage";
-import { themeStorageKey } from "./data/themes";
 import {
   pauseJapanese,
   resumeJapanese,
@@ -34,26 +33,6 @@ const getPageFromHash = (): PageKey => {
   return pages.includes(hash) ? hash : "home";
 };
 
-const legacyLearningStoragePatterns = [
-  /nihongo.*(heard|listen|listened|progress|visited|recent|completed|seen|read)/i,
-  /nihongo-learning.*(heard|listen|listened|progress|visited|recent|completed|seen|read)/i,
-];
-
-const clearLegacyLearningRecords = () => {
-  try {
-    const keys = Array.from({ length: window.localStorage.length }, (_, index) => window.localStorage.key(index))
-      .filter((key): key is string => Boolean(key));
-
-    keys.forEach((key) => {
-      if (key !== themeStorageKey && legacyLearningStoragePatterns.some((pattern) => pattern.test(key))) {
-        window.localStorage.removeItem(key);
-      }
-    });
-  } catch {
-    // The app works normally even when localStorage is blocked.
-  }
-};
-
 const App = () => {
   const [currentPage, setCurrentPage] = useState<PageKey>(getPageFromHash);
   const [speechWarning, setSpeechWarning] = useState<string | null>(null);
@@ -64,10 +43,6 @@ const App = () => {
     const handleHashChange = () => setCurrentPage(getPageFromHash());
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
-
-  useEffect(() => {
-    clearLegacyLearningRecords();
   }, []);
 
   const navigate = useCallback((page: PageKey) => {
